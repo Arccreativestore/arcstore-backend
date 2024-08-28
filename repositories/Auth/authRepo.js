@@ -1,36 +1,42 @@
 const pool = require("../../config/pgConfig.js");
-const userModel = require("../../models/authModel.js");
+const userepo = require("../Irepo/userepo.js");
+
 
 class authRepo {
 
 
-    async findEmail(data) {
-        if (!data) {
+    async findEmail(email) {
+        if (!email) {
             console.log('no data passed to repo')
+            return null
         }
-        const findEmail = await userModel.findOne({ where: { email: data } })
+
+        const findEmail = await userepo.find(email)
+
         if (findEmail) {
-            return true
+            return findEmail.dataValues
         }
-        return false
+
+        return null
     }
     async newAccount(data) {
-        if (!data) {
-            console.log('no data passed to repo')
-        }
-        const { email, username, password } = data
-        const newAccount = await userModel.create({
-            email,
-            username,
-            password
-        })
-        if (newAccount) {
-            delete newAccount.dataValues.password
-            // console.log(newAccount.dataValues)
-            return newAccount.dataValues
+        const {email, username, password} = data
 
+        if (!email || !username || !password) {
+            console.log('no or bad data passed')
+            return null
         }
-        return {}
+
+
+
+        const newAccount = await userepo.create({email,username, password})
+
+        if (newAccount) {
+
+            delete newAccount.dataValues.password
+            return newAccount.dataValues
+        }
+        return null
 
     }
 }

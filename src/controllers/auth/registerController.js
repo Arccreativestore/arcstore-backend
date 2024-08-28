@@ -7,7 +7,7 @@ const registerController = async (req, res)=>{
   
   if(!email || !username || !password)
   {
-    return res.status(400).json({status: 409, data: {}, message: "email already exist"})
+    return res.status(400).json({status: 400, data: {}, message: "Bad request"})
   }
   const register = await authServices.register({email, username, password})
   if(register)

@@ -11,7 +11,6 @@ class authService {
         if (checkEmail) {
             return { status: 409, data: {}, message: "email already exist" }
         }
-        console.log
 
         const newPassword = await bcrypt.hash(data.password, 12)
         data.password = newPassword
@@ -25,15 +24,22 @@ class authService {
 
     async login(data) {
 
-        const { email, username, password } = data
+        const { email, password } = data
+
         const checkEmail = await authRepo.findEmail(email)
-        if (!email) {
+
+        if (!checkEmail) {
             return { status: 404, data: {}, message: "email does not exist" }
         }
-        const comparePass = await bcrypt.compare(checkEmail.password, password)
+
+        const comparePass = await bcrypt.compare(password, checkEmail.password)
+
         if (comparePass) {
 
-            const token = jwt.sign(comparePass.id, process.env.ACCESS_SECRETKEY, { expiresIn: "15m"})
+            const payload = {
+                id: checkEmail.id
+            }
+            const token = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: "15m" })
             return { status: 200, data: { token }, message: "user logged in" }
         }
         return { status: 401, data: {}, message: "incorrect password" }
