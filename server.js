@@ -5,8 +5,7 @@ const env = require('dotenv').config()
 
 
 sequelize.authenticate()
-    .then(async () => {
-        await sequelize.sync({ force: true })
+    .then(async () => {await sequelize.sync({ force: true })
 
         console.log('connected to DB')
         app.listen(`${process.env.PORT}`, () => {

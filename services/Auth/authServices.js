@@ -1,17 +1,20 @@
-const pool = require("../../config/pgConfig");
-const authRepo = require("../../repositories/Auth/authRepo");
+const pool = require("../../config/pgConfig.js");
+const authRepo = require("../../repositories/Auth/authRepo.js");
 const bcrypt = require('bcrypt')
 
 class authService{
 
 async register(data){
-    const {username, email, password} = data
+    const {email} = data
     const checkEmail = await authRepo.findEmail(email)
-    if(register)
+    if(checkEmail)
     {
         return {status: 409, data: {}, message: "email already exist"}
     }
-    const newPassword = await bcrypt.hash(password, 12)
+    console.log
+
+    const newPassword = await bcrypt.hash(data.password, 12)
+    data.password = newPassword
     const newAccount = await authRepo.newAccount(data)
 
     if(!newAccount)

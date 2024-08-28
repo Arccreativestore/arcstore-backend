@@ -8,7 +8,7 @@ const userModel = sequelize.define('userstable', {
         allowNull: false,
         unique: true
     },
-    userName: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false
     },
