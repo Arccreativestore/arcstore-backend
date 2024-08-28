@@ -2,7 +2,12 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/pgConfig");
 
 const userModel = sequelize.define('userstable', {
-    
+    id:
+    {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -12,7 +17,7 @@ const userModel = sequelize.define('userstable', {
         type: DataTypes.STRING,
         allowNull: false
     },
- 
+
     password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -22,7 +27,7 @@ const userModel = sequelize.define('userstable', {
         defaultValue: null
     }
 
-},{
+}, {
     tableName: 'userstable' // Explicitly set the table name
-  })
+})
 module.exports = userModel
