@@ -4,7 +4,7 @@ const Irepository = require("./Irepository");
 class userRepo extends Irepository {
 
     async find(email) {
-        return await userModel.findOne({ where: { email: email } })
+        return await userModel.findOne({ where: { email: email }, attributes: ['id','email']})
     }
     async create(data) {
         return await userModel.create(data)
@@ -15,7 +15,6 @@ class userRepo extends Irepository {
             { verified: true },
             {
                 where: { id: id },
-                returning: true
             }
         )
     }

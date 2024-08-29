@@ -27,12 +27,7 @@ class authRepo {
        try {
         const {email, username, password} = data
 
-        if (!email || !username || !password) {
-            console.log('no or bad data passed')
-            return null
-        }
-
-        const newAccount = await userepo.create({email,username, password})
+        const newAccount = await userepo.create(data)
 
         if (newAccount) {
 
@@ -47,10 +42,16 @@ class authRepo {
     }
     async verify(id)
     {
-        const verify = await userepo.verify(id)
+        try {
+            
+            const verify = await userepo.verify(id)
+        
         if(verify)
         {
             return verify
+        }
+        } catch (error) {
+             console.log(error.message)
         }
     }
 

@@ -3,6 +3,7 @@ const authServices = require("../../../services/Auth/authServices.js");
 
 const registerController = async (req, res)=>{
 
+ try {
   const {email, username, password} = req.body
   
   if(!email || !username || !password)
@@ -16,6 +17,9 @@ const registerController = async (req, res)=>{
     return res.status(register.status).json(register)
   }
  return res.status(500).send('server error')
+ } catch (error) {
+    console.log(erro.message)
+ }
 }
 
 module.exports = registerController

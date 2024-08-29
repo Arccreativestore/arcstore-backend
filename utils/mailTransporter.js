@@ -7,7 +7,7 @@ const verifyEmail = async (name,token, email) => {
     const sendMail = await transporter.sendMail({
 
         from: '"ARC-CREATIVES" <arccreatives@gmail.com>', 
-        to: email, // list of receivers
+        to: email,
         subject: "PLEASE VERIFY YOUR EMAIL ADDRESS",  
         html: `<p>Hi There ${name}</p>
         <p> click the link to verify your email</p>

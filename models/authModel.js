@@ -20,7 +20,7 @@ const userModel = sequelize.define('userstable', {
 
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     profilePicture: {
         type: DataTypes.STRING,

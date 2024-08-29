@@ -41,6 +41,7 @@ class authService {
         const { email, password } = data
 
        try {
+        
         const checkEmail = await authRepo.findEmail(email)
 
         if (!checkEmail) {
@@ -54,10 +55,11 @@ class authService {
             const payload = {
                 id: checkEmail.id
             }
-            const token = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: "15m" })
-            return { status: 200, data: { token }, message: "user logged in" }
+            const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: "15m" })
+            return { status: 200, data: { accessToken }, message: "user logged in" }
         }
         return { status: 401, data: {}, message: "incorrect password" }
+
        } catch (error) {
         console.log(error.message)
        }
@@ -65,6 +67,8 @@ class authService {
     async verifyEmail(data)
     {
         const {id}= data
+      try {
+
         const verifyEmail = await authRepo.verify(id)
         if(verifyEmail)
         {
@@ -72,6 +76,10 @@ class authService {
         }
         return null
 
+
+      } catch (error) {
+        console.log(errorr.message)
+      }
     }
 }
 
