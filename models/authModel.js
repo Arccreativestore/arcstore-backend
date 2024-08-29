@@ -25,6 +25,10 @@ const userModel = sequelize.define('userstable', {
     profilePicture: {
         type: DataTypes.STRING,
         defaultValue: null
+    },
+    verified:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 
 }, {

@@ -1,31 +1,46 @@
 const pool = require("../../config/pgConfig.js");
 const authRepo = require("../../repositories/Auth/authRepo.js");
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const verifyEmail = require("../../utils/mailTransporter.js");
 const env = require('dotenv').config()
 class authService {
 
     async register(data) {
-        const { email } = data
-        const checkEmail = await authRepo.findEmail(email)
-        if (checkEmail) {
-            return { status: 409, data: {}, message: "email already exist" }
-        }
+        const { username, email } = data
+        try {
+            const checkEmail = await authRepo.findEmail(email)
 
-        const newPassword = await bcrypt.hash(data.password, 12)
-        data.password = newPassword
-        const newAccount = await authRepo.newAccount(data)
+            if (checkEmail) {
+                return { status: 409, data: {}, message: "email already exist" }
+            }
 
-        if (!newAccount) {
-            return { status: 500, data: {}, message: "error creating account" }
+            const newPassword = await bcrypt.hash(data.password, 12)
+            data.password = newPassword
+            const newAccount = await authRepo.newAccount(data)
+
+            if (!newAccount) {
+                return { status: 500, data: {}, message: "error creating account" }
+            }
+
+            const payload = {
+                id: newAccount.id
+            }
+
+            const token = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: '1hr' })
+            await verifyEmail(username, token, email)
+            return { status: 201, data: { newAccount }, message: "Account created successfully" }
+
+        } catch (error) {
+            console.log(error.message)
         }
-        return { status: 201, data: { newAccount }, message: "Account created successfully" }
     }
 
     async login(data) {
 
         const { email, password } = data
 
+       try {
         const checkEmail = await authRepo.findEmail(email)
 
         if (!checkEmail) {
@@ -43,6 +58,20 @@ class authService {
             return { status: 200, data: { token }, message: "user logged in" }
         }
         return { status: 401, data: {}, message: "incorrect password" }
+       } catch (error) {
+        console.log(error.message)
+       }
+    }
+    async verifyEmail(data)
+    {
+        const {id}= data
+        const verifyEmail = await authRepo.verify(id)
+        if(verifyEmail)
+        {
+            return {status: 200, data:{verifyEmail}, message: "email verified"}
+        }
+        return null
+
     }
 }
 
