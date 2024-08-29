@@ -1,0 +1,14 @@
+2024-08-29T19:57:22.379Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T19:57:39.411Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T19:58:23.529Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T19:58:54.310Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T19:59:20.999Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T19:59:24.190Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T20:01:02.543Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T20:01:02.568Z [31merror[39m: Registeration error data is not defined
+2024-08-29T20:01:37.950Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T20:01:37.977Z [32minfo[39m: User registered with email: undefined
+2024-08-29T20:05:05.129Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-29T20:05:05.134Z [31merror[39m: Registeration error Cannot destructure property 'email' of 'req.bdy' as it is undefined.
+2024-08-29T20:14:19.499Z [32minfo[39m: HTTP POST /api/v1/login
+2024-08-29T20:14:19.518Z [31merror[39m: Login Error at the login service: ceckEmail is not defined

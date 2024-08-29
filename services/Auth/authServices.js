@@ -3,6 +3,7 @@ const authRepo = require("../../repositories/Auth/authRepo.js");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const verifyEmail = require("../../utils/mailTransporter.js");
+const logger = require("../../config/logger.js");
 const env = require('dotenv').config()
 class authService {
 
@@ -32,7 +33,7 @@ class authService {
             return { status: 201, data: { newAccount }, message: "Account created successfully" }
 
         } catch (error) {
-            console.log(error.message)
+            logger.error(`Registeration Error at the register service: ${error.message}`)
         }
     }
 
@@ -61,7 +62,7 @@ class authService {
         return { status: 401, data: {}, message: "incorrect password" }
 
        } catch (error) {
-        console.log(error.message)
+        logger.error(`Login Error at the login service: ${error.message}`)
        }
     }
     async verifyEmail(data)
@@ -78,7 +79,7 @@ class authService {
 
 
       } catch (error) {
-        console.log(errorr.message)
+        logger.error(`Verify Mail Error at the Verify Mail service: ${error.message}`)
       }
     }
 }

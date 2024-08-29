@@ -1,3 +1,4 @@
+const logger = require("../../config/logger.js");
 const pool = require("../../config/pgConfig.js");
 const userepo = require("../Irepo/userepo.js");
 
@@ -20,7 +21,7 @@ class authRepo {
     
             return null
         } catch (error) {
-            console.log(error.message)
+            logger.error(`Error at the findEmail authrepo: ${error.message}`)
         }
     }
     async newAccount(data) {
@@ -36,7 +37,7 @@ class authRepo {
         }
         return null
        } catch (error) {
-        console.log(error.message)
+        logger.error(`Error at the newAccount authrepo: ${error.message}`)
        }
 
     }
@@ -51,7 +52,7 @@ class authRepo {
             return verify
         }
         } catch (error) {
-             console.log(error.message)
+            logger.error(`Error at the verify authrepo: ${error.message}`)
         }
     }
 

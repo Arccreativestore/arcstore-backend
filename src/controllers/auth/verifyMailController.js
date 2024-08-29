@@ -1,3 +1,4 @@
+const { logger } = require("../../../config/nodemailerConfig")
 const authServices = require("../../../services/Auth/authServices")
 const jwt = require('jsonwebtoken')
 
@@ -24,7 +25,7 @@ const verifyMailController = async (req, res) => {
         })
       
     } catch (error) {
-        console.log(error.message)
+        logger.error(`verify Mail Error at the verify Mail controller: ${error.message}`)
     }
 
 }

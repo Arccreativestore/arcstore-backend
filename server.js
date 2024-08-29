@@ -1,4 +1,5 @@
 const app = require("./app");
+const logger = require("./config/logger.js");
 const sequelize = require("./config/pgConfig.js");
 const userModel = require("./models/authModel.js");
 const env = require('dotenv').config()
@@ -14,6 +15,5 @@ sequelize.authenticate()
         })
     })
     .catch((e) => {
-        console.log("error connecting to DB")
-        console.log(e.message)
+        logger.error(`Error connecting to DB : ${e.message}`)
     })
