@@ -1,17 +1,18 @@
 
 const logger = require("../../../config/logger.js");
 const authServices = require("../../../services/Auth/authServices.js");
+const {BadreqError} = require("../../../utils/errors.js");
 
 
-
-const registerController = async (req, res)=>{
+const registerController = async (req, res, next)=>{
 
  try {
   const {email, username, password} = req.body
   
   if(!email || !username || !password)
   {
-    return res.status(400).json({status: 400, data: {}, message: "Bad request"})
+    
+     throw next( new BadreqError('please provide all details for registeration'))
   }
   
   const register = await authServices.register({email, username, password})
@@ -20,11 +21,16 @@ const registerController = async (req, res)=>{
   
     return res.status(register.status).json(register)
   }
- return res.status(500).send('server error')
+ return next( new Error('server error'))
  } catch (error) {
-    logger.error(`Registeration error at the registeration controller: ${error.message}`)
-    
+  if (error.isOperational) {
+    return next(error) 
+  }
+  logger.error(`Register Error at the register Controller: ${error.message}`)
+  return next(error)
+      
  }
 }
 
 module.exports = registerController
+

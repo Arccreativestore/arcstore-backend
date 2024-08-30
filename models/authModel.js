@@ -26,6 +26,10 @@ const userModel = sequelize.define('userstable', {
         type: DataTypes.STRING,
         defaultValue: null
     },
+    role:
+    {
+        type: DataTypes.STRING
+    },
     verified:{
         type: DataTypes.BOOLEAN,
         defaultValue: false

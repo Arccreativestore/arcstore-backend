@@ -7,7 +7,7 @@ const oauthCbController = require('../../controllers/auth/oauthCbController');
 
 
 router.get('/',
-    passport.authenticate('google', { failureRedirect: '/login', session: false }),
+    passport.authenticate('google', { failureRedirect: '/api/v1/register', session: false }),
     oauthCbController
 );
 

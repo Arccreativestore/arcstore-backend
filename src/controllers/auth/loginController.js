@@ -1,22 +1,29 @@
+const { error } = require("winston")
 const logger = require("../../../config/logger")
 const authServices = require("../../../services/Auth/authServices")
+const {BadreqError} = require("../../../utils/errors")
 
 
-const loginController = async(req,res)=>{
+const loginController = async(req,res,next)=>{
    try {
     const { email, password} = req.body
     if(!email || !password)
     {
-        return res.status(400).json({status: 401, data:{}, message: "Bad request"})
+        return next( new BadreqError('please provide all details for registeration'))
     }
     const login = await authServices.login({email, password})
     if(login)
     {
         return res.status(login.status).json(login)
     }
-    return res.status(500).json({status: 500, data:{}, message: "server error"})
+    throw new Error('error logging in')
    } catch (error) {
-    logger.error(`Login Error at the login controller: ${error.message}`)
+    if (error.isOperational) {
+        return next(error) 
+    }
+    logger.error(`Login Error at the login Controller: ${error.message}`)
+    return next(error)
+    
    }
 }
 module.exports = loginController

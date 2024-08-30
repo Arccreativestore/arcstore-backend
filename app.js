@@ -16,12 +16,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Error-handling middleware
-app.use((err, req, res, next) => {
-    logger.error(`Error: ${err.message}`);
-    res.status(500).send('Internal Server Error');
-});
-
 
 
 // Routes
@@ -46,6 +40,13 @@ app.use('/api/v1/auth/google/callback', oauthCallbackrouter)
 
 
 
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    logger.error(`universal error: ${err}`);
+    const statusCode = err.statusCode || 500;
+    const message = err.isOperational ? err.message : 'Internal Server Error';
+    res.status(statusCode).json({ status: 'error', data: {}, message });
+});
 
 
 

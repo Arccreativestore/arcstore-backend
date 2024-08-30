@@ -1,1 +1,53 @@
 2024-08-29T20:14:19.518Z [31merror[39m: Login Error at the login service: ceckEmail is not defined
+2024-08-29T21:12:18.062Z [31merror[39m: Error: Expected double-quoted property name in JSON at position 62
+2024-08-29T21:13:10.056Z [31merror[39m: Error: Expected double-quoted property name in JSON at position 62
+2024-08-29T21:14:10.335Z [31merror[39m: Error: Expected double-quoted property name in JSON at position 62
+2024-08-29T21:14:49.923Z [31merror[39m: Error: Expected double-quoted property name in JSON at position 63
+2024-08-29T21:19:29.930Z [31merror[39m: Expected double-quoted property name in JSON at position 63
+2024-08-29T21:24:46.598Z [31merror[39m: Registeration error at the registeration controller: Cannot set headers after they are sent to the client
+2024-08-29T21:36:56.641Z [31merror[39m: please provide all details for registeration
+2024-08-29T22:06:11.888Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-29T22:06:39.853Z [31merror[39m: universal error: 400
+2024-08-30T07:21:57.575Z [31merror[39m: Registeration error at the registeration controller: BadreqError is not a constructor
+2024-08-30T07:21:57.578Z [31merror[39m: universal error: TypeError: BadreqError is not a constructor
+2024-08-30T07:22:37.178Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-30T07:22:44.755Z [31merror[39m: universal error: SyntaxError: Expected double-quoted property name in JSON at position 63
+2024-08-30T07:22:58.951Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:22:58.952Z [31merror[39m: universal error: Error: server error
+2024-08-30T07:23:19.962Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:23:19.963Z [31merror[39m: universal error: Error: server error
+2024-08-30T07:23:24.125Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:23:24.126Z [31merror[39m: universal error: Error: server error
+2024-08-30T07:27:43.575Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:27:43.583Z [31merror[39m: Registeration error at the registeration controller: Invalid status code: undefined
+2024-08-30T07:27:43.585Z [31merror[39m: universal error: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: undefined
+2024-08-30T07:34:06.295Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-30T07:35:54.503Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:35:54.504Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:40:27.853Z [31merror[39m: Registeration Error at the register service: email already exist
+2024-08-30T07:40:27.861Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:40:48.915Z [31merror[39m: Registeration Error at the register service: ConflictError: email already exist
+2024-08-30T07:40:48.937Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:41:18.414Z [31merror[39m: Registeration Error at the register service: undefined
+2024-08-30T07:41:18.416Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:41:31.365Z [31merror[39m: Registeration Error at the register service: true
+2024-08-30T07:41:31.369Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:44:47.683Z [31merror[39m: Registeration Error at the register service: token is not defined
+2024-08-30T07:44:47.685Z [31merror[39m: universal error: Error: server error
+2024-08-30T07:58:31.180Z [31merror[39m: universal error: ConflictError: email already exist
+2024-08-30T07:58:44.561Z [31merror[39m: Error at the newAccount authrepo: column "role" does not exist
+2024-08-30T07:58:44.562Z [31merror[39m: Registeration Error at the register service: Error creating account
+2024-08-30T07:58:44.564Z [31merror[39m: universal error: Error: server error
+2024-08-30T08:01:33.865Z [31merror[39m: Login Error at the login controller: email does not exist, please create an account first
+2024-08-30T08:01:33.868Z [31merror[39m: universal error: NotFoundError: email does not exist, please create an account first
+2024-08-30T08:02:50.434Z [31merror[39m: Login Error at the login service: data and hash arguments required
+2024-08-30T08:02:50.435Z [31merror[39m: Login Error at the login controller: server error
+2024-08-30T08:02:50.436Z [31merror[39m: universal error: Error: server error
+2024-08-30T08:04:23.836Z [31merror[39m: Login Error at the login service: data and hash arguments required
+2024-08-30T08:04:23.838Z [31merror[39m: Login Error at the login controller: server error
+2024-08-30T08:04:23.841Z [31merror[39m: universal error: Error: server error
+2024-08-30T08:05:50.378Z [31merror[39m: Login Error at the login controller: password is incorrect
+2024-08-30T08:05:50.380Z [31merror[39m: universal error: UnauthorizedError: password is incorrect
+2024-08-30T08:23:46.516Z [31merror[39m: universal error: UnauthorizedError: password is incorrect
+2024-08-30T08:23:59.678Z [31merror[39m: Login Error at the login Controller: logn is not defined
+2024-08-30T08:23:59.680Z [31merror[39m: universal error: ReferenceError: logn is not defined

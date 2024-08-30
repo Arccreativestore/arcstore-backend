@@ -1,7 +1,7 @@
 const logger = require("../../../config/logger");
 
 
-const oauthCbController = async (req, res)=>{
+const oauthCbController = async (req, res, next)=>{
     
         const { user, accessToken } = req.user;
 
@@ -12,8 +12,12 @@ const oauthCbController = async (req, res)=>{
             accessToken
         });
        } catch (error) {
-        logger.error(`Registeraton Error at the oauthCB controller: ${error.message}`)
+        if (error.isOperational) {
+            return next(error) 
+        }
+        logger.error(`Login Error at the oauthCB controller: ${error.message}`)
+        return next(error)
+        
        }
-    
 }
 module.exports = oauthCbController

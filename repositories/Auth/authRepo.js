@@ -33,6 +33,8 @@ class authRepo {
         if (newAccount) {
 
             delete newAccount.dataValues.password
+            delete newAccount.dataValues.createdAt
+            delete newAccount.dataValues.updatedAt
             return newAccount.dataValues
         }
         return null
