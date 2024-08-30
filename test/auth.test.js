@@ -35,7 +35,8 @@ describe('authRepo', ()=>{
         const newAccount = await userepo.create(data)
         expect(newAccount).toEqual(response)
       });
-      
+
+      test('')
  
 
 })

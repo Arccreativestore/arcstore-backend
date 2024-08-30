@@ -12,7 +12,7 @@ const registerController = async (req, res, next)=>{
   if(!email || !username || !password)
   {
     
-     throw next( new BadreqError('please provide all details for registeration'))
+     throw new BadreqError('please provide all details for registeration')
   }
   
   const register = await authServices.register({email, username, password})

@@ -35,6 +35,8 @@ class authRepo {
             delete newAccount.dataValues.password
             delete newAccount.dataValues.createdAt
             delete newAccount.dataValues.updatedAt
+            delete newAccount.dataValues.verified
+            delete newAccount.dataValues.updatedAt
             return newAccount.dataValues
         }
         return null
