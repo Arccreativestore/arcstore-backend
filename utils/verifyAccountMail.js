@@ -15,9 +15,9 @@ const verifyEmail = async (name,token, email) => {
          <p> Note that this link expires in 1hr </p>`
         
     })
-    if(sendMail.info)
+    
+    if(sendMail.accepted)
     {
-        console.log(sendMail)
      return true
     }
     else

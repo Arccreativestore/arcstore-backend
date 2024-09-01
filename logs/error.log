@@ -94,3 +94,69 @@
 2024-08-30T13:00:09.144Z [31merror[39m: universal error: UnauthorizedError: link is expired, please request a new link
 2024-08-30T13:02:39.168Z [31merror[39m: universal error: ReferenceError: BadreqError is not defined
 2024-08-30T13:03:29.978Z [31merror[39m: universal error: BadreqError: invalid link, please request a new link to verify
+2024-08-31T19:22:26.405Z [31merror[39m: universal error: BadreqError: Invalid value
+2024-08-31T19:22:41.753Z [31merror[39m: universal error: BadreqError: Invalid value
+2024-08-31T19:23:04.464Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a strong password
+2024-08-31T19:24:02.307Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-31T19:24:25.946Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-31T23:52:31.145Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:52:31.147Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:53:30.745Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:53:30.747Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:28.297Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:28.299Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:32.765Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:32.767Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:57:30.588Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-08-31T23:57:44.851Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a valid email
+2024-08-31T23:57:56.278Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a strong password
+2024-09-01T08:00:35.696Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-09-01T08:01:01.380Z [31merror[39m: Reset Password Error at the rpassword Controller: logger is not defined
+2024-09-01T08:01:01.384Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:03:29.201Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-09-01T08:04:02.673Z [31merror[39m: Forgot Password Error at the forgot password Controller: logger is not defined
+2024-09-01T08:04:02.675Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:04:07.661Z [31merror[39m: universal error: NotFoundError: email does not exist, please create an account first
+2024-09-01T08:04:12.207Z [31merror[39m: universal error: NotFoundError: email does not exist, please create an account first
+2024-09-01T08:04:23.043Z [31merror[39m: universal error: UnauthorizedError: password is incorrect
+2024-09-01T08:05:38.112Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:06:33.938Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+    at ResetPasswordService.resetpass (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:22:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\forgotPasswordController.js:18:27)
+2024-09-01T08:06:47.679Z [31merror[39m: universal error: ReferenceError: logger is not defined
+    at ResetPasswordService.resetpass (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:49:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\forgotPasswordController.js:18:27)
+2024-09-01T08:11:59.107Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:11:59.108Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T08:16:40.634Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:16:40.636Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T08:17:59.248Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:17:59.251Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:23:33.624Z [31merror[39m: forgot password service Error at the forgot password service: user_id is not defined
+2024-09-01T09:23:33.625Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:27:04.783Z [31merror[39m: forgot password service Error at the forgot password service: user_id is not defined
+2024-09-01T09:27:04.784Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:28:05.899Z [31merror[39m: forgot password service Error at the forgot password service: error reseting email, please try again later
+2024-09-01T09:28:05.901Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T10:15:07.860Z [31merror[39m: Forgot Password Error at the forgot password Controller: resetPasswordService.resetpass is not a function
+2024-09-01T10:16:49.497Z [31merror[39m: reset password service Error at the reset password service: authRepo.find is not a function
+2024-09-01T10:16:49.498Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:16:51.815Z [31merror[39m: reset password service Error at the reset password service: authRepo.find is not a function
+2024-09-01T10:16:51.816Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:17:59.076Z [31merror[39m: find token method Error at the forgot password repo: column resetpassword.email does not exist
+2024-09-01T10:17:59.077Z [31merror[39m: reset password service Error at the forgot password service: error updating password
+2024-09-01T10:17:59.078Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:18:53.576Z [31merror[39m: find token method Error at the forgot password repo: column resetpassword.email does not exist
+2024-09-01T10:18:53.577Z [31merror[39m: reset password service Error at the forgot password service: error updating password
+2024-09-01T10:18:53.578Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:35:12.072Z [31merror[39m: reset password service Error at the forgot password service: Cannot read properties of null (reading 'dataValues')
+2024-09-01T10:35:12.074Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:39:52.217Z [31merror[39m: reset password service Error at the forgot password service: Cannot read properties of null (reading 'dataValues')
+2024-09-01T10:39:52.222Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:43:44.459Z [31merror[39m: reset password service Error at the forgot password service: TypeError: Cannot read properties of null (reading 'dataValues')
+    at ResetPasswordService.resetPassword (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:76:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\resetPasswordController.js:17:27)
+2024-09-01T10:43:44.463Z [31merror[39m: reset Password Error at the reset password Controller: server error

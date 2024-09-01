@@ -6,7 +6,7 @@ const oauthCbController = async (req, res, next)=>{
         const { user, accessToken } = req.user;
 
        try {
-        res.json({
+       return res.json({
             message: 'Authentication successful',
             user,
             accessToken

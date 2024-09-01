@@ -2,6 +2,7 @@ const app = require("./app");
 const logger = require("./config/logger.js");
 const sequelize = require("./config/pgConfig.js");
 const userModel = require("./models/authModel.js");
+const rPasswordModel = require("./models/resetPassword.js");
 const env = require('dotenv').config()
 
 

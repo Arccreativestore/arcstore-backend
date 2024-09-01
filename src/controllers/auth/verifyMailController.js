@@ -19,7 +19,7 @@ const verifyMailController = async (req, res, next) => {
  
              if (email) {
  
-                 return res.status(email.status).json(email)
+                 return res.status(email.statusCode).json(email)
              }
                throw new Error('error verifying account')
            } catch (error) {

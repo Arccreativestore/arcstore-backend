@@ -2,9 +2,9 @@ const pool = require("../../config/pgConfig.js");
 const authRepo = require("../../repositories/Auth/authRepo.js");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const verifyEmail = require("../../utils/mailTransporter.js");
+const verifyEmail = require("../../utils/verifyAccountMail.js");
 const logger = require("../../config/logger.js");
-const { ConflictError, NotFoundError, UnauthorizedError} = require("../../utils/errors.js");
+const { ConflictError, NotFoundError, UnauthorizedError } = require("../../utils/errors.js");
 const env = require('dotenv').config()
 
 class authService {
@@ -30,9 +30,9 @@ class authService {
                 id: newAccount.id
             }
 
-            const token = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: '1hr' })
-            await verifyEmail(username, token, email)
-            return { status: 201, data: { newAccount }, message: "Account created successfully" }
+            const token = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: '1hr' }) // might change the expired format
+            await verifyEmail(username, token, email) // might change
+            return { status: "success", data: { newAccount }, message: "Account created successfully", statusCode: 202 }
 
         } catch (error) {
 
@@ -51,9 +51,9 @@ class authService {
         try {
 
             const checkEmail = await authRepo.findEmail(email)
-           
+
             if (!checkEmail) {
-              throw new NotFoundError('email does not exist, please create an account first')
+                throw new NotFoundError('email does not exist, please create an account first')
             }
 
             const comparePass = await bcrypt.compare(password, checkEmail.password)
@@ -64,9 +64,9 @@ class authService {
                     id: checkEmail.id
                 }
                 const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY, { expiresIn: "15m" })
-                return { status: 200, data: { accessToken }, message: "user logged in" }
+                return { status: "success", data: { accessToken }, message: "user logged in", statusCode: 200 }
             }
-            throw new UnauthorizedError('password is incorrect') 
+            throw new UnauthorizedError('password is incorrect')
 
         } catch (error) {
             if (error.isOperational) {
@@ -82,7 +82,7 @@ class authService {
 
             const verifyEmail = await authRepo.verify(id)
             if (verifyEmail) {
-                return { status: 200, data: { verifyEmail }, message: "email verified" }
+                return { status: "success", data: { verifyEmail }, message: "email verified", statusCode: 200 }
             }
             return null
 

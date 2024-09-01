@@ -2,7 +2,7 @@ const authRepo = require("../../repositories/Auth/authRepo")
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const jwt = require('jsonwebtoken')
-const verifyEmail = require("../../utils/mailTransporter")
+const verifyEmail = require("../../utils/verifyAccountMail")
 const env = require('dotenv').config()
 
 const passportAuth = async () => {

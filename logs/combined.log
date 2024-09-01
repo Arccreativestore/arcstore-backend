@@ -179,3 +179,178 @@
 2024-08-30T13:02:39.168Z [31merror[39m: universal error: ReferenceError: BadreqError is not defined
 2024-08-30T13:03:29.930Z [32minfo[39m: HTTP GET /verify/enoodidi
 2024-08-30T13:03:29.978Z [31merror[39m: universal error: BadreqError: invalid link, please request a new link to verify
+2024-08-31T19:22:26.381Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T19:22:26.405Z [31merror[39m: universal error: BadreqError: Invalid value
+2024-08-31T19:22:41.740Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T19:22:41.753Z [31merror[39m: universal error: BadreqError: Invalid value
+2024-08-31T19:23:04.460Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T19:23:04.464Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a strong password
+2024-08-31T19:24:02.298Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T19:24:02.307Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-31T19:24:25.941Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T19:24:25.946Z [31merror[39m: universal error: BadreqError: please provide all details for registeration
+2024-08-31T23:52:30.990Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:52:31.145Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:52:31.147Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:53:30.717Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:53:30.745Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:53:30.747Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:28.276Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:54:28.297Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:28.299Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:32.752Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:54:32.765Z [31merror[39m: Reset Password Error at the rpassword Controller: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:54:32.767Z [31merror[39m: universal error: TypeError: Cannot read properties of undefined (reading 'statusCode')
+2024-08-31T23:57:30.532Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:57:30.588Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-08-31T23:57:44.841Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:57:44.851Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a valid email
+2024-08-31T23:57:56.269Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T23:57:56.278Z [31merror[39m: universal error: BadreqError: Invalid value,Please enter a strong password
+2024-08-31T23:58:10.533Z [32minfo[39m: HTTP POST /api/v1/register
+2024-08-31T23:58:21.663Z [32minfo[39m: HTTP POST /api/v1/reset-password
+2024-08-31T23:58:49.710Z [32minfo[39m: HTTP GET /?token=$2b$12$wtKd1jQmku0VpyF8gaRNHOPiWrsyGnbhGrzy3Du3Oyy9MJJ/ysIOi&user_id=1
+2024-09-01T08:00:35.675Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:00:35.696Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-09-01T08:00:48.063Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:00:58.961Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:01:01.380Z [31merror[39m: Reset Password Error at the rpassword Controller: logger is not defined
+2024-09-01T08:01:01.384Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:03:29.184Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:03:29.201Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+2024-09-01T08:03:38.002Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:04:00.288Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:04:02.673Z [31merror[39m: Forgot Password Error at the forgot password Controller: logger is not defined
+2024-09-01T08:04:02.675Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:04:07.656Z [32minfo[39m: HTTP POST /api/v1/login
+2024-09-01T08:04:07.661Z [31merror[39m: universal error: NotFoundError: email does not exist, please create an account first
+2024-09-01T08:04:12.204Z [32minfo[39m: HTTP POST /api/v1/login
+2024-09-01T08:04:12.207Z [31merror[39m: universal error: NotFoundError: email does not exist, please create an account first
+2024-09-01T08:04:22.639Z [32minfo[39m: HTTP POST /api/v1/login
+2024-09-01T08:04:23.043Z [31merror[39m: universal error: UnauthorizedError: password is incorrect
+2024-09-01T08:05:30.776Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:05:35.815Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:05:38.112Z [31merror[39m: universal error: ReferenceError: logger is not defined
+2024-09-01T08:06:33.918Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:06:33.938Z [31merror[39m: universal error: NotFoundError: No Account found with that email
+    at ResetPasswordService.resetpass (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:22:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\forgotPasswordController.js:18:27)
+2024-09-01T08:06:39.775Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:06:45.363Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:06:47.679Z [31merror[39m: universal error: ReferenceError: logger is not defined
+    at ResetPasswordService.resetpass (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:49:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\forgotPasswordController.js:18:27)
+2024-09-01T08:11:42.987Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:11:56.660Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:11:59.107Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:11:59.108Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T08:16:29.352Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:16:32.590Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:16:38.275Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:16:40.634Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:16:40.636Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T08:17:51.935Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:17:56.978Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:17:59.248Z [31merror[39m: forgot password service Error at the forgot password service: Error sending Email
+2024-09-01T08:17:59.251Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T08:20:03.014Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T08:20:26.906Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T08:28:48.687Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T09:23:24.189Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T09:23:33.297Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T09:23:33.624Z [31merror[39m: forgot password service Error at the forgot password service: user_id is not defined
+2024-09-01T09:23:33.625Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:26:58.704Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T09:27:04.778Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T09:27:04.783Z [31merror[39m: forgot password service Error at the forgot password service: user_id is not defined
+2024-09-01T09:27:04.784Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:27:53.256Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T09:28:05.243Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T09:28:05.899Z [31merror[39m: forgot password service Error at the forgot password service: error reseting email, please try again later
+2024-09-01T09:28:05.901Z [31merror[39m: Forgot Password Error at the forgot password Controller: server error
+2024-09-01T09:30:05.403Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T09:30:10.795Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T09:30:28.547Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$kIWUD7Y190ZSrnMbRpL1XOMRJvsHgp1buWA1Om.bM0kAQVn3h/49q&email=eniolaolagbegi@gmail.com
+2024-09-01T09:33:38.959Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24kIWUD7Y190ZSrnMbRpL1XOMRJvsHgp1buWA1Om.bM0kAQVn3h%2F49q&email=eniolaolagbegi%40gmail.com
+2024-09-01T09:33:42.784Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24kIWUD7Y190ZSrnMbRpL1XOMRJvsHgp1buWA1Om.bM0kAQVn3h%2F49q&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:10:27.197Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:10:35.171Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:10:51.443Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$UCyjx4NNw/w2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi@gmail.com
+2024-09-01T10:12:01.145Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:12:34.788Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:12:43.098Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:12:47.769Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:12:55.432Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:12:57.900Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24UCyjx4NNw%2Fw2l6l.twYuiehAh7JiLPXU21oI5JW3GZWDLZ2dOXLAe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:13:24.374Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:13:43.722Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:13:53.745Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi@gmail.com
+2024-09-01T10:14:07.562Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:14:53.056Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:15:07.857Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:15:07.860Z [31merror[39m: Forgot Password Error at the forgot password Controller: resetPasswordService.resetpass is not a function
+2024-09-01T10:16:31.122Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:16:44.506Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:16:49.486Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:16:49.497Z [31merror[39m: reset password service Error at the reset password service: authRepo.find is not a function
+2024-09-01T10:16:49.498Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:16:51.811Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:16:51.815Z [31merror[39m: reset password service Error at the reset password service: authRepo.find is not a function
+2024-09-01T10:16:51.816Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:17:47.852Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:17:53.682Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:17:59.058Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:17:59.076Z [31merror[39m: find token method Error at the forgot password repo: column resetpassword.email does not exist
+2024-09-01T10:17:59.077Z [31merror[39m: reset password service Error at the forgot password service: error updating password
+2024-09-01T10:17:59.078Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:18:47.460Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:18:53.564Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:18:53.576Z [31merror[39m: find token method Error at the forgot password repo: column resetpassword.email does not exist
+2024-09-01T10:18:53.577Z [31merror[39m: reset password service Error at the forgot password service: error updating password
+2024-09-01T10:18:53.578Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:20:14.895Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:20:18.636Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:20:23.715Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.comreset-password%3Ftoken%3D%242b%2412%24lDHFJ3niAWGCjE5IYXrcjO.SPQ5noBjvFOLUIvqb304dcJpVQWziC&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:20:34.791Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:20:43.012Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$PRNVH8ma/b62EeyBO8DupOVcjmpkGC0ItZBWBpKehm3je1axYcw2i&email=eniolaolagbegi@gmail.com
+2024-09-01T10:21:47.878Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24PRNVH8ma%2Fb62EeyBO8DupOVcjmpkGC0ItZBWBpKehm3je1axYcw2i&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:24:18.445Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24PRNVH8ma%2Fb62EeyBO8DupOVcjmpkGC0ItZBWBpKehm3je1axYcw2i&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:24:22.728Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:24:29.058Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:24:43.510Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$wZM4jBmxPaPPdO5DstAMkuUZl/2EzLFraJZuONLv.4WJVguMVm7Pi&email=eniolaolagbegi@gmail.com
+2024-09-01T10:25:25.985Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24wZM4jBmxPaPPdO5DstAMkuUZl%2F2EzLFraJZuONLv.4WJVguMVm7Pi&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:26:44.553Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24wZM4jBmxPaPPdO5DstAMkuUZl%2F2EzLFraJZuONLv.4WJVguMVm7Pi&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:26:49.141Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:26:53.842Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:27:06.836Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$MhRA5vfQSLlR4R4j24twWOFxIYalnixG7XNS4Q8Y1HcWbd2kjcKVO&email=eniolaolagbegi@gmail.com
+2024-09-01T10:27:57.827Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24MhRA5vfQSLlR4R4j24twWOFxIYalnixG7XNS4Q8Y1HcWbd2kjcKVO&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:32:36.568Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:32:41.655Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:32:52.875Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi@gmail.com
+2024-09-01T10:33:19.474Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:35:04.613Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:35:12.028Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:35:12.072Z [31merror[39m: reset password service Error at the forgot password service: Cannot read properties of null (reading 'dataValues')
+2024-09-01T10:35:12.074Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:39:43.117Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:39:46.887Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:39:52.194Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:39:52.217Z [31merror[39m: reset password service Error at the forgot password service: Cannot read properties of null (reading 'dataValues')
+2024-09-01T10:39:52.222Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:43:37.522Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:43:44.448Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:43:44.459Z [31merror[39m: reset password service Error at the forgot password service: TypeError: Cannot read properties of null (reading 'dataValues')
+    at ResetPasswordService.resetPassword (C:\Users\Ibitola\Documents\arc-creatives\services\Auth\forgotPasswordService.js:76:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async resetPasswordController (C:\Users\Ibitola\Documents\arc-creatives\src\controllers\auth\resetPasswordController.js:17:27)
+2024-09-01T10:43:44.463Z [31merror[39m: reset Password Error at the reset password Controller: server error
+2024-09-01T10:45:07.852Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:45:12.708Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24H4dh15NYqpvK0xo1nFbRCuUSqXYRky6.ojucbGCpG8rjBdYQVXkCe&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:48:06.651Z [32minfo[39m: HTTP POST /api/v1/register
+2024-09-01T10:48:16.018Z [32minfo[39m: HTTP POST /api/v1/forgot-password
+2024-09-01T10:48:37.458Z [32minfo[39m: HTTP GET /reset-password?token=$2b$12$A89tSE8iG2W9zuXKf8uxI.rurCtlHRrAMGYuTtHsDQGe93Ud9Raz2&email=eniolaolagbegi@gmail.com
+2024-09-01T10:49:07.205Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24A89tSE8iG2W9zuXKf8uxI.rurCtlHRrAMGYuTtHsDQGe93Ud9Raz2&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:51:10.055Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24A89tSE8iG2W9zuXKf8uxI.rurCtlHRrAMGYuTtHsDQGe93Ud9Raz2&email=eniolaolagbegi%40gmail.com
+2024-09-01T10:51:20.497Z [32minfo[39m: HTTP POST /api/v1/reset-password?token=%242b%2412%24A89tSE8iG2W9zuXKf8uxI.rurCtlHRrAMGYuTtHsDQGe93Ud9Raz2&email=eniolaolagbegi%40gmail.com

@@ -1,12 +1,12 @@
-const { BadreqError } = require("../../../utils/errors");
-const loginController = require("../../controllers/auth/loginController")
 const router = require('express').Router()
+const { BadreqError } = require("../../../utils/errors");
 const { body, validationResult } = require("express-validator");
+const resetPasswordController = require('../../controllers/auth/resetPasswordController');
 const validateRequestBody = [
  
+    body('NewPassword').notEmpty().isAlphanumeric().withMessage("Please enter a strong password"), 
+    body('token').notEmpty().withMessage("Please enter a valid token"),
     body('email').notEmpty().isEmail().withMessage("Please enter a valid email"),
-    body('password').isAlphanumeric().notEmpty().withMessage("Please enter a strong password"),
-
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -19,7 +19,7 @@ const validateRequestBody = [
     }
 ];
 
-router.post('/', validateRequestBody, loginController)
+router.post('/', validateRequestBody, resetPasswordController)
 
 
 

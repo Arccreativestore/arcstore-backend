@@ -1,6 +1,6 @@
 const logger = require("../../config/logger.js");
 const pool = require("../../config/pgConfig.js");
-const userepo = require("../Irepo/userepo.js");
+const userepo = require("../Irepo/userDb.js");
 
 
 class authRepo {
@@ -24,11 +24,12 @@ class authRepo {
             logger.error(`Error at the findEmail authrepo: ${error.message}`)
         }
     }
+
     async newAccount(data) {
        try {
         const {email, username, password} = data
 
-        const newAccount = await userepo.create(data)
+        const newAccount = await userepo.create({email, username, password})
 
         if (newAccount) {
 

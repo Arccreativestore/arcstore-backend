@@ -9,6 +9,10 @@ class Irepository{
     {
         throw new Error("Method 'create()' must be implemented.");
     }
+    async updatePassword(data)
+    {
+        throw new Error("Method 'update()' must be implemented.");   
+    }
     async verify(id)
     {
         throw new Error("Method 'verify()' must be implemented.");

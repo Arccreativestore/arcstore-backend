@@ -9,12 +9,12 @@ const loginController = async(req,res,next)=>{
     const { email, password} = req.body
     if(!email || !password)
     {
-        return next( new BadreqError('please provide all details for registeration'))
+        return next( new BadreqError('please provide all details/fields for registeration'))
     }
     const login = await authServices.login({email, password})
     if(login)
     {
-        return res.status(login.status).json(login)
+        return res.status(login.statusCode).json(login)
     }
     throw new Error('error logging in')
    } catch (error) {

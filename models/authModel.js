@@ -4,7 +4,7 @@ const sequelize = require("../config/pgConfig");
 const userModel = sequelize.define('userstable', {
     id:
     {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true
     },

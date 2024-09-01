@@ -24,6 +24,10 @@ const loginRouter = require("./src/routes/auth/loginRoute.js")
 const verifyMailrouter = require("./src/routes/auth/verifyMail.js")
 const oAuthrouter = require("./src/routes/auth/oauthRoute.js")
 const oauthCallbackrouter = require("./src/routes/auth/oauthCallback.js")
+const forgotPasswordrouter = require("./src/routes/auth/forgotPasswordRoute.js")
+const resetPasswordrouter = require("./src/routes/auth/resetPasswordRoute.js")
+
+
 
 
 
@@ -33,7 +37,8 @@ app.use('/api/v1/login', loginRouter)
 app.use('/verify', verifyMailrouter)
 app.use('/api/v1/auth/google', oAuthrouter)
 app.use('/api/v1/auth/google/callback', oauthCallbackrouter)
-
+app.use('/api/v1/forgot-password', forgotPasswordrouter)
+app.use('/api/v1/reset-password', resetPasswordrouter)
 
 
 
@@ -42,7 +47,14 @@ app.use('/api/v1/auth/google/callback', oauthCallbackrouter)
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
-    logger.error(`universal error: ${err}`);
+    if(err.isOperational === false)
+    {
+        logger.error(`universal error: ${err.stack}`);
+        const statusCode =  500;
+        const message =  err.message ? err.message : 'Internal Server Error';
+        res.status(statusCode).json({ status: 'error', data: {}, message });
+    }
+   
     const statusCode = err.statusCode || 500;
     const message = err.isOperational ? err.message : 'Internal Server Error';
     res.status(statusCode).json({ status: 'error', data: {}, message });
