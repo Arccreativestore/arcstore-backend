@@ -5,6 +5,11 @@ const userModel = require("./models/authModel.js");
 const rPasswordModel = require("./models/resetPassword.js");
 const env = require('dotenv').config()
 
+// implement 
+// rate limiting
+// testing with supertest and jest 
+// 
+
 
 sequelize.authenticate()
     .then(async () => {
