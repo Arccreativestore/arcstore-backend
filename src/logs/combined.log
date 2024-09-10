@@ -1,0 +1,31 @@
+2024-09-09T21:34:39.654Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-09T21:34:39.762Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:26:10.083Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:26:10.303Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:31:01.778Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:31:01.898Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:35:03.340Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:35:03.570Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:43:13.529Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:43:13.642Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:40:34.754Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:40:34.899Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:56:52.602Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:56:52.765Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:57:43.792Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:57:43.896Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:05:41.885Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:05:42.098Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:43:51.908Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:43:52.082Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:45:43.119Z [31merror[39m: No recipients defined
+2024-09-10T02:46:57.008Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:46:57.173Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:47:18.546Z [31merror[39m: Validation error: "email" must be a valid email
+2024-09-10T02:47:18.547Z [31merror[39m: "email" must be a valid email
+2024-09-10T02:47:19.530Z [31merror[39m: No recipients defined
+2024-09-10T02:53:54.074Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:53:54.235Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:54:10.711Z [31merror[39m: Validation error: please enter a valid Email Address
+2024-09-10T02:54:10.712Z [31merror[39m: please enter a valid Email Address
+2024-09-10T02:54:11.720Z [31merror[39m: No recipients defined

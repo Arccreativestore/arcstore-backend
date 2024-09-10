@@ -1,0 +1,7 @@
+2024-09-10T02:45:43.119Z [31merror[39m: No recipients defined
+2024-09-10T02:47:18.546Z [31merror[39m: Validation error: "email" must be a valid email
+2024-09-10T02:47:18.547Z [31merror[39m: "email" must be a valid email
+2024-09-10T02:47:19.530Z [31merror[39m: No recipients defined
+2024-09-10T02:54:10.711Z [31merror[39m: Validation error: please enter a valid Email Address
+2024-09-10T02:54:10.712Z [31merror[39m: please enter a valid Email Address
+2024-09-10T02:54:11.720Z [31merror[39m: No recipients defined
