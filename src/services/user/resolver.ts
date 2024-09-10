@@ -5,16 +5,20 @@ import {
   ConflictError,
   BadreqError,
   NotFoundError,
+  UnauthorizedError,
 } from "../../middleware/errors";
 import jwt from "jsonwebtoken";
 import "../../events/user/userEvents";
-import { VERIFY_SECRETKEY } from "../../config/config";
+import { ACCESS_SECRETKEY, VERIFY_SECRETKEY } from "../../config/config";
 import { eventEmitter } from "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { User } from "../../app";
-import { IUserMutation } from "./userTypesAndValidation";
+import {  validateLoginInput, validateRegistrationInput, IVerifyUserMutation } from "./userTypesAndValidation";
+import bcrypt from 'bcrypt'
 
-export const UserMutation: IUserMutation = {
+
+//REGISTER MUTATION
+export const UserMutation = {
   async userRegistration(
     __: unknown,
     { data }: { data: IReg }
@@ -65,8 +69,9 @@ export const UserMutation: IUserMutation = {
   
 };
 
-export const verifyUserMutation = {
-  async verifyAccount(_: any, args: any, { req, user }: { req: Request, user: User }) {
+// VERIFY USER MUTATION 
+export const verifyUserMutation: IVerifyUserMutation = {
+  async verifyAccount(_: any, args: any, { user }: { req: Request, user: User }): Promise<{ status: string }> {
    
     
     
@@ -101,6 +106,40 @@ export const verifyUserMutation = {
   },
 };
 
+// LOGIN MUTATION
+
+export const loginUserMutation = 
+{
+  async Login(_: any, {data}: {data:{email: string, password: string}} , context: {req: Request}): Promise<{token: string}>
+  {
+   
+    const { email, password } = data
+    logger.info(JSON.stringify(data))
+    //validateLoginInput(data)
+    if(!email || !password)
+    {
+      throw new BadreqError('Fields Email or Password is Required')
+    }
+    const userExist =  await UserDatasource.findByEmail(email) 
+
+    if(!userExist)
+    {
+      throw new NotFoundError('User with that email not found')
+    }
+
+    const comparePassword: boolean = await bcrypt.compare(password, userExist.password)
+    logger.info(comparePassword)
+    if(comparePassword)
+    {
+      const token = jwt.sign({_id: userExist._id}, ACCESS_SECRETKEY as string, { expiresIn: '15m'})
+      return { token }
+    }
+    throw new UnauthorizedError('Password is incorrect')
+    
+  }
+}
+
+
 export const UserQuery = {
   async getUserProfile() {
     // Placeholder logic, could be extended to fetch user profile data
@@ -108,10 +147,3 @@ export const UserQuery = {
   },
 };
 
-const validateRegistrationInput =(data: IReg): void => {
-  const { error } = regValidationSchema.validate(data);
-  if (error) {
-    logger.error(`Validation error: ${error.message}`);
-    throw new BadreqError(error.message);
-  }
-}

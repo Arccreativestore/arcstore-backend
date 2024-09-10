@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import { ObjectId } from 'mongoose';
-
+import { User } from '../../app';
+import { BadreqError } from '../../middleware/errors';
 export interface dbResponse {
   _id: ObjectId;
   email: string;
@@ -27,7 +28,8 @@ export interface IReg {
   password?: string | null;
   role: "USER" | "STAFF" | "CREATOR" | "SUPERADMIN";
   profilePicture?: string | null;
-  verified?: boolean;
+  emailVerified?: boolean;
+  verifiedDate: Date
 }
 
 export interface Imail {
@@ -42,7 +44,7 @@ export interface IUserMutation {
 }
 
 export interface IVerifyUserMutation {
-  verifyAccount(_: any, args: any, context: { req: Request }): Promise<{ status: string; verify: any }>;
+  verifyAccount(_: any, args: any, { user }: { user: User }): Promise<{ status: string }>;
 }
 
 // Common reusable rules
@@ -72,3 +74,25 @@ export const regValidationSchema = Joi.object({
   username: usernameRule,
   role: roleRule,
 });
+
+export const loginValidationSchema= Joi.object(
+  {
+    email: emailRule, 
+    password: passwordRule
+  }
+)
+
+export const validateRegistrationInput =(data: IReg): void => {
+  const { error } = regValidationSchema.validate(data);
+  if (error) {
+    throw new BadreqError(error.message);
+  }
+}
+
+
+export const validateLoginInput =(data: {email: string, password: string}): void => {
+  const { error } = loginValidationSchema.validate(data);
+  if (error) {
+    throw new BadreqError(error.message);
+  }
+}

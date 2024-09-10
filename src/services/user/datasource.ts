@@ -42,7 +42,7 @@ class UserDatasource extends Base {
   async verifyEmail(email: string): Promise<IAccount | null> {
     const verifyAccount = userModel.findOneAndUpdate(
       { email },
-      { verified: true, verifiedDate: Date.now() },
+      { emailVerified: true, verifiedDate: new Date() },
       { new: true }
     );
     return verifyAccount;

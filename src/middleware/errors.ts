@@ -100,6 +100,7 @@ export const ErrorMiddleware: ErrorRequestHandler = (
   }
 };
 
+// Graphql Error Handler
 interface ErrorFormat extends GraphQLFormattedError {
   isOperational: boolean;
   status: string;

@@ -1,10 +1,11 @@
-import { UserMutation, verifyUserMutation, UserQuery } from "./services/user/resolver";
+import { log } from "console";
+import { UserMutation, verifyUserMutation, UserQuery, loginUserMutation } from "./services/user/resolver";
 
 
 const Mutation = {
   ...UserMutation,
-  ...verifyUserMutation
-  
+  ...verifyUserMutation,
+  ...loginUserMutation
 };
 
 const Query = {

@@ -54,24 +54,27 @@ const UserSchema: Schema = new Schema<IAccount>(
   },
   { timestamps: true }
 );
-
-export const userModel = model("users", UserSchema);
-// HASH PASSWORD
+// Pre-save middleware to hash password
 UserSchema.pre<IAccount>("save", async function (next) {
   const user = this;
 
+  // If the password hasn't been modified, skip hashing
   if (!user.isModified("password")) return next();
 
   try {
+    // Generate salt and hash the password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
+
+    // Replace the plain password with the hashed one
     user.password = hash;
+
     next();
-  } catch (error: any) {
+  } catch (error) {
     next(error);
   }
 });
-
+export const userModel = model<IAccount>("users", UserSchema);
 // export default function (isTest: boolean = false) {
 //     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
 //     const collectionName = isTest ? 'test_accounts' : "accounts";
