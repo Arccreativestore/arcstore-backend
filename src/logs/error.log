@@ -29,3 +29,131 @@
 2024-09-10T17:55:32.775Z [31merror[39m: Internal Server Error: `variables` in a POST body should be provided as an object, not a recursively JSON-encoded string.
 2024-09-10T17:55:46.119Z [31merror[39m: Internal Server Error: token has expired
 2024-09-10T18:02:02.855Z [31merror[39m: Registration error: User already exists
+2024-09-10T21:25:17.778Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T21:25:17.778Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T21:25:17.779Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T21:27:21.028Z [31merror[39m: Internal Server Error: data and hash arguments required
+2024-09-10T21:28:11.382Z [31merror[39m: Registration error: User already exists
+2024-09-10T21:28:41.387Z [31merror[39m: Internal Server Error: data and hash arguments required
+2024-09-10T21:29:48.192Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T21:30:23.941Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:24.937Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:25.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:27.221Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:27.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:28.931Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:29.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:30.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:31.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:32.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:33.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:34.976Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:35.928Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:36.932Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:37.931Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:38.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:39.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:40.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:42.012Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:42.950Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:43.931Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:44.930Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:45.942Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:46.936Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:47.946Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:48.931Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:49.931Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:49.947Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:50.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:51.933Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:30:52.934Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:01.695Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:02.698Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:03.697Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:04.693Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:05.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:06.690Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:07.693Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:08.690Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:09.740Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:11.056Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:11.690Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:12.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:13.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:14.718Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:15.695Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:16.693Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:17.695Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:18.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:19.701Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:20.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:21.699Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:22.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:23.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:24.695Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:25.696Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:26.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:27.691Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:28.693Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:29.881Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:30.690Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:31.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:32.692Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:33.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:34.693Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:35.717Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:36.696Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:37.694Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:38.690Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:39.691Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:41.520Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:42.503Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:43.502Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:44.504Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:45.508Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:46.508Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:47.502Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:48.506Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:49.510Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:50.504Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:51.504Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:52.511Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:53.504Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:54.507Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:55.506Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:56.505Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:57.505Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:58.506Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:31:59.506Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:00.505Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:01.509Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:02.510Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:03.140Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:03.505Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:32:04.508Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:53.259Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:54.263Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:55.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:56.259Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:57.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:58.259Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:34:59.419Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:00.273Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:01.523Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:02.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:03.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:04.260Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:05.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:06.259Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:07.256Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:08.261Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:09.257Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:22.480Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:35:23.534Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:37:55.966Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-10T21:47:41.606Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T21:47:41.607Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T21:47:41.608Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T21:54:43.803Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T21:54:43.803Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T21:54:43.803Z [31merror[39m: dBase connection closed due to app termination

@@ -38,6 +38,7 @@
         "graphql-tag": "^2.12.6",
         "graphql-tools": "^9.0.1",
         "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
         "log4js": "^6.9.1",
         "moment": "^2.30.1",
         "mongoose": "^7.0.3",

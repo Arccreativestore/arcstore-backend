@@ -12,6 +12,7 @@ export interface IAccount extends Document {
   profilePicture: string;
   username: string;
   permissionGroup?: ObjectId[];
+  permissions?:string[]
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
