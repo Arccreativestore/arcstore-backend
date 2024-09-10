@@ -19,6 +19,7 @@ import context from "./context/context";
 import { ErrorMiddleware } from "./middleware/errors";
 import passport from "passport";
 import passportAuth from "./services/user/oauth";
+import { jwtVerify } from "./middleware/jwtVerify";
 
 export const cookieSettings = {
     httpOnly: true,
@@ -106,8 +107,9 @@ app.use("/graphql",
 
         let user = null //initialize user
         if (token) {
-          user = null //call a function to decrypt the token and set user to the context
+          user = jwtVerify(token) //call a function to decrypt the token and set user to the context
         }
+        logger.info(user)
 
         //Return without user, Route that are not protected will be freely called.
         return {

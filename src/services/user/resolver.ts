@@ -35,8 +35,6 @@ export const UserMutation: IUserMutation = {
       if (findEmail) {
         throw new ConflictError("User already exists");
       }
-     
-      // Generate a JWT token
     
      
       // Create the user in the database
@@ -47,9 +45,10 @@ export const UserMutation: IUserMutation = {
       if (createUser) { 
         const { _id, email, username, role } = createUser;
 
-        const token = jwt.sign({ _id}, VERIFY_SECRETKEY as string, {
+        const token = jwt.sign({ _id, email}, VERIFY_SECRETKEY as string, {
           expiresIn: "1hr",
         });
+        // emit event to send verification email
         eventEmitter.emit("newUser", { email, token, username });
         return { status: "success", _id, email, username, role };
       }
@@ -67,9 +66,10 @@ export const UserMutation: IUserMutation = {
 };
 
 export const verifyUserMutation = {
-  async verifyAccount(_: any, args: any, { req }: { req: Request }) {
-    const user = req.user;
-
+  async verifyAccount(_: any, args: any, { req, user }: { req: Request, user: User }) {
+   
+    
+    
     try {
       if (!user) {
         throw new NotFoundError("User not found in request");
@@ -89,8 +89,7 @@ export const verifyUserMutation = {
 
       const verify = await UserDatasource.verifyEmail(email);
       if (verify) {
-        logger.info(`Email verified for user: ${email}`);
-        return { status: "success", verify };
+        return { status: "success" }; // update....
       }
 
       throw new Error("Email verification failed");

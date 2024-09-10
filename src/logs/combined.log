@@ -69,3 +69,52 @@
 2024-09-10T10:45:41.094Z [32minfo[39m: Successfully connected to 
 2024-09-10T10:51:13.652Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
 2024-09-10T10:51:13.822Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:16:48.349Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:16:48.461Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:17:40.740Z [31merror[39m: Validation error: please enter a valid Email Address
+2024-09-10T11:17:40.741Z [31merror[39m: Registration error: please enter a valid Email Address
+2024-09-10T11:19:08.942Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:19:09.040Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:25:36.637Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:25:36.762Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:30:21.534Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:30:21.665Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:31:40.577Z [31merror[39m: Registration error: User already exists
+2024-09-10T11:33:39.882Z [31merror[39m: Verification error: User not found in request
+2024-09-10T11:34:42.100Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:34:42.218Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:34:46.291Z [32minfo[39m: undefined
+2024-09-10T11:34:46.292Z [31merror[39m: Verification error: User not found in request
+2024-09-10T11:35:57.322Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:35:57.457Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:35:58.407Z [32minfo[39m: [object Object]
+2024-09-10T11:35:58.409Z [31merror[39m: Verification error: invalid token
+2024-09-10T11:36:59.697Z [32minfo[39m: [object Object]
+2024-09-10T11:36:59.699Z [31merror[39m: Verification error: invalid token
+2024-09-10T11:37:03.693Z [32minfo[39m: [object Object]
+2024-09-10T11:37:03.694Z [31merror[39m: Verification error: invalid token
+2024-09-10T11:38:24.570Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:38:24.692Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:38:28.493Z [32minfo[39m: [object Object]
+2024-09-10T11:38:28.537Z [32minfo[39m: [object Object]
+2024-09-10T11:38:28.538Z [31merror[39m: Verification error: invalid token
+2024-09-10T11:38:29.069Z [32minfo[39m: [object Object]
+2024-09-10T11:38:42.569Z [32minfo[39m: null
+2024-09-10T11:38:44.170Z [32minfo[39m: null
+2024-09-10T11:38:44.678Z [32minfo[39m: null
+2024-09-10T11:39:16.589Z [32minfo[39m: [object Object]
+2024-09-10T11:39:18.230Z [32minfo[39m: [object Object]
+2024-09-10T11:39:18.232Z [32minfo[39m: [object Object]
+2024-09-10T11:39:18.253Z [32minfo[39m: Email verified for user: eniolaolagbegi@gmail.com
+2024-09-10T11:39:18.613Z [32minfo[39m: [object Object]
+2024-09-10T11:42:13.093Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T11:42:13.242Z [32minfo[39m: Successfully connected to 
+2024-09-10T11:42:14.327Z [32minfo[39m: [object Object]
+2024-09-10T11:42:14.345Z [32minfo[39m: User details: {
+  "_id": "66e02fc45d360d93e5250611",
+  "email": "eniolaolagbegi@gmail.com",
+  "iat": 1725968324,
+  "exp": 1725971924
+}
+2024-09-10T11:42:14.383Z [32minfo[39m: Email verified for user: eniolaolagbegi@gmail.com
+2024-09-10T11:42:14.891Z [32minfo[39m: [object Object]
