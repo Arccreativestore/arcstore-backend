@@ -5,3 +5,10 @@
 2024-09-10T02:54:10.711Z [31merror[39m: Validation error: please enter a valid Email Address
 2024-09-10T02:54:10.712Z [31merror[39m: please enter a valid Email Address
 2024-09-10T02:54:11.720Z [31merror[39m: No recipients defined
+2024-09-10T10:10:33.563Z [31merror[39m: Unknown authentication strategy "google"
+2024-09-10T10:34:56.606Z [31merror[39m: Successfully disconnected from mongodb://localhost:27017/arc-studios
+2024-09-10T10:34:56.608Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:34:56.687Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:39:55.173Z [31merror[39m: Successfully disconnected from mongodb://localhost:27017/arc-studios
+2024-09-10T10:39:55.176Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:40:28.237Z [31merror[39m: Bad Request

@@ -17,20 +17,27 @@ import db from "./config/database";
 import { logger } from "./config/logger";
 import context from "./context/context";
 import { ErrorMiddleware } from "./middleware/errors";
-
+import passport from "passport";
+import passportAuth from "./services/user/oauth";
 
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
 } satisfies CookieOptions;
 
+export interface User{
+    _id: string
+    email?:string
+    iat: number
+    exp: number
+}
 
 declare global {
     type LeanDocument<T> = T & Document;
 
     namespace Express {
         interface Request {
-            user?: any;
+            user?: User;
         }
     }
 }
@@ -76,7 +83,8 @@ const corsOptions = {
 await server.start();
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
-
+app.use(passport.initialize())
+passportAuth()
 
 
 app.get("/", async (req:Request, res:Response) => {
@@ -90,7 +98,7 @@ app.use('/api/v1', apiRoute);
 app.use("/graphql",
     bodyParser.json({limit: "5mb"}),
     expressMiddleware(server, {
-    //context                      ------------->>>>>>>>>> PLEASE HELP
+    context                   
     })
 );
 
@@ -104,3 +112,9 @@ await new Promise<void>((resolve) =>
 
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
+    process.exit(1); 
+  });

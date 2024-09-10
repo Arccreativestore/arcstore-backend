@@ -6,10 +6,6 @@ import UserSchema from "./services/user/typeDefs.js";
 
 
 const rootTypeDefs = gql`
-  enum gender {
-    male
-    female
-  }
 
   type Mutation {
     _: Boolean

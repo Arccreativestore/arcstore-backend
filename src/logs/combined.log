@@ -29,3 +29,43 @@
 2024-09-10T02:54:10.711Z [31merror[39m: Validation error: please enter a valid Email Address
 2024-09-10T02:54:10.712Z [31merror[39m: please enter a valid Email Address
 2024-09-10T02:54:11.720Z [31merror[39m: No recipients defined
+2024-09-10T10:04:52.613Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:04:53.025Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:08:47.407Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:08:47.502Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:10:29.606Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:10:29.718Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:10:33.563Z [31merror[39m: Unknown authentication strategy "google"
+2024-09-10T10:12:46.953Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:12:47.072Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:14:07.218Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:14:07.431Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:15:26.521Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:15:26.744Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:23:07.943Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:23:08.109Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:28:50.278Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:28:50.443Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:30:59.178Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:30:59.325Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:31:53.037Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:31:53.204Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:34:56.606Z [31merror[39m: Successfully disconnected from mongodb://localhost:27017/arc-studios
+2024-09-10T10:34:56.608Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:34:56.687Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:35:16.367Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:35:16.596Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:39:55.173Z [31merror[39m: Successfully disconnected from mongodb://localhost:27017/arc-studios
+2024-09-10T10:39:55.176Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T10:40:22.647Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:40:22.885Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:40:28.237Z [31merror[39m: Bad Request
+2024-09-10T10:42:09.417Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:42:09.639Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:42:19.661Z [32minfo[39m: https://lh3.googleusercontent.com/a/ACg8ocIDfJkb8jaTb000duao5aJfUzKv2mVm1jUzwaYxMmLSdYtwDHM=s96-c
+2024-09-10T10:44:06.318Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:44:06.579Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:45:40.869Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:45:41.094Z [32minfo[39m: Successfully connected to 
+2024-09-10T10:51:13.652Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:51:13.822Z [32minfo[39m: Successfully connected to 

@@ -4,6 +4,7 @@ const UserType = gql`
   type Mutation {
     userRegistration(data:iRegInput): User!
     verifyAccount: JSON!  
+    
   }
 
 type Query{
