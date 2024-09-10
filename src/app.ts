@@ -16,6 +16,7 @@ import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
 import context from "./context/context";
+import { ErrorMiddleware } from "./middleware/errors";
 
 
 export const cookieSettings = {
@@ -89,19 +90,13 @@ app.use('/api/v1', apiRoute);
 app.use("/graphql",
     bodyParser.json({limit: "5mb"}),
     expressMiddleware(server, {
-   // context: context
+    //context                      ------------->>>>>>>>>> PLEASE HELP
     })
 );
 
 
 // Generic error handler middleware
-app.use((err:any, req:Request, res:Response, next:NextFunction) => {
-    console.error(err.stack); // Log the error details
-    res.status(err.status || 500).json({
-        success: false,
-        error: err.stack
-    });
-});
+app.use(ErrorMiddleware);
 
 await new Promise<void>((resolve) =>
     httpServer.listen({port: PORT}, resolve)

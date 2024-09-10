@@ -15,9 +15,9 @@ export const jwtVerify = (token: string | null) => {
     return decoded 
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {
-     throw new Error( 'link has expired' );
+     throw new Error( 'token has expired' );
     } else if (err instanceof jwt.JsonWebTokenError) {
-      throw new Error('Invalid link');
+      throw new Error('Invalid token');
     } else {
       throw new Error('Internal server error');
     }

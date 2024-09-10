@@ -1,5 +1,5 @@
-
-
+import { Request, RequestHandler, ErrorRequestHandler, Response, NextFunction } from "express";
+import { logger } from "../config/logger";
 export class BadreqError extends Error{
  
     public name: string;
@@ -69,3 +69,29 @@ export class UnauthorizedError extends Error {
         Object.setPrototypeOf(this, BadreqError.prototype);
     }
 }
+
+export const ErrorMiddleware: ErrorRequestHandler = (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (
+      err instanceof BadreqError ||
+      err instanceof ConflictError ||
+      err instanceof NotFoundError ||
+      err instanceof UnauthorizedError
+    ) {
+        // user errors
+      const statusCode = err.statusCode || 500;
+      const message = err.isOperational ? err.message : "Internal Server Error";
+      return res.status(statusCode).json({ status: "error", data: null, message });
+    } else {
+      // For developer errors
+      logger.error(err);
+      return res
+        .status(500)
+        .json({ status: "error", data: null, message: "internal server error" });
+    }
+  };
+  
