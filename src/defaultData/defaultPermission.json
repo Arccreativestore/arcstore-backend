@@ -1,0 +1,53 @@
+[
+    {
+      "_id": "64d72c9f2a0ad1b51521836e",
+      "title": "Create Permission Group",
+      "description": "Allows the creation of a new permission group in the system.",
+      "method": "createPermissionGroup",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "permissions"
+    },
+    {
+      "_id": "64d72c9f2a0ad1b51521836f",
+      "title": "Update Permission Group",
+      "description": "Allows updating the details of an existing permission group.",
+      "method": "updatePermissionGroup",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "permissions"
+    },
+    {
+      "_id": "64d72c9f2a0ad1b515218370",
+      "title": "Disable Permission Group",
+      "description": "Allows disabling a permission group, preventing its further usage.",
+      "method": "disablePermissionGroup",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "permissions"
+    },
+    {
+      "_id": "64d72c9f2a0ad1b515218371",
+      "title": "Get All Permission Groups",
+      "description": "Allows fetching all the permission groups currently available.",
+      "method": "getAllPermissionGroup",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "permissions"
+    },
+    {
+      "_id": "64d72c9f2a0ad1b515218372",
+      "title": "Get Default Permissions",
+      "description": "Allows fetching all default permissions with pagination support.",
+      "method": "getAllDefaultPermissions",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "permissions"
+    }
+  ]
+  
