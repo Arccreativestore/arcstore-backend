@@ -95,16 +95,30 @@ app.get("/", async (req:Request, res:Response) => {
 app.use('/api/v1', apiRoute);
 
 
+
+
 app.use("/graphql",
-    bodyParser.json({limit: "5mb"}),
+    bodyParser.json({ limit: "5mb" }),
     expressMiddleware(server, {
-    context                   
+      context: async ({ req, res }) => {
+
+        const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
+
+        let user = null //initialize user
+        if (token) {
+          user = null //call a function to decrypt the token and set user to the context
+        }
+
+        //Return without user, Route that are not protected will be freely called.
+        return {
+          req,
+          res,
+          user
+        };
+      },
     })
-);
+  );
 
-
-// Generic error handler middleware
-app.use(ErrorMiddleware);
 
 await new Promise<void>((resolve) =>
     httpServer.listen({port: PORT}, resolve)

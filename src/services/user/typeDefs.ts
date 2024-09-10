@@ -4,7 +4,10 @@ const UserType = gql`
   type Mutation {
     userRegistration(data:iRegInput): User!
     verifyAccount: JSON!  
+<<<<<<< HEAD
     
+=======
+>>>>>>> 3a57ec96355985a393c0cfafc88d7bcca9750a4c
   }
 
 type Query{
@@ -17,12 +20,19 @@ enum IuserType{
     STAFF
 }
 
+<<<<<<< HEAD
 input iRegInput
 {
     email: String!
     username: String!
     password: String!
     role: IuserType!
+=======
+input iRegInput{
+    email: String!
+    username: String!
+    password: String!
+>>>>>>> 3a57ec96355985a393c0cfafc88d7bcca9750a4c
      
 }
 
