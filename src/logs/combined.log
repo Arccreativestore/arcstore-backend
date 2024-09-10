@@ -1,0 +1,1114 @@
+2024-09-09T21:34:39.654Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-09T21:34:39.762Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:26:10.083Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:26:10.303Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:31:01.778Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:31:01.898Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:35:03.340Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:35:03.570Z [32minfo[39m: Successfully connected to 
+2024-09-10T00:43:13.529Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T00:43:13.642Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:40:34.754Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:40:34.899Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:56:52.602Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:56:52.765Z [32minfo[39m: Successfully connected to 
+2024-09-10T01:57:43.792Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T01:57:43.896Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:05:41.885Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:05:42.098Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:43:51.908Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:43:52.082Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:45:43.119Z [31merror[39m: No recipients defined
+2024-09-10T02:46:57.008Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:46:57.173Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:47:18.546Z [31merror[39m: Validation error: "email" must be a valid email
+2024-09-10T02:47:18.547Z [31merror[39m: "email" must be a valid email
+2024-09-10T02:47:19.530Z [31merror[39m: No recipients defined
+2024-09-10T02:53:54.074Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T02:53:54.235Z [32minfo[39m: Successfully connected to 
+2024-09-10T02:54:10.711Z [31merror[39m: Validation error: please enter a valid Email Address
+2024-09-10T02:54:10.712Z [31merror[39m: please enter a valid Email Address
+2024-09-10T02:54:11.720Z [31merror[39m: No recipients defined
+2024-09-10T09:32:49.698Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:32:49.734Z [31merror[39m: There was a db connection error 
+2024-09-10T09:32:54.736Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:32:54.737Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:32:54.738Z [31merror[39m: There was a db connection error 
+2024-09-10T09:32:59.739Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:32:59.740Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:32:59.740Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:04.743Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:04.744Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:04.744Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:09.746Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:09.746Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:09.747Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:14.748Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:14.748Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:14.748Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:19.753Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:19.753Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:19.754Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:24.756Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:24.757Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:24.758Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:29.759Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:29.760Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:29.760Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:34.761Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:34.761Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:34.762Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:39.763Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:39.764Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:39.765Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:43.892Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:33:43.893Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:33:44.765Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:44.766Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:44.767Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:49.768Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:49.768Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:49.769Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:52.291Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:52.417Z [32minfo[39m: Successfully connected to 
+2024-09-10T09:33:54.770Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:54.879Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:54.880Z [31merror[39m: There was a db connection error 
+2024-09-10T09:33:59.881Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:33:59.882Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:33:59.882Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:04.883Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:04.884Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:04.885Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:09.885Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:09.885Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:09.885Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:11.474Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/dt_super_admin
+2024-09-10T09:34:11.476Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:34:11.477Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:34:14.886Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:14.886Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:14.886Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:19.889Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:19.889Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:19.890Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:21.309Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:21.375Z [32minfo[39m: Successfully connected to 
+2024-09-10T09:34:24.890Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:24.890Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:24.891Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:29.891Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:29.892Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:29.892Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:34.893Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:34.894Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:34.894Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:39.895Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:39.896Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:39.896Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:44.896Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:44.896Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:44.896Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:49.898Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:49.898Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:49.899Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:54.899Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:54.900Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:54.900Z [31merror[39m: There was a db connection error 
+2024-09-10T09:34:59.902Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:34:59.903Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:34:59.903Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:04.904Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:04.904Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:04.905Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:09.906Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:09.907Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:09.907Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:14.914Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:14.915Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:14.915Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:19.921Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:19.921Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:19.921Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:24.927Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:24.928Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:24.928Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:29.930Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:29.930Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:29.931Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:34.932Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:34.933Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:34.933Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:39.935Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:39.935Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:39.936Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:44.939Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:44.939Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:44.939Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:48.837Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T09:35:48.838Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:35:48.838Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:35:49.940Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:49.940Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:49.940Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:54.942Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:54.942Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:54.942Z [31merror[39m: There was a db connection error 
+2024-09-10T09:35:58.783Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:58.868Z [32minfo[39m: Successfully connected to 
+2024-09-10T09:35:59.943Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:35:59.944Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:35:59.944Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:04.946Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:04.946Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:04.946Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:09.947Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:09.947Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:09.948Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:14.952Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:14.952Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:14.952Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:19.953Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:19.954Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:19.954Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:24.955Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:24.956Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:24.956Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:29.957Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:29.958Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:29.958Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:34.959Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:34.960Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:34.960Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:39.967Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:39.968Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:39.968Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:44.969Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:44.969Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:44.969Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:49.970Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:49.970Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:49.970Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:54.971Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:54.972Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:54.972Z [31merror[39m: There was a db connection error 
+2024-09-10T09:36:59.973Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:36:59.973Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:36:59.974Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:04.975Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:04.975Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:04.975Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:09.976Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:09.977Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:09.977Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:14.979Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:14.979Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:14.980Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:19.980Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:19.981Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:19.981Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:24.981Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:24.982Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:24.983Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:29.983Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:29.983Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:29.984Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:34.984Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:34.989Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:34.989Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:39.993Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:40.003Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:40.003Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:45.004Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:45.005Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:45.005Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:50.007Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:50.008Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:50.008Z [31merror[39m: There was a db connection error 
+2024-09-10T09:37:55.009Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:37:55.010Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:37:55.011Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:00.010Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:00.011Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:00.011Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:05.013Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:05.013Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:05.013Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:10.015Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:10.015Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:10.016Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:15.016Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:15.017Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:15.017Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:20.018Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:20.019Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:20.019Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:25.020Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:25.022Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:25.023Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:30.026Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:30.026Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:30.028Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:35.030Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:35.030Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:35.030Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:40.031Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:40.031Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:40.032Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:45.033Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:45.034Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:45.034Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:50.034Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:50.034Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:50.035Z [31merror[39m: There was a db connection error 
+2024-09-10T09:38:55.036Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:38:55.036Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:38:55.036Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:00.037Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:00.037Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:00.037Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:05.039Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:05.039Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:05.039Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:10.040Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:10.040Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:10.040Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:15.041Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:15.041Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:15.042Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:20.043Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:20.044Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:20.045Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:25.047Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:25.047Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:25.048Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:30.048Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:30.049Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:30.050Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:35.051Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:35.051Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:35.052Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:40.053Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:40.053Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:40.054Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:45.056Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:45.056Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:45.058Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:50.066Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:50.067Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:50.068Z [31merror[39m: There was a db connection error 
+2024-09-10T09:39:55.071Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:39:55.071Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:39:55.072Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:00.073Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:00.074Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:00.074Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:05.076Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:05.076Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:05.077Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:10.078Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:10.078Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:10.079Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:15.079Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:15.079Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:15.079Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:20.081Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:20.081Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:20.081Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:25.082Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:25.082Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:25.082Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:30.083Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:30.083Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:30.084Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:35.084Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:35.085Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:35.085Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:40.085Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:40.085Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:40.086Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:45.087Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:45.087Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:45.088Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:50.089Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:50.090Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:50.090Z [31merror[39m: There was a db connection error 
+2024-09-10T09:40:55.092Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:40:55.092Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:40:55.093Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:00.094Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:00.094Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:00.095Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:05.096Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:05.097Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:05.097Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:10.098Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:10.098Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:10.098Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:15.098Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:15.099Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:15.099Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:20.100Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:20.100Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:20.101Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:25.101Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:25.102Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:25.102Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:30.102Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:30.104Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:30.104Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:35.107Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:35.107Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:35.108Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:40.114Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:40.115Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:40.115Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:45.116Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:45.117Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:45.118Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:50.118Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:50.119Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:50.120Z [31merror[39m: There was a db connection error 
+2024-09-10T09:41:55.121Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:41:55.122Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:41:55.122Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:00.122Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:00.122Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:00.123Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:05.136Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:05.141Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:05.142Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:10.143Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:10.144Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:10.144Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:15.144Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:15.145Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:15.146Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:20.146Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:20.147Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:20.148Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:25.150Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:25.151Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:25.152Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:30.152Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:30.153Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:30.153Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:35.157Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:35.158Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:35.158Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:40.159Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:40.159Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:40.160Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:45.160Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:45.161Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:45.162Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:50.163Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:50.163Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:50.163Z [31merror[39m: There was a db connection error 
+2024-09-10T09:42:55.166Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:42:55.166Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:42:55.166Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:00.168Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:00.169Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:00.169Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:05.171Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:05.171Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:05.172Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:10.173Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:10.174Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:10.174Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:15.176Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:15.176Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:15.177Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:20.178Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:20.178Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:20.179Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:25.179Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:25.179Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:25.180Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:30.181Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:30.182Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:30.183Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:35.184Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:35.185Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:35.185Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:40.187Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:40.188Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:40.188Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:45.195Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:45.195Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:45.195Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:50.198Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:50.199Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:50.199Z [31merror[39m: There was a db connection error 
+2024-09-10T09:43:55.200Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:43:55.201Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:43:55.202Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:00.203Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:00.203Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:00.204Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:05.223Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:05.224Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:05.224Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:10.226Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:10.228Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:10.230Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:15.232Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:15.232Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:15.233Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:20.233Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:20.234Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:20.234Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:25.236Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:25.236Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:25.237Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:30.252Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:30.253Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:30.253Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:35.253Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:35.254Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:35.254Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:40.254Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:40.254Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:40.258Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:45.258Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:45.260Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:45.260Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:50.280Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:50.281Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:50.281Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:55.282Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:44:55.283Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:44:55.283Z [31merror[39m: There was a db connection error 
+2024-09-10T09:44:58.086Z [31merror[39m: Validation error: "password" must only contain alpha-numeric characters
+2024-09-10T09:44:58.087Z [31merror[39m: "password" must only contain alpha-numeric characters
+2024-09-10T09:44:58.506Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:45:00.284Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:00.286Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:00.287Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:05.290Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:05.290Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:05.291Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:08.913Z [31merror[39m: Validation error: "role" is not allowed
+2024-09-10T09:45:08.914Z [31merror[39m: "role" is not allowed
+2024-09-10T09:45:08.993Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:45:10.292Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:10.293Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:10.293Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:15.360Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:15.360Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:15.361Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:20.361Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:20.363Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:20.363Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:21.850Z [31merror[39m: Validation error: "role" is not allowed
+2024-09-10T09:45:21.855Z [31merror[39m: "role" is not allowed
+2024-09-10T09:45:22.156Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:45:25.366Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:25.367Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:25.367Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:30.369Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:30.370Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:30.372Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:33.337Z [31merror[39m: Validation error: "role" is not allowed
+2024-09-10T09:45:33.337Z [31merror[39m: "role" is not allowed
+2024-09-10T09:45:33.407Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:45:35.373Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:35.373Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:35.373Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:40.375Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:40.376Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:40.377Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:45.378Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:45.379Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:45.379Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:50.379Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:50.379Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:50.380Z [31merror[39m: There was a db connection error 
+2024-09-10T09:45:55.382Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:45:55.382Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:45:55.383Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:00.384Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:00.384Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:00.385Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:05.386Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:05.386Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:05.387Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:10.388Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:10.389Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:10.390Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:15.391Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:15.391Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:15.393Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:20.394Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:20.395Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:20.395Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:25.396Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:25.396Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:25.397Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:30.398Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:30.398Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:30.398Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:30.589Z [31merror[39m: Validation error: "role" is not allowed
+2024-09-10T09:46:30.590Z [31merror[39m: "role" is not allowed
+2024-09-10T09:46:30.996Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:46:35.399Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:35.400Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:35.400Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:40.400Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:40.401Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:40.401Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:45.403Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:45.403Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:45.404Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:50.406Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:50.407Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:50.407Z [31merror[39m: There was a db connection error 
+2024-09-10T09:46:55.408Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:46:55.409Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:46:55.409Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:00.410Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:00.411Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:00.411Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:05.412Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:05.413Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:05.414Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:10.416Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:10.416Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:10.417Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:15.418Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:15.418Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:15.419Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:20.421Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:20.422Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:20.424Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:25.425Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:25.426Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:25.426Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:30.428Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:30.429Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:30.429Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:35.431Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:35.431Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:35.432Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:40.433Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:40.434Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:40.434Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:45.435Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:45.439Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:45.440Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:50.441Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:50.441Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:50.441Z [31merror[39m: There was a db connection error 
+2024-09-10T09:47:55.442Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:47:55.442Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:47:55.442Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:00.444Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:00.444Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:00.444Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:05.446Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:05.446Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:05.447Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:10.448Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:10.449Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:10.449Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:15.451Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:15.452Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:15.452Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:20.453Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:20.454Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:20.455Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:25.455Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:25.456Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:25.456Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:30.458Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:30.459Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:30.460Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:35.461Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:35.462Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:35.462Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:40.466Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:40.467Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:40.467Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:45.469Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:45.470Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:45.470Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:50.470Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:50.471Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:50.472Z [31merror[39m: There was a db connection error 
+2024-09-10T09:48:55.481Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:48:55.482Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:48:55.482Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:00.484Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:00.484Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:00.485Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:05.486Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:05.486Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:05.487Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:10.488Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:10.488Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:10.489Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:15.490Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:15.492Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:15.492Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:20.494Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:20.495Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:20.496Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:25.496Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:25.497Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:25.498Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:30.499Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:30.499Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:30.500Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:35.503Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:35.503Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:35.503Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:40.509Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:40.510Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:40.510Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:45.511Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:45.511Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:45.512Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:50.512Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:50.513Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:50.514Z [31merror[39m: There was a db connection error 
+2024-09-10T09:49:55.515Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:49:55.516Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:49:55.516Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:00.517Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:00.518Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:00.518Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:05.519Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:05.520Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:05.521Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:10.522Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:10.523Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:10.524Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:15.682Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:15.682Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:15.683Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:20.685Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:20.685Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:20.686Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:25.687Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:25.687Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:25.688Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:30.689Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:30.690Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:30.690Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:35.692Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:35.692Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:35.692Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:40.693Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:40.694Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:40.694Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:45.695Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:45.695Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:45.696Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:50.697Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:50.697Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:50.697Z [31merror[39m: There was a db connection error 
+2024-09-10T09:50:55.767Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:50:55.769Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:50:55.770Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:00.772Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:00.772Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:00.772Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:05.774Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:05.774Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:05.775Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:10.775Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:10.775Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:10.776Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:15.776Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:15.777Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:15.777Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:20.777Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:20.778Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:20.778Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:25.781Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:25.782Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:25.783Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:30.785Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:30.786Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:30.786Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:35.788Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:35.789Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:35.789Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:40.789Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:40.793Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:40.793Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:43.405Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T09:51:43.405Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:51:45.793Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:45.794Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:45.794Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:50.795Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:50.795Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:50.795Z [31merror[39m: There was a db connection error 
+2024-09-10T09:51:51.611Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:51.692Z [32minfo[39m: Successfully connected to 
+2024-09-10T09:51:55.796Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:51:55.796Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:51:55.797Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:00.797Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:00.797Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:00.800Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:05.801Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:05.801Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:05.801Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:10.803Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:10.804Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:10.804Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:15.805Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:15.805Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:15.805Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:20.806Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:20.807Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:20.808Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:25.811Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:25.812Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:25.812Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:30.814Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:30.815Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:30.817Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:34.200Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-10T09:52:35.818Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:35.819Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:35.819Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:40.820Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:40.820Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:40.821Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:45.822Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:45.822Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:45.822Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:50.824Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:50.825Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:50.825Z [31merror[39m: There was a db connection error 
+2024-09-10T09:52:55.830Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:52:55.830Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:52:55.831Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:00.833Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:00.833Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:00.834Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:05.835Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:05.835Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:05.836Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:10.836Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:10.837Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:10.838Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:15.837Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:15.837Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:15.837Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:20.838Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:20.838Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:20.839Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:25.839Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:25.841Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:25.841Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:30.843Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:30.843Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:30.844Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:35.845Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:35.845Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:35.846Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:40.846Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:40.847Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:40.847Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:45.849Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:45.849Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:45.850Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:50.850Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:50.850Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:50.851Z [31merror[39m: There was a db connection error 
+2024-09-10T09:53:55.852Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:53:55.852Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:53:55.852Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:00.854Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:00.855Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:00.856Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:05.857Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:05.857Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:05.857Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:10.859Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:10.860Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:10.861Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:15.861Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:15.862Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:15.863Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:20.864Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:20.864Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:20.865Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:25.866Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:25.866Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:25.867Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:30.869Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:30.869Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:30.869Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:35.870Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:35.871Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:35.871Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:40.872Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:40.872Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:40.873Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:45.874Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:45.875Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:45.875Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:50.877Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:50.877Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:50.878Z [31merror[39m: There was a db connection error 
+2024-09-10T09:54:55.880Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:54:55.881Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:54:55.881Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:00.883Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:00.884Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:00.884Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:05.886Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:05.886Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:05.887Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:10.888Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:10.889Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:10.889Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:15.889Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:15.890Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:15.890Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:20.891Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:20.891Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:20.892Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:25.893Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:25.894Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:25.894Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:30.895Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:30.896Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:30.896Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:35.896Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:35.896Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:35.897Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:40.898Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:40.898Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:40.898Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:45.899Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:45.899Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:45.899Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:50.900Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:50.900Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:50.900Z [31merror[39m: There was a db connection error 
+2024-09-10T09:55:55.901Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:55:55.901Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:55:55.901Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:00.902Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:00.903Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:00.904Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:05.952Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:05.952Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:05.953Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:10.954Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:10.955Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:10.955Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:15.967Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:15.967Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:15.967Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:20.969Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:20.969Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:20.969Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:25.971Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:25.971Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:25.971Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:30.972Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:30.972Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:30.972Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:35.975Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:35.976Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:35.979Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:40.979Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:40.981Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:40.982Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:45.984Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:45.984Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:45.986Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:50.988Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:50.988Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:50.989Z [31merror[39m: There was a db connection error 
+2024-09-10T09:56:55.991Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:56:55.991Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:56:55.991Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:00.992Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:00.999Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:01.007Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:06.008Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:06.009Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:06.009Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:11.009Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:11.010Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:11.010Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:16.011Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:16.011Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:16.011Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:21.014Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:21.014Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:21.014Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:26.014Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:26.015Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:26.015Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:31.015Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:31.016Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:31.016Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:36.027Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:36.027Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:36.028Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:41.029Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:41.029Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:41.030Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:46.030Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:46.031Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:46.032Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:48.518Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T09:57:48.519Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:57:48.519Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:57:51.034Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:51.035Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:51.035Z [31merror[39m: There was a db connection error 
+2024-09-10T09:57:56.037Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:57:56.039Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:57:56.039Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:01.039Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:01.040Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:01.040Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:06.042Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:06.043Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:06.043Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:11.046Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:11.051Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:11.055Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:16.056Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:16.056Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:16.056Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:21.057Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:21.057Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:21.058Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:26.059Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:26.060Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:26.060Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:31.065Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:31.065Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:31.066Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:36.067Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:36.067Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:36.068Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:41.069Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:41.069Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:41.069Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:46.070Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:46.070Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:46.070Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:46.765Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:46.822Z [32minfo[39m: Successfully connected to 
+2024-09-10T09:58:51.071Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:51.072Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:51.072Z [31merror[39m: There was a db connection error 
+2024-09-10T09:58:56.075Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:58:56.075Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:58:56.076Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:01.077Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:01.077Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:01.078Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:01.858Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-10T09:59:01.859Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:59:01.860Z [31merror[39m: dBase connection closed due to app termination
+2024-09-10T09:59:06.079Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:06.080Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:06.081Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:11.083Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:11.083Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:11.084Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:16.085Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:16.086Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:16.087Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:21.089Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:21.090Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:21.092Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:26.092Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:26.093Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:26.093Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:31.095Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:31.095Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:31.096Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:36.097Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:36.097Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:36.097Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:41.098Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:41.099Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:41.099Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:46.100Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:46.100Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:46.100Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:51.102Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:51.103Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:51.103Z [31merror[39m: There was a db connection error 
+2024-09-10T09:59:56.104Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T09:59:56.104Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T09:59:56.105Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:01.105Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:01.106Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:01.107Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:06.107Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:06.108Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:06.108Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:11.108Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:11.109Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:11.109Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:16.109Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:16.109Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:16.111Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:21.112Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:21.113Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:21.113Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:26.115Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:26.116Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:26.117Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:31.118Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:31.118Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:31.118Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:36.119Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:36.120Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:36.120Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:41.122Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:41.122Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:41.124Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:46.130Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:46.131Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:46.131Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:51.132Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:51.134Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:51.134Z [31merror[39m: There was a db connection error 
+2024-09-10T10:00:56.136Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:00:56.137Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:00:56.137Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:01.138Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:01.139Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:01.139Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:06.141Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:06.142Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:06.142Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:11.144Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:11.144Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:11.145Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:16.147Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:16.147Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:16.148Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:21.150Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:21.151Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:21.151Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:26.153Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:26.154Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:26.155Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:31.155Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:31.155Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:31.156Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:36.158Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:36.158Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:36.159Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:41.160Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T10:01:41.161Z [31merror[39m: Successfully disconnected from 45
+2024-09-10T10:01:41.164Z [31merror[39m: There was a db connection error 
+2024-09-10T10:01:46.165Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
