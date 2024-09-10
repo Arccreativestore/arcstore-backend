@@ -1,97 +1,149 @@
-import { Request, RequestHandler, ErrorRequestHandler, Response, NextFunction } from "express";
+import {
+  Request,
+  RequestHandler,
+  ErrorRequestHandler,
+  Response,
+  NextFunction,
+} from "express";
 import { logger } from "../config/logger";
-export class BadreqError extends Error{
- 
-    public name: string;
-    public statusCode: number;
-    public isOperational: boolean
+import { GraphQLError, GraphQLFormattedError } from "graphql";
 
-    constructor(
-        public message: string,
-       
-    )
-    {
-        super(message)
-        this.name = 'BadreqError';
-        this.statusCode = 400
-        this.isOperational = true;
-        Object.setPrototypeOf(this, BadreqError.prototype);
-    }
-}
-export class ConflictError extends Error
-{
-    public name: string;
-    public statusCode: number;
-    public isOperational: boolean
+//CUSTOM ERRORS
+export class CustomError extends Error {
+  public statusCode: number;
+  public isOperational: boolean;
 
-    constructor(
-        public message: string,
-    )
-    {
-        super(message)
-        this.name = 'ConflictError';
-        this.statusCode = 409
-        this.isOperational = true;
-        Object.setPrototypeOf(this, BadreqError.prototype);
-    }
+  constructor(message: string, statusCode: number, isOperational: boolean) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = isOperational;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
 }
 
-export class NotFoundError extends Error {
-
-    public name: string;
-    public statusCode: number;
-    public isOperational: boolean
-    constructor(
-        public message: string,
-    )
-    {
-        super(message)
-        this.name = 'NotFoundError';
-        this.statusCode = 404
-        this.isOperational = true;
-        Object.setPrototypeOf(this, BadreqError.prototype);
-    }
+//BAD REQ ERROR
+export class BadreqError extends CustomError {
+    
+  constructor(
+    public message: string,
+  ) {
+    super(message, 400, true);
+   
+  }
 }
 
-export class UnauthorizedError extends Error {
-
-    public name: string;
-    public statusCode: number;
-    public isOperational: boolean
-    constructor(
-        public message: string,
-    )
-    {
-        super(message)
-        this.name = 'UnauthorizedError';
-        this.statusCode = 401
-        this.isOperational = true;
-        Object.setPrototypeOf(this, BadreqError.prototype);
-    }
+// CONFLICT ERROR
+export class ConflictError extends CustomError {
+  constructor(
+    public message: string,
+  ) {
+    super(message, 409, true);
+   
+  }
 }
 
+// NOTFOUND ERROR
+export class NotFoundError extends CustomError {
+  constructor(
+    public message: string,
+  ) {
+    super(message, 404, true);
+   
+  }
+}
+
+//UNAUTHORIZED ERROR
+export class UnauthorizedError extends CustomError {
+  constructor(
+    public message: string,
+  ) {
+    super(message, 401, true);
+   
+  }
+}
+
+//FORBIDDEN ERROR
+export class ForbiddenError extends CustomError {
+  constructor(
+    public message: string,
+  ) {
+    super(message, 403, true);
+   
+  }
+}
+
+// EXPRESS ERROR HANDLER
 export const ErrorMiddleware: ErrorRequestHandler = (
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    if (
-      err instanceof BadreqError ||
-      err instanceof ConflictError ||
-      err instanceof NotFoundError ||
-      err instanceof UnauthorizedError
-    ) {
-        // user errors
-      const statusCode = err.statusCode || 500;
-      const message = err.isOperational ? err.message : "Internal Server Error";
-      return res.status(statusCode).json({ status: "error", data: null, message });
-    } else {
-      // For developer errors
-      logger.error(err);
-      return res
-        .status(500)
-        .json({ status: "error", data: null, message: "internal server error" });
-    }
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (
+    err instanceof BadreqError ||
+    err instanceof ConflictError ||
+    err instanceof NotFoundError ||
+    err instanceof UnauthorizedError
+  ) {
+    // user errors
+    const statusCode = err.statusCode || 500;
+    const message = err.isOperational ? err.message : "Internal Server Error";
+    return res
+      .status(statusCode)
+      .json({ status: "error", data: null, message });
+  } else {
+    // For developer errors
+    logger.error(err);
+    return res
+      .status(500)
+      .json({ status: "error", data: null, message: "internal server error" });
+  }
+};
+
+interface ErrorFormat extends GraphQLFormattedError {
+  isOperational: boolean;
+  status: string;
+  statusCode: number;
+}
+
+// GRAPHQL ERROR HANDLER
+
+export const GraphError = (
+  formattedError: GraphQLFormattedError,
+  error: unknown
+): ErrorFormat => {
+  const err = (error as GraphQLError).originalError || error;
+
+  let ErrorObject: ErrorFormat = {
+    message: "Internal Server Error",
+    statusCode: 500,
+    isOperational: false,
+    status: "error",
+    path: formattedError.path,
+    locations: formattedError.locations,
   };
-  
+  if (err instanceof CustomError) {
+    ErrorObject =
+      // no logging for user errors
+      {
+        message: err.message ? err.message : "Error",
+        statusCode: err.statusCode ? err.statusCode : 500,
+        isOperational: true,
+        status: "error",
+      };
+  } else {
+    // Log unexpected internal errors for further investigation
+    logger.error(
+      `Internal Server Error: ${
+        err instanceof Error ? err.message : "Unknown error"
+      }`,
+      {
+        stack:
+          err instanceof Error
+            ? err.stack
+            : "No stack trace",
+      }
+    );
+  }
+  return ErrorObject;
+};

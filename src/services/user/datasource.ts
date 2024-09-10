@@ -1,6 +1,6 @@
 import Base from "../../base";
 import { userModel } from "../../models/user";
-import { IReg, regValidationSchema, registerResponse } from "./interfaces";
+import { IReg, regValidationSchema, dbResponse } from "./userTypesAndValidation";
 import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
@@ -10,20 +10,14 @@ import { BadreqError } from "../../middleware/errors";
 
 class UserDatasource extends Base {
 
-  private validateRegistration(data: IReg): void {
-    const { error } = regValidationSchema.validate(data);
-    if (error) {
-      logger.error(`Validation error: ${error.message}`);
-      throw new BadreqError(error.message);
-    }
-  }
+  
 
-  async userRegistration(data: IReg): Promise<registerResponse | null> {
+  async userRegistration(data: IReg): Promise<dbResponse | null> {
     try {
-      this.validateRegistration(data)
+     
       const create = await userModel.create(data);
     
-        return create ? (create.toObject() as registerResponse) : null;
+        return create ? (create.toObject()) : null;
       
       
     } catch (error: any) {
@@ -32,13 +26,13 @@ class UserDatasource extends Base {
     }
   }
 
-  async findByEmail(email: string): Promise<boolean> {
+  async findByEmail(email: string): Promise<dbResponse | null> {
     try {
       const emailExist = await userModel.findOne({ email });
       if (emailExist) {
-        return true;
+        return emailExist.toObject();
       }
-      return false;
+      return null;
     } catch (error: any) {
       logger.error(error.message);
       throw error;
@@ -48,7 +42,7 @@ class UserDatasource extends Base {
   async verifyEmail(email: string): Promise<IAccount | null> {
     const verifyAccount = userModel.findOneAndUpdate(
       { email },
-      { verified: true },
+      { verified: true, verifiedDate: Date.now() },
       { new: true }
     );
     return verifyAccount;

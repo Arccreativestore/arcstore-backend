@@ -17,20 +17,28 @@ import db from "./config/database";
 import { logger } from "./config/logger";
 import context from "./context/context";
 import { ErrorMiddleware } from "./middleware/errors";
-
-
+import passport from "passport";
+import passportAuth from "./services/user/oauth";
+import { jwtVerify } from "./middleware/jwtVerify";
+import { GraphError } from "./middleware/errors";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
 } satisfies CookieOptions;
 
+export interface User{
+    _id: string
+    email?:string
+    iat: number
+    exp: number
+}
 
 declare global {
     type LeanDocument<T> = T & Document;
 
     namespace Express {
         interface Request {
-            user?: any;
+            user?: User;
         }
     }
 }
@@ -54,6 +62,7 @@ const server = new ApolloServer<MyContext>({
     typeDefs,
     resolvers,
     csrfPrevention: false,
+    formatError: GraphError,
     plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
     
 
@@ -76,7 +85,8 @@ const corsOptions = {
 await server.start();
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
-
+app.use(passport.initialize())
+passportAuth()
 
 
 app.get("/", async (req:Request, res:Response) => {
@@ -87,12 +97,7 @@ app.get("/", async (req:Request, res:Response) => {
 app.use('/api/v1', apiRoute);
 
 
-// app.use("/graphql",
-//     bodyParser.json({limit: "5mb"}),
-//     expressMiddleware(server, {
-//     //context                      ------------->>>>>>>>>> PLEASE HELP
-//     })
-// );
+
 
 app.use("/graphql",
     bodyParser.json({ limit: "5mb" }),
@@ -103,8 +108,9 @@ app.use("/graphql",
 
         let user = null //initialize user
         if (token) {
-          user = null //call a function to decrypt the token and set user to the context
+          user = jwtVerify(token) //call a function to decrypt the token and set user to the context
         }
+        logger.info(user)
 
         //Return without user, Route that are not protected will be freely called.
         return {
@@ -123,3 +129,9 @@ await new Promise<void>((resolve) =>
 
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
+    process.exit(1); 
+  });

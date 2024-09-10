@@ -1,65 +1,66 @@
 import { NextFunction } from "express";
-import mongoose, { Schema, ObjectId,model, Document } from "mongoose";
-import bcrypt from 'bcrypt'
-export type RoleEnum = 'USER' | 'SUPERADMIN'  | 'STAFF' | 'CREATOR';
+import mongoose, { Schema, ObjectId, model, Document } from "mongoose";
+import bcrypt from "bcrypt";
+export type RoleEnum = "USER" | "SUPERADMIN" | "STAFF" | "CREATOR";
 
-export interface IAccount extends Document{
-
-    email: string
-    verifiedDate: Date
-    emailVerified: boolean
-    password: string
-    role: RoleEnum
-    profilePicture: string
-    username: string
-    permissionGroup?:ObjectId[]
+export interface IAccount extends Document {
+  email: string;
+  verifiedDate: Date;
+  emailVerified: boolean;
+  password: string;
+  role: RoleEnum;
+  profilePicture: string;
+  username: string;
+  permissionGroup?: ObjectId[];
 }
 
-
-
-const UserSchema: Schema = new Schema<IAccount>({
- 
-    email : {
-    type: String,
-    required: true,
-    index: true,
-    unique: true,
-    trim: true
+const UserSchema: Schema = new Schema<IAccount>(
+  {
+    email: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      trim: true,
     },
 
     username: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
-
+    password: {
+      type: String,
+      trim: true,
+    },
     emailVerified: {
-        type: Boolean
+      type: Boolean,
     },
-
     role: {
-        type: String,
-        enum: ['USER', 'SUPERADMIN','CREATOR', 'STAFF'],
-        default: 'USER'
+      type: String,
+      enum: ["USER", "SUPERADMIN", "CREATOR", "STAFF"],
+      default: "USER",
     },
-
-    permissionGroup:{
-        type:[Schema.Types.ObjectId],
-        
+    profilePicture: {
+      type: String,
+      trim: true,
     },
-
+    permissionGroup: {
+      type: [Schema.Types.ObjectId],
+    },
     verifiedDate: {
-        type: Date
+      type: Date,
     },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true })
-
-export const userModel = model("users", UserSchema)
+export const userModel = model("users", UserSchema);
 // HASH PASSWORD
-UserSchema.pre<IAccount>('save', async function (next) {
-  const user = this; 
+UserSchema.pre<IAccount>("save", async function (next) {
+  const user = this;
 
-  if (!user.isModified('password')) return next();
+  if (!user.isModified("password")) return next();
 
   try {
     const salt = await bcrypt.genSalt(10);
