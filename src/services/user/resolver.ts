@@ -1,6 +1,6 @@
 import UserDatasource from "./datasource";
 import { Request } from "express";
-import { IReg, registerResponse, regValidationSchema } from "./interfaces";
+import { IReg, registerResponse, regValidationSchema } from "./userTypesAndValidation";
 import {
   ConflictError,
   BadreqError,
@@ -12,7 +12,7 @@ import { VERIFY_SECRETKEY } from "../../config/config";
 import { eventEmitter } from "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { User } from "../../app";
-import { IUserMutation } from "./interfaces";
+import { IUserMutation } from "./userTypesAndValidation";
 
 export const UserMutation: IUserMutation = {
   async userRegistration(

@@ -20,7 +20,7 @@ import { ErrorMiddleware } from "./middleware/errors";
 import passport from "passport";
 import passportAuth from "./services/user/oauth";
 import { jwtVerify } from "./middleware/jwtVerify";
-
+import { GraphError } from "./middleware/errors";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -62,6 +62,7 @@ const server = new ApolloServer<MyContext>({
     typeDefs,
     resolvers,
     csrfPrevention: false,
+    formatError: GraphError,
     plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
     
 

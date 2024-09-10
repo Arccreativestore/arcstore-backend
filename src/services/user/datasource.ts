@@ -1,6 +1,6 @@
 import Base from "../../base";
 import { userModel } from "../../models/user";
-import { IReg, regValidationSchema, dbResponse } from "./interfaces";
+import { IReg, regValidationSchema, dbResponse } from "./userTypesAndValidation";
 import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";

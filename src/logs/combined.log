@@ -118,3 +118,11 @@
 }
 2024-09-10T11:42:14.383Z [32minfo[39m: Email verified for user: eniolaolagbegi@gmail.com
 2024-09-10T11:42:14.891Z [32minfo[39m: [object Object]
+2024-09-10T15:20:48.930Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-10T15:20:49.050Z [32minfo[39m: Successfully connected to 
+2024-09-10T15:21:42.865Z [32minfo[39m: null
+2024-09-10T15:21:50.701Z [32minfo[39m: null
+2024-09-10T15:21:51.497Z [32minfo[39m: null
+2024-09-10T15:22:01.505Z [32minfo[39m: null
+2024-09-10T15:22:01.514Z [31merror[39m: Registration error: User already exists
+2024-09-10T15:22:02.109Z [32minfo[39m: null
