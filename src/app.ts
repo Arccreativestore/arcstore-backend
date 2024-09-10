@@ -109,6 +109,7 @@ app.use("/graphql",
         let user = null //initialize user
         if (token) {
           user = jwtVerify(token) //call a function to decrypt the token and set user to the context
+          
         }
         logger.info(user)
 

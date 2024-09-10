@@ -3,7 +3,8 @@ import gql from "graphql-tag";
 const UserType = gql`
   type Mutation {
     userRegistration(data: iRegInput): User!
-    verifyAccount: verification!
+    verifyAccount: Verification!
+    Login(data: LoginInput): Token!
   }
 
   type Query {
@@ -22,6 +23,10 @@ const UserType = gql`
     password: String!
     role: IuserType!
   }
+  input LoginInput {
+    email: String
+    password: String
+  }
 
   type User {
     status: String
@@ -30,9 +35,12 @@ const UserType = gql`
     username: String
     role: String
   }
-  
-  type verification{
+
+  type Verification {
     status: String
+  }
+  type Token {
+    token: String
   }
 `;
 

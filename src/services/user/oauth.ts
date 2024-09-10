@@ -34,7 +34,9 @@ const passportAuth = (): void => {
                         profilePicture,
                         password: null,
                         role: 'USER', // default
-                        verified: true // true for o-auth
+                        emailVerified: true ,// true for o-auth
+                        verifiedDate: new Date()
+
                     });
 
                     if (newAccount) {

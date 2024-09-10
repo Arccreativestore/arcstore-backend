@@ -9,7 +9,7 @@ import {
   UnauthorizedError,
 } from "../middleware/errors.js";
 interface callback {
-  user: createReturnAttributes; // because from the oauth the user might just be trying to login
+  user: createReturnAttributes; 
   accessToken: string;
 }
 interface createReturnAttributes {

@@ -22,3 +22,10 @@
 2024-09-10T11:37:03.694Z [31merror[39m: Verification error: invalid token
 2024-09-10T11:38:28.538Z [31merror[39m: Verification error: invalid token
 2024-09-10T15:22:01.514Z [31merror[39m: Registration error: User already exists
+2024-09-10T17:49:54.732Z [31merror[39m: Internal Server Error: Unknown type "Log". Did you mean "Long"?
+2024-09-10T17:51:41.927Z [31merror[39m: Internal Server Error: `variables` in a POST body should be provided as an object, not a recursively JSON-encoded string.
+2024-09-10T17:52:01.989Z [31merror[39m: Internal Server Error: Cannot query field "mann" on type "User".
+2024-09-10T17:54:54.393Z [31merror[39m: Internal Server Error: `variables` in a POST body should be provided as an object, not a recursively JSON-encoded string.
+2024-09-10T17:55:32.775Z [31merror[39m: Internal Server Error: `variables` in a POST body should be provided as an object, not a recursively JSON-encoded string.
+2024-09-10T17:55:46.119Z [31merror[39m: Internal Server Error: token has expired
+2024-09-10T18:02:02.855Z [31merror[39m: Registration error: User already exists
