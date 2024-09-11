@@ -21,6 +21,7 @@ import passport from "passport";
 import passportAuth from "./services/user/oauth";
 import { jwtVerify } from "./middleware/jwtVerify";
 import { GraphError } from "./middleware/errors";
+import { userModel } from "./models/user";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -83,6 +84,7 @@ const corsOptions = {
 };
 
 await server.start();
+await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(passport.initialize())
@@ -111,7 +113,7 @@ app.use("/graphql",
           user = jwtVerify(token) //call a function to decrypt the token and set user to the context
           
         }
-        logger.info(user)
+      
 
         //Return without user, Route that are not protected will be freely called.
         return {
