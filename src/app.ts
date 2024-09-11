@@ -5,7 +5,7 @@ import {expressMiddleware} from "@apollo/server/express4";
 import {resolvers, typeDefs} from "./schema";
 import http from "http";
 import {isDev, MONGO_URI, PORT} from "./config/config";
-import express, {CookieOptions, NextFunction, Request, Response} from "express";
+import express, {CookieOptions, Request, Response} from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -15,13 +15,13 @@ import {Document} from "mongoose";
 import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
-import context from "./context/context";
-import { ErrorMiddleware } from "./middleware/errors";
+
 import passport from "passport";
 import passportAuth from "./services/user/oauth";
-import { jwtVerify } from "./middleware/jwtVerify";
-import { GraphError } from "./middleware/errors";
+
 import { userModel } from "./models/user";
+import formatError from "./helpers/formatError";
+import { log } from "console";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -52,18 +52,15 @@ interface MyContext {
 
 
 // connect db
-new db(logger).connect(MONGO_URI as string); // use winston
-
-
+new db(console).connect(MONGO_URI as string); // use winston
 
 const app = express();
 const httpServer = http.createServer(app);
 const server = new ApolloServer<MyContext>({
-    // formatError, infuse error formatter
+    formatError, 
     typeDefs,
     resolvers,
     csrfPrevention: false,
-    formatError: GraphError,
     plugins: [ApolloServerPluginDrainHttpServer({httpServer})],
     
 
@@ -109,10 +106,10 @@ app.use("/graphql",
         const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
 
         let user = null //initialize user
-        if (token) {
-          user = jwtVerify(token) //call a function to decrypt the token and set user to the context
+        // if (token) {
+        //   user = jwtVerify(token) //call a function to decrypt the token and set user to the context
           
-        }
+        // }
       
 
         //Return without user, Route that are not protected will be freely called.
@@ -133,8 +130,8 @@ await new Promise<void>((resolve) =>
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
 
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
-    logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
-    process.exit(1); 
-  });
+// process.on('uncaughtException', (error) => {
+//     console.error('Uncaught Exception:', error);
+//     logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
+//     process.exit(1); 
+//   });

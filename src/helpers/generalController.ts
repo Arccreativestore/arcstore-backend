@@ -1,5 +1,5 @@
 import Base from "../base.js";
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { Request, Response, NextFunction } from "express";
 import { logger } from "../config/logger";
 import { ObjectId } from "mongoose";
 import {
@@ -8,6 +8,8 @@ import {
   NotFoundError,
   UnauthorizedError,
 } from "../middleware/errors.js";
+import MongooseErrorUtils from "./handleMongoDbError.js";
+import {Document} from "mongoose";
 interface callback {
   user: createReturnAttributes; 
   accessToken: string;
@@ -43,6 +45,17 @@ class GeneralController {
       };
     }
   }
+
+
+  async handleMongoError(mongo: Promise<Document>): Promise<Document> {
+    return new Promise((resolve, reject) => {
+        mongo.then((data) => resolve(data))
+            .catch((reason) => {
+                reject(MongooseErrorUtils.handleMongooseError(reason));
+            });
+    });
+}
+
 }
 
 export default GeneralController;

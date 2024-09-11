@@ -202,3 +202,82 @@
 2024-09-11T13:28:38.919Z [31merror[39m: Internal Server Error: data and hash arguments required
 2024-09-11T13:31:55.972Z [31merror[39m: Internal Server Error: data and hash arguments required
 2024-09-11T13:39:28.744Z [31merror[39m: Internal Server Error: Variable "$data" of type "IresetPassword" used in position expecting type "IresetPassword!".
+2024-09-11T15:11:50.803Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:51.761Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:52.984Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:53.780Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:54.491Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:55.493Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:56.495Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:57.500Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:58.495Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:11:59.493Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:12:00.507Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:12:01.492Z [31merror[39m: Internal Server Error: Invalid token
+2024-09-11T15:12:45.961Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T15:12:45.962Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T15:12:45.962Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T15:25:09.621Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-11T16:30:30.253Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-11T16:30:31.813Z [31merror[39m: Registration error: User already exists
+2024-09-11T21:47:46.581Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T21:47:46.582Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:47:46.583Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:49:54.801Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T21:49:54.801Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:49:54.802Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:53:55.243Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T21:53:55.250Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:53:58.438Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:54:13.173Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T21:54:13.174Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:54:13.174Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:54:44.268Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T21:54:44.269Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T21:54:44.269Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:03:21.411Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:03:21.412Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:03:21.413Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:05:10.279Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:05:10.279Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:05:10.280Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:06:59.135Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:06:59.137Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:06:59.138Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:10:50.327Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:10:50.328Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:10:50.329Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:12:02.353Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:12:02.356Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:12:02.357Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:13:51.299Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:13:51.302Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:13:51.303Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:15:56.380Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:15:56.382Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:15:56.383Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:18:21.010Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:18:21.013Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:18:21.015Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:19:25.927Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:19:25.928Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:19:25.928Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:21:23.540Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:21:23.541Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:21:23.541Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:23:17.031Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:23:17.033Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:23:17.033Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:26:19.529Z [31merror[39m: E11000 duplicate key error collection: arc-store.permission_groups index: title_1 dup key: { title: "permission group" }
+2024-09-11T22:27:38.293Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:27:38.295Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:27:38.296Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:30:09.637Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:30:09.637Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:30:09.638Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:32:28.364Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
+2024-09-11T22:32:28.365Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T22:32:28.365Z [31merror[39m: dBase connection closed due to app termination
+2024-09-11T23:20:58.487Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-11T23:21:01.424Z [31merror[39m: Registration error: User already exists
+2024-09-11T23:21:05.847Z [31merror[39m: Registration error: User already exists
