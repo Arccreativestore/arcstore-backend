@@ -6,7 +6,7 @@ import {
   NextFunction,
 } from "express";
 import { logger } from "../config/logger";
-import { GraphQLError, GraphQLFormattedError } from "graphql";
+import { GraphQLError, GraphQLFormattedError, SourceLocation } from "graphql";
 
 //CUSTOM ERRORS
 export class CustomError extends Error {
@@ -99,7 +99,6 @@ export const ErrorMiddleware: ErrorRequestHandler = (
       .json({ status: "error", data: null, message: "internal server error" });
   }
 };
-
 // Graphql Error Handler
 interface ErrorFormat extends GraphQLFormattedError {
   isOperational: boolean;
@@ -147,4 +146,4 @@ export const GraphError = (
     );
   }
   return ErrorObject;
-};
+}

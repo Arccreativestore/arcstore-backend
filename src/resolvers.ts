@@ -1,16 +1,17 @@
-import { log } from "console";
-import { UserMutation, verifyUserMutation, UserQuery, loginUserMutation } from "./services/user/resolver";
-
+import { userMutations, UserQuery } from "./services/user/resolver";
+import {
+  PermissionMutation,
+  PermissionQuery,
+} from "./services/permission/resolver";
 
 const Mutation = {
-  ...UserMutation,
-  ...verifyUserMutation,
-  ...loginUserMutation
+  ...userMutations,
+  ...PermissionMutation,
 };
 
 const Query = {
   ...UserQuery,
-
+  ...PermissionQuery,
 };
 
 export { Mutation, Query };

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { logger } from "./logger";
+import DefaultScripts from "../defaultScript";
 
 dotenv.config();
 
@@ -28,7 +28,7 @@ class db {
                 .connect(DB_URL, options)
                 .then(async () => {
                     log.info(`Successfully connected to `, DB_URL);
-                 
+                  new DefaultScripts()
                 })
                 .catch((err: any) => {
                     log.error(`There was a db connection error `);

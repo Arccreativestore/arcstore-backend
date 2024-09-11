@@ -1,10 +1,16 @@
+
 import gql from "graphql-tag";
 
 const UserType = gql`
+scalar EmailAddress
+
   type Mutation {
-    userRegistration(data: iRegInput): User!
-    verifyAccount: Verification!
-    Login(data: LoginInput): Token!
+    userRegistration(data: iRegInput!): User!
+    verifyAccount: General!
+    requestVerification(data: Email!): General!
+    Login(data: LoginInput!): Token!
+    forgotPassword(data: Email!): General!
+    resetPassword(data: IresetPassword!): General!
   }
 
   type Query {
@@ -18,26 +24,38 @@ const UserType = gql`
   }
 
   input iRegInput {
-    email: String!
-    username: String!
+    email: EmailAddress!
+    firstName: String!
+    lastName: String
     password: String!
     role: IuserType!
   }
   input LoginInput {
-    email: String
-    password: String
+    email: String!
+    password: String!
+  }
+  input IresetPassword{
+    email: EmailAddress!
+    newPassword: String!
+    token:String!
+  }
+
+  input Email{
+  email:String!
   }
 
   type User {
-    status: String
+    status: String!
     _id: String!
-    email: String
-    username: String
-    role: String
+    email: EmailAddress!
+    firstName: String!
+    lastName: String
+    role: String!
   }
 
-  type Verification {
-    status: String
+  type General {
+    status: String!
+    message: String!
   }
   type Token {
     token: String
