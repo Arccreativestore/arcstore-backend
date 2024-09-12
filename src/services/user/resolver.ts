@@ -1,6 +1,7 @@
 import UserDatasource from "./datasource";
 import { Request } from "express";
 import {
+  Generalres,
   IReg,
   isEmail,
   registerResponse,
@@ -85,7 +86,7 @@ export const verifyUserMutation = {
     _: any,
     args: any,
     { user }: { req: Request; user: User }
-  ): Promise<{ status: string; message: string }> {
+  ): Promise<Generalres> {
     try {
       if (!user) {
         throw new NotFoundError("User not found in request");
@@ -117,7 +118,7 @@ export const verifyUserMutation = {
 };
 // REQUEST VERIFICATION
 export const requestVerification = {
-  async requestVerification(_: any, { data }: { data: { email: string } }): Promise<{status: string, message: string}> {
+  async requestVerification(_: any, { data }: { data: { email: string } }): Promise<Generalres> {
     try {
       const { email } = data;
       isEmail({email})
@@ -131,7 +132,7 @@ export const requestVerification = {
         throw new NotFoundError("User with that email does not exist");
       }
 
-      const username = findEmail?.firstName;
+      const username = findEmail.firstName;
 
       const token = jwt.sign({ email }, VERIFY_SECRETKEY as string, {
         expiresIn: "1hr",
@@ -184,7 +185,7 @@ export const forgotPasswordMutation = {
   async forgotPassword(
     _: any,
     { data }: { data: { email: string } }
-  ): Promise<{ status: string; message: string }> {
+  ): Promise<Generalres> {
     try {
       const { email } = data;
       isEmail(data);
@@ -223,13 +224,12 @@ export const forgotPasswordMutation = {
     }
   },
 };
-
 // RESET PASSWORD
 export const resetPasswordMutation = {
   async resetPassword(
     _: any,
     { data }: { data: { email: string; newPassword: string; token: string } }
-  ): Promise<{ status: string; message: string }> 
+  ): Promise<Generalres> 
   {
     let { email, newPassword, token } = data;
    try {

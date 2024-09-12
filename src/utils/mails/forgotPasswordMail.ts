@@ -1,4 +1,4 @@
-import { transporter } from "../../config/nodeMailerConfig"
+import { transporter } from "../../config/nodeMailer"
 import { logger } from "../../config/logger"
 
 export const forgotPasswordMail = async (name:string, link:string , email:string) => {

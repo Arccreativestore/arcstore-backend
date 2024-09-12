@@ -25,6 +25,10 @@ export interface registerResponse {
   role: "USER" | "STAFF" | "CREATOR" | "SUPERADMIN";
 }
 
+export interface Generalres{
+  status: string
+  message: string 
+}
 export interface IReg {
   email: string;
   firstName: string;

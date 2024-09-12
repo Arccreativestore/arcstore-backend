@@ -842,3 +842,12 @@
 2024-09-11T14:07:16.103Z [32minfo[39m: Successfully connected to 
 2024-09-11T14:10:30.811Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
 2024-09-11T14:10:30.925Z [32minfo[39m: Successfully connected to 
+2024-09-11T14:33:41.512Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-11T14:33:41.622Z [32minfo[39m: Successfully connected to 
+2024-09-11T14:33:52.003Z [31merror[39m: Internal Server Error: Field "email" of required type "EmailAddress!" was not provided.
+2024-09-11T21:17:06.224Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-11T21:17:06.335Z [32minfo[39m: Successfully connected to 
+2024-09-11T21:38:17.918Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-11T21:38:18.235Z [32minfo[39m: Successfully connected to 
+2024-09-11T21:38:37.198Z [31merror[39m: Internal Server Error: Field "email" of required type "String!" was not provided.
+2024-09-11T21:40:07.598Z [31merror[39m: Registration error: User already exists
