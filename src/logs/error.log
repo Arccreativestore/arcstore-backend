@@ -281,3 +281,27 @@
 2024-09-11T23:20:58.487Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
 2024-09-11T23:21:01.424Z [31merror[39m: Registration error: User already exists
 2024-09-11T23:21:05.847Z [31merror[39m: Registration error: User already exists
+2024-09-11T23:44:18.149Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-11T23:45:42.288Z [31merror[39m: Uncaught Exception: {}
+2024-09-11T23:46:51.987Z [31merror[39m: Uncaught Exception: {}
+2024-09-11T23:47:23.596Z [31merror[39m: Uncaught Exception: {}
+2024-09-11T23:48:54.151Z [31merror[39m: Uncaught Exception: {}
+2024-09-11T23:50:52.741Z [31merror[39m: Uncaught Exception: {}
+2024-09-11T23:59:29.424Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid token"
+}
+2024-09-12T00:01:36.367Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid token"
+}
+2024-09-12T00:02:50.344Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid token"
+}
+2024-09-12T00:05:23.163Z [31merror[39m: Uncaught Exception: {}
+2024-09-12T00:08:41.423Z [31merror[39m: Uncaught Exception: {}
+2024-09-12T00:11:15.512Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid token"
+}

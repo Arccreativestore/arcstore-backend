@@ -22,6 +22,7 @@ import passportAuth from "./services/user/oauth";
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
 import { log } from "console";
+import Base from "./base";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -105,14 +106,13 @@ app.use("/graphql",
 
         const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
 
-        let user = null //initialize user
-        // if (token) {
-        //   user = jwtVerify(token) //call a function to decrypt the token and set user to the context
+        let user = null
+        if (token) {
+            
+          user = new Base().extractUserDetails(token)
           
-        // }
+        }
       
-
-        //Return without user, Route that are not protected will be freely called.
         return {
           req,
           res,
@@ -130,8 +130,8 @@ await new Promise<void>((resolve) =>
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
 
-// process.on('uncaughtException', (error) => {
-//     console.error('Uncaught Exception:', error);
-//     logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
-//     process.exit(1); 
-//   });
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
+    process.exit(1); 
+  });
