@@ -16,7 +16,8 @@ import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
 import passport from "passport";
-import passportAuth from "./api/3rdpartyAuth/oauth";
+import passportGoogleAuth from "./api/3rdpartyAuth/oauth";
+import FacebookAuth from "./api/3rdpartyAuth/facebook";
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
 
@@ -85,7 +86,8 @@ await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(passport.initialize())
-passportAuth()
+new passportGoogleAuth().googleOauth()
+new FacebookAuth().facebookAuth()
 
 app.get("/", async (req:Request, res:Response) => {
     res.json({name: packageJson.name, version: packageJson.version, });

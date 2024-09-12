@@ -10,7 +10,7 @@ import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
 import { resetPasswordModel } from "../../models/resetpassword";
 
-class UserDatasource extends Base {
+export class UserDatasource extends Base {
   async userRegistration(data: IReg): Promise<dbResponse | null> {
     try {
       const create = await this.handleMongoError(userModel().create(data));

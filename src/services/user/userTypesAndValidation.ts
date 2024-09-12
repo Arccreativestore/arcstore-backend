@@ -126,7 +126,7 @@ export const validateRegistrationInput = (data: IReg): void => {
   }
 };
 
-// VALIDATE LOGIN
+
 export const validateLoginInput = (data: {
   email: string;
   password: string;

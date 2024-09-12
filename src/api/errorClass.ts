@@ -24,7 +24,7 @@ enum errorCode {
     }
  }
 
- class BadreqError extends AppError  {
+ export class BadreqError extends AppError  {
 
     constructor(message: string, statusCode: number = 400, code: errorCode= errorCode.BAD_REQUEST)   
     {
