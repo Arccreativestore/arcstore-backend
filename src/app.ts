@@ -15,14 +15,14 @@ import {Document} from "mongoose";
 import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
-
 import passport from "passport";
-import passportAuth from "./services/user/oauth";
-
+import passportGoogleAuth from "./api/3rdpartyAuth/oauth";
+import FacebookAuth from "./api/3rdpartyAuth/facebook";
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
-import { log } from "console";
+
 import Base from "./base";
+import { expressHandler } from "./helpers/expressError";
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -86,8 +86,8 @@ await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(passport.initialize())
-passportAuth()
-
+new passportGoogleAuth().googleOauth()
+new FacebookAuth().facebookAuth()
 
 app.get("/", async (req:Request, res:Response) => {
     res.json({name: packageJson.name, version: packageJson.version, });
@@ -109,7 +109,8 @@ app.use("/graphql",
         let user = null
         if (token) {
             
-          user = new Base().extractUserDetails(token)
+          user = await new Base().extractUserDetails(token)
+          console.log(user)
           
         }
       
@@ -127,6 +128,7 @@ await new Promise<void>((resolve) =>
     httpServer.listen({port: PORT}, resolve)
 );
 
+app.use(expressHandler) 
 
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
 

@@ -11,7 +11,9 @@ const ErrorFormat = (
     code === ApolloExtraErrorCodes.AuthenticationError ||
     code === ApolloExtraErrorCodes.ValidationError ||
     code === ApolloExtraErrorCodes.FORBIDDEN ||
-    code === ApolloExtraErrorCodes.BAD_USER_INPUT
+    code === ApolloExtraErrorCodes.BAD_USER_INPUT ||
+    code === ApolloExtraErrorCodes.CONFLICT_ERROR ||
+    code === ApolloExtraErrorCodes.NOT_FOUND_ERROR 
   ) {
     return formattedError;
   }

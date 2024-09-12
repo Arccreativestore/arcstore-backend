@@ -1,5 +1,5 @@
 import { logger } from "../../config/logger";
-import { transporter } from "../../config/nodeMailerConfig";
+import { transporter } from "../../config/nodeMailer";
 
 
 

@@ -2,8 +2,6 @@
 import gql from "graphql-tag";
 
 const UserType = gql`
-scalar EmailAddress
-
   type Mutation {
     userRegistration(data: iRegInput!): User!
     verifyAccount: General!
@@ -16,6 +14,7 @@ scalar EmailAddress
   type Query {
     getUserProfile: String
   }
+
   enum IuserType {
     USER
     CREATOR
@@ -24,30 +23,32 @@ scalar EmailAddress
   }
 
   input iRegInput {
-    email: EmailAddress!
+    email: String!
     firstName: String!
     lastName: String
     password: String!
     role: IuserType!
   }
+
   input LoginInput {
     email: String!
     password: String!
   }
-  input IresetPassword{
-    email: EmailAddress!
-    newPassword: String!
-    token:String!
-  }
-
+  
   input Email{
   email:String!
+  }
+
+  input IresetPassword{
+    email: String!
+    newPassword: String!
+    token:String!
   }
 
   type User {
     status: String!
     _id: String!
-    email: EmailAddress!
+    email: String!
     firstName: String!
     lastName: String
     role: String!
@@ -57,6 +58,7 @@ scalar EmailAddress
     status: String!
     message: String!
   }
+
   type Token {
     token: String
   }

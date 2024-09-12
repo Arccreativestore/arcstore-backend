@@ -1,4 +1,4 @@
-import { BadreqError, UnauthorizedError } from "../../middleware/errors";
+import {  UnauthorizedError } from "../../api/errorClass";
 import { IAccount } from "../../models/user";
 
 export const isUserAuthorized = (user:IAccount, method:string, global?:boolean )=>{

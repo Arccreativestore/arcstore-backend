@@ -6,6 +6,8 @@ export enum ApolloExtraErrorCodes {
   ValidationError = "VALIDATION_FAILED",
   FORBIDDEN = "FORBIDDEN",
   BAD_USER_INPUT = "BAD_USER_INPUT",
+  NOT_FOUND_ERROR = "NOT_FOUND",
+  CONFLICT_ERROR = "CONFLICT"
 }
 class GraphQLErrorWithCode extends GraphQLError {
   constructor(
@@ -76,6 +78,34 @@ export class ErrorHandlers {
         nodes: error.nodes,
         originalError: error.originalError ?? error,
         extensions: { ...error.extensions, http: { status: 403 } },
+      }
+    );
+  }
+
+  NotFound(message?: string, options?: GraphQLErrorOptions) {
+    const error = new GraphQLError(message || "Resource Not Found", options);
+
+    return new GraphQLErrorWithCode(
+      error.message,
+      ApolloExtraErrorCodes.NOT_FOUND_ERROR,
+      {
+        nodes: error.nodes,
+        originalError: error.originalError ?? error,
+        extensions: { ...error.extensions, http: { status: 404 } },
+      }
+    );
+  }
+
+  ConflicError(message?: string, options?: GraphQLErrorOptions) {
+    const error = new GraphQLError(message || "Resource Already Exist", options);
+
+    return new GraphQLErrorWithCode(
+      error.message,
+      ApolloExtraErrorCodes.CONFLICT_ERROR,
+      {
+        nodes: error.nodes,
+        originalError: error.originalError ?? error,
+        extensions: { ...error.extensions, http: { status: 409 } },
       }
     );
   }

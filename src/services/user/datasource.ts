@@ -8,14 +8,12 @@ import {
 import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
-import { BadreqError } from "../../middleware/errors";
-import { ObjectId } from "mongoose";
 import { resetPasswordModel } from "../../models/resetpassword";
-import bcrypt from "bcrypt"
-class UserDatasource extends Base {
+
+export class UserDatasource extends Base {
   async userRegistration(data: IReg): Promise<dbResponse | null> {
     try {
-      const create = await userModel().create(data);
+      const create = await this.handleMongoError(userModel().create(data));
 
       return create ? create.toObject() : null;
     } catch (error: any) {
@@ -82,8 +80,13 @@ class UserDatasource extends Base {
     try {
       
       const newPassword = await userModel().updateOne({ email}, {$set:{ password}});
-      const setPasswordStatus = await resetPasswordModel().updateOne({email, token: sha256}, {$set:{passwordChanged: true}})
-      return newPassword.matchedCount > 0 ? true : false;
+
+      if(newPassword.matchedCount > 0)
+      {
+       await resetPasswordModel().updateOne({email, token: sha256}, {$set:{passwordChanged: true, expiresAt: Date.now()}})
+       return true
+      }
+      return false;
     } catch (error) {
       logger.error(error);
       throw error;
