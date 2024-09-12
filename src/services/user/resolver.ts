@@ -7,13 +7,11 @@ import {
   registerResponse,
   validateresetInput,
 } from "./userTypesAndValidation";
-import {
-  ConflictError,
-  BadreqError,
-  NotFoundError,
-  UnauthorizedError,
-  ForbiddenError,
-} from "../../middleware/errors";
+import 
+{
+ErrorHandlers
+}
+from '../../helpers/errorHandler'
 import jwt from "jsonwebtoken";
 import "../../events/user/userEvents";
 import { ACCESS_SECRETKEY, VERIFY_SECRETKEY } from "../../config/config";
@@ -42,11 +40,11 @@ export const registerMutation = {
       {
         if(typeof lastName !== "string")
         {
-          throw new BadreqError("Please Enter a valid Last name")
+          throw new ErrorHandlers().UserInputError("Please Enter a valid Last name")
         }
       }
       if (!email || !firstName || !password ) {
-        throw new BadreqError("Please provide all required fields");
+        throw new ErrorHandlers().UserInputError("Please provide all required fields");
       }
       // Validate registration input
       validateRegistrationInput({email, password, firstName, role});
@@ -54,7 +52,7 @@ export const registerMutation = {
       // Check if the email is already in use
       const findEmail = await UserDatasource.findByEmail(email);
       if (findEmail) {
-        throw new ConflictError("User already exists");
+        throw new ErrorHandlers().ConflicError("User already exists");
       }
        
       // Create the user in the database
@@ -63,7 +61,7 @@ export const registerMutation = {
       if (createUser) {
         const { _id, email, firstName, lastName, role } = createUser
 
-        const token = jwt.sign({ email }, VERIFY_SECRETKEY as string, {
+        const token = jwt.sign({ email, _id: createUser._id }, VERIFY_SECRETKEY as string, {
           expiresIn: "1hr",
         });
         // emit event to send verification email
@@ -73,8 +71,6 @@ export const registerMutation = {
 
       throw new Error("Error registering, please try again later");
     } catch (error) {
-      // Log the error and rethrow it
-      logger.error(`Registration error: ${error.message}`);
       throw error;
     }
   },
@@ -89,18 +85,18 @@ export const verifyUserMutation = {
   ): Promise<Generalres> {
     try {
       if (!user) {
-        throw new NotFoundError("User not found in request");
+        throw new ErrorHandlers().NotFound("User not found in request");
       }
 
       const { email } = user as User;
 
       if (!email) {
-        throw new BadreqError("invalid token");
+        throw new ErrorHandlers().UserInputError("invalid token");
       }
 
       const findEmail = await UserDatasource.findByEmail(email);
       if (!findEmail) {
-        throw new NotFoundError("User does not exist");
+        throw new ErrorHandlers().NotFound("User does not exist");
       }
 
       const verify = await UserDatasource.verifyEmail(email);
@@ -110,8 +106,6 @@ export const verifyUserMutation = {
 
       throw new Error("Email verification failed");
     } catch (error) {
-      // Log and rethrow the error
-      logger.error(`Verification error: ${error.message}`);
       throw error;
     }
   },
@@ -123,13 +117,13 @@ export const requestVerification = {
       const { email } = data;
       isEmail({email})
       if (!email) {
-        throw new BadreqError("Please Provide An Email");
+        throw new ErrorHandlers().UserInputError("Please Provide An Email");
       }
 
       const findEmail = await UserDatasource.findByEmail(email);
 
       if (!findEmail) {
-        throw new NotFoundError("User with that email does not exist");
+        throw new ErrorHandlers().NotFound("User with that email does not exist");
       }
 
       const username = findEmail.firstName;
@@ -156,30 +150,29 @@ export const loginUserMutation = {
       validateLoginInput(data);
 
       if (!email || !password) {
-        throw new BadreqError("Please provide all required fields");
+        throw new ErrorHandlers().UserInputError("Please provide all required fields");
       }
 
       const userExist = await UserDatasource.findByEmail(email);
      
       if (!userExist) {
-        throw new NotFoundError("User with that email not found");
+        throw new ErrorHandlers().NotFound("User with that email not found");
       }
      
       if (userExist.emailVerified == false) {
-        throw new ForbiddenError("Please Verify Your Email Before Login");
+        throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login");
       }
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
-        const token = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "15m" });
+        const token = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
         return { token };
       }
-      throw new UnauthorizedError("Password is incorrect");
+      throw new ErrorHandlers().AuthenticationError("Password is incorrect");
     } catch (error) {
       throw error;
     }
   },
 };
-
 // FORGOT PASSWORD
 export const forgotPasswordMutation = {
   async forgotPassword(
@@ -190,7 +183,7 @@ export const forgotPasswordMutation = {
       const { email } = data;
       isEmail(data);
       if (!email) {
-        throw new BadreqError("Email must be specified");
+        throw new ErrorHandlers().UserInputError("Email must be specified");
       }
 
       const userExist = await UserDatasource.findByEmail(email);
@@ -218,7 +211,7 @@ export const forgotPasswordMutation = {
         };
       }
 
-      throw new NotFoundError("No user with that email was found");
+      throw new ErrorHandlers().NotFound("No user with that email was found");
     } catch (error) {
       throw error;
     }
@@ -234,12 +227,12 @@ export const resetPasswordMutation = {
     let { email, newPassword, token } = data;
    try {
     if (!email || !newPassword || !token) {
-      throw new BadreqError("Please provide all required fields");
+      throw new ErrorHandlers().UserInputError("Please provide all required fields");
     }
     validateresetInput(data)
     const userExist = await UserDatasource.findByEmail(email);
     if (!userExist) {
-      throw new NotFoundError("User with that email does not exist");
+      throw new ErrorHandlers().NotFound("User with that email does not exist");
     }
     const sha256Hash = crypto.createHash("sha256").update(token).digest("hex");
 
@@ -248,12 +241,12 @@ export const resetPasswordMutation = {
       sha256Hash,
     });
     if (!findToken) {
-      throw new NotFoundError("Invalid token");
+      throw new ErrorHandlers().NotFound("Invalid token");
     }
 
     const expiresAt = findToken.expiresAt;
     if (Date.now() > expiresAt) {
-      throw new BadreqError("The provided Link has expired");
+      throw new ErrorHandlers().UserInputError("The provided Link has expired");
     }
     newPassword = await bcrypt.hash(newPassword, 12)
   

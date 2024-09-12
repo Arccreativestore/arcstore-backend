@@ -9,10 +9,11 @@ import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
 import { resetPasswordModel } from "../../models/resetpassword";
+
 class UserDatasource extends Base {
   async userRegistration(data: IReg): Promise<dbResponse | null> {
     try {
-      const create = await userModel().create(data);
+      const create = await this.handleMongoError(userModel().create(data));
 
       return create ? create.toObject() : null;
     } catch (error: any) {
@@ -82,7 +83,7 @@ class UserDatasource extends Base {
 
       if(newPassword.matchedCount > 0)
       {
-       await resetPasswordModel().updateOne({email, token: sha256}, {$set:{passwordChanged: true}})
+       await resetPasswordModel().updateOne({email, token: sha256}, {$set:{passwordChanged: true, expiresAt: Date.now()}})
        return true
       }
       return false;

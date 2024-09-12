@@ -1,4 +1,4 @@
-import { BadreqError, UnauthorizedError } from "../../middleware/errors";
+import {  UnauthorizedError } from "../../api/errorClass";
 import { IAccount } from "../../models/user";
 
 export const isUserAuthorized = (user:IAccount, method:string, global?:boolean )=>{
@@ -12,7 +12,7 @@ export const isUserAuthorized = (user:IAccount, method:string, global?:boolean )
 	if(user.role && global) return true
 
 	//Restricted resources
-	if(!global && !user?.permissions?.toString()?.includes(method)) throw new UnauthorizedError("You don't have access to this resources");
+	if(!global && !user?.permissions?.includes(method)) throw new UnauthorizedError("You don't have access to this resources");
 
 	return true
 }

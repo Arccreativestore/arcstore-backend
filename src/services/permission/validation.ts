@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { Types } from 'mongoose';
+import { ErrorHandlers } from '../../helpers/errorHandler';
 
 
 export interface IPermissionGroup {
@@ -59,7 +60,7 @@ export function CreatePermissionGroupValidation(data: IPermissionGroup): Promise
     return new Promise((resolve, reject) => {
         const { error, value } = permissionGroupSchema.validate(data, { abortEarly: false });
         if (error) {
-            reject(new Error(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
         } else {
             resolve(value);
         }
@@ -104,7 +105,7 @@ export function UpdatePermissionGroupValidation(data:IUpdatePermissionGroup ): P
     return new Promise((resolve, reject) => {
         const { error, value } =     partialUpdateSchema .validate(data, { abortEarly: false });
         if (error) {
-            reject(new Error(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
         } else {
             resolve(value);
         }

@@ -9,13 +9,13 @@ const PermissionType = gql`
 
   type Query {
     getAllPermissionGroup:[IPermissionResponse]
-    getAllDefaultPermissions(permissionGroupId:ID!):PaginatedPermission
+    getAllDefaultPermissions:PaginatedPermission
   }
 
 
   input IPermissionGroupInput{
     permissions:[ID!]!
-    title:String!
+    title:String
     description:String!
   }
 
@@ -30,7 +30,6 @@ const PermissionType = gql`
     _id:ID
     title: String
     description: String
-    permissions: String
     disable: Boolean
     createdAt:DateTime
     updatedAt:DateTime
@@ -44,6 +43,7 @@ const PermissionType = gql`
       permissions: String
       disable: Boolean
       createdAt:DateTime
+      updatedAt:DateTime
   }
   type PageInfo{
         hasNextPage: Boolean

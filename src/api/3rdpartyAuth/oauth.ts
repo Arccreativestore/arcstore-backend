@@ -1,4 +1,4 @@
-import datasource from './datasource';
+import datasource from '../../services/user/datasource';
 import passport from 'passport';
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 import jwt from 'jsonwebtoken';
@@ -46,7 +46,6 @@ const passportAuth = (): void => {
                         role: 'USER', // default
                         emailVerified: true ,// true for o-auth
                         verifiedDate: new Date()
-
                     });
 
                     if (newAccount) {
@@ -54,13 +53,13 @@ const passportAuth = (): void => {
                             id: newAccount._id
                         };
 
-                        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '15m' });
+                        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '1hr' });
                         return done(null, { user: payload, accessToken }); // look into
                     }
                 } else {
                     const payload = { id: existingUser._id };
                     
-                    const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '15m' });
+                    const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '1hr' });
                     return done(null, { user: payload, accessToken });
                 }
             } catch (err: any) {

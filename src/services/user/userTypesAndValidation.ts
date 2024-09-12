@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { ObjectId } from "mongoose";
 import { User } from "../../app";
-import { BadreqError } from "../../middleware/errors";
+import { ErrorHandlers } from "../../helpers/errorHandler";
 
 
 export interface dbResponse {
@@ -113,15 +113,16 @@ const roleRule = Joi.string()
 export const isEmail = (data: { email: string }) => {
   const { error } = EmailValidationSchema.validate(data);
   if (error) {
-    throw new BadreqError("Please enter a valid Email Address ");
+    throw new ErrorHandlers().ValidationError("Please enter a valid Email Address ");
   }
 };
+
 
 // VALIDATE REGISTERATION
 export const validateRegistrationInput = (data: IReg): void => {
   const { error } = regValidationSchema.validate(data);
   if (error) {
-    throw new BadreqError(error.message);
+    throw new ErrorHandlers().ValidationError(error.message);
   }
 };
 
@@ -132,7 +133,7 @@ export const validateLoginInput = (data: {
 }): void => {
   const { error } = loginValidationSchema.validate(data);
   if (error) {
-    throw new BadreqError(error.message);
+    throw new ErrorHandlers().ValidationError(error.message);
   }
 };
 // validate reset password Route
@@ -143,6 +144,6 @@ export const validateresetInput = (data: {
 }): void => {
   const { error } = resetPasswordValidateSchema.validate(data);
   if (error) {
-    throw new BadreqError(error.message);
+    throw new ErrorHandlers().ValidationError(error.message);
   }
 };
