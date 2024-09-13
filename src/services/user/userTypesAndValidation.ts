@@ -34,7 +34,7 @@ export interface IReg {
   firstName: string;
   lastName?: string;
   password?: string | null;
-  role: "USER" | "STAFF" | "CREATOR" | "SUPERADMIN";
+  role: "USER" 
   profilePicture?: string | null;
   emailVerified?: boolean;
   verifiedDate?: Date;

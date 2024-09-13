@@ -82,7 +82,7 @@ const corsOptions = {
 };
 
 await server.start();
-await userModel().deleteMany({}) // for dev purposes
+//await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(passport.initialize())
@@ -110,8 +110,6 @@ app.use("/graphql",
         if (token) {
             
           user = await new Base().extractUserDetails(token)
-          console.log(user)
-          
         }
       
         return {

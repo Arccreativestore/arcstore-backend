@@ -1,6 +1,6 @@
 import passport from "passport";
 import {Strategy as FacebookStrategy, Profile}  from 'passport-facebook'
-import { FACEBOOK_APP_SECRET, FACEBOOK_APP_ID, ACCESS_SECRETKEY } from "../../config/config";
+import { FACEBOOK_APP_SECRET, FACEBOOK_APP_ID, ACCESS_SECRETKEY, REFRESH_SECRETKEY } from "../../config/config";
 import { UserDatasource } from "../../services/user/datasource";
 import { BadreqError } from "../errorClass";
 import jwt from 'jsonwebtoken'
@@ -46,11 +46,13 @@ passport.use(new FacebookStrategy({
             }
         )
      const accessToken = jwt.sign({_id: newUser?._id}, ACCESS_SECRETKEY as string, {expiresIn : '1hr'})
-     return newUser ?  done(null, accessToken) : done(new Error('Error Signing up at this time'), null)
+     const refreshToken = jwt.sign( {_Id: newUser?._id}, REFRESH_SECRETKEY as string, { expiresIn: "7d" }); 
+     return newUser ? done(null,  {user:{accessToken, refreshToken, statusCode: 202}}) : done(new Error('Error Signing up at this time'), null)
     }
     else{
         const accessToken = jwt.sign({_id: userExist._id}, ACCESS_SECRETKEY as string, {expiresIn : '1hr'})
-        return done(null, accessToken)
+        const refreshToken = jwt.sign( {_Id: userExist?._id}, REFRESH_SECRETKEY as string, { expiresIn: "7d" }); 
+        return done(null, {user:{accessToken, refreshToken, statusCode: 200}})
     }
     } catch (error) {
         logger.error(error)
