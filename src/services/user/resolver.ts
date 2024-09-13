@@ -14,7 +14,7 @@ ErrorHandlers
 from '../../helpers/errorHandler'
 import jwt from "jsonwebtoken";
 import "../../events/user/userEvents";
-import { ACCESS_SECRETKEY, VERIFY_SECRETKEY } from "../../config/config";
+import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFY_SECRETKEY } from "../../config/config";
 import { eventEmitter } from "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { User } from "../../app";
@@ -46,16 +46,11 @@ export const registerMutation = {
       if (!email || !firstName || !password ) {
         throw new ErrorHandlers().UserInputError("Please provide all required fields");
       }
-      // Validate registration input
+     
       validateRegistrationInput({email, password, firstName, role});
 
-      // Check if the email is already in use
       const findEmail = await UserDatasource.findByEmail(email);
-      if (findEmail) {
-        throw new ErrorHandlers().ConflicError("User already exists");
-      }
-       
-      // Create the user in the database
+      if (findEmail) throw new ErrorHandlers().ConflicError("User already exists");
       const createUser = await UserDatasource.userRegistration(data);
 
       if (createUser) {
@@ -64,6 +59,7 @@ export const registerMutation = {
         const token = jwt.sign({ email, _id: createUser._id }, VERIFY_SECRETKEY as string, {
           expiresIn: "1hr",
         });
+
         // emit event to send verification email
         eventEmitter.emit("newUser", { email, token, username:firstName });
         return { status: "success", _id, email, firstName, lastName, role };
@@ -84,27 +80,21 @@ export const verifyUserMutation = {
     { user }: { req: Request; user: User }
   ): Promise<Generalres> {
     try {
-      if (!user) {
-        throw new ErrorHandlers().NotFound("User not found in request");
-      }
+      if (!user) throw new ErrorHandlers().NotFound("User not found in request");
+      
 
       const { email } = user as User;
 
-      if (!email) {
-        throw new ErrorHandlers().UserInputError("invalid token");
-      }
+      if (!email) throw new ErrorHandlers().UserInputError("invalid token");
 
       const findEmail = await UserDatasource.findByEmail(email);
-      if (!findEmail) {
-        throw new ErrorHandlers().NotFound("User does not exist");
-      }
-
+      if (!findEmail) throw new ErrorHandlers().NotFound("User does not exist");
+      
       const verify = await UserDatasource.verifyEmail(email);
-      if (verify) {
-        return { status: "success", message: "User has been verified" }; // update....
-      }
-
+      if (verify)  return { status: "success", message: "User has been verified" }; // update....
+      
       throw new Error("Email verification failed");
+
     } catch (error) {
       throw error;
     }
@@ -144,28 +134,27 @@ export const loginUserMutation = {
     _: any,
     { data }: { data: { email: string; password: string } },
     context: { req: Request }
-  ): Promise<{ token: string }> {
+  ): Promise<{ accessToken: string, refreshToken:string }> {
     const { email, password } = data;
     try {
       validateLoginInput(data);
 
-      if (!email || !password) {
-        throw new ErrorHandlers().UserInputError("Please provide all required fields");
-      }
+      if (!email || !password) throw new ErrorHandlers().UserInputError("Please provide all required fields");
+      
 
       const userExist = await UserDatasource.findByEmail(email);
      
-      if (!userExist) {
-        throw new ErrorHandlers().NotFound("User with that email not found");
-      }
+      if (!userExist) throw new ErrorHandlers().NotFound("User with that email not found");
+      
      
-      if (userExist.emailVerified == false) {
-        throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login");
-      }
+      if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login");
+      
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
-        const token = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
-        return { token };
+        const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
+        const refreshToken = jwt.sign( { _id: userExist._id }, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+        
+        return { accessToken, refreshToken };
       }
       throw new ErrorHandlers().AuthenticationError("Password is incorrect");
     } catch (error) {
@@ -264,7 +253,6 @@ export const resetPasswordMutation = {
 };
 export const UserQuery = {
   async getUserProfile() {
-    // Placeholder logic, could be extended to fetch user profile data
     return "User profile";
   },
 };

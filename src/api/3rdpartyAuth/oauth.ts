@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 import jwt from 'jsonwebtoken';
 import { logger } from '../../config/logger';
-import {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} from '../../config/config'
+import {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, REFRESH_SECRETKEY} from '../../config/config'
 import {UserDatasource} from '../../services/user/datasource'
 import { BadreqError } from '../errorClass';
 const clientID = GOOGLE_CLIENT_ID as string
@@ -51,15 +51,17 @@ async (GaccessToken: string, GrefreshToken: string, profile: Profile, done: (err
         id: newAccount._id
          };
 
-        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '1hr' });
-        return done(null,  {user:{accessToken,  statusCode: 202}} ); 
+        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '1hr' }); 
+        const refreshToken = jwt.sign( payload, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+        return done(null,  {user:{accessToken, refreshToken, statusCode: 202}} ); 
         }
         return done(new Error('Error signing up at this time'), null); 
          } else {
          const payload = { id: existingUser._id };
                     
         const accessToken = jwt.sign(payload, process.env.ACCESS_SECRETKEY as string, { expiresIn: '1hr' });
-        return done(null, { user:{accessToken, statusCode: 200} } );
+        const refreshToken = jwt.sign( payload, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+        return done(null, { user:{accessToken,refreshToken, statusCode: 200} } );
         }
         } catch (err: any) {
         logger.error(`Registration Error at the OAuth service: ${err.message}`);

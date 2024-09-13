@@ -6,7 +6,7 @@ const UserType = gql`
     userRegistration(data: iRegInput!): User!
     verifyAccount: General!
     requestVerification(data: Email!): General!
-    Login(data: LoginInput!): Token!
+    Login(data: LoginInput!): IToken!
     forgotPassword(data: Email!): General!
     resetPassword(data: IresetPassword!): General!
   }
@@ -17,9 +17,6 @@ const UserType = gql`
 
   enum IuserType {
     USER
-    CREATOR
-    SUPERADMIN
-    STAFF
   }
 
   input iRegInput {
@@ -59,8 +56,9 @@ const UserType = gql`
     message: String!
   }
 
-  type Token {
-    token: String
+  type IToken {
+    accessToken: String!
+    refreshToken: String!
   }
 `;
 

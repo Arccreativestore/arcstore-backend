@@ -5,7 +5,7 @@ import { BadreqError } from "../errorClass";
 
 interface callback {
    error: Error | BadreqError | any
-   user: { accessToken: string, statusCode: number } | null
+   user: { accessToken: string, refreshToken: string, statusCode: number } | null
   }
 
 class apiControllers {
@@ -14,7 +14,6 @@ class apiControllers {
         const { error, user } = req.user as callback;
        
         try {
-          console.log(req.user)
           if(error) throw error
           if(user) return res.status(user.statusCode).json({message: "Authentication successful", user });
         } catch (error) {
