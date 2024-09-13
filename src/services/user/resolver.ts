@@ -220,29 +220,26 @@ export const resetPasswordMutation = {
     }
     validateresetInput(data)
     const userExist = await UserDatasource.findByEmail(email);
-    if (!userExist) {
-      throw new ErrorHandlers().NotFound("User with that email does not exist");
-    }
+    if (!userExist)   throw new ErrorHandlers().NotFound("User with that email does not exist");
+    
+    if(newPassword === userExist.password) throw new ErrorHandlers().UserInputError('New Password Matches Old Password')
+    
     const sha256Hash = crypto.createHash("sha256").update(token).digest("hex");
-
     const findToken = await UserDatasource.findByEmailAndToken({
       email,
       sha256Hash,
     });
-    if (!findToken) {
-      throw new ErrorHandlers().NotFound("Invalid token");
-    }
+    if (!findToken) throw new ErrorHandlers().NotFound("Invalid token");
+  
 
     const expiresAt = findToken.expiresAt;
-    if (Date.now() > expiresAt) {
-      throw new ErrorHandlers().UserInputError("The provided Link has expired");
-    }
+    if (Date.now() > expiresAt) throw new ErrorHandlers().UserInputError("The provided Link has expired");
+    
     newPassword = await bcrypt.hash(newPassword, 12)
   
     const setPassword = UserDatasource.updatePassword(email, newPassword, sha256Hash);
-    if (!setPassword) {
-      throw new Error("Error updating password at this time");
-    }
+    if (!setPassword) throw new Error("Error updating password at this time");
+    
     eventEmitter.emit("resetPassword", email);
    
     return { status: "success", message: "password has been updated" };
