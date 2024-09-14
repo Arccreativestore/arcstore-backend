@@ -9,3 +9,13 @@
 2024-09-12T22:55:42.837Z [31merror[39m: Unknown authentication strategy "google"
 2024-09-12T22:55:48.322Z [31merror[39m: Unknown authentication strategy "google"
 2024-09-12T22:55:52.583Z [31merror[39m: Unknown authentication strategy "google"
+2024-09-14T21:29:28.019Z [31merror[39m: invalid token, please Login to continue
+2024-09-14T21:29:49.311Z [31merror[39m: invalid token, please Login to continue
+2024-09-14T21:30:08.131Z [31merror[39m: invalid token, please Login to continue
+2024-09-14T21:32:07.436Z [31merror[39m: invalid token, please Login to continue
+2024-09-14T21:33:21.022Z [31merror[39m: Reused Token Detected, Please Login to Continue
+2024-09-14T21:41:27.699Z [31merror[39m: Reused Token Detected, Please Login to Continue
+2024-09-14T21:42:10.441Z [31merror[39m: Reused Token Detected, Please Login to Continue
+2024-09-14T22:53:14.525Z [31merror[39m: Bad Request
+2024-09-14T23:00:07.900Z [31merror[39m: Bad Request
+2024-09-14T23:08:36.742Z [31merror[39m: Bad Request

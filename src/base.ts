@@ -17,7 +17,6 @@ import { REFRESH_SECRETKEY, VERIFY_SECRETKEY } from "./config/config";
     isTokenExpired(decoded: any) {
         
         const currentTimeInSeconds = Math.floor(Date.now() / 1000);
-        console.log(currentTimeInSeconds)
         return decoded.exp < currentTimeInSeconds;
     }
 

@@ -9,6 +9,8 @@ import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
 import { resetPasswordModel } from "../../models/resetpassword";
+import { tokenModel } from "../../models/token";
+import { ObjectId } from "mongoose";
 
 export class UserDatasource extends Base {
   async userRegistration(data: IReg): Promise<dbResponse | null> {
@@ -92,6 +94,6 @@ export class UserDatasource extends Base {
       throw error;
     }
   }
-
+ 
 }
 export default new UserDatasource();

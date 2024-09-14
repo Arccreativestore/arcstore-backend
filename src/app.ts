@@ -20,7 +20,6 @@ import passportGoogleAuth from "./api/3rdpartyAuth/oauth";
 import FacebookAuth from "./api/3rdpartyAuth/facebook";
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
-
 import Base from "./base";
 import { expressHandler } from "./helpers/expressError";
 export const cookieSettings = {
@@ -41,6 +40,10 @@ declare global {
     namespace Express {
         interface Request {
             user?: User;
+        }
+
+        interface cookies {
+            cookies?:  { [key: string]: string };
         }
     }
 }
@@ -85,9 +88,10 @@ await server.start();
 //await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
+app.use(cookieParser())
 app.use(passport.initialize())
-new passportGoogleAuth().googleOauth()
-new FacebookAuth().facebookAuth()
+new passportGoogleAuth().init()
+new FacebookAuth().init()
 
 app.get("/", async (req:Request, res:Response) => {
     res.json({name: packageJson.name, version: packageJson.version, });

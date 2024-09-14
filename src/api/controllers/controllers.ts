@@ -3,33 +3,28 @@ import { ObjectId } from "mongoose";
 import { logger } from "../../config/logger";
 import { BadreqError } from "../errorClass";
 
-interface callback {
-   error: Error | BadreqError | any
-   user: { accessToken: string, refreshToken: string, statusCode: number } | null
-  }
 
 class apiControllers {
 
     async googleCallback(req: Request, res: Response, next: NextFunction) {
-        const { error, user } = req.user as callback;
-       
-        try {
-          if(error) throw error
-          if(user) return res.status(user.statusCode).json({message: "Authentication successful", user });
-        } catch (error) {
-          next(error)
+      const {accessToken } = req.user as { accessToken: string }
+        if(accessToken)
+        {
+        console.log('mymy')
+          return res.status(200).json({accessToken})          
         }
+        throw new Error('Error signing up at this time')
       }
+   
       
       async facebookCallback(req: Request, res: Response, next: NextFunction){
-
-        try {
-          const { error, user} = req.user as callback
-        if(error) throw error
-        if(user) res.status(user.statusCode).json({message: "Authentication successful", user })
-        } catch (error) {
-          next(error)
+        const {accessToken } = req.user as { accessToken: string }
+        if(accessToken)
+        {
+        
+          return res.status(200).json({accessToken})          
         }
+        throw new Error('Error signing up at this time')
       }
 
     

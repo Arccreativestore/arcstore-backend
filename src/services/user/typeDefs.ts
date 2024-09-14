@@ -58,7 +58,6 @@ const UserType = gql`
 
   type IToken {
     accessToken: String!
-    refreshToken: String!
   }
 `;
 

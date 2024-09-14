@@ -1,5 +1,5 @@
 import UserDatasource from "./datasource";
-import { Request } from "express";
+import { Request, Response } from "express";
 import {
   Generalres,
   IReg,
@@ -25,6 +25,8 @@ import {
 } from "./userTypesAndValidation";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import { tokenModel } from "../../models/token";
+import { tokenDataSource } from "../tokens/dataSource";
 
 //REGISTER MUTATION
 export const registerMutation = {
@@ -133,9 +135,10 @@ export const loginUserMutation = {
   async Login(
     _: any,
     { data }: { data: { email: string; password: string } },
-    context: { req: Request }
-  ): Promise<{ accessToken: string, refreshToken:string }> {
+    context: { req: Request, res: Response }
+  ): Promise<{ accessToken: string }> {
     const { email, password } = data;
+    const { res }= context
     try {
       validateLoginInput(data);
 
@@ -151,10 +154,22 @@ export const loginUserMutation = {
       
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
-        const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
-        const refreshToken = jwt.sign( { _id: userExist._id }, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+
+     
+      const tokenId = crypto.randomBytes(12).toString('hex')
+      const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
+
+      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
+      const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
         
-        return { accessToken, refreshToken };
+      await new tokenDataSource().newToken(tokenId, userExist._id, expiresAt)
+        res.cookie('refreshToken', refreshToken, {
+          httpOnly: true,
+          secure: false, // for http
+          expires: new Date(expiresAt),
+        })
+        
+        return { accessToken };
       }
       throw new ErrorHandlers().AuthenticationError("Password is incorrect");
     } catch (error) {
@@ -220,9 +235,10 @@ export const resetPasswordMutation = {
     }
     validateresetInput(data)
     const userExist = await UserDatasource.findByEmail(email);
-    if (!userExist)   throw new ErrorHandlers().NotFound("User with that email does not exist");
-    
-    if(newPassword === userExist.password) throw new ErrorHandlers().UserInputError('New Password Matches Old Password')
+    if (!userExist) throw new ErrorHandlers().NotFound("User with that email does not exist");
+    const samePassword = await bcrypt.compare(newPassword, userExist.password)
+    if(samePassword) throw new ErrorHandlers().UserInputError('New Password Matches Old Password')
+ 
     
     const sha256Hash = crypto.createHash("sha256").update(token).digest("hex");
     const findToken = await UserDatasource.findByEmailAndToken({
