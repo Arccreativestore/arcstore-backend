@@ -12,7 +12,7 @@ export const eventEmitter = new EventEmitter();
 eventEmitter.on("newUser", (data: any) => {
   try {
     const { username, token, email } = data;
-    verifyEmail(username, token, email);
+    verifyEmail(email, username, token);
   } catch (err) {
     logger.error(`error sending verify mail ${err}`);
     throw new Error("error sending email");
@@ -30,9 +30,10 @@ eventEmitter.on("forgotPassword", (data: any) => {
   }
 });
 // reset alert mail
-eventEmitter.on("resetPassword", (email: string) => {
+eventEmitter.on("resetPassword", (data: any) => {
   try {
-    resetPasswordMail(email);
+    const {email, firstname} = data
+    resetPasswordMail(firstname, email);
   } catch (err) {
     logger.error(`error sending reset password mail alert ${err}`);
     throw new Error("error sending email");

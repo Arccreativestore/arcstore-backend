@@ -256,7 +256,7 @@ export const resetPasswordMutation = {
     const setPassword = UserDatasource.updatePassword(email, newPassword, sha256Hash);
     if (!setPassword) throw new Error("Error updating password at this time");
     
-    eventEmitter.emit("resetPassword", email);
+    eventEmitter.emit("resetPassword", {email, firstname: userExist.firstName});
    
     return { status: "success", message: "password has been updated" };
   

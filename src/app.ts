@@ -85,7 +85,7 @@ const corsOptions = {
 };
 
 await server.start();
-//await userModel().deleteMany({}) // for dev purposes
+await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(cookieParser())

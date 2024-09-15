@@ -1,64 +1,101 @@
-import { transporter } from "../../config/nodeMailer"
-import { logger } from "../../config/logger"
+import pkg from 'node-mailjet'
+const { Client } = pkg
+import {  SendEmailV3_1, LibraryResponse } from 'node-mailjet';
+import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
 
-export const forgotPasswordMail = async (name:string, link:string , email:string) => {
 
+export async function forgotPasswordMail(name: string, link: string, userEmail: string) {
   try {
-    
-    const sendMail = await transporter.sendMail({
+   
+   
+  const mailjet = new Client({
+  apiKey: MJ_APIKEY,
+  apiSecret: MJ_SECRETKEY
+});
+  const data: SendEmailV3_1.Body = {
+    Messages: [
+      {
+        From: {
+          Email: 'contact@arccreatives.store',
+          Name: 'Arc Creatives',
+        },
+        To: [
+          {
+            Email: userEmail
+          },
+        ],
+        Variables:
+        {
+          firstname: name,
+          reset_link: link,
+        },
+       TemplateID: 6291772,
+       TemplateLanguage: true,
+       Subject: 'RESET YOUR PASSWORD',
+       
+      },
+    ],
+  };
 
-        from: '"ARC-CREATIVES" <arccreatives@gmail.com>', 
-        to: email,
-        subject: "RESET YOUR PASSWORD",  
-        html: `<p>Hi There ${name}</p>
-        <p> click the link to reset your password</p>
-        <a href = "${link}">Reset Password</a>
-         <p> Note that this link expires in 15 minutes </p>`
-        
-    })
+  const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
+          .post('send', { version: 'v3.1' })
+          .request(data);
 
-    if(sendMail.accepted)
-    {
-     return true
-    }
-    else
-    {
-        return false
-    }
-  } catch (err: any) {
-   logger.error(`error at the forgot password mail ${err.message}`)
+  const { Status } = result.body.Messages[0];
+  console.log(result.body.Messages[0])
+
+
+  } catch (err) {
+    console.error('Error sending email:', err.statusCode, err.message);
+    console.error(err.response.body);
   }
-    
 }
 
 
-export const resetPasswordMail = async ( email:string) => {
 
+
+export async function resetPasswordMail(name: string, userEmail: string) {
   try {
-    
-    const sendMail = await transporter.sendMail({
+   
+   
+  const mailjet = new Client({
+  apiKey: MJ_APIKEY,
+  apiSecret: MJ_SECRETKEY
+});
+  const data: SendEmailV3_1.Body = {
+    Messages: [
+      {
+        From: {
+          Email: 'contact@arccreatives.store',
+          Name: 'Arc Creatives',
+        },
+        To: [
+          {
+            Email: userEmail
+          },
+        ],
+        Variables:
+        {
+          firstname: name
+        },
+       TemplateID: 6291782,
+       TemplateLanguage: true,
+       Subject: 'Your Password Has Been Reset',
+       
+      },
+    ],
+  };
 
-        from: '"ARC-CREATIVES" <arccreatives@gmail.com>', 
-        to: email,
-        subject: "PASSWORD CHANGED!",  
-        html: `
-        <p> your password has been changed</p>
-         <p>if this action was not carried out by you please send a mail to</p>
-          <p><a href="mailto:support@arc-creatives.com">support@arc-creatives.com</a></p>
-          `
-    })
+  const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
+          .post('send', { version: 'v3.1' })
+          .request(data);
 
-    if(sendMail.accepted)
-    {
-     return true
-    }
-    else
-    {
-        return false
-    }
-  } catch (err: any) {
-   logger.error(`error at the forgot password mail ${err.message}`)
+  const { Status } = result.body.Messages[0];
+  console.log(result.body.Messages[0])
+
+
+  } catch (err) {
+    console.error('Error sending email:', err.statusCode, err.message);
+    console.error(err.response.body);
   }
-    
 }
-

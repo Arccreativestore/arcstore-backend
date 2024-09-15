@@ -1,37 +1,54 @@
-import { logger } from "../../config/logger";
-import { transporter } from "../../config/nodeMailer";
+import pkg from 'node-mailjet'
+const { Client } = pkg
+import {  SendEmailV3_1, LibraryResponse } from 'node-mailjet';
+import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
 
 
-
-export const verifyEmail = async (name : string,token : string, email: string): Promise<boolean> => {
-
+export async function verifyEmail(userEmail: string, username: string, token: string) {
   try {
-    const link= `http://localhost:3000/verify/${token}`//for dev
-    const sendMail = await transporter.sendMail({
+    const verificationLink = `http://localhost:3000/api/v1/verify/?token=${token}`
+   
+const mailjet = new Client({
+  apiKey: MJ_APIKEY,
+  apiSecret: MJ_SECRETKEY
+});
+  const data: SendEmailV3_1.Body = {
+    Messages: [
+      {
+        From: {
+          Email: 'contact@arccreatives.store',
+          Name: 'Arc Creatives',
+        },
+        To: [
+          {
+            Email: userEmail
+          },
+        ],
+        Variables:
+        {
+          firstname: username,
+          verification_link: verificationLink,
+        },
+       TemplateID: 6291738,
+       TemplateLanguage: true,
+       Subject: 'VERIFY YOUR EMAIL',
+       
+      },
+    ],
+  };
 
-        from: '"ARC-CREATIVES" <arccreatives@gmail.com>', 
-        to: email,
-        subject: "PLEASE VERIFY YOUR EMAIL ADDRESS",  
-        html: `<p>Hi There ${name}</p>
-        <p> click the link to verify your email</p>
-        <a href = "${link}">Verify email</a>
-         <p> Note that this link expires in 1hr </p>`
-        
-    })
-    
-    if(sendMail.accepted)
-    {
-     return true
-    }
-    else
-    {
-        return false
-    }
+  const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
+          .post('send', { version: 'v3.1' })
+          .request(data);
+
+  const { Status } = result.body.Messages[0];
+  console.log(result.body.Messages[0])
+
+
   } catch (err) {
-    const error = err as Error
-    logger.error(error.message)
-    return false
+    console.error('Error sending email:', err.statusCode, err.message);
+    console.error(err.response.body);
   }
-    
 }
+
 

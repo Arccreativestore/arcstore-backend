@@ -9,10 +9,6 @@ import crypto from 'crypto'
 import { Request, Response } from "express";
 
 
-// interface CustomRequest extends Request {
-// cookies: { [key: string]: string };
-// }
-
 class RefreshToken extends Base
 {
     async generateToken(_: any, args: any, context: { req: Request, res: Response}): Promise<{accessToken: string}>{
@@ -20,6 +16,7 @@ class RefreshToken extends Base
    try {
         const { req, res } = context
         const token = req?.cookies?.refreshToken
+        console.log(req.cookies)
         if(!token) throw new ErrorHandlers().ValidationError('Token not Found in Request')
         const verify: any = this.decodeRefresh(token)
         const payload: any = this.isTokenExpired(verify)
@@ -35,6 +32,7 @@ class RefreshToken extends Base
         const findToken = await new tokenDataSource().findToken(tokenId)
         if(!findToken || findToken.used)
         {
+                // suspicious login
                 await new tokenDataSource().deleteAllTokens(_id)
                 throw new ErrorHandlers().ForbiddenError('Reused Token Detected, Please Login to Continue')
         }

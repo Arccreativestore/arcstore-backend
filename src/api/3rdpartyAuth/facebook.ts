@@ -25,7 +25,7 @@ class FacebookAuth extends UserDatasource {
           clientID: FACEBOOK_APP_ID as string,
           clientSecret: FACEBOOK_APP_SECRET as string,
           callbackURL: FACEBOOK_CALLBACK_URL as string,
-          profileFields: ['id', 'emails', 'name', 'first_name', 'last_name', 'picture.type(large)'],
+          profileFields: ['id', 'emails', 'name', 'picture.type(large)'],
           scope: ['email'],
           passReqToCallback: true,
         },

@@ -62,7 +62,6 @@ class PassportGoogleAuth extends UserDatasource {
                 emailVerified,
                 verifiedDate: emailVerified ? new Date() : undefined,
               });
-              console.log(user)
               
               if (!user) {
                 return done(new Error('Error signing up at this time'), null);
