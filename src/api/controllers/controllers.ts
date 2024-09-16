@@ -18,7 +18,7 @@ class apiControllers {
    
       
       async facebookCallback(req: Request, res: Response, next: NextFunction){
-        const {accessToken } = req.user as { accessToken: string }
+        const { accessToken } = req.user as { accessToken: string }
         if(accessToken)
         {
         

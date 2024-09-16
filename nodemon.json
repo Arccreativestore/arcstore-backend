@@ -1,0 +1,9 @@
+{
+    "watch": ["src"],
+    "ignore": ["dist", "node_modules"],
+    "ext": "ts,js",
+    "events": {
+        "restart": "echo 'App restarted due to changes...'"
+      },
+    "exec": "node --experimental-specifier-resolution=node --loader ts-node/esm ./src/app.ts"
+}

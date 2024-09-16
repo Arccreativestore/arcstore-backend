@@ -6,7 +6,7 @@ import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
 
 export async function verifyEmail(userEmail: string, username: string, token: string) {
   try {
-    const verificationLink = `http://localhost:3000/api/v1/verify/?token=${token}`
+    const verificationLink = `http://localhost:3000/api/v1/?action=verifyEmail&token=${token}`
    
 const mailjet = new Client({
   apiKey: MJ_APIKEY,
