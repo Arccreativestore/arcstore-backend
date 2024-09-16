@@ -22,3 +22,4 @@
 2024-09-15T10:19:14.830Z [31merror[39m: Syntax error "Field first_name specified more than once. This is only possible before version 2.1" at character 52: id,email,last_name,first_name,middle_name,first_name,last_name,picture.type(large)
 2024-09-15T10:41:20.784Z [31merror[39m: Token not Found in Request
 2024-09-15T10:47:42.289Z [31merror[39m: Reused Token Detected, Please Login to Continue
+2024-09-16T19:55:16.403Z [31merror[39m: Reused Token Detected, Please Login to Continue

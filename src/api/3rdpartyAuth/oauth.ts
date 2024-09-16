@@ -11,7 +11,7 @@ import {
   REFRESH_SECRETKEY,
   ACCESS_SECRETKEY,
 } from '../../config/config';
-import { UserDatasource } from '../../services/user/datasource';
+import { UserDatasource } from '../../services/auth/datasource';
 import { BadreqError } from '../errorClass';
 import crypto from 'crypto';
 import { Request, Response } from 'express';

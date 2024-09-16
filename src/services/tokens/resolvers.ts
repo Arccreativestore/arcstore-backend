@@ -4,7 +4,7 @@ import { ErrorHandlers } from "../../helpers/errorHandler";
 import jwt from 'jsonwebtoken'
 import { logger } from "../../config/logger";
 import { tokenDataSource } from "./dataSource";
-import UserDatasource  from "../user/datasource";
+import UserDatasource  from "../auth/datasource";
 import crypto from 'crypto'
 import { Request, Response } from "express";
 
@@ -16,7 +16,6 @@ class RefreshToken extends Base
    try {
         const { req, res } = context
         const token = req?.cookies?.refreshToken
-        console.log(req.cookies)
         if(!token) throw new ErrorHandlers().ValidationError('Token not Found in Request')
         const verify: any = this.decodeRefresh(token)
         const payload: any = this.isTokenExpired(verify)

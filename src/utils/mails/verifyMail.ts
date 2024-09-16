@@ -2,11 +2,12 @@ import pkg from 'node-mailjet'
 const { Client } = pkg
 import {  SendEmailV3_1, LibraryResponse } from 'node-mailjet';
 import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
+import { logger } from '../../config/logger';
 
 
-export async function verifyEmail(userEmail: string, username: string, token: string) {
+export async function verifyEmail(userEmail: string, username: string, verificationLink: string): Promise<boolean> {
   try {
-    const verificationLink = `http://localhost:3000/api/v1/?action=verifyEmail&token=${token}`
+  
    
 const mailjet = new Client({
   apiKey: MJ_APIKEY,
@@ -42,12 +43,13 @@ const mailjet = new Client({
           .request(data);
 
   const { Status } = result.body.Messages[0];
-  console.log(result.body.Messages[0])
+  return Status ? true : false
 
 
-  } catch (err) {
-    console.error('Error sending email:', err.statusCode, err.message);
-    console.error(err.response.body);
+
+  } catch (error) {
+    logger.error('Error sending email:', error.statusCode, error.message);
+    throw error
   }
 }
 

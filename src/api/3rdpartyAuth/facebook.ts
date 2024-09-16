@@ -9,7 +9,7 @@ import {
   ACCESS_SECRETKEY,
   REFRESH_SECRETKEY,
 } from '../../config/config';
-import { UserDatasource } from '../../services/user/datasource';
+import { UserDatasource } from '../../services/auth/datasource';
 import { BadreqError } from '../errorClass';
 import jwt from 'jsonwebtoken';
 import { logger } from '../../config/logger';

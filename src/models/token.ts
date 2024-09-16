@@ -30,7 +30,7 @@ const tokenSchema = new Schema<Itoken>({
    timestamps: true 
 })
 
-export const tokenModel = (isTest: boolean = true)=>{
+export const tokenModel = (isTest: boolean = false)=>{
     let collectionName;
     if (isTest == undefined || isTest == null) {
         throw new Error("environment is not valid");

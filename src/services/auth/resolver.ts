@@ -27,6 +27,8 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { tokenModel } from "../../models/token";
 import { tokenDataSource } from "../tokens/dataSource";
+import { verifyEmail } from "../../utils/mails/verifyMail";
+import { resolve } from "path";
 
 //REGISTER MUTATION
 export const registerMutation = {
@@ -62,8 +64,9 @@ export const registerMutation = {
           expiresIn: "1hr",
         });
 
-        // emit event to send verification email
-        eventEmitter.emit("newUser", { email, token, username:firstName });
+        const verificationLink = `http://localhost:3000/?action=verifyEmail&token=${token}`
+
+        eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
         return { status: "success", _id, email, firstName, lastName, role };
       }
 
@@ -264,13 +267,15 @@ export const resetPasswordMutation = {
     throw error
    }},
 };
+
+
 export const UserQuery = {
   async getUserProfile() {
     return "User profile";
   },
 };
 
-export const userMutations = 
+export const authMutations = 
 {
   ...registerMutation,
   ...verifyUserMutation,

@@ -1,4 +1,4 @@
-import { userMutations, UserQuery} from "./services/user/resolver";
+import { authMutations, UserQuery} from "./services/auth/resolver";
 import { tokenMutation, tokenQuery } from "./services/tokens/resolvers";
 import {
   PermissionMutation,
@@ -6,7 +6,7 @@ import {
 } from "./services/permission/resolver";
 
 const Mutation = {
-  ...userMutations,
+  ...authMutations,
   ...PermissionMutation,
   ...tokenMutation
 };

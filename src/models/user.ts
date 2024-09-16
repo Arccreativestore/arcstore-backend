@@ -89,7 +89,7 @@ UserSchema.pre<IAccount>("save", async function (next) {
 });
 
 
-export const userModel = (isTest: boolean = true) => {
+export const userModel = (isTest: boolean = false) => {
   if (isTest == undefined || isTest == null) {
     throw new Error("environment is not valid");
   }
