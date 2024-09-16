@@ -15,13 +15,11 @@ import {Document} from "mongoose";
 import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
-
 import passport from "passport";
 import passportAuth from "./services/user/oauth";
-
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
-import { log } from "console";
+
 import Base from "./base";
 export const cookieSettings = {
     httpOnly: true,
@@ -95,8 +93,6 @@ app.get("/", async (req:Request, res:Response) => {
 
 
 app.use('/api/v1', apiRoute);
-
-
 
 
 app.use("/graphql",

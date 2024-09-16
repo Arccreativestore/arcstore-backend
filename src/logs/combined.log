@@ -993,3 +993,12 @@
   "name": "JsonWebTokenError",
   "message": "invalid token"
 }
+2024-09-12T10:45:31.719Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid signature"
+}
+2024-09-12T10:51:47.418Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-12T10:53:32.260Z [31merror[39m: Uncaught Exception: {
+  "name": "JsonWebTokenError",
+  "message": "invalid signature"
+}
