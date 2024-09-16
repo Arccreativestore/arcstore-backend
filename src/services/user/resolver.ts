@@ -206,7 +206,7 @@ export const forgotPasswordMutation = {
           sha256Hash,
           expiresAt,
         });
-        let link = `http://localhost:3000/resetpassword?email=${email}&token=${token}`; // for dev
+        let link = `http://localhost:3000/?action=resetpassword&email=${email}&token=${token}`; // for dev 
         let username = userExist.firstName;
         eventEmitter.emit("forgotPassword", { username, link, email });
         return {
