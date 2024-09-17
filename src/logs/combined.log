@@ -704,3 +704,7 @@
 2024-09-10T21:54:43.803Z [31merror[39m: Successfully disconnected from mongodb://127.0.0.1:27017/arc-store
 2024-09-10T21:54:43.803Z [31merror[39m: dBase connection closed due to app termination
 2024-09-10T21:54:43.803Z [31merror[39m: dBase connection closed due to app termination
+2024-09-17T06:18:23.518Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-17T06:18:23.904Z [32minfo[39m: Successfully connected to 
+2024-09-17T06:19:09.955Z [32minfo[39m: Attempting MongoDB connection (will retry if needed)
+2024-09-17T06:19:10.046Z [32minfo[39m: Successfully connected to 
