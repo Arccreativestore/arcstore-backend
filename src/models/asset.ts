@@ -24,6 +24,7 @@ export interface IAsset extends Document {
     downloads: number;
     ratings:IRating
     licenseType: LicenseType
+    files:ObjectId[]
 }
 
 const AssetSchema = new Schema<IAsset>({
@@ -70,6 +71,11 @@ const AssetSchema = new Schema<IAsset>({
         type: Number,
         default: 0,
     },
+
+    files:{
+        type:[Schema.Types.ObjectId]
+    }, 
+
     ratings: {
         count: { type: Number, default: 0 },
         total: { type: Number, default: 0 },

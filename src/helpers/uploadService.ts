@@ -5,7 +5,7 @@ import {getSignedUrl} from "@aws-sdk/s3-request-presigner";
 import { AWS_ACCESS_KEY_ID, AWS_BUCKET_NAME, AWS_HOSTNAME_URL, AWS_REGION, AWS_SECRET_ACCESS_KEY } from "../config/config.js";
 import {Readable} from "stream";
 import { NextFunction, Response,Request} from 'express'
-import Base from "../base.js";
+import Base from "../base";
 
 
 class FileUploader {
@@ -23,7 +23,7 @@ class FileUploader {
                 secretAccessKey: AWS_SECRET_ACCESS_KEY as string,
             },
             endpoint: AWS_HOSTNAME_URL,
-            forcePathStyle: true,
+            // forcePathStyle: true,
 
         };
 
@@ -49,11 +49,14 @@ class FileUploader {
 
     }
 
-    //Get File Presigned URL , default to 6 days => aws max 7 days.
-    public async getFileUrl(key: string, fileExpiryDate:number = 6*60*60): Promise<string> {
-        const client = this.s3
-        const command: GetObjectCommand = new GetObjectCommand({Bucket: AWS_BUCKET_NAME, Key: key});
-        const url = await getSignedUrl(client, command, {expiresIn: fileExpiryDate});
+    // Get File Presigned URL , default to 6 days => aws max 7 days.
+    public async getFileUrl(key: string, fileExpiryDate: number = 6 * 60 * 60): Promise<string> {
+        const command: GetObjectCommand = new GetObjectCommand({
+            Bucket: this.bucketName,
+            Key: key
+        });
+
+        const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
         return url;
     }
 
