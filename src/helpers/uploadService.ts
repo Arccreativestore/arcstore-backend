@@ -100,9 +100,7 @@ class FileUploader {
         return Readable.from(buffer);
     }
 
- 
 }
-
 
 const fileUploader = new FileUploader();
 export const upload = fileUploader.upload;

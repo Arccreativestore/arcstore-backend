@@ -6,6 +6,7 @@ export interface ICategory extends Document {
     slug: string;
     description: string;
     disable: boolean;
+    deleted: boolean; 
 }
 
 const CategorySchema = new Schema<ICategory>({
@@ -28,6 +29,11 @@ const CategorySchema = new Schema<ICategory>({
         trim: true,
     },
     disable: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    deleted: {
         type: Boolean,
         required: true,
         default: false,

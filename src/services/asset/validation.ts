@@ -2,21 +2,20 @@ import Joi from 'joi';
 import { Types } from 'mongoose';
 import { ErrorHandlers } from '../../helpers/errorHandler';
 
-
-export interface IPermissionGroup {
-    permissions: Types.ObjectId[]; 
-    description: string;
+// Category Interfaces
+export interface ICategoryValidation {
     title: string;
+    description: string;
 }
 
-export interface IUpdatePermissionGroup {
-    permissionGroupId:Types.ObjectId
-    permissions: Types.ObjectId[]; 
-    description: string;
-    title: string;
+export interface IUpdateCategoryValidation {
+    categoryId: Types.ObjectId;
+    title?: string;
+    description?: string;
 }
 
 
+// Custom ObjectId validation
 export const objectId = Joi.string().custom((value, helpers) => {
     if (!Types.ObjectId.isValid(value)) {
         return helpers.error('any.invalid');
@@ -24,41 +23,49 @@ export const objectId = Joi.string().custom((value, helpers) => {
     return value;
 }, 'ObjectId Validation');
 
-// Create PG
-const permissionGroupSchema = Joi.object({
-    permissions: Joi.array()
-        .items(objectId.required().messages({
-            'any.invalid': 'Invalid Permission ID',
-        }))
-        .required()
-        .messages({
-            'array.base': 'Permissions are required',
-        }),
 
-    description: Joi.string()
-        .required()
-        .trim()
-        .lowercase()
-        .messages({
-            'string.empty': 'Description is required',
-            'string.base': 'Description must be a string',
-        }),
-
-    title: Joi.string()
-        .required()
-        .lowercase()
-        .trim()
-        .messages({
-            'string.empty': 'Title is required',
-            'string.base': 'Title must be a string',
-        }),
+// Category Validation Schema
+const categorySchema = Joi.object({
+    title: Joi.string().required().trim().messages({
+        'string.empty': 'Title is required',
+        'string.base': 'Title must be a string',
+    }),
+    description: Joi.string().required().trim().messages({
+        'string.empty': 'Description is required',
+        'string.base': 'Description must be a string',
+    }),
 });
 
-
-
-export function CreatePermissionGroupValidation(data: IPermissionGroup): Promise<IPermissionGroup> {
+// Create Category Validation
+export function CreateCategoryValidation(data: ICategoryValidation): Promise<ICategoryValidation> {
     return new Promise((resolve, reject) => {
-        const { error, value } = permissionGroupSchema.validate(data, { abortEarly: false });
+        const { error, value } = categorySchema.validate(data, { abortEarly: false });
+        if (error) {
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+        } else {
+            resolve(value);
+        }
+    });
+}
+
+// Update Category Validation Schema
+const updateCategorySchema = Joi.object({
+    categoryId: objectId.required().messages({
+        'any.invalid': 'Invalid Category ID',
+        'any.required': 'Category ID is required',
+    }),
+    title: Joi.string().trim().optional().messages({
+        'string.base': 'Title must be a string',
+    }),
+    description: Joi.string().trim().optional().messages({
+        'string.base': 'Description must be a string',
+    }),
+});
+
+// Update Category Validation
+export function UpdateCategoryValidation(data: IUpdateCategoryValidation): Promise<IUpdateCategoryValidation> {
+    return new Promise((resolve, reject) => {
+        const { error, value } = updateCategorySchema.validate(data, { abortEarly: false });
         if (error) {
             reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
         } else {
@@ -68,42 +75,102 @@ export function CreatePermissionGroupValidation(data: IPermissionGroup): Promise
 }
 
 
-//Update PG
-const partialUpdateSchema = Joi.object({
-    permissionGroupId: objectId.required().messages({
-        'any.invalid': 'Invalid Permission Group ID',
-        'any.required': 'Permission Group ID is required'
+
+// Asset Interfaces
+export interface IAssetValidation {
+    title: string;
+    description: string;
+    price: number;
+    author: Types.ObjectId;
+    category: Types.ObjectId;
+    tags: string[];
+    licenseType: 'regular' | 'extended';
+}
+
+export interface IUpdateAssetValidation {
+    assetId: Types.ObjectId;
+    title?: string;
+    description?: string;
+    price?: number;
+    category?: Types.ObjectId;
+    tags?: string[];
+    licenseType?: 'regular' | 'extended';
+}
+
+
+// Asset Validation Schema
+const assetSchema = Joi.object({
+    title: Joi.string().required().trim().messages({
+        'string.empty': 'Title is required',
+        'string.base': 'Title must be a string',
     }),
-
-    permissions: Joi.array()
-        .items(objectId.required().messages({
-            'any.invalid': 'Invalid Permission ID',
-        }))
-        .optional()
-        .messages({
-            'array.base': 'Permissions should be an array of valid Permission IDs',
-        }),
-
-    description: Joi.string()
-        .trim()
-        .lowercase()
-        .optional()
-        .messages({
-            'string.base': 'Description must be a string',
-        }),
-
-    title: Joi.string()
-        .lowercase()
-        .trim()
-        .optional()
-        .messages({
-            'string.base': 'Title must be a string',
-        }),
+    description: Joi.string().required().trim().messages({
+        'string.empty': 'Description is required',
+        'string.base': 'Description must be a string',
+    }),
+    price: Joi.number().required().messages({
+        'number.base': 'Price must be a number',
+        'any.required': 'Price is required',
+    }),
+    author: objectId.required().messages({
+        'any.invalid': 'Invalid Author ID',
+        'any.required': 'Author ID is required',
+    }),
+    category: objectId.required().messages({
+        'any.invalid': 'Invalid Category ID',
+        'any.required': 'Category ID is required',
+    }),
+    tags: Joi.array().items(Joi.string()).optional().messages({
+        'array.base': 'Tags should be an array of strings',
+    }),
+    licenseType: Joi.string().valid('regular', 'extended').required().messages({
+        'any.only': 'License type must be either "regular" or "extended"',
+        'any.required': 'License type is required',
+    }),
 });
 
-export function UpdatePermissionGroupValidation(data:IUpdatePermissionGroup ): Promise<IPermissionGroup> {    
+// Create Asset Validation
+export function CreateAssetValidation(data: IAssetValidation): Promise<IAssetValidation> {
     return new Promise((resolve, reject) => {
-        const { error, value } =     partialUpdateSchema .validate(data, { abortEarly: false });
+        const { error, value } = assetSchema.validate(data, { abortEarly: false });
+        if (error) {
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+        } else {
+            resolve(value);
+        }
+    });
+}
+
+// Update Asset Validation Schema
+const updateAssetSchema = Joi.object({
+    assetId: objectId.required().messages({
+        'any.invalid': 'Invalid Asset ID',
+        'any.required': 'Asset ID is required',
+    }),
+    title: Joi.string().trim().optional().messages({
+        'string.base': 'Title must be a string',
+    }),
+    description: Joi.string().trim().optional().messages({
+        'string.base': 'Description must be a string',
+    }),
+    price: Joi.number().optional().messages({
+        'number.base': 'Price must be a number',
+    }),
+    category: objectId.optional().messages({
+        'any.invalid': 'Invalid Category ID',
+    }),
+    tags: Joi.array().items(Joi.string()).optional().messages({
+        'array.base': 'Tags should be an array of strings',
+    }),
+    licenseType: Joi.string().valid('regular', 'extended').optional().messages({
+        'any.only': 'License type must be either "regular" or "extended"',
+    }),
+});
+
+// Update Asset Validation
+export function UpdateAssetValidation(data: IUpdateCategoryValidation): Promise<IUpdateCategoryValidation> {
+    return new Promise((resolve, reject) => {
+        const { error, value } = updateAssetSchema.validate(data, { abortEarly: false });
         if (error) {
             reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
         } else {

@@ -17,6 +17,7 @@ import db from "./config/database";
 import { logger } from "./config/logger";
 import passport from "passport";
 import passportAuth from "./services/user/oauth";
+
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
 
@@ -103,11 +104,11 @@ app.use("/graphql",
         const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
 
         let user = null
-        if (token) {
+        // if (token) {
             
-          user = new Base().extractUserDetails(token)
+        //   user = new Base().extractUserDetails(token)
           
-        }
+        // }
       
         return {
           req,
