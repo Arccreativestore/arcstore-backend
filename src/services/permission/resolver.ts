@@ -4,9 +4,8 @@ import { IAccount } from "../../models/user";
 import { CreatePermissionGroupValidation, IPermissionGroup, IUpdatePermissionGroup, UpdatePermissionGroupValidation } from "./validation";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 import { Types } from "mongoose";
-import { BadreqError } from "../../middleware/errors";
 
-
+import { ErrorHandlers } from "../../helpers/errorHandler";
 
 export const PermissionMutation = {
 
@@ -26,7 +25,7 @@ export const PermissionMutation = {
   async disablePermissionGroup(__:unknown, {permissionGroupId}:{permissionGroupId:string}, context:{req:Request, res:Response, user:IAccount}){
     
     if (!Types.ObjectId.isValid(permissionGroupId)) {
-      throw new BadreqError('Invalid permission group id');
+      throw new ErrorHandlers().UserInputError('Invalid permission group id');
     }
 
     isUserAuthorized(context.user, this.disablePermissionGroup.name) //check user privilege

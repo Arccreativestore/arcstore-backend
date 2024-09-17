@@ -10,9 +10,11 @@ export interface IAccount extends Document {
   password: string;
   role: RoleEnum;
   profilePicture: string;
-  username: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: number;
   permissionGroup?: ObjectId[];
-  permissions?:string[]
+  permissions?: string[];
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
@@ -25,9 +27,13 @@ const UserSchema: Schema = new Schema<IAccount>(
       trim: true,
     },
 
-    username: {
+    firstName: {
       type: String,
       required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
       trim: true,
     },
     password: {
@@ -36,11 +42,16 @@ const UserSchema: Schema = new Schema<IAccount>(
     },
     emailVerified: {
       type: Boolean,
+      default: false
     },
     role: {
       type: String,
       enum: ["USER", "SUPERADMIN", "CREATOR", "STAFF"],
       default: "USER",
+    },
+    phoneNumber:
+    {
+      type: Number
     },
     profilePicture: {
       type: String,
@@ -56,6 +67,7 @@ const UserSchema: Schema = new Schema<IAccount>(
   { timestamps: true }
 );
 // Pre-save middleware to hash password
+
 UserSchema.pre<IAccount>("save", async function (next) {
   const user = this;
 
@@ -64,7 +76,7 @@ UserSchema.pre<IAccount>("save", async function (next) {
 
   try {
     // Generate salt and hash the password
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(user.password, salt);
 
     // Replace the plain password with the hashed one
@@ -75,9 +87,12 @@ UserSchema.pre<IAccount>("save", async function (next) {
     next(error);
   }
 });
-export const userModel = model<IAccount>("users", UserSchema);
-// export default function (isTest: boolean = false) {
-//     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
-//     const collectionName = isTest ? 'test_accounts' : "accounts";
-//     return model<IAccount>(collectionName, UserSchema, collectionName);
-// }
+
+
+export const userModel = (isTest: boolean = true) => {
+  if (isTest == undefined || isTest == null) {
+    throw new Error("environment is not valid");
+  }
+  const collectionName = isTest ? "test_users" : "users";
+  return model<IAccount>(collectionName, UserSchema, collectionName);
+};

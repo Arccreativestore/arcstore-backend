@@ -2,43 +2,31 @@ import Base from '../../base'
 import { IPermissionGroup, IUpdatePermissionGroup } from './validation'
 import __PermissionGroupModel from '../../models/permissionGroup'
 import __Permission from '../../models/permission'
-import { logger } from '../../config/logger'
 import { PipelineStage } from 'mongoose'
+import { ErrorHandlers } from '../../helpers/errorHandler'
 
 class PermissionDatasource extends Base {
 
   async createPermissionGroup(data: IPermissionGroup) {
-
-    try {
-      const created = await __PermissionGroupModel().create(data)
+      const created = await this.handleMongoError(__PermissionGroupModel().create(data))
       if(created) return "Permission group created successfully"
-    } catch (error) {
-      logger.error(error)
-      throw new Error(error.message)
-    }
+      throw new ErrorHandlers().ValidationError("Unable to create permission group")
+    
   }
 
 
   async updatePermissionGroup(data: IUpdatePermissionGroup) {
-  try {
     const {permissionGroupId, ...rest} = data
-    const updated = await __PermissionGroupModel().updateOne({_id:permissionGroupId}, {$set:rest})
+    const updated = await __PermissionGroupModel().updateOne({_id:permissionGroupId}, { $set: { ...rest } })
     if(updated.matchedCount > 0) return "Permission group updated successfully"
-  } catch (error) {
-    logger.error(error)
-    throw new Error(error.message)
-  }
-
+    throw new ErrorHandlers().ValidationError("Unable to update permission group")
+    
   }
 
   async disablePermissionGroup(permissionGroupId: string) {
-    try {
-      const updated = await __PermissionGroupModel().updateOne({_id:permissionGroupId}, {$set:{disable:true}})
+      const updated = await __PermissionGroupModel().updateOne({ _id:permissionGroupId}, { $set:{ disable:true }})
       if(updated.matchedCount > 0) return "Permission group disabled successfully"
-    } catch (error) {
-      logger.error(error)
-      throw new Error(error.message)
-    }
+      throw new ErrorHandlers().ValidationError("Unable to delete permission group")
   }
 
   async getAllPermissionGroup() {
@@ -60,7 +48,6 @@ class PermissionDatasource extends Base {
           $project: {
               title: 1,
               description: 1,
-              permissions: 1,
               disable: 1,
               createdAt:1,
               updatedAt:1,
@@ -68,8 +55,7 @@ class PermissionDatasource extends Base {
           },
       },
   ];
-
-    return __PermissionGroupModel().aggregate(pipeline).exec()
+  return  __PermissionGroupModel().aggregate(pipeline).exec()
   }
 
   async getAllDefaultPermissions(page:number=1, limit:number=20) {

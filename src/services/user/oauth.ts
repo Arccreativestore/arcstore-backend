@@ -9,8 +9,6 @@ const clientID = GOOGLE_CLIENT_ID as string
 const clientSecret = GOOGLE_CLIENT_SECRET as string
 
 
-
-
 // Define the function for setting up Google authentication strategy
 const passportAuth = (): void => {
     passport.use(new GoogleStrategy({
@@ -23,16 +21,28 @@ const passportAuth = (): void => {
                 const email: string = profile.emails?.[0].value as string;
                 const username: string = profile.displayName;
                 const profilePicture: string | null = profile.photos?.[0].value || null;
-            
+                let firstName = ''
+                let lastName = ''
+                const nameParts: Array<string> = username.split(" ")
+
+                if (nameParts.length === 1) {
+                    // In case the user only has one name
+                    firstName = nameParts[0];
+                  } else if (nameParts.length > 1) {
+                    firstName = nameParts[0];
+                    // Join the rest of the name parts in case there are multiple words in the last name
+                    lastName = nameParts.slice(1).join(' ');
+                  }
+
 
                 const existingUser = await datasource.findByEmail(email);
 
                 if (!existingUser) {
                     const newAccount = await datasource.userRegistration({
                         email,
-                        username,
+                        firstName,
+                        lastName,
                         profilePicture,
-                        password: null,
                         role: 'USER', // default
                         emailVerified: true ,// true for o-auth
                         verifiedDate: new Date()
