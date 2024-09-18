@@ -4,7 +4,8 @@ const router = express.Router()
 import GeneralController from "../helpers/generalController";
 import {handleMultipleFileUpload, upload} from '../helpers/uploadService'
 import { authMiddleware } from "../middleware/authMiddleware";
-import CompleteUpload from "../helpers/completeUpload";
+import CompleteUpload, { CustomRequest } from "../helpers/completeUpload";
+
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
@@ -13,21 +14,17 @@ router.get("/auth/google/callback",
     new GeneralController().oAuthCallback
 )
 
-
-
-
-
 router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:NextFunction)=>{
     await new CompleteUpload().createPresignedUrl(req, res)
 })
 
 router.post('/asset/upload/single', authMiddleware, upload.single('file'), async(req:Request, res:Response, next:NextFunction)=>{
-    await new CompleteUpload().processFileUpload(req, res)
+    await new CompleteUpload().processFileUpload(req as CustomRequest, res)
 })
 
 
 router.post('/asset/upload/multiple', authMiddleware, handleMultipleFileUpload, async(req:Request, res:Response, next:NextFunction)=>{
-    await new CompleteUpload().processFileUpload(req, res)
+    await new CompleteUpload().processFileUpload(req as CustomRequest, res)
 })
 
 

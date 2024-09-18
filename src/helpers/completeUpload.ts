@@ -5,12 +5,12 @@ import { CreateAssetValidation, IAssetValidation } from "../services/asset/valid
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";  
 import { IAccount } from "../models/user";
-import { createPresignedUrl } from "./uploadService";
 
-interface FileRes{
+
+export interface FileRes{
     url: string; type: string
 }
-interface CustomRequest extends Request{
+export interface CustomRequest extends Request{
     user:IAccount,
     uploads:FileRes[]
 }
@@ -61,10 +61,11 @@ class CompleteUpload {
 
 
     //Get presigned url
-    async createPresignedUrl(req: CustomRequest, res: Response){
+    async createPresignedUrl(req: Request, res: Response){
         const key = req.params.id
         const exp:any = req.query.exp
-        const url:string = await createPresignedUrl(key, exp )
+        const url:string = ""
+        // await createPresignedUrl(key, exp )
 
         res.redirect(url)
     }

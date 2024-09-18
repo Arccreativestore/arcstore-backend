@@ -56,8 +56,8 @@ class FileUploader {
             Key: key
         });
 
-        const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
-        return url;
+        // const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
+        return "";
     }
 
     //Uploade multiple files 
