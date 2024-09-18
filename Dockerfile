@@ -13,11 +13,13 @@ RUN yarn install
 # Copy the rest of the application code
 COPY . .
 
+
 # Compile TypeScript to JavaScript (if applicable)
 RUN yarn build
 
+
 # Expose the port specified in the environment variable
-EXPOSE ${PORT}
+EXPOSE 3000
 
 # Command to run the app
 CMD ["yarn", "start"]
