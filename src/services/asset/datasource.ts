@@ -211,10 +211,8 @@ class AssetDatasource extends Base {
   async getAssetById(assetId:string){
     const result = await __Asset()
     .findOne({ _id: assetId, published:false })
-    .populate('categoryId')  
-    .populate('files')      
-    .populate('author');    
-
+    .populate([ { path:'categoryId'}, { path:"files" }, { path:"author" } ]).exec()  
+    
   return result;
 
   }
