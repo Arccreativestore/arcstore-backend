@@ -1,12 +1,12 @@
 import { GraphQLError } from "graphql";
 import { model, ObjectId, Schema } from "mongoose";
 
-interface Idownloads extends Document {
+interface Isaved extends Document {
     assetId: ObjectId
     userId: ObjectId
 }
 
-const downloadsSchema  = new Schema<Idownloads>({
+const savedAssetsSchema  = new Schema<Isaved>({
 
     assetId: {
         type: Schema.Types.ObjectId,
@@ -21,12 +21,11 @@ const downloadsSchema  = new Schema<Idownloads>({
     timestamps: true
 })
 
-const downloadsModel = (isTest: boolean = false)=>{
+const savedAssetsModel = (isTest: boolean = false)=>{
 if(isTest == undefined || isTest == null) throw new GraphQLError("Environment is invalid")
 
-let collectionName = isTest ? "test_downloads" : "downloads"
-return model<Idownloads>(collectionName, downloadsSchema, collectionName)
+let collectionName = isTest ? "test_savedAssets" : "savedAssets"
+return model<Isaved>(collectionName, savedAssetsSchema, collectionName)
 }
 
-
-export default downloadsModel
+export default savedAssetsModel

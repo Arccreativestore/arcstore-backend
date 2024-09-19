@@ -66,22 +66,15 @@ const UserSchema: Schema = new Schema<IAccount>(
   },
   { timestamps: true }
 );
-// Pre-save middleware to hash password
 
 UserSchema.pre<IAccount>("save", async function (next) {
   const user = this;
-
-  // If the password hasn't been modified, skip hashing
   if (!user.isModified("password")) return next();
-
   try {
-    // Generate salt and hash the password
+
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(user.password, salt);
-
-    // Replace the plain password with the hashed one
     user.password = hash;
-
     next();
   } catch (error) {
     next(error);

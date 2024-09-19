@@ -1,7 +1,8 @@
 import {  UnauthorizedError } from "../../api/errorClass";
+import { User } from "../../app";
 import { IAccount } from "../../models/user";
 
-export const isUserAuthorized = (user:IAccount, method:string, global?:boolean )=>{
+export const isUserAuthorized = (user:User, method:string, global?:boolean )=>{
 
 	if(!user) throw new UnauthorizedError("Invalid or expired session, kindly login.")
 

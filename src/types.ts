@@ -3,6 +3,8 @@ import { typeDefs as scalarTypeDefs } from "graphql-scalars";
 import UserSchema from "./services/auth/typeDefs.js";
 import PermissionSchema from "./services/permission/typeDefs.js";
 import {refreshTokenTypeDef} from './services/tokens/typeDefs.js'
+import UserTypeDefs from "./services/users/typeDefs.js";
+import supportTypeDefs from "./services/Faq/typeDefs.js";
 
 
 
@@ -25,6 +27,8 @@ const data = [
   UserSchema,
   PermissionSchema,
   refreshTokenTypeDef,
+  UserTypeDefs,
+  supportTypeDefs,
   ...scalarTypeDefs,
 ]
 

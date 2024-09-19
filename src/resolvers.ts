@@ -1,5 +1,7 @@
-import { authMutations, UserQuery} from "./services/auth/resolver";
+import { authMutations, authQuery} from "./services/auth/resolver";
 import { tokenMutation, tokenQuery } from "./services/tokens/resolvers";
+import UserQueries from "./services/users/resolvers";
+import {faqMutations, faqQueries} from "./services/Faq/resolvers";
 import {
   PermissionMutation,
   PermissionQuery,
@@ -8,13 +10,16 @@ import {
 const Mutation = {
   ...authMutations,
   ...PermissionMutation,
-  ...tokenMutation
+  ...tokenMutation,
+  ...faqMutations
 };
 
 const Query = {
-  ...UserQuery,
+  ...authQuery,
+  ...UserQueries,
   ...PermissionQuery,
-  ...tokenQuery
+  ...tokenQuery,
+  ...faqQueries
 };
 
 export { Mutation, Query };

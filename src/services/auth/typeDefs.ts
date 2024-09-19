@@ -3,23 +3,27 @@ import gql from "graphql-tag";
 
 const UserType = gql`
   type Mutation {
-    userRegistration(data: iRegInput!): User!
+    userRegistration(data: iRegister!): User!
     verifyAccount: General!
-    requestVerification(data: Email!): General!
-    Login(data: LoginInput!): IToken!
-    forgotPassword(data: Email!): General!
+    requestVerification(data: IEmail!): General!
+    Login(data: ILogin!): IToken!
+    forgotPassword(data: IEmail!): General!
     resetPassword(data: IresetPassword!): General!
+    updateUserProfile(data: IupdateProfile): General!
   }
 
   type Query {
-    getUserProfile: String
+    me: String
   }
 
   enum IuserType {
     USER
+    CREATOR
+    STAFF
+    SUPERADMIN
   }
 
-  input iRegInput {
+  input iRegister {
     email: String!
     firstName: String!
     lastName: String
@@ -27,12 +31,12 @@ const UserType = gql`
     role: IuserType!
   }
 
-  input LoginInput {
+  input ILogin {
     email: String!
     password: String!
   }
   
-  input Email{
+  input IEmail{
   email:String!
   }
 
@@ -42,9 +46,16 @@ const UserType = gql`
     token:String!
   }
 
+  input IupdateProfile {
+  email: String
+  firstName: String
+  lastName: String
+  phoneNumber: Int
+  }
+
   type User {
     status: String!
-    _id: String!
+    _id: ID!
     email: String!
     firstName: String!
     lastName: String

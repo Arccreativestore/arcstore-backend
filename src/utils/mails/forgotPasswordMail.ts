@@ -42,7 +42,6 @@ export async function forgotPasswordMail(name: string, link: string, userEmail: 
           .request(data);
 
   const { Status } = result.body.Messages[0];
-  console.log(result.body.Messages[0])
 
 
   } catch (err) {

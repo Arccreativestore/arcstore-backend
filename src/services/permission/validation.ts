@@ -103,7 +103,7 @@ const partialUpdateSchema = Joi.object({
 
 export function UpdatePermissionGroupValidation(data:IUpdatePermissionGroup ): Promise<IPermissionGroup> {    
     return new Promise((resolve, reject) => {
-        const { error, value } =     partialUpdateSchema .validate(data, { abortEarly: false });
+        const { error, value } =     partialUpdateSchema.validate(data, { abortEarly: false });
         if (error) {
             reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
         } else {

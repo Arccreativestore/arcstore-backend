@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken'
 import {userModel} from './models/user'
 import mongoose from "mongoose";
-import { REFRESH_SECRETKEY, VERIFY_SECRETKEY } from "./config/config";
+import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "./config/config";
 
 
  export default class Base extends GeneralController {
@@ -11,7 +11,7 @@ import { REFRESH_SECRETKEY, VERIFY_SECRETKEY } from "./config/config";
         return jwt.verify(token, REFRESH_SECRETKEY as string)
      }
      decodeToken(token: string) {
-       return  jwt.verify(token, VERIFY_SECRETKEY as string)
+       return  jwt.verify(token, ACCESS_SECRETKEY as string)
     }
 
     isTokenExpired(decoded: any) {

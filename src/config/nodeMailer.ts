@@ -3,7 +3,7 @@ import {G_HOST, G_PORT, G_USER, G_PASSWORD} from './config'
 
 
 const host = G_HOST as string
-const port = Number(G_PORT)  // Default port for SMTP
+const port = Number(G_PORT)  
 const user = G_USER as string
 const pass = G_PASSWORD as string
 
