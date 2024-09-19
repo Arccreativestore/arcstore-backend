@@ -23,8 +23,11 @@ class CompleteUpload {
             const body:IAssetValidation = req.body
 
             // Validate the request body
-            await CreateAssetValidation(body);
+            
+            await CreateAssetValidation({...body, author:user._id.toString()});
 
+    
+            
             // Normalize uploads to an array (in case it's a single file)
             const uploadArray = Array.isArray(uploads) ? uploads : [uploads];
 
@@ -47,6 +50,7 @@ class CompleteUpload {
             const created: any = await __Asset().create({
                 ...body, 
                 uploads: uploadedIds,
+                files:uploadedIds,
                 author: user?._id   
             });
 

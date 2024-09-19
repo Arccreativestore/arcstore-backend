@@ -1010,3 +1010,12 @@
   "name": "JsonWebTokenError",
   "message": "invalid signature"
 }
+2024-09-19T06:22:47.886Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T06:51:12.803Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T06:55:01.998Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T06:57:46.966Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T07:12:08.549Z [31merror[39m: Registration error: User already exists
+2024-09-19T07:19:15.389Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T07:21:28.831Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T07:22:36.350Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb
+2024-09-19T07:25:43.492Z [31merror[39m: getaddrinfo ENOTFOUND dsfcvb

@@ -1,4 +1,5 @@
-import { Document, model, ObjectId, Schema } from 'mongoose';
+import { Document, Model, model, ObjectId, PipelineStage, Schema } from 'mongoose';
+import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import slugify from 'slugify';
 
 
@@ -18,15 +19,19 @@ export interface IAsset extends Document {
     description: string;
     price: number;
     author: ObjectId;
-    category: ObjectId;
+    categoryId: ObjectId;
     tags: string[];
     views: number;
     downloads: number;
     ratings:IRating
     licenseType: LicenseType
     files:ObjectId[]
+    deleted:boolean
+    published:boolean
 }
-
+interface IAssetModel extends Model<IAsset> {
+    aggregatePaginate(pipeline: PipelineStage[], options: any): Promise<any>;
+}
 const AssetSchema = new Schema<IAsset>({
     title: {
         type: String,
@@ -51,11 +56,13 @@ const AssetSchema = new Schema<IAsset>({
     },
     author: {
         type: Schema.Types.ObjectId,
+        ref:"users",
         required: true,
         index: true,
     },
-    category: {
+    categoryId: {
         type: Schema.Types.ObjectId,
+        ref:'categories',
         required: true,
         index: true,
     },
@@ -73,6 +80,7 @@ const AssetSchema = new Schema<IAsset>({
     },
 
     files:{
+        ref:"files",
         type:[Schema.Types.ObjectId]
     }, 
 
@@ -86,6 +94,17 @@ const AssetSchema = new Schema<IAsset>({
         default:LicenseType.Regular,
         required: true,
     },
+    deleted: {
+        type: Boolean,
+        required: true,
+        default:false
+    },
+
+    published: {
+        type: Boolean,
+        required: true,
+        default:false,
+    },
 }, {
     timestamps: true,
     versionKey: false,
@@ -98,10 +117,11 @@ AssetSchema.pre('validate', function (next) {
     next();
 });
 
+AssetSchema.plugin(mongooseAggregatePaginate);
 const AssetModel = (isTest: boolean = false) => {
     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
     const collectionName = isTest ? 'test_assets' : 'assets';
-    return model<IAsset>(collectionName, AssetSchema, collectionName);
+    return model<IAsset, IAssetModel>(collectionName, AssetSchema, collectionName);
 };
 
 export default AssetModel;

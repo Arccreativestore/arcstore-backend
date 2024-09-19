@@ -83,8 +83,6 @@ export interface IAssetValidation {
     price: number;
     author: Types.ObjectId;
     category: Types.ObjectId;
-    tags: string[];
-    licenseType: 'regular' | 'extended';
 }
 
 export interface IUpdateAssetValidation {
@@ -116,16 +114,9 @@ const assetSchema = Joi.object({
         'any.invalid': 'Invalid Author ID',
         'any.required': 'Author ID is required',
     }),
-    category: objectId.required().messages({
+    categoryId: objectId.required().messages({
         'any.invalid': 'Invalid Category ID',
         'any.required': 'Category ID is required',
-    }),
-    tags: Joi.array().items(Joi.string()).optional().messages({
-        'array.base': 'Tags should be an array of strings',
-    }),
-    licenseType: Joi.string().valid('regular', 'extended').required().messages({
-        'any.only': 'License type must be either "regular" or "extended"',
-        'any.required': 'License type is required',
     }),
 });
 

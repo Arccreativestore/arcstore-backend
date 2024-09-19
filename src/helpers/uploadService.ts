@@ -76,8 +76,7 @@ class FileUploader {
             try {
         
                 req.uploads = await Promise.all(files.map(async (file) => {
-                    const fileType = file.mimetype.split('/').pop();
-                    return {url: file.key, type: fileType};
+                    return {url: file.key, type: file.mimetype};
                 }));
                 return next()
             } catch (error) {

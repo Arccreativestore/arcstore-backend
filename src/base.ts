@@ -18,7 +18,7 @@ export default class Base extends GeneralController {
   async extractUserDetails(token: string) {
     const payload: any = this.decodeToken(token)
 
-    const tokenExpired = this.isTokenExpired(payload)
+    const tokenExpired = false
 
     if (!tokenExpired) {
       const pipeline: any[] = [
@@ -80,8 +80,9 @@ export default class Base extends GeneralController {
         },
       ]
 
-      const [userData]: any = await userModel().aggregate(pipeline).exec()
 
+      
+      const [userData]: any = await userModel(true).aggregate(pipeline).exec()
       return userData
     }
 

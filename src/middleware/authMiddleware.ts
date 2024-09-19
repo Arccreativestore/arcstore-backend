@@ -17,6 +17,7 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
             const userFound:IAccount | null = await new Base().extractUserDetails(authorization as string)
          
             if (!userFound) return res.status(STATUS_CODE).json(ERROR_MESSAGE)
+                console.log(userFound);
             request.user = userFound;
 
             return next();

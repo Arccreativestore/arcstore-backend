@@ -169,7 +169,7 @@ export const loginUserMutation = {
       }
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
-        const token = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "15m" });
+        const token = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: '1h' });
         return { token };
       }
       throw new UnauthorizedError("Password is incorrect");
