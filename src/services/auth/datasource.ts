@@ -4,7 +4,8 @@ import {
   IReg,
   dbResponse,
   IresetPassword,
-} from "./userTypesAndValidation";
+  IupdateProfile,
+} from "./types";
 import "../../events/user/userEvents";
 import { logger } from "../../config/logger";
 import { IAccount } from "../../models/user";
@@ -95,5 +96,15 @@ export class UserDatasource extends Base {
     }
   }
  
+  async updateProfile(_id: ObjectId, data: IupdateProfile){
+      try {
+        
+        const update = await userModel().findOneAndUpdate({_id}, data, {new: true})
+        
+        return update ? update.toObject() : null
+      } catch (error) {
+        logger.error(error)
+        throw error
+      }
+  }
 }
-export default new UserDatasource();

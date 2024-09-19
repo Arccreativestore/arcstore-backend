@@ -10,7 +10,6 @@ class apiControllers {
       const {accessToken } = req.user as { accessToken: string }
         if(accessToken)
         {
-        console.log('mymy')
           return res.status(200).json({accessToken})          
         }
         throw new Error('Error signing up at this time')

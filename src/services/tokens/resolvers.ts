@@ -1,10 +1,10 @@
 import Base from "../../base";
-import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFY_SECRETKEY } from "../../config/config";
+import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "../../config/config";
 import { ErrorHandlers } from "../../helpers/errorHandler";
 import jwt from 'jsonwebtoken'
 import { logger } from "../../config/logger";
 import { tokenDataSource } from "./dataSource";
-import UserDatasource  from "../auth/datasource";
+import {UserDatasource}  from "../auth/datasource";
 import crypto from 'crypto'
 import { Request, Response } from "express";
 
@@ -31,7 +31,7 @@ class RefreshToken extends Base
         const findToken = await new tokenDataSource().findToken(tokenId)
         if(!findToken || findToken.used)
         {
-                // suspicious login
+                // suspicious login possibly send an email to the user to change password
                 await new tokenDataSource().deleteAllTokens(_id)
                 throw new ErrorHandlers().ForbiddenError('Reused Token Detected, Please Login to Continue')
         }

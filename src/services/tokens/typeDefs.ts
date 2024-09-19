@@ -6,10 +6,6 @@ type Mutation{
 type Query {
     Me: String!
 }
-    input Token{
-        refreshToken: String!
-    }
-
     type Itoken{
         accessToken: String!
     }

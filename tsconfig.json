@@ -13,10 +13,13 @@
     "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
     "inlineSourceMap": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
   },
   "ts-node": {
       "esm": true
   },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"],
   "lib": ["esnext"]
 }
