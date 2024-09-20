@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import {userModel} from './models/user'
 import mongoose from "mongoose";
 import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "./config/config";
-
+import {v4 as uuid} from 'uuid'
 
  export default class Base extends GeneralController {
 
@@ -94,4 +94,7 @@ import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "./co
 
 
     }
+
+
+    generateUniqueId(){ return uuid() }
  }
