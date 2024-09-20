@@ -119,21 +119,16 @@ export const loginUserMutation = {
     const { res }= context
     try {
       validateLoginInput(data);
-
       if (!email || !password) throw new ErrorHandlers().UserInputError("Please provide all required fields");
       
 
       const userExist = await new UserDatasource().findByEmail(email);
-     
       if (!userExist) throw new ErrorHandlers().NotFound("User with that email not found");
       
      
-      if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login");
-      
+      if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login")
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
-
-     
       const tokenId = crypto.randomBytes(12).toString('hex')
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
 

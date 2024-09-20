@@ -19,10 +19,7 @@ const downloadsQuery = {
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
         validateMongoId(userId)
-
-        const getDownloads = await new datasource().getDownloads(userId)
-        return getDownloads.length > 0 ? getDownloads : []
-
+        return await new datasource().getDownloads(userId)
        } catch (error) {
         throw error
        }
@@ -35,14 +32,10 @@ const savedAssetsQuery = {
     async getsavedAssets( savedAssets_: any, args: any, context: {user: User}){
         
       try {
-       
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
         validateMongoId(userId)
-        
-        const savedAssets = await new datasource().getsavedAssets(userId)
-        return savedAssets.length > 0 ? savedAssets : []
-
+        return await new datasource().getsavedAssets(userId)
       } catch (error) {
         throw error
       }
@@ -56,9 +49,8 @@ const purchaseHistoryQuery = {
        try {
 
         const userId = context.user?._id;
-        if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
+        if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed'); 
         validateMongoId(userId)
-  
         const PurchaseHistory = await new datasource().getPurchaseHistory(userId)
         return PurchaseHistory.length > 0 ? PurchaseHistory : []
 

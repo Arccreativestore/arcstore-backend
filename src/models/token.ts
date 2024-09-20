@@ -27,7 +27,8 @@ const tokenSchema = new Schema<Itoken>({
     }
 },
 {
-   timestamps: true 
+    timestamps: true,
+    versionKey: false,
 })
 
 export const tokenModel = (isTest: boolean = false)=>{
