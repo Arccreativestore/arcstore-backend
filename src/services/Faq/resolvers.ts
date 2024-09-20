@@ -2,15 +2,17 @@ import { isValidObjectId } from "mongoose";
 import { User } from "../../app";
 import { ErrorHandlers } from "../../helpers/errorHandler";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
-import { faqCreateInputType,  faqUpdateInputType, validateCreateFaq, validateUpdateFaq } from "./types";
+import { faqCreateInputType,  faqUpdateInputType, vailidateSearchQuery, validateCreateFaq, validateUpdateFaq } from "./types";
 import { datasource } from "./datasource";
+import Joi from "joi";
 
 
 
 const faqQuery = {
-    async getAllFaqs(_: any, args: any, context: {user: User}){
+    async getAllFaqs(_: any, {data}:{ data:{limit?: number, page?: number}}, context: {user: User}){
     try {
-      return await new datasource().getAllFaqs()
+      const {limit, page} = data
+      return await new datasource().getAllFaqs(limit, page)
     } catch (error) {
        throw error 
     }
@@ -20,13 +22,17 @@ const faqQuery = {
        try {
          const { faqId } = data
          if(!isValidObjectId(faqId)) throw new ErrorHandlers().ValidationError("faqId is not a valid id")
-         const getFaq =  await new datasource().getOneFaq(faqId)
-         if(!getFaq) throw new ErrorHandlers().NotFound("Faq not found")
-         return getFaq
+          return await new datasource().getOneFaq(faqId) 
        } catch (error) {
         throw error
        }
         
+    },
+
+    async searchFaq(__: any, {data}: {data: {searchKey: string, limit?: number, page?: number}}){
+      const { searchKey, limit, page } = data
+      vailidateSearchQuery(data)
+      return await new datasource().searchFaqs(searchKey, page, limit)
     }
 }
 

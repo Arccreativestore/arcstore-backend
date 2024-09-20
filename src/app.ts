@@ -24,6 +24,8 @@ import Base from "./base";
 import { expressHandler } from "./helpers/expressError";
 import { ObjectId } from "mongoose";
 import faqModel from "./models/Faq";
+import { data } from "./faqs";
+
 export const cookieSettings = {
     httpOnly: true,
     secure: false,
@@ -90,6 +92,7 @@ const corsOptions = {
     credentials: true, // <-- REQUIRED backend setting
 };
 await server.start();
+//await faqModel().insertMany(data)
 //await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));

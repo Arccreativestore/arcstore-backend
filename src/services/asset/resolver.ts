@@ -12,7 +12,7 @@ export const AssetMutation = {
 
   async addAssetCategory(__:unknown, {data}:{data:ICategoryValidation},context:context ){
     await CreateCategoryValidation(data)
-    isUserAuthorized(context.user, this.addAssetCategory.name)
+   // isUserAuthorized(context.user, this.addAssetCategory.name)
     return await new AssetDatasource().addAssetCategory(data)
   },
 
@@ -60,7 +60,7 @@ export const AssetQuery = {
   },
 
   async getAllMyAssets(__:unknown, {page, limit, search}:{page:number, limit:number, search:string},context:context){
-    isUserAuthorized(context.user, this.getAllMyAssets.name) 
+   // isUserAuthorized(context.user, this.getAllMyAssets.name) 
     return await new AssetDatasource().getAllMyAssets(page, limit, context.user._id,  search)
   }
 

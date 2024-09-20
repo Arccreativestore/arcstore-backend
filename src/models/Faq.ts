@@ -1,11 +1,14 @@
 import { GraphQLError } from "graphql"
-import { model, ObjectId, Schema } from "mongoose"
-
+import { PipelineStage } from "mongoose"
+import { Model, model, ObjectId, Schema } from "mongoose"
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2"
+import slugify from "slugify"
 
 interface IFaq extends Document {
     author: ObjectId
-    name: string
+    authorName: string
     question: string
+    slug: string
     answer: string
     category: ObjectId[]
     tags: string[]
@@ -16,6 +19,11 @@ interface IFaq extends Document {
     updatedBy: ObjectId
 }
 
+
+interface IFaqModel extends Model<IFaq> {
+    aggregatePaginate(pipeline: PipelineStage[], options: any): Promise<any>;
+}
+
 const faqSchema = new Schema<IFaq>({
 
     author: {
@@ -23,17 +31,26 @@ const faqSchema = new Schema<IFaq>({
         ref: 'users',
         index: true
     },
-    name:{
+    authorName:{
         type: String,
-        index: true
+        index: true,
     },
     question: {
         type: String,
-        required: true
+        required: true,
+        index: true,
+        unique: true,
+        trim: true
+    },
+    slug: {
+        type: String,
+        unique: true,
+        trim: true
     },
     answer: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     category: {
         type: [{type: Schema.Types.ObjectId,   ref: 'categories'}],
@@ -64,16 +81,23 @@ const faqSchema = new Schema<IFaq>({
 
 },
 {
-    timestamps: true
+    timestamps: true,
+    versionKey: false,
 })
 
+faqSchema.pre('validate', function (next){
+    if (this.title) {
+        this.slug = slugify(this.title, { lower: true });
+    }
+    next();
+})
 
-
+faqSchema.plugin(mongooseAggregatePaginate)
 const faqModel = (isTest: boolean = false)=>{
     if(isTest == undefined || isTest == null) throw new GraphQLError("Environment is invalid")
     
     let collectionName = isTest ? "test_faq" : "faq"
-    return model<IFaq>(collectionName, faqSchema, collectionName)
+    return model<IFaq, IFaqModel>(collectionName, faqSchema, collectionName)
 }
     
    

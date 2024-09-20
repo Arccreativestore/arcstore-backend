@@ -40,7 +40,8 @@ const resetPasswordSchema = new Schema<IRpassword>({
         default: false
     }
 },
-{ timestamps: true})
+{ timestamps: true,
+  versionKey: false,})
 
 export const resetPasswordModel = (isTest: boolean = false) =>{
 

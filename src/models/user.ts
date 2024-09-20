@@ -63,8 +63,9 @@ const UserSchema: Schema = new Schema<IAccount>(
     verifiedDate: {
       type: Date,
     },
-  },
-  { timestamps: true }
+  },{
+  timestamps: true,
+  versionKey: false,}
 );
 
 UserSchema.pre<IAccount>("save", async function (next) {

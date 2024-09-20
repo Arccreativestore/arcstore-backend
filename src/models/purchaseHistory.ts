@@ -44,7 +44,8 @@ const purchaseHistorySchema = new Schema<Ipurchase>({
     }
 },
 {
-    timestamps: true
+    timestamps: true,
+    versionKey: false,
 })
 
 
