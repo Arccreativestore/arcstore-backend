@@ -12,11 +12,13 @@ export class datasource extends Base {
 
     async getAllFaqs(page:number=1, limit:number=20){
         try {
+         
             let options = {
                 page,
                 limit: limit > 100 ? 100:limit,
                 $sort:{ createdAt:-1 },
               }
+
             // add related to pipeline
             const pipeline: PipelineStage[] = [
                 {
@@ -63,7 +65,6 @@ export class datasource extends Base {
               const faqModelInstance = faqModel();
               const aggregate = faqModelInstance.aggregate(pipeline);
               const result = await faqModelInstance.aggregatePaginate(aggregate as any, options);
-              console.log(result)
               return {
                 data: result.docs,
                 pageInfo: {

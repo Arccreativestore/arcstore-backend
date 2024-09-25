@@ -15,6 +15,7 @@ export interface IAccount extends Document {
   phoneNumber: number;
   permissionGroup?: ObjectId[];
   permissions?: string[];
+  disabled: boolean;
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
@@ -63,6 +64,10 @@ const UserSchema: Schema = new Schema<IAccount>(
     verifiedDate: {
       type: Date,
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },{
   timestamps: true,
   versionKey: false,}

@@ -25,6 +25,7 @@ import { expressHandler } from "./helpers/expressError";
 import { ObjectId } from "mongoose";
 import faqModel from "./models/Faq";
 import { data } from "./faqs";
+import agenda from "./config/agenda";
 
 export const cookieSettings = {
     httpOnly: true,
@@ -91,6 +92,12 @@ const corsOptions = {
     origin,
     credentials: true, // <-- REQUIRED backend setting
 };
+agenda.start()
+.then(()=>{
+    console.log('Agenda running and ready to process jobs')
+})
+.catch((e)=> console.log(e))
+
 await server.start();
 //await faqModel().insertMany(data)
 //await userModel().deleteMany({}) // for dev purposes
