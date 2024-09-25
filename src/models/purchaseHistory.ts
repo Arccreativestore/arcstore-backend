@@ -1,46 +1,68 @@
 import { GraphQLError } from "graphql";
 import { DateTypeDefinition } from "graphql-scalars";
 import { model, ObjectId, Schema } from "mongoose";
+import {Decimal128} from 'mongodb';
 
 
-interface Ipurchase extends Document {
+export enum IPaymentMethodEnum {
+    PayStack='paystack',
+    GooglePay='googlepay'
+}
+export enum transactionStatus {
+    pending = "pending",
+    success = "success",
+    reversal = "reversal",
+    failure = "failure",
+    fraud = 'fraud',
+}
+export interface IPurchase extends Document {
+    _id?:ObjectId
     userId: ObjectId
-    assetId: Array<ObjectId>
+    planId:ObjectId
     purchaseDate: Date
-    amountPayed: number
-    paymentMethod: ObjectId
+    amountPaid: Decimal128
+    paymentMethod: IPaymentMethodEnum
     currency: string
-    status: boolean
+    status: transactionStatus
 }
 
-const purchaseHistorySchema = new Schema<Ipurchase>({
-    userId:
-    {
+const purchaseHistorySchema = new Schema<IPurchase>({
+    userId:{
         type: Schema.Types.ObjectId,
         ref: 'users',
         required: true,
         index: true
     },
-    assetId: {
-        type: [{type: Schema.Types.ObjectId, ref: 'assets', required: true, index: true}]
+
+    planId:{
+        type:Schema.Types.ObjectId,
+        index:true,
     },
+
     purchaseDate: {
         type: Date,
         default: Date.now()
     },
-    amountPayed: {
-        type: Number,
+
+    amountPaid: {
+        type: Decimal128,
         required: true
     },
+
     currency: {
         type: String
     },
+
     paymentMethod: {
-        type: Schema.Types.ObjectId,
-        ref: 'userPaymentMethod'
+        type: String,
+        enum:Object.values(IPaymentMethodEnum),
+        default:IPaymentMethodEnum.PayStack
     },
+
     status: {
-        type: Boolean
+        type: String,
+        enum:Object.values(transactionStatus),
+        default:transactionStatus.pending
     }
 },
 {
@@ -48,14 +70,11 @@ const purchaseHistorySchema = new Schema<Ipurchase>({
     versionKey: false,
 })
 
-
-
 const purchaseHistoryModel = (isTest: boolean = false)=>{
     if(isTest == undefined || isTest == null) throw new GraphQLError("Environment is invalid")
     
     let collectionName = isTest ? "test_purchaseHistory" : "purchaseHistory"
-    return model<Ipurchase>(collectionName, purchaseHistorySchema, collectionName)
+    return model<IPurchase>(collectionName, purchaseHistorySchema, collectionName)
     }
-    
     
     export default purchaseHistoryModel

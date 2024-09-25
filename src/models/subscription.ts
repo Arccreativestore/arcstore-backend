@@ -1,59 +1,57 @@
 import { model, ObjectId, Schema } from "mongoose";
+import { Decimal128 } from 'mongodb'
+import { IPaymentMethodEnum } from "./purchaseHistory";
 
-enum subPlans {
-    basic = "BASIC",
-    premium = "PREMIUM",
-    team = "TEAM"
-}
-interface Isubscriptions extends Document{
+export interface ISubscriptions extends Document{
+    _id?:ObjectId
     userId: ObjectId
-    plan : subPlans
-    amountPayed: number
-    duration: Date
+    planId : ObjectId
+    amountPaid: Decimal128
     expiresAt: Date
-    paymentMethod: ObjectId
-    features: Array<Schema.Types.ObjectId>
+    paymentId:ObjectId
+    paymentMethod: IPaymentMethodEnum
 }
 
-const subSchema = new Schema<Isubscriptions>({
+
+const subSchema = new Schema<ISubscriptions>({
 
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'users',
         index: true
     },
-    plan: {
-        type: String,
-        enum: subPlans
+    
+    paymentId:{
+        type:Schema.Types.ObjectId,
+        index:true,
     },
-    duration: {
-        type: Date
+
+    planId: {
+        type: Schema.Types.ObjectId,
+        index:true
     },
+
     expiresAt: {
         typ: Date
     },
-    amountPayed:{
-        type: Number
+
+    amountPaid:{
+        type: Decimal128
     },
+
     paymentMethod:{
-        type: Schema.Types.ObjectId,
-        ref: 'userPaymentMethod'
+        type: String,
+        enum:Object.values(IPaymentMethodEnum)
     },
-    features: {
-        type: [Schema.Types.ObjectId],
-        ref: 'features'
-    }
 },
 {
     timestamps: true
 })
 
 const subscriptionsModel = (isTest: boolean = false)=>{
-    if (isTest == undefined || isTest == null) {
-        throw new Error("environment is not valid");
-      }
+    if (isTest == undefined || isTest == null) throw new Error("environment is not valid");
       const collectionName = isTest ? "test_subscriptions" : "subscriptions";
-      return model<Isubscriptions>(collectionName, subSchema, collectionName);
+      return model<ISubscriptions>(collectionName, subSchema, collectionName);
 }
 
 export default subscriptionsModel

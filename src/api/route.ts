@@ -59,7 +59,7 @@ router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:N
 
 /**
  * @route POST /asset/upload/single
- * @description Upload multiple assets
+ * @description Upload single assets
  * @access Private
  * 
  * @body {
