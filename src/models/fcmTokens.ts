@@ -4,6 +4,7 @@ import { model, ObjectId, Schema } from "mongoose"
 interface Ifcm extends Document {
     userId: ObjectId
     fcmToken: string
+    preferences: Array<ObjectId>
 }
 
 const fcmSchema = new Schema<Ifcm>({
@@ -17,7 +18,8 @@ const fcmSchema = new Schema<Ifcm>({
         type: String,
         trim: true,
         unique: true
-    }
+    },
+    preferences: [{type: Schema.Types.ObjectId, ref: 'categories'}]
 },
 {
     timestamps: true,

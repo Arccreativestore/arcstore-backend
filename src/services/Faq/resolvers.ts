@@ -23,7 +23,7 @@ const faqQuery = {
        try {
          const { faqId } = data
          if(!isValidObjectId(faqId)) throw new ErrorHandlers().ValidationError("faqId is not a valid id")
-          return await new datasource().getOneFaq(faqId) 
+         return await new datasource().getOneFaq(faqId) 
        } catch (error) {
         throw error
        }

@@ -11,7 +11,6 @@ interface IRpassword extends Document
 }
 
 const resetPasswordSchema = new Schema<IRpassword>({
-
     user_id:
     {
         type: Schema.Types.ObjectId,
@@ -49,7 +48,7 @@ export const resetPasswordModel = (isTest: boolean = false) =>{
     {
         throw new Error('environment is not valid')
     }
-    const collectionName = isTest ? "test_reset_password" : "reset_password"
+    const collectionName = isTest ? "test_reset_password" : "resetPassword"
     return model<IRpassword>(collectionName, resetPasswordSchema, collectionName)
 
 }

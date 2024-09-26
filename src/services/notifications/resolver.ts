@@ -1,5 +1,5 @@
-import { addNotificationJob } from "../../agenda/pushNotifications";
 import { User } from "../../app";
+import agenda from "../../config/agenda";
 import { ErrorHandlers } from "../../helpers/errorHandler";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 import datasource from "./datasource";
@@ -7,6 +7,23 @@ import { vailidatNotiInput } from "./types";
 
 
 const notificationMutation = {
+
+    async subToNotifications(__: any, {data}: {data: {fcmToken: string}}, context: {user: User}){
+
+        try {
+ 
+        const userId = context?.user?._id
+        if(!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
+        const fcmToken = data?.fcmToken
+        if(!fcmToken) throw new ErrorHandlers().UserInputError('No Fcm Token in Request')
+        return await new datasource().subToPush(userId, fcmToken)
+            
+        } catch (error) {
+            throw error
+        } 
+        
+    },
+
     async createPushNotification(__: any, {data}: {data: {title: string, message: string}}, context: {user: User}){
         try {
             
@@ -19,8 +36,8 @@ const notificationMutation = {
             
             const getUserToken = await new datasource().getUserToken()
             const tokenStrings: string[] = getUserToken.map(tokenObj => tokenObj.fcmToken.toString());  
-
-            addNotificationJob(tokenStrings, title, message)
+            
+            agenda.now('send push notification', {tokenStrings ,title ,message})
             await new datasource().savePush(title, message, tokenStrings)
             return { status: "success", message: "message forwarded to all recipients"}
 
@@ -31,19 +48,32 @@ const notificationMutation = {
 
 },
 
+}
+
+const notificationQuery = {
+
     async getPushNotificationsHistory(__: any, {data}:{ data: {limit?: number, page?: number }}, context: {user: User}){
 
-            try {
-                const user = context?.user
-                vailidatNotiInput(data)
-                isUserAuthorized(user, this.getPushNotificationsHistory.name)
-                
-                const getPushHistory = await new datasource().getPushHistory(data?.limit, data?.page)
-                return getPushHistory
+        try {
+            const user = context?.user
+            vailidatNotiInput(data)
+            isUserAuthorized(user, this.getPushNotificationsHistory.name)
+            
+            const getPushHistory = await new datasource().getPushHistory(data?.limit, data?.page)
+            return getPushHistory
 
-            } catch (error) {
-                throw error
-            }
+        } catch (error) {
+            throw error
+        }
 
-    }
+}
+
+}
+
+export const notificationsQuery = {
+    ...notificationQuery
+}
+
+export const notificationMutations = {
+    ...notificationMutation
 }

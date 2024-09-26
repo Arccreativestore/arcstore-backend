@@ -1,16 +1,26 @@
-import { PipelineStage } from "mongoose";
+import { ObjectId, PipelineStage } from "mongoose";
 import { logger } from "../../config/logger";
 import fcmModel from "../../models/fcmTokens";
 import pushNotificationModel from "../../models/pushNotifications";
-
-
+import CategoryModel from "../../models/assetCategory";
+import AssetModel from "../../models/asset";
+import moment from 'moment'
 
 
 class datasource {
 
+    async subToPush(userId: ObjectId, fcmToken: string){
+        try {
+            const create = await fcmModel().create({userId, fcmToken })
+            return create ? ' User subscribed successfully' : 'failed to subscribe user'
+        } catch (error) {
+            logger.error(error)
+            throw error
+        }
+    }
     async getUserToken(){
         try {
-        return await fcmModel().find({}, { userId: 0, _id: 0, fcmToken: 1}).lean().exec()
+        return await fcmModel().find()
         } catch (error) {
             logger.error(error)
             throw error
@@ -36,7 +46,7 @@ class datasource {
     {
        try {
         
-        if(limit){if(limit>100) limit = 10}
+        if(limit){if(limit>100) limit = 100}
         const options = {
             limit: limit ? limit : 10,
             page: page? page : 1,
@@ -85,7 +95,59 @@ class datasource {
         logger.error(error)
        }
     }
-   
+
+    async categoriesWithUploads(){
+       
+        try {
+            const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    
+        const pipeline = [
+            {
+                $match: {
+                    createdAt: { $gte: oneWeekAgo },
+                    deleted: false,
+                    published: true,
+                },
+            },
+            {
+                $group: {
+                    _id: '$categoryId',
+                    assetCount: { $sum: 1 },
+                },
+            },
+            {
+                $match: {
+                    assetCount: { $gt: 7 },
+                },
+            },
+        ];
+    
+        const result = await AssetModel().aggregate(pipeline);
+        return result.map(doc => doc._id);
+
+        } catch (error) {
+            logger.error(error)
+        }
+    }
+
+    async getFcmTokensForCategories(categoryIds: ObjectId[]) {
+      try {
+        
+        const fcmTokensDocs = await fcmModel().find({
+            preferences: { $in: categoryIds },
+        }).select('fcmToken');
+    
+        const fcmTokens = [...new Set(fcmTokensDocs.map(doc => doc.fcmToken))];
+        return fcmTokens;
+
+      } catch (error) {
+        logger.error(error)
+        throw error
+      }
+    }
+    
+
 }
 
 

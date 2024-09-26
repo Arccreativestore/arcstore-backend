@@ -154,3 +154,10 @@ process.on('uncaughtException', (error) => {
     logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
     process.exit(1); 
   });
+
+process.on('SIGTERM', async () => {
+    console.log('Shutting down Agenda...');
+    await agenda.stop();
+    process.exit(0);
+});
+  

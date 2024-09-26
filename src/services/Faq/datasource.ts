@@ -19,7 +19,7 @@ export class datasource extends Base {
                 $sort:{ createdAt:-1 },
               }
 
-            // add related to pipeline
+           
             const pipeline: PipelineStage[] = [
                 {
                   $match: {
@@ -65,6 +65,8 @@ export class datasource extends Base {
               const faqModelInstance = faqModel();
               const aggregate = faqModelInstance.aggregate(pipeline);
               const result = await faqModelInstance.aggregatePaginate(aggregate as any, options);
+             
+              
               return {
                 data: result.docs,
                 pageInfo: {

@@ -56,7 +56,7 @@ const FeaturesSchema = new Schema<Ifeautures>({
 });
 const featuresModel =  function (isTest: boolean = false) {
     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
-    const collectionName = isTest ? 'test_features' : "features";
+    const collectionName = isTest ? 'test_features' : "Features";
     return model<Ifeautures>(collectionName, FeaturesSchema, collectionName);
 
 }

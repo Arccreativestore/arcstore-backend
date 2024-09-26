@@ -25,6 +25,16 @@ export class UserDatasource extends Base {
     }
   }
 
+  async findById(_id: ObjectId){
+    try {
+      const find = await userModel().findById(_id).lean().exec()
+      return find ? find : null
+    } catch (error) {
+      logger.error(error)
+      throw error
+    }
+  }
+
   async findByEmail(email: string): Promise<dbResponse | null> {
     try {
       const emailExist = await userModel().findOne({ email });
@@ -95,6 +105,7 @@ export class UserDatasource extends Base {
       throw error;
     }
   }
+
  
   async updateProfile(_id: ObjectId, data: IupdateProfile){
       try {

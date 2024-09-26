@@ -41,6 +41,6 @@ export const tokenModel = (isTest: boolean = false)=>{
     {
        collectionName = "test_refreshtoken"
     }
-    collectionName = "refreshtoken"
+    collectionName = "refreshToken"
     return model<Itoken>(collectionName, tokenSchema, collectionName)
 }
