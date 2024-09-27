@@ -4,6 +4,8 @@ import __Category from '../../models/assetCategory'
 import { ErrorHandlers } from '../../helpers/errorHandler';
 import { PipelineStage, Schema } from 'mongoose';
 import __Asset from '../../models/asset'
+import { AssetFetcher, QueryParams } from './externalApis/externalService';
+import { PlatformEnum } from './externalApis/apiAuthHeader';
 
 
 class AssetDatasource extends Base {
@@ -261,6 +263,11 @@ class AssetDatasource extends Base {
 
   async getAllCategory(){
     return __Category().find({disable:false})
+  }
+
+  async getExternalAsset(platform:PlatformEnum, params:QueryParams){
+    return await new AssetFetcher(platform).fetchAssets(params)
+
   }
 }
 

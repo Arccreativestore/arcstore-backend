@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 const AssetType = gql`
 
@@ -17,8 +17,34 @@ const AssetType = gql`
     getAllAssets(page:Int! limit:Int! search:String):AssetDataResponse
     getAllMyAssets(page:Int! limit:Int! search:String):AssetDataResponse
     getAssetById(assetId:ID!):AssetResponse
+    getExternalAsset(platform:PlatformEnum! params:IParams):JSON
   }
 
+
+
+  input IParams{
+  page:Int
+  query:String
+  limit:Int
+  order:IOrder
+  }
+
+   enum IOrder{
+    asc 
+    desc
+}
+  enum PlatformEnum {
+    adobeStock
+    pinterest
+    behance
+    dribble
+    freepik
+    instagram
+    tiktok
+    mobbin
+    envato
+    yandex
+  }
   input IAddCategoryInput{
     title:String
     description:String
@@ -85,6 +111,6 @@ type AssetDataResponse {
   data: [AssetResponse]
   pageInfo: PageInfo
 }
-`;
+`
 
-export default AssetType;
+export default AssetType

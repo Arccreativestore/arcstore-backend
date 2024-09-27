@@ -29,7 +29,7 @@ class PaystackService {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
+      
             return response.data.data;
         } catch (error) {
             console.log(error)
@@ -42,7 +42,6 @@ class PaystackService {
         if (!isTransaction) return console.log(JSON.stringify(data, null, 2), "Error processing payment");
 
         const formattedPayload: Record<string, any> = {
-            assetId: isTransaction.assetId,
             userId: isTransaction.userId,
             paymentId: isTransaction._id,
             amount: isTransaction.amountPaid,

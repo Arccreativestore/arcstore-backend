@@ -2,6 +2,8 @@ import AssetDatasource from "./datasource";
 import { IAccount } from "../../models/user";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 import { CreateCategoryValidation, ICategoryValidation, IUpdateCategoryValidation, UpdateAssetValidation,  } from "./validation";
+import { PlatformEnum } from "./externalApis/apiAuthHeader";
+import { QueryParams } from "./externalApis/externalService";
 
 interface context{
   req:Request, 
@@ -62,6 +64,9 @@ export const AssetQuery = {
   async getAllMyAssets(__:unknown, {page, limit, search}:{page:number, limit:number, search:string},context:context){
    // isUserAuthorized(context.user, this.getAllMyAssets.name) 
     return await new AssetDatasource().getAllMyAssets(page, limit, context.user._id,  search)
+  },
+  async getExternalAsset(_:unknown, {platform, params}:{platform:PlatformEnum, params:QueryParams},context:context){
+    return new AssetDatasource().getExternalAsset(platform, params)
   }
 
 

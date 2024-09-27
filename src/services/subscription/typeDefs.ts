@@ -5,16 +5,60 @@ const SubscriptionType = gql`
     getAllSubscriptions: [ISubResponse]
     getSubscriptionById(subId: ID!): ISubResponse
     verifyTransaction(paymentRef: ID!): String!
-    getAllSubscriptions: [ISubResponseFull]
+    getAllMySubscriptions: [ISubResponse]
+    getAllPlan:[IPlanResponse]
+    getPlanById(planId:ID!):IPlanResponse
   }
 
   extend type Mutation {
     addSubscription(data: JSON!): String!
-    InitializePayment(
-      assetIds: [ID!]!
-      paymentMethod: PaymentMethodEnum!
-    ): IPaymentResponse
+    InitializePayment(planId:ID! paymentMethod: PaymentMethodEnum!): IPaymentResponse
+    addPlan(data: IPlanInput!): String!
+    updatePlan(data:IUpdatePlanInput):String!
   }
+
+
+
+      input IPlanInput{
+        amount:Float!
+        discount: Float!
+        unit: UnitEnum!
+        duration: Int!
+    }
+
+       enum UnitEnum {
+        month
+        year
+    }
+    input IUpdatePlanInput{
+        planId:ID!
+        amount:Float
+        discount: Float
+        unit: UnitEnum
+        duration: Int
+    }
+
+
+    type IPlanResponse{
+        _id:ID!
+        amount: Float
+        discount: Float
+        unit: UnitEnum
+        duration: Int
+        disable:Boolean
+        createdAt:DateTime
+        updatedAt:DateTime
+    }
+
+
+    enum ProcessingMediaStatus {
+    pending
+    processed
+    queued
+    processing
+    failed 
+    canceled
+    }
 
   type IPaymentResponse {
     ref: String

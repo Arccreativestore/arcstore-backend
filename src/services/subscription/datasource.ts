@@ -8,6 +8,7 @@ import __Plan, {IPlan} from '../../models/plan'
 import __Asset, { IAsset } from '../../models/asset.js';
 import {PAYSTACK_PUBLIC_KEY} from '../../config/config'
 import { ObjectId } from 'mongoose';
+import { CreatePlanValidation, IPlanValidation, IUpdatePlanValidation, UpdatePlanValidation } from './validation.js';
 
 
 
@@ -18,23 +19,24 @@ class SubscriptionDatasource extends Base {
         return 'Added successfully'
     }
 
-    async InitializePayment(assetIds: string[], paymentMethod: IPaymentMethodEnum, user: User): Promise<{ ref:string, publicKey:string }> {
-        const asset: IAsset[] | null = await __Asset().find({_id: {$ne: assetIds }});
-        if (!asset) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
+    async InitializePayment(planId: string, paymentMethod: IPaymentMethodEnum, user: User): Promise<{ ref:string, publicKey:string }> {
+        const plan: IPlan | null = await __Plan().findOne({_id: planId});
 
-        const price:number = asset.reduce((acc, item)=> acc + item.price, 0)
-
+        if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
+        const {unit, amount, discount, duration } = plan
+        const totalAmount = this.calculateSubscription(unit, amount.toString(), discount, duration)
+       
         const {_id} = await this.handleMongoError(__Payment().create({
             userId: user._id,
-            amountPaid:price,
-            paymentMethod:paymentMethod
+            amountPaid:totalAmount,
+            paymentMethod:paymentMethod,
+            planId
         }));
 
         if (!_id) throw new ErrorHandlers().ValidationError('Unable to initialize payment, try again.');
         return { ref: _id, publicKey: PAYSTACK_PUBLIC_KEY as string }
-
-
     }
+
 
     async verifyTransaction(paymentRef: string, user: User): Promise<string> {
 
@@ -81,6 +83,8 @@ class SubscriptionDatasource extends Base {
         return `${updateStatus === transactionStatus.fraud ? fraudMessage : "Transaction processing"}`
     }
 
+    async cancelSubscription(subscriptionId:string){}
+
     async updatePaymentStatus(paymentId: string,  status: transactionStatus) {
         return __Payment().updateOne({_id: paymentId}, {$set: {status}});
     }
@@ -92,6 +96,65 @@ class SubscriptionDatasource extends Base {
     async getSubscriptionById(subId:string):Promise<ISubscriptions | null>{
         return null
     }
+
+        //Pricing
+        async addPlan(data: IPlanValidation): Promise<string> {
+            await CreatePlanValidation(data)
+            await this.handleMongoError(__Plan().create({...data}))
+            return 'Plan created successfully'
+        }
+    
+        async updatePlan(data: IUpdatePlanValidation): Promise<string> {
+            await  UpdatePlanValidation(data)
+            const {planId, ...body} = data
+            const pricing = await __Plan().findById(planId)
+
+            if(!pricing) throw new ErrorHandlers().ValidationError("Plan not found")
+            const updated = await __Plan().updateOne({_id: planId}, {$set: body})
+
+              if(updated.matchedCount > 0)  return 'Plan updated successfully'
+            throw new ErrorHandlers().ValidationError("Unable to update the plan")
+        }
+    
+        async getAllPlan(): Promise<any[]> {
+            const data: any[] = await __Plan().find({})
+            return data?.map((item: any) => {
+                const amount: string = item.amount?.toString()
+    
+                delete item?.amount
+                return {
+                    seasonId: item.seasonId,
+                    type: item.type,
+                    discount: item.discount,
+                    unit: item.unit,
+                    duration: item.duration,
+                    disable: item.disable,
+                    createdAt: item.createdAt,
+                    updatedAt: item.updatedAt,
+                    _id: item._id,
+                    amount
+                }
+            });
+        }
+    
+        async getPlanById(planId: string): Promise<any> {
+            const data: IPlan | null = await __Plan().findOne({_id: planId});
+            if (!data) return null;
+            const amount: string = data?.amount.toString()
+            // @ts-ignore
+            delete data?.amount
+            return {
+                type: data.type,
+                discount: data.discount,
+                unit: data.unit,
+                duration: data.duration,
+                disable: data.disable,
+                createdAt: data.createdAt,
+                updatedAt: data.updatedAt,
+                _id: data._id,
+                amount: amount
+            }
+        }
 
 }
 

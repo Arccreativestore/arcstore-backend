@@ -6,12 +6,16 @@ import {
   PermissionMutation,
   PermissionQuery,
 } from "./services/permission/resolver";
+import { AssetMutation, AssetQuery } from "./services/asset/resolver";
+import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription/resolver";
 
 const Mutation = {
   ...authMutations,
   ...PermissionMutation,
   ...tokenMutation,
-  ...faqMutations
+  ...faqMutations,
+  ...AssetMutation,
+  ...SubscriptionMutation,
 };
 
 const Query = {
@@ -19,7 +23,9 @@ const Query = {
   ...UserQueries,
   ...PermissionQuery,
   ...tokenQuery,
-  ...faqQueries
+  ...faqQueries,
+  ...AssetQuery,
+  ...SubscriptionQuery,
 };
 
 export { Mutation, Query };
