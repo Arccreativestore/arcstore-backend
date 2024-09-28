@@ -5,21 +5,19 @@ FROM node:18.18.0
 WORKDIR /usr/src/app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json .
 
 # Install dependencies using Yarn
-RUN yarn install
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
-
-# Compile TypeScript to JavaScript (if applicable)
-RUN yarn build
-
+# Build the TypeScript files
+RUN npm run build
 
 # Expose the port specified in the environment variable
 EXPOSE 3000
 
 # Command to run the app
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

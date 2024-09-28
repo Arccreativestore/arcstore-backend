@@ -1,0 +1,10 @@
+# flyctl launch added from .gitignore
+
+**\.idea
+node_modules
+dist
+**\.env
+**\DS_Store
+**\.DS_Store
+**\arc-store-push-notifications-firebase-adminsdk-llfe8-364d3c57fd.json
+fly.toml

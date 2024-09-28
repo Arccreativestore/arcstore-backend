@@ -142,7 +142,7 @@ app.use("/graphql",
 
 
 await new Promise<void>((resolve) =>
-    httpServer.listen({port: PORT}, resolve)
+    httpServer.listen({port: PORT,host: '0.0.0.0',}, resolve)
 );
 
 app.use(expressHandler) 
