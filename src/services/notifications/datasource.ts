@@ -5,13 +5,16 @@ import pushNotificationModel from "../../models/pushNotifications";
 import CategoryModel from "../../models/assetCategory";
 import AssetModel from "../../models/asset";
 import moment from 'moment'
+import { userModel } from "../../models/user";
 
 
 class datasource {
 
     async subToPush(userId: ObjectId, fcmToken: string){
         try {
-            const create = await fcmModel().create({userId, fcmToken })
+            const user = await userModel().findById(userId).select('preferences');
+            const preferences = user ? user.preferences : [];
+            const create = await fcmModel().create({ userId, fcmToken, preferences });
             return create ? ' User subscribed successfully' : 'failed to subscribe user'
         } catch (error) {
             logger.error(error)

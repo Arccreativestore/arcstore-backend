@@ -27,7 +27,7 @@ agenda.define('send push notification',  { lockLifetime: 10000, concurrency: 10 
 agenda.define('new assets push notifications',  { lockLifetime: 10000, concurrency: 10 }, async (job:any, done)=>{
   
   
-  const getCategories = await new datasource().categoriesWithUploads()
+  const getCategories = await new datasource().categoriesWithUploads() as any[]
   if(getCategories.length === 0) return
   const getUserToken = await new datasource().getFcmTokensForCategories(getCategories)
 
