@@ -18,9 +18,6 @@ const UserType = gql`
 
   enum IuserType {
     USER
-    CREATOR
-    STAFF
-    SUPERADMIN
   }
 
   input iRegister {

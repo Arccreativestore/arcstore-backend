@@ -92,7 +92,7 @@ const usernameRule = Joi.string().min(3).required().messages({
 });
 
 const roleRule = Joi.string()
-  .valid('USER', 'CREATOR', 'SUPERADMIN', 'STAFF')
+  .valid('USER')
   .required()
   .messages({
     'any.only': 'Role must be one of [USER, STAFF, CREATOR, SUPERADMIN]',
