@@ -1,13 +1,9 @@
-
 import SubscriptionDatasource from './datasource.js';
-import {IAccount} from "../../models/user.js";
 import { Request, Response } from 'express'
-
 import { isUserAuthorized } from '../../helpers/utils/permissionChecks.js';
 import { User } from '../../app.js';
 import { IPaymentMethodEnum } from '../../models/purchaseHistory.js';
 import { ISubscriptions } from '../../models/subscription.js';
-import { IPlan } from '../../models/plan.js';
 import { IPlanValidation, IUpdatePlanValidation } from './validation.js';
 
 

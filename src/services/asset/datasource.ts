@@ -6,6 +6,7 @@ import { PipelineStage, Schema } from 'mongoose';
 import __Asset from '../../models/asset'
 import { AssetFetcher, QueryParams } from './externalApis/externalService';
 import { PlatformEnum } from './externalApis/apiAuthHeader';
+import { AssetDetailsFetcher, DetailsQueryParams } from './externalApis/externalAssetDetails';
 
 
 class AssetDatasource extends Base {
@@ -269,7 +270,10 @@ class AssetDatasource extends Base {
     return await new AssetFetcher(platform).fetchAssets(params)
 
   }
-}
 
+  async getAssetDetails(platform:PlatformEnum, params:DetailsQueryParams){
+    return await new AssetDetailsFetcher(platform).fetchAssetDetails(params)
+}
+}
 export default AssetDatasource
 

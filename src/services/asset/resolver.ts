@@ -4,6 +4,7 @@ import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 import { CreateCategoryValidation, ICategoryValidation, IUpdateCategoryValidation, UpdateAssetValidation,  } from "./validation";
 import { PlatformEnum } from "./externalApis/apiAuthHeader";
 import { QueryParams } from "./externalApis/externalService";
+import { DetailsQueryParams } from "./externalApis/externalAssetDetails";
 
 interface context{
   req:Request, 
@@ -67,8 +68,15 @@ export const AssetQuery = {
   },
   async getExternalAsset(_:unknown, {platform, params}:{platform:PlatformEnum, params:QueryParams},context:context){
     return new AssetDatasource().getExternalAsset(platform, params)
-  }
+  },
 
+  async getFreePikAsset(_:unknown, {platform, params}:{platform:PlatformEnum, params:QueryParams},context:context){
+    return new AssetDatasource().getExternalAsset(platform, params)
+  },
+  
+  async getFreePikAssetDetails(_:unknown, {platform, params}:{platform:PlatformEnum, params:DetailsQueryParams},context:context){
+      return new AssetDatasource().getAssetDetails(platform, params)
+  }
 
 };
 

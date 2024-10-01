@@ -9,6 +9,7 @@ export interface QueryParams {
   page?: number;  // Page number for pagination
   limit?: number; // Number of results per page
   order?: string; // Optional order/sort parameter
+  category?:string
 }
 
 interface CustomHeaders {
@@ -42,6 +43,11 @@ export class AssetFetcher {
       }else{
         headers={Authorization:api.authHeader}
       }
+
+
+      headers['Content-Type']="application/json"
+      headers.Accept= 'application/json'
+
       const config: AxiosRequestConfig = {
         url: `${api.baseUrl}/${endpoint}`,
         method: 'GET',
@@ -49,11 +55,11 @@ export class AssetFetcher {
         params, 
       };
 
-      console.log({config})
+
       const response = await axios(config);
       return response.data
     } catch (error) {
-      console.log({error})
+      console.log(JSON.stringify({error}, null, 2))
       logger.error(`Error fetching from ${platform}: ${error}`);
       return undefined;
     }
@@ -107,14 +113,16 @@ export class AssetFetcher {
     return await this.makeRequest(PlatformEnum.Dribble, 'shots', params, customHeaders);
   }
 
-  private async getFreepikAssets(params: QueryParams,) {
+  private async getFreepikAssets(params: QueryParams) {
+    const {category, ...rest} = params
+
     const customHeaders = {
       'x-freepik-api-key': FREEPIK_API_KEY as string,
     }
-    return await this.makeRequest(PlatformEnum.Freepik, 'resources', params, customHeaders);
+    return await this.makeRequest(PlatformEnum.Freepik, category as string, rest, customHeaders);
   }
 
-  private async getInstagramAssets(params: QueryParams) {
+  private async getInstagramAssets(params: QueryParams, ) {
     return await this.makeRequest(PlatformEnum.Instagram, 'media', params);
   }
 
@@ -134,3 +142,4 @@ export class AssetFetcher {
     return await this.makeRequest(PlatformEnum.Yandex, 'search', params);
   }
 }
+

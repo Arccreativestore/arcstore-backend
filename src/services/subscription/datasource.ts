@@ -21,20 +21,20 @@ class SubscriptionDatasource extends Base {
 
     async InitializePayment(planId: string, paymentMethod: IPaymentMethodEnum, user: User): Promise<{ ref:string, publicKey:string }> {
         const plan: IPlan | null = await __Plan().findOne({_id: planId});
-
+  
         if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
         const {unit, amount, discount, duration } = plan
-        const totalAmount = this.calculateSubscription(unit, amount.toString(), discount, duration)
-       
-        const {_id} = await this.handleMongoError(__Payment().create({
-            userId: user._id,
+        const {totalAmount} = this.calculateSubscription(unit, amount.toString(), discount, duration)
+   
+        const created = await this.handleMongoError(__Payment().create({
+            userId: user?._id,
             amountPaid:totalAmount,
             paymentMethod:paymentMethod,
             planId
         }));
-
-        if (!_id) throw new ErrorHandlers().ValidationError('Unable to initialize payment, try again.');
-        return { ref: _id, publicKey: PAYSTACK_PUBLIC_KEY as string }
+     
+        if (!created?._id) throw new ErrorHandlers().ValidationError('Unable to initialize payment, try again.');
+        return { ref: created?._id, publicKey: PAYSTACK_PUBLIC_KEY as string }
     }
 
 

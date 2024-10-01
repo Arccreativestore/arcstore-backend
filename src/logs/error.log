@@ -40,3 +40,16 @@
 2024-09-27T09:43:29.835Z [31merror[39m: Error fetching from instagram: AxiosError: Request failed with status code 401
 2024-09-27T09:43:58.111Z [31merror[39m: Error fetching from instagram: AxiosError: Request failed with status code 401
 2024-09-27T10:31:31.893Z [31merror[39m: Error fetching from instagram: AxiosError: Request failed with status code 401
+2024-09-27T15:43:36.126Z [31merror[39m: Error sending email:
+2024-10-01T20:25:06.953Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:25:45.593Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:27:14.038Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:27:37.261Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:32:35.900Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:33:48.887Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:37:55.119Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 403
+2024-10-01T20:40:14.147Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:46:10.917Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:47:02.979Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T20:51:18.650Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
+2024-10-01T21:09:40.283Z [31merror[39m: Error fetching from freepik: AxiosError: Request failed with status code 404

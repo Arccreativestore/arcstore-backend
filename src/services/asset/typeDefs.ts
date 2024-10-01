@@ -18,15 +18,30 @@ const AssetType = gql`
     getAllMyAssets(page:Int! limit:Int! search:String):AssetDataResponse
     getAssetById(assetId:ID!):AssetResponse
     getExternalAsset(platform:PlatformEnum! params:IParams):JSON
+    getFreePikAsset(platform:PlatformEnum! params:IParams):JSON
+    getFreePikAssetDetails(platform:PlatformEnum! params:IDetailsParams):JSON
   }
 
 
 
+
+  enum IFreePickCategory{
+  images
+  resources
+  icons
+  }
+  
   input IParams{
   page:Int
   query:String
   limit:Int
   order:IOrder
+  category:IFreePickCategory
+  }
+
+   input IDetailsParams{
+    assetId:String
+    category:IFreePickCategory
   }
 
    enum IOrder{

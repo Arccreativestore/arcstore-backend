@@ -50,7 +50,8 @@ const purchaseHistorySchema = new Schema<IPurchase>({
     },
 
     currency: {
-        type: String
+        type: String,
+        default:"NGN"
     },
 
     paymentMethod: {
