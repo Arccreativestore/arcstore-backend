@@ -2,8 +2,12 @@ import Base from '../../base'
 import { ICategoryValidation, IUpdateCategoryValidation  } from "./validation";
 import __Category from '../../models/assetCategory'
 import { ErrorHandlers } from '../../helpers/errorHandler';
-import { PipelineStage, Schema } from 'mongoose';
+import mongoose, { PipelineStage, Schema } from 'mongoose';
 import __Asset from '../../models/asset'
+import { ObjectId } from 'mongoose';
+import likesModel from '../../models/assetLikes';
+import { logger } from '../../config/logger';
+import AssetModel from '../../models/asset';
 
 
 class AssetDatasource extends Base {
@@ -114,7 +118,7 @@ class AssetDatasource extends Base {
     },
 };
   }
-  async getAllMyAssets(page:number=1, limit:number=20, userId:string, searchKey:string) {
+  async getAllMyAssets(page:number=1, limit:number=20, userId:ObjectId, searchKey:string) {
     let options = {
       page,
       limit: limit > 100 ? 100:limit,
@@ -125,7 +129,7 @@ class AssetDatasource extends Base {
       {
         $match: {
           disable: false,
-          author: new Schema.Types.ObjectId(userId),
+          author: userId,
           ...(searchKey && {
             $or: [
               { name: { $regex: searchKey, $options: 'i' } }, 
@@ -261,6 +265,47 @@ class AssetDatasource extends Base {
 
   async getAllCategory(){
     return __Category().find({disable:false})
+  }
+
+  async likeAsset(userId: ObjectId, assetId: string){
+   try {
+
+    const likeAsset = likesModel()
+    const create = await likeAsset.create({assetId, userId})
+    return create ? create.toObject() : null
+
+   } catch (error) {
+    logger.error(error)
+    throw error
+   } 
+  }
+
+  async getCreator(assetId: string){
+   try {
+    
+    const userId = await AssetModel().findById(new mongoose.Types.ObjectId(assetId)).populate('author')
+    return userId ? userId.toObject() : null
+
+   } catch (error) {
+    logger.error(error)
+    throw error
+   }
+  }
+
+  async unlikeAsset(userId: ObjectId, assetId: string){
+   try {
+
+    const find = await likesModel().findOneAndDelete({userId, assetId})
+    return find ? true : null
+
+   } catch (error) {
+    logger.error(error)
+   }
+  }
+
+  async getLikeCount(assetId: string){
+    const findAll = await likesModel().find({assetId}).count()
+    return findAll
   }
 }
 

@@ -27,8 +27,8 @@ export class UserDatasource extends Base {
 
   async findById(_id: ObjectId){
     try {
-      const find = await userModel().findById(_id).lean().exec()
-      return find ? find : null
+      const find = await userModel().findById(_id)
+      return find ? find.toObject() : null
     } catch (error) {
       logger.error(error)
       throw error

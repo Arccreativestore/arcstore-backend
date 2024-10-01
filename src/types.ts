@@ -5,6 +5,8 @@ import PermissionSchema from "./services/permission/typeDefs.js";
 import {refreshTokenTypeDef} from './services/tokens/typeDefs.js'
 import UserTypeDefs from "./services/users/typeDefs.js";
 import supportTypeDefs from "./services/Faq/typeDefs.js";
+import AssetType from "./services/asset/typeDefs.js";
+
 
 
 
@@ -29,6 +31,7 @@ const data = [
   refreshTokenTypeDef,
   UserTypeDefs,
   supportTypeDefs,
+  AssetType,
   ...scalarTypeDefs,
 ]
 

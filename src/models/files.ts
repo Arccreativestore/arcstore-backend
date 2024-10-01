@@ -73,3 +73,5 @@ export default function (isTest: boolean = false) {
   const collectionName = isTest ? 'test_files' : "files"
   return model<IFile, IFileDoc<IFile>>(collectionName, fileSchema, collectionName)
 }
+
+

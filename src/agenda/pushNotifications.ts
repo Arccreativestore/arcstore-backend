@@ -48,4 +48,28 @@ agenda.define('new assets push notifications',  { lockLifetime: 10000, concurren
     done();
   }
 })
-agenda.every('7 days', 'new assets push notifications')  
+  agenda.every('7 days', 'new assets push notifications')  
+
+agenda.define('new asset interaction notification', async(job: any, done)=>{
+   
+  const { fcmToken, msg } = job.attrs.data;  
+
+  if(!fcmToken) return
+  const message = {
+    notification: {
+      title: 'New asset interaction',
+      body: msg
+    },
+    token: fcmToken,  
+  };
+
+
+  try {
+    await admin.messaging().send(message);  
+    done();
+  } catch (error) {
+    console.error('Error sending notification:', error);
+    done();
+  }
+
+})

@@ -53,7 +53,7 @@ class RefreshToken extends Base
         return {accessToken}
         }
          catch (error: any) {
-        logger.error(error)
+        
         throw error
    }
 }

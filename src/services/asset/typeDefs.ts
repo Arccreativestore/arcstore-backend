@@ -9,6 +9,9 @@ const AssetType = gql`
     publishOrUnpublishAsset(assetId:ID! publish:Boolean!):String!
     deleteAssetCategory(categoryId:ID!):String!
     deleteAsset(assetId:ID!):String!
+    likeAsset(data:assetId!): General!
+    unlikeAsset(data:assetId!): General!
+    getLikeCount(data:assetId!): Int!
   }
 
   type Query {
@@ -55,6 +58,10 @@ type IFile {
   updatedAt: String
 }
 
+type General {
+  status: String
+  message: String
+}
 
 type AssetResponse {
   _id: ID!
@@ -81,6 +88,9 @@ type PageInfo {
   totalDocs: Int
 }
 
+input assetId {
+  assetId: ID
+}
 type AssetDataResponse {
   data: [AssetResponse]
   pageInfo: PageInfo

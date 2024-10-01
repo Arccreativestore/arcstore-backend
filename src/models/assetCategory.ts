@@ -56,4 +56,5 @@ const CategoryModel = (isTest: boolean = false) => {
     return model<ICategory>(collectionName, CategorySchema, collectionName);
 };
 
+
 export default CategoryModel;

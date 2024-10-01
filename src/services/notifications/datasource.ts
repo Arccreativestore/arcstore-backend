@@ -150,7 +150,15 @@ class datasource {
       }
     }
     
-
+    async isUserSubscribed(userId: ObjectId){
+       try {
+        const find = await fcmModel().findOne({userId})
+        return find ? find.toObject() : null
+       } catch (error) {
+        logger.error(error)
+        throw error
+       }
+    }
 }
 
 

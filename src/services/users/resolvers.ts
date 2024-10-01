@@ -18,7 +18,6 @@ const downloadsQuery = {
 
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
-        validateMongoId(userId)
         return await new datasource().getDownloads(userId)
        } catch (error) {
         throw error
@@ -34,7 +33,6 @@ const savedAssetsQuery = {
       try {
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
-        validateMongoId(userId)
         return await new datasource().getsavedAssets(userId)
       } catch (error) {
         throw error
