@@ -12,6 +12,8 @@ const AssetType = gql`
     likeAsset(data:assetId!): General!
     unlikeAsset(data:assetId!): General!
     getLikeCount(data:assetId!): Int!
+    assetComment(data: Icomment!): Comment!
+    deleteComment(data: IdeleteComment!): General!
   }
 
   type Query {
@@ -27,6 +29,15 @@ const AssetType = gql`
     description:String
   }
 
+  input Icomment {
+    assetId: String, 
+    comment: String
+  }
+
+  input IdeleteComment {
+    assetId: String, 
+    commentId: String
+  }
   input IUpdateCategoryInput{
     categoryId:ID!
     title:String
@@ -46,7 +57,14 @@ const AssetType = gql`
   count: Int
   total: Int
 }
+type Comment {
+  assetId: ID
+  userId: ID
+  comment: String
+  createdAt:DateTime
+  updatedAt:DateTime
 
+}
 type IFile {
   _id: ID!
   key: String

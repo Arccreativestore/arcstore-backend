@@ -7,6 +7,8 @@ import Joi from "joi";
 import { Types } from "mongoose";
 import purchaseHistoryModel from "../../models/purchaseHistory";
 import { downloadType, purchaseHistoryType, savedAssetType, validateMongoId } from "./types";
+import { Icreator } from "../../models/creator";
+import { UserDatasource } from "../auth/datasource";
 
 
 
@@ -75,12 +77,43 @@ const subscriptionQuery = {
   }
 }
 
+const disableUserAccount = {
+  async disableUserAccount(__: any, args: any, context: {user:User}){
+    try {
+      
+    const userId = context?.user?._id
+    console.log(context.user)
+    if(!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
+    return await new datasource().disableUserAccount(userId)
+
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
+const deleteUserAccount = {
+  async deleteUserAccount(__: any, args: any, context: {user:User}){
+    try {
+      
+    const userId = context?.user?._id
+    if(!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
+    return await new datasource().deleteUserAccount(userId)
+
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
 
 const UserQueries =  {
   ...downloadsQuery,
   ...savedAssetsQuery,
   ...purchaseHistoryQuery,
-  ...subscriptionQuery
+  ...subscriptionQuery,
+  ...disableUserAccount,
+  ...deleteUserAccount
 }
 
 export default UserQueries

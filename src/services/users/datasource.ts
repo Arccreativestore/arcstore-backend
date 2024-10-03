@@ -5,6 +5,8 @@ import downloadsModel from "../../models/downloads";
 import { logger } from "../../config/logger";
 import purchaseHistoryModel from "../../models/purchaseHistory";
 import subscriptionsModel from "../../models/subscription";
+import { userModel } from "../../models/user";
+import { ErrorHandlers } from "../../helpers/errorHandler";
 
 
 export class datasource extends Base {
@@ -43,6 +45,28 @@ export class datasource extends Base {
             logger.error(error)
             throw error
         }
+    }
+
+    async disableUserAccount(_id: ObjectId){
+        try {
+            const disable = await userModel().updateOne({_id}, { $set: {disabled: true} })
+            if( disable.matchedCount > 0) return {status: "sucsess", message: "account disbled"} 
+            throw new ErrorHandlers().NotFound('account does not exist')
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async deleteUserAccount(_id: ObjectId){
+       try {
+        
+        const deleteAccount = await userModel().findOneAndDelete({_id})
+        if(deleteAccount) return { status: "success", message: "account deleted successfully"}
+        throw new ErrorHandlers().NotFound('account does not exist')
+
+       } catch (error) {
+        throw error
+       }
     }
 }
 

@@ -4,9 +4,7 @@ import gql from "graphql-tag";
 const UserType = gql`
   type Mutation {
     userRegistration(data: iRegister!): User!
-    verifyAccount: General!
-    requestVerification(data: IEmail!): General!
-    Login(data: ILogin!): IToken!
+    Login(data: ILogin!): AuthToken!
     forgotPassword(data: IEmail!): General!
     resetPassword(data: IresetPassword!): General!
     updateUserProfile(data: IupdateProfile): General!
@@ -14,6 +12,8 @@ const UserType = gql`
 
   type Query {
     me: String
+    verifyAccount(data: IToken): General!
+    requestEmailVerification(data: IEmail!): General!
   }
 
   enum IuserType {
@@ -37,6 +37,9 @@ const UserType = gql`
   email:String!
   }
 
+ input IToken {
+  token: String 
+}
   input IresetPassword{
     email: String!
     newPassword: String!
@@ -64,7 +67,7 @@ const UserType = gql`
     message: String!
   }
 
-  type IToken {
+  type AuthToken {
     accessToken: String!
   }
 `;

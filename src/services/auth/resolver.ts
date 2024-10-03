@@ -32,6 +32,7 @@ import { tokenDataSource } from "../tokens/dataSource";
 import { verifyEmail } from "../../utils/mails/verifyMail";
 import { resolve } from "path";
 import { isValidObjectId, ObjectId } from "mongoose";
+import { verifyEmailPayload } from "./helper";
 
 
 //REGISTER MUTATION
@@ -57,9 +58,9 @@ export const registerMutation = {
       if (createUser) {
 
       const { _id, email, firstName, lastName, role } = createUser
-      const token = jwt.sign({ email, _id: createUser._id }, ACCESS_SECRETKEY as string, {expiresIn: "1hr"});
+      const token = jwt.sign({ email, _id: createUser._id }, VERIFYEMAIL_SECRETKEY as string, {expiresIn: "1hr"});
 
-      const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`
+      const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
       eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
       return { status: "success", _id, email, firstName, lastName, role };
 
@@ -73,11 +74,14 @@ export const registerMutation = {
 };
 
 // VERIFY USER MUTATION
-export const verifyUserMutation = {
-  async verifyAccount(_: any, args: any, context: { req: Request; user: User }): Promise<Generalres> {
+export const verifyUserQuery = {
+  async verifyAccount(_: any, {data}: {data: {token: string}}): Promise<Generalres> {
     try {
       
-      const  email  = context?.user?.email as string
+      const token = data?.token
+      if(!token) throw new ErrorHandlers().UserInputError("Please provide a token");
+      const decode: any = verifyEmailPayload(token)
+      const  email  = decode?.email 
       isEmail({email})
       const findEmail = await new UserDatasource().findByEmail(email);
       if (!findEmail) throw new ErrorHandlers().NotFound("User does not exist");
@@ -92,8 +96,8 @@ export const verifyUserMutation = {
   },
 };
 // REQUEST VERIFICATION
-export const requestVerification = {
-  async requestVerification(_: any, { data }: { data: { email: string } }): Promise<Generalres> {
+export const requestEmailVerification = {
+  async requestEmailVerification(_: any, { data }: { data: { email: string } }): Promise<Generalres> {
     try {
 
       const { email } = data;
@@ -103,8 +107,8 @@ export const requestVerification = {
       if (!findEmail) throw new ErrorHandlers().NotFound("User with that email does not exist");
       const username = findEmail.firstName;
 
-      const token = jwt.sign({ email, _id: findEmail._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr"});
-      const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`
+      const token = jwt.sign({ email, _id: findEmail._id }, VERIFYEMAIL_SECRETKEY as string, { expiresIn: "1hr"});
+      const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
       eventEmitter.emit("newUser", { email, verificationLink, username });
       return { status: "success", message: "request verification successfull" };
     } catch (error) {
@@ -179,7 +183,7 @@ export const forgotPasswordMutation = {
         });
 
 
-        let link = `https://arcstore-frontend.fly.dev/resetpassword?email=${email}&token=${token}`; // for dev 
+        let link = `https://arcstore-frontend.fly.dev/accounts/resetpassword?email=${email}&token=${token}`; // for dev 
         let username = userExist.firstName;
         eventEmitter.emit("forgotPassword", { username, link, email });
         return { status: "success",message: "Please Check your email for further instructions",};
@@ -261,7 +265,7 @@ async function handleProfileUpdate(_id: ObjectId , data: any, email?: string){
   if (email) {
     const token = jwt.sign({ email, _id: updateProfile._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
     const firstName = updateProfile.firstName;
-    const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`;
+    const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`;
     
     eventEmitter.emit("newUser", { email, username: firstName, verificationLink });
   }
@@ -277,14 +281,14 @@ const dummyQuery= {
 }
 
 export const authQuery = {
- ...dummyQuery
+ ...dummyQuery,
+ ...verifyUserQuery,
+ ...requestEmailVerification
 };
 
 export const authMutations = 
 {
   ...registerMutation,
-  ...verifyUserMutation,
-  ...requestVerification,
   ...loginUserMutation,
   ...forgotPasswordMutation,
   ...resetPasswordMutation,

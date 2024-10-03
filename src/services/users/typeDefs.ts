@@ -7,6 +7,8 @@ type Query{
     getsavedAssets:AssetsResponse
     getPurchaseHistory:purchaseHistoryResponse
     getSubcriptionHistory: subHistoryResponse
+    disableUserAccount: General
+    deleteUserAccount: General
 }
 
 type AssetsResponse {
@@ -42,6 +44,10 @@ currency: String
 status: Boolean
 }
 
+type General {
+    status: String
+    message: String
+}
 type subAssets{
 title: String
 description: String

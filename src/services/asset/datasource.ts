@@ -8,6 +8,7 @@ import { ObjectId } from 'mongoose';
 import likesModel from '../../models/assetLikes';
 import { logger } from '../../config/logger';
 import AssetModel from '../../models/asset';
+import commentsModel from '../../models/assetsComment';
 
 
 class AssetDatasource extends Base {
@@ -306,6 +307,22 @@ class AssetDatasource extends Base {
   async getLikeCount(assetId: string){
     const findAll = await likesModel().find({assetId}).count()
     return findAll
+  }
+
+  async assetComment(userId: ObjectId, assetId: string, comment: string){
+    const create = await commentsModel().create({
+      assetId,
+      userId,
+      comment
+    })
+
+    return create ? create.toObject() : null
+  }
+
+  async deleteComment(_id: string, assetId: string, userId: ObjectId){
+    const remove = await commentsModel().findOneAndDelete({_id,assetId,userId})
+    if(remove) return {message: 'Coment deleted successfully', status: "success"} 
+    else { throw new ErrorHandlers().NotFound('comment not found') }
   }
 }
 
