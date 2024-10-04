@@ -84,11 +84,12 @@ const server = new ApolloServer<MyContext>({
 });
 
 const origin = [
-    // "https://example.com", //allowed origin
+    "https://arcstore-frontend.fly.dev",
+    "http://localhost:3000"
 ];
 
 if (isDev) {
-    origin.push("http://localhost:3000");
+    origin.push("http://localhost:3000", "http://localhost:3001", "");
 }
 
 
