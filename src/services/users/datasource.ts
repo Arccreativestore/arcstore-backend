@@ -35,6 +35,7 @@ export class datasource extends Base {
             throw error
         }
     }
+    
     // adjust when schema has been implemented
     async getSubcriptionHistory(userId: ObjectId){
         try {

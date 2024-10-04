@@ -6,6 +6,7 @@ import {refreshTokenTypeDef} from './services/tokens/typeDefs.js'
 import UserTypeDefs from "./services/users/typeDefs.js";
 import supportTypeDefs from "./services/Faq/typeDefs.js";
 import AssetType from "./services/asset/typeDefs.js";
+import SubscriptionType from "./services/subscription/typeDefs.js";
 
 
 
@@ -32,6 +33,7 @@ const data = [
   UserTypeDefs,
   supportTypeDefs,
   AssetType,
+  SubscriptionType,
   ...scalarTypeDefs,
 ]
 

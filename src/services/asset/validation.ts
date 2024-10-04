@@ -9,7 +9,7 @@ export interface ICategoryValidation {
 }
 
 export interface IUpdateCategoryValidation {
-    categoryId: Types.ObjectId;
+    categoryId: string;
     title?: string;
     description?: string;
 }
@@ -81,16 +81,16 @@ export interface IAssetValidation {
     title: string;
     description: string;
     price: number;
-    author: Types.ObjectId;
-    category: Types.ObjectId;
+    authorId: string
+    categoryId: string
 }
 
 export interface IUpdateAssetValidation {
-    assetId: Types.ObjectId;
+    assetId: string;
     title?: string;
     description?: string;
     price?: number;
-    category?: Types.ObjectId;
+    categoryId?: string;
     tags?: string[];
     licenseType?: 'regular' | 'extended';
 }
@@ -110,7 +110,7 @@ const assetSchema = Joi.object({
         'number.base': 'Price must be a number',
         'any.required': 'Price is required',
     }),
-    author: objectId.required().messages({
+    authorId: objectId.required().messages({
         'any.invalid': 'Invalid Author ID',
         'any.required': 'Author ID is required',
     }),

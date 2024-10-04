@@ -24,7 +24,7 @@ class CompleteUpload {
 
             // Validate the request body
             
-            await CreateAssetValidation({...body, author:user._id.toString()});
+            await CreateAssetValidation({...body, authorId:user._id.toString()});
 
     
             

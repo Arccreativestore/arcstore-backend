@@ -19,6 +19,7 @@
         "@aws-sdk/s3-request-presigner": "^3.654.0",
         "@graphql-tools/schema": "^10.0.6",
         "@log4js-node/slack": "^1.0.0",
+        "@types/agenda": "^4.1.0",
         "@types/log4js": "^2.3.5",
         "@types/mongoose-paginate-v2": "^1.6.5",
         "@types/multer": "^1.4.11",

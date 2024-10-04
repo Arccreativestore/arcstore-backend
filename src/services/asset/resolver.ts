@@ -1,11 +1,14 @@
-import AssetDatasource from "./datasource";
-import { IAccount } from "../../models/user";
+import AssetDatasource, { PaymentMethodInput } from "./datasource";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
-import { CreateCategoryValidation, ICategoryValidation, IUpdateCategoryValidation, UpdateAssetValidation,  } from "./validation";
+import { CreateCategoryValidation, IAssetValidation, ICategoryValidation, IUpdateCategoryValidation, UpdateAssetValidation,  } from "./validation";
+import { PlatformEnum } from "./externalApis/apiAuthHeader";
+import { QueryParams } from "./externalApis/externalService";
+import { DetailsQueryParams } from "./externalApis/externalAssetDetails";
 import { User } from "../../app";
 import { ErrorHandlers } from "../../helpers/errorHandler";
 import { validateMongoId } from "../users/types";
 import { notifyCreator } from "./helper";
+import { Types } from "mongoose";
 
 interface context{
   req:Request, 
@@ -13,7 +16,11 @@ interface context{
   user:User
   }
 export const AssetMutation = {
-
+async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
+  isUserAuthorized(context.user, this.addAsset.name)
+  
+  return await new AssetDatasource().addAsset(data, context.user._id.toString())
+},
   async addAssetCategory(__:unknown, {data}:{data:ICategoryValidation},context:context ){
     await CreateCategoryValidation(data)
     isUserAuthorized(context.user, this.addAssetCategory.name)
@@ -83,11 +90,26 @@ export const AssetMutation = {
     const assetId = data?.assetId
     validateMongoId(assetId)
     return await new AssetDatasource().getLikeCount(assetId)
-  }
-
-};
+  },
 
 
+  //CREATOR's PAYMENT METHOD
+  async updateCreatorsPaymentMethod(_:unknown, {id, input}:{id:string, input: PaymentMethodInput}, context: context ){
+    return await new AssetDatasource().updatePaymentMethod(id, input, context.user._id.toString()
+    )
+  },
+
+  async addCreatorsPaymentMethod(_:unknown, {input}:{ input: PaymentMethodInput}, context: context ){
+    return await new AssetDatasource().addPaymentMethod(input, context.user._id.toString())
+  },
+
+  async deleteCreatorsPaymentMethod(_:unknown, {id}:{ id: string}, context: context ){
+    isUserAuthorized(context.user, this.deleteCreatorsPaymentMethod.name) 
+    return await new AssetDatasource().deletePaymentMethod(id)
+  },
+
+
+}
 export const AssetQuery = {
   
   async getAllCategory(){
@@ -108,8 +130,37 @@ export const AssetQuery = {
   async getAllMyAssets(__:unknown, {page, limit, search}:{page:number, limit:number, search:string},context:context){
    // isUserAuthorized(context.user, this.getAllMyAssets.name) 
     return await new AssetDatasource().getAllMyAssets(page, limit, context.user._id,  search)
-  }
+  },
+  async getExternalAsset(_:unknown, {platform, params}:{platform:PlatformEnum, params:QueryParams},context:context){
+    return new AssetDatasource().getExternalAsset(platform, params)
+  },
+
+  async getFreePikAsset(_:unknown, {platform, params}:{platform:PlatformEnum, params:QueryParams},context:context){
+    return new AssetDatasource().getExternalAsset(platform, params)
+  },
+  
+  async getFreePikAssetDetails(_:unknown, {platform, params}:{platform:PlatformEnum, params:DetailsQueryParams},context:context){
+      return new AssetDatasource().getAssetDetails(platform, params)
+  },
 
 
-};
+  //CREATOR's DASHBOARD STATISTICS
+  async getUploadStatusStatistics(__:unknown, _:unknown, context:context){
+    return new AssetDatasource().getUploadStatusStatistics(context.user._id.toString())
+  },
+
+
+  
+  async getAssetAnalytics(__:unknown, _:unknown, context:context){
+    isUserAuthorized(context.user, this.getAssetAnalytics.name) 
+    return new AssetDatasource().getAssetAnalytics(context.user._id.toString())
+},
+
+ //CREATOR's PAYMENT METHOD
+async getCreatorsPaymentMethods(_:unknown, __:unknown, context:context )  {
+  isUserAuthorized(context.user, this.getCreatorsPaymentMethods.name) 
+  return await new AssetDatasource().getPaymentMethods(context.user._id.toString())
+}
+
+}
 

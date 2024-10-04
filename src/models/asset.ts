@@ -12,13 +12,17 @@ export interface IRating{
     count: number;
     total: number;
 }
-
+export enum IStatus {
+    Pending='pending',
+    Approved='approved',
+    Declined='declined'
+}
 export interface IAsset extends Document {
     title: string;
     slug: string;
     description: string;
     price: number;
-    author: ObjectId;
+    authorId: ObjectId;
     categoryId: ObjectId;
     tags: string[];
     views: number;
@@ -28,6 +32,9 @@ export interface IAsset extends Document {
     files:ObjectId[]
     deleted:boolean
     published:boolean
+    status:IStatus
+    reviewedBy:ObjectId
+    reviewedAt:Date
 }
 interface IAssetModel extends Model<IAsset> {
     aggregatePaginate(pipeline: PipelineStage[], options: any): Promise<any>;
@@ -42,7 +49,6 @@ const AssetSchema = new Schema<IAsset>({
     slug: {
         type: String,
         unique: true,
-        required: true,
         lowercase: true,
     },
     description: {
@@ -54,7 +60,7 @@ const AssetSchema = new Schema<IAsset>({
         type: Number,
         required: true,
     },
-    author: {
+    authorId: {
         type: Schema.Types.ObjectId,
         ref:"users",
         required: true,
@@ -105,6 +111,19 @@ const AssetSchema = new Schema<IAsset>({
         required: true,
         default:false,
     },
+    status:{
+        type:String,
+        enum:Object.values(IStatus),
+        default:IStatus.Pending,
+    },
+    reviewedBy:{
+        type: Schema.Types.ObjectId,
+        ref:"users"
+    },
+    
+    reviewedAt:{
+        type:Date
+    }
 }, {
     timestamps: true,
     versionKey: false,

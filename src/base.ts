@@ -4,6 +4,8 @@ import {userModel} from './models/user'
 import mongoose from "mongoose";
 import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "./config/config";
 import {v4 as uuid} from 'uuid'
+import { IUnitType } from "./models/plan";
+import moment from "moment";
 
  export default class Base extends GeneralController {
 
@@ -96,5 +98,47 @@ import {v4 as uuid} from 'uuid'
     }
 
 
+    calculateSubscription(unit: IUnitType, amount: string, discount: number, duration: number): {
+		expiresAt: Date,
+		totalAmount: number
+	} {
+		const now = moment();
+		let totalAmount: string;
+		const newUnit = {
+			[IUnitType.month]: 'month',
+			[IUnitType.year]: 'year',
+		} as const
+		
+		const endDate = now.clone().add(duration, newUnit[unit]);
+		
+		if (discount > 0) {
+			totalAmount = this.bankersRound(Number(amount) * duration * (1 - discount))
+		} else {
+			totalAmount = this.bankersRound(Number(amount) * duration)
+		}
+		return { expiresAt: endDate.toDate(), totalAmount: Number(totalAmount) };
+	}
+	
+	bankersRound(number: number): string {
+		// Function to check if a number is exactly halfway between two integers
+		const isHalfway = (num: number) => Math.abs(num - Math.round(num)) === 0.5;
+		
+		let rounded: number;
+		if (isHalfway(number)) {
+			// If the number is halfway, determine if the integer part is even
+			if (Math.floor(number) % 2 === 0) {
+				rounded = Math.floor(number);
+			} else {
+				rounded = Math.ceil(number);
+			}
+		} else {
+			// For non-halfway numbers, use standard rounding and apply two decimal rounding here
+			rounded = Math.round(number * 100) / 100;
+		}
+		
+		// Format the rounded number to always have two decimal places
+		return rounded.toFixed(2);
+	}
+	
     generateUniqueId(){ return uuid() }
  }
