@@ -1,18 +1,41 @@
 import Base from '../../base'
-import { ICategoryValidation, IUpdateCategoryValidation  } from "./validation";
+import { CreateAssetValidation, IAssetValidation, ICategoryValidation, IUpdateCategoryValidation  } from "./validation";
 import __Category from '../../models/assetCategory'
 import { ErrorHandlers } from '../../helpers/errorHandler';
-import { PipelineStage, Schema } from 'mongoose';
+import mongoose, { PipelineStage, Schema, Types } from 'mongoose';
 import __Asset from '../../models/asset'
 import { AssetFetcher, QueryParams } from './externalApis/externalService';
 import { PlatformEnum } from './externalApis/apiAuthHeader';
 import { AssetDetailsFetcher, DetailsQueryParams } from './externalApis/externalAssetDetails';
+import { ObjectId } from 'mongoose';
+import likesModel from '../../models/assetLikes';
+import { logger } from '../../config/logger';
+import AssetModel from '../../models/asset';
+import { relativeTimeRounding } from 'moment';
+import __PaymentMethod, { IPaymentMethod, PaymentMethodEnum } from '../../models/paymentMethod'
 
+
+
+export interface PaymentMethodInput {
+  method: PaymentMethodEnum
+  details: Record<string, any>
+  isActive: boolean
+}
 
 class AssetDatasource extends Base {
 
 
   //Asset CRUD
+  async addAsset(data:IAssetValidation, authorId:string){
+    await CreateAssetValidation({...data, authorId})
+    const category = await __Category().findOne({_id:data.categoryId})
+    if(!category) throw new ErrorHandlers().ValidationError("Asset category does not exist")
+    const created = await __Asset().create({...data, authorId})
+    if(created) return "Asset created successfully"
+    throw new ErrorHandlers().ValidationError("Unable to create asset, please try again")
+  }
+
+
   async getAllAssets(page:number=1, limit:number=20, searchKey:string) {
     let options = {
       page,
@@ -117,7 +140,7 @@ class AssetDatasource extends Base {
     },
 };
   }
-  async getAllMyAssets(page:number=1, limit:number=20, userId:string, searchKey:string) {
+  async getAllMyAssets(page:number=1, limit:number=20, userId:ObjectId, searchKey:string) {
     let options = {
       page,
       limit: limit > 100 ? 100:limit,
@@ -128,7 +151,7 @@ class AssetDatasource extends Base {
       {
         $match: {
           disable: false,
-          author: new Schema.Types.ObjectId(userId),
+          author: userId,
           ...(searchKey && {
             $or: [
               { name: { $regex: searchKey, $options: 'i' } }, 
@@ -266,6 +289,48 @@ class AssetDatasource extends Base {
     return __Category().find({disable:false})
   }
 
+  async likeAsset(userId: ObjectId, assetId: string){
+   try {
+
+    const likeAsset = likesModel()
+    const create = await likeAsset.create({assetId, userId})
+    return create ? create.toObject() : null
+
+   } catch (error) {
+    logger.error(error)
+    throw error
+   } 
+  }
+
+  async getCreator(assetId: string){
+   try {
+    
+    const userId = await AssetModel().findById(new mongoose.Types.ObjectId(assetId)).populate('author')
+    return userId ? userId.toObject() : null
+
+   } catch (error) {
+    logger.error(error)
+    throw error
+   }
+  }
+
+  async unlikeAsset(userId: ObjectId, assetId: string){
+   try {
+
+    const find = await likesModel().findOneAndDelete({userId, assetId})
+    return find ? true : null
+
+   } catch (error) {
+    logger.error(error)
+   }
+  }
+
+  async getLikeCount(assetId: string){
+    const findAll = await likesModel().find({assetId}).count()
+    return findAll
+  }
+
+
   async getExternalAsset(platform:PlatformEnum, params:QueryParams){
     return await new AssetFetcher(platform).fetchAssets(params)
 
@@ -274,6 +339,107 @@ class AssetDatasource extends Base {
   async getAssetDetails(platform:PlatformEnum, params:DetailsQueryParams){
     return await new AssetDetailsFetcher(platform).fetchAssetDetails(params)
 }
+
+
+//CREATOR's DASHBOARD STATISTICS
+async  getUploadStatusStatistics(authorId:string) {
+    const pipeline = [
+      {
+          $match: { authorId: new mongoose.Types.ObjectId(authorId) }
+      },
+      {
+          $group: {
+              _id: '$status',
+              count: { $sum: 1 }
+          }
+      },
+      {
+        
+          $project: {
+              status: '$_id',
+              count: 1,
+              _id: 0 
+          }
+      }
+  ]
+
+      const result = await __Asset().aggregate(pipeline);
+      return result; 
+}
+
+async  getAssetAnalytics(authorId: string) {
+  const pipeline = [
+      {
+          $match: { authorId: new mongoose.Types.ObjectId(authorId) }
+      },
+      {
+          $lookup: {
+              from: 'downloads',
+              localField: '_id',
+              foreignField: 'assetId',
+              as: 'downloadData'
+          }
+      },
+      {
+          $unwind: {
+              path: '$downloadData',
+              preserveNullAndEmptyArrays: true
+          }
+      },
+      {
+          $group: {
+              _id: '$_id', 
+              title: { $first: '$title' },
+              downloads: { $sum: { $cond: [{ $ifNull: ['$downloadData', false] }, 1, 0] } },
+              views: { $sum: '$views' },
+              ratingsCount: { $sum: '$ratings.count' },
+              ratingsTotal: { $sum: '$ratings.total' },
+              earnings: { $sum: { $multiply: [{ $ifNull: ['$downloadData', 0] }, '$price'] } }
+          }
+      },
+      {
+          $project: {
+              _id: 1, 
+              title: 1,
+              downloads: { $ifNull: ['$downloads', 0] },
+              views: { $ifNull: ['$views', 0] },
+              ratingsCount: { $ifNull: ['$ratingsCount', 0] },
+              averageRating: { 
+                  $cond: [{ $eq: ['$ratingsCount', 0] }, 0, { $divide: ['$ratingsTotal', '$ratingsCount'] }] 
+              },
+              earnings: { $ifNull: ['$earnings', 0] }
+          }
+      }
+  ];
+ return await __Asset().aggregate(pipeline).exec();
+
+}
+
+
+
+//CREATOR PAYMENT METHOD
+
+  async getPaymentMethods(userId: string )  {
+      return await __PaymentMethod().find({ userId });
+  }
+
+  async addPaymentMethod (payload: PaymentMethodInput, userId:string ) {
+      return await __PaymentMethod().create({...payload, userId});
+   
+  }
+  
+  async updatePaymentMethod(id:string, payload: PaymentMethodInput, userId:string ){
+      return await __PaymentMethod().findByIdAndUpdate(id, payload, { new: true });
+  }
+  
+  async deletePaymentMethod(id: string ){
+     const res =  await __PaymentMethod().findByIdAndDelete(id);
+     if(res) return true;
+     return false
+  }
+
+
+
 }
 export default AssetDatasource
 

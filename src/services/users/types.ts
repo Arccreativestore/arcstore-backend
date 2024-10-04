@@ -1,6 +1,7 @@
 import { validate } from "graphql"
 import Joi from "joi"
 import { ObjectId } from "mongoose"
+import { ErrorHandlers } from "../../helpers/errorHandler"
 
 export interface downloadType {
     assetId: ObjectId
@@ -33,5 +34,8 @@ const validateObjectSchema = Joi.object({
 
 export const validateMongoId = (_id: any)=>{
     const {error, value} = validateObjectSchema.validate({_id}, {abortEarly: false})
+    if (error) {
+        throw new ErrorHandlers().ValidationError(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
+    }
     return value
 }

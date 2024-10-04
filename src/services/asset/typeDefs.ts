@@ -3,13 +3,23 @@ import gql from 'graphql-tag'
 const AssetType = gql`
 
   type Mutation {
+    addAsset(data:IAddAssetInput):String!
     addAssetCategory(data:IAddCategoryInput):String!
     updateAssetCategory(data:IUpdateCategoryInput):String!
     enableOrDisableAssetCategory(categoryId:ID! status:Boolean!):String!
     publishOrUnpublishAsset(assetId:ID! publish:Boolean!):String!
     deleteAssetCategory(categoryId:ID!):String!
     deleteAsset(assetId:ID!):String!
+    likeAsset(data:assetId!): General!
+    unlikeAsset(data:assetId!): General!
+    getLikeCount(data:assetId!): Int!
+
+    #CREATORS
+    addCreatorsPaymentMethod(input: PaymentMethodInput!): PaymentMethod!
+    updateCreatorsPaymentMethod(id: ID!, input: PaymentMethodInput!): PaymentMethod!
+    deleteCreatorsPaymentMethod(id: ID!): Boolean!
   }
+
 
   type Query {
     getAllCategory:[ICategoryResponse]
@@ -20,9 +30,35 @@ const AssetType = gql`
     getExternalAsset(platform:PlatformEnum! params:IParams):JSON
     getFreePikAsset(platform:PlatformEnum! params:IParams):JSON
     getFreePikAssetDetails(platform:PlatformEnum! params:IDetailsParams):JSON
+    getUploadStatusStatistics:[IUploadStatusStatistics]
+    getAssetAnalytics:[AssetAnalytics]
+
+     #CREATORS
+    getCreatorsPaymentMethods(userId: ID!): [PaymentMethod!]!
   }
 
 
+  type AssetAnalytics {
+    _id: ID!         
+    title: String!   
+    downloads: Int! 
+    views: Int! 
+    ratingsCount: Int! 
+    averageRating: Float!
+    earnings: Float! 
+}
+
+  type IUploadStatusStatistics{
+  count:Int
+  status:IStatus
+  }
+
+input IAddAssetInput{
+  title:String!
+  description:String!
+  price:Float!
+  categoryId:ID!
+}
 
 
   enum IFreePickCategory{
@@ -65,6 +101,13 @@ const AssetType = gql`
     description:String
   }
 
+
+  enum IStatus{
+  pending
+  approved
+  declined
+  }
+
   input IUpdateCategoryInput{
     categoryId:ID!
     title:String
@@ -96,6 +139,10 @@ type IFile {
   updatedAt: String
 }
 
+type General {
+  status: String
+  message: String
+}
 
 type AssetResponse {
   _id: ID!
@@ -122,9 +169,36 @@ type PageInfo {
   totalDocs: Int
 }
 
+input assetId {
+  assetId: ID
+}
 type AssetDataResponse {
   data: [AssetResponse]
   pageInfo: PageInfo
+}
+
+
+enum PaymentMethodEnum {
+    PayPal
+    BankTransfer
+    PayStack
+    GooglePay
+}
+
+type PaymentMethod {
+    id: ID!
+    userId: ID!
+    method: PaymentMethodEnum!
+    details: JSON!
+    isActive: Boolean!
+    createdAt: String!
+    updatedAt: String!
+}
+
+input PaymentMethodInput {
+    method: PaymentMethodEnum!
+    details: JSON!
+    isActive: Boolean
 }
 `
 

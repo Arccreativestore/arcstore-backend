@@ -45,10 +45,6 @@ export class datasource extends Base {
             throw error
         }
     }
-
-
-
-
 }
 
 async function execPipeline(userId: ObjectId, limit?: number, page?: number){
@@ -105,15 +101,13 @@ async function execPipeline(userId: ObjectId, limit?: number, page?: number){
       },
       {
           $project: {
-              downloadedAt: 1,
+              createdAt: 1,
               asset: {
                   title: 1,
                   description: 1,
                   price: 1,
                   author: 1,
-                  ratings: 1,
-                  licenseType: 1,
-                  files: 1,
+                  licenseType: 1
               },
               category: {
                   title: 1,
@@ -123,7 +117,6 @@ async function execPipeline(userId: ObjectId, limit?: number, page?: number){
                   deleted: 1,
               },
               files: {
-                  url: 1,
                   thumbnailUrl: 1,
                   type: 1,
               },
@@ -135,7 +128,7 @@ async function execPipeline(userId: ObjectId, limit?: number, page?: number){
   const savedAssetsModelInstance = savedAssetsModel();
   const aggregate = savedAssetsModelInstance.aggregate(pipeline);
   const result = await savedAssetsModelInstance.aggregatePaginate(aggregate as any, options);
-
+  console.log(result.docs[0].files)
   return {
       data: result.docs,
       pageInfo: {

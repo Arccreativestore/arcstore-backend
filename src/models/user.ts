@@ -15,6 +15,8 @@ export interface IAccount extends Document {
   phoneNumber: number;
   permissionGroup?: ObjectId[];
   permissions?: string[];
+  disabled: boolean;
+  preferences: Array<ObjectId>
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
@@ -32,37 +34,52 @@ const UserSchema: Schema = new Schema<IAccount>(
       required: true,
       trim: true,
     },
+    
     lastName: {
       type: String,
       trim: true,
     },
+
     password: {
       type: String,
       trim: true,
     },
+
     emailVerified: {
       type: Boolean,
       default: false
     },
+
     role: {
       type: String,
       enum: ["USER", "SUPERADMIN", "CREATOR", "STAFF"],
       default: "USER",
     },
+
     phoneNumber:
     {
       type: Number
     },
+
     profilePicture: {
       type: String,
       trim: true,
     },
+
     permissionGroup: {
       type: [Schema.Types.ObjectId],
     },
+
     verifiedDate: {
       type: Date,
     },
+
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+
+    preferences : [{type: Schema.Types.ObjectId, ref: 'categories'}]
   },{
   timestamps: true,
   versionKey: false,}

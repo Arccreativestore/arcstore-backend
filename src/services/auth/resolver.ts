@@ -59,7 +59,7 @@ export const registerMutation = {
       const { _id, email, firstName, lastName, role } = createUser
       const token = jwt.sign({ email, _id: createUser._id }, ACCESS_SECRETKEY as string, {expiresIn: "1hr"});
 
-      const verificationLink = `http://localhost:3000/?action=verifyEmail&token=${token}`
+      const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`
       eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
       return { status: "success", _id, email, firstName, lastName, role };
 
@@ -104,7 +104,7 @@ export const requestVerification = {
       const username = findEmail.firstName;
 
       const token = jwt.sign({ email, _id: findEmail._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr"});
-      const verificationLink = `http://localhost:3000/?action=verifyEmail&token=${token}`
+      const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`
       eventEmitter.emit("newUser", { email, verificationLink, username });
       return { status: "success", message: "request verification successfull" };
     } catch (error) {
@@ -179,7 +179,7 @@ export const forgotPasswordMutation = {
         });
 
 
-        let link = `http://localhost:3000/?action=resetpassword&email=${email}&token=${token}`; // for dev 
+        let link = `https://arcstore-frontend.fly.dev/resetpassword?email=${email}&token=${token}`; // for dev 
         let username = userExist.firstName;
         eventEmitter.emit("forgotPassword", { username, link, email });
         return { status: "success",message: "Please Check your email for further instructions",};
@@ -261,7 +261,7 @@ async function handleProfileUpdate(_id: ObjectId , data: any, email?: string){
   if (email) {
     const token = jwt.sign({ email, _id: updateProfile._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
     const firstName = updateProfile.firstName;
-    const verificationLink = `http://localhost:3000/?action=verifyEmail&token=${token}`;
+    const verificationLink = `https://arcstore-frontend.fly.dev/verify?token=${token}`;
     
     eventEmitter.emit("newUser", { email, username: firstName, verificationLink });
   }

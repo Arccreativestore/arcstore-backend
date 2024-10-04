@@ -53,3 +53,13 @@
 2024-10-01T20:47:02.979Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
 2024-10-01T20:51:18.650Z [31merror[39m: Error fetching from pinterest: AxiosError: Request failed with status code 401
 2024-10-01T21:09:40.283Z [31merror[39m: Error fetching from freepik: AxiosError: Request failed with status code 404
+2024-09-30T18:30:33.885Z [31merror[39m: Uncaught Exception: {
+  "code": "ESERVFAIL",
+  "syscall": "queryTxt",
+  "hostname": "cluster0.wfrdpqg.mongodb.net"
+}
+2024-09-30T22:02:15.356Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
+2024-09-30T22:05:37.069Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
+2024-09-30T22:11:01.577Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
+2024-09-30T22:58:31.960Z [31merror[39m: Reused Token Detected, Please Login to Continue
+2024-10-01T00:35:06.467Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }

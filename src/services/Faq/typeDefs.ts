@@ -55,7 +55,7 @@ type General {
 input IcreateFaqs {
 question: String
 answer: String
-categories: [String]
+category: [String]
 tags: [String]
 helpful: Int
 notHelpful: Int

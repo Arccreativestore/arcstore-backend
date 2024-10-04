@@ -6,8 +6,8 @@
     "scripts": {
         "dev": "nodemon",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc",
-        "start": "node dist/src/app.js"
+        "build": "tsc && tsc-alias",
+        "start": "node dist/app.js"
     },
     "type": "module",
     "keywords": [],
@@ -19,11 +19,13 @@
         "@aws-sdk/s3-request-presigner": "^3.654.0",
         "@graphql-tools/schema": "^10.0.6",
         "@log4js-node/slack": "^1.0.0",
+        "@types/agenda": "^4.1.0",
         "@types/log4js": "^2.3.5",
         "@types/mongoose-paginate-v2": "^1.6.5",
         "@types/multer": "^1.4.11",
         "@types/multer-s3": "^3.0.3",
         "@types/speakeasy": "^2.0.10",
+        "agenda": "^5.0.0",
         "bcrypt": "^5.1.1",
         "body-parser": "^1.20.2",
         "cookie-parser": "^1.4.6",
@@ -34,6 +36,7 @@
         "express": "^4.18.2",
         "express-handlebars": "^7.1.2",
         "faker": "^5.5.3",
+        "firebase-admin": "^12.5.0",
         "graphql": "^16.6.0",
         "graphql-constraint-directive": "^5.4.3",
         "graphql-scalars": "^1.20.1",
@@ -80,6 +83,7 @@
         "@types/uuid": "^9.0.7",
         "nodemon": "^3.1.4",
         "ts-node": "^10.9.2",
+        "tsc-alias": "^1.8.10",
         "tsx": "^4.19.0",
         "typescript": "^5.6.2"
     }

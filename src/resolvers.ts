@@ -16,6 +16,7 @@ const Mutation = {
   ...faqMutations,
   ...AssetMutation,
   ...SubscriptionMutation,
+  ...AssetMutation
 };
 
 const Query = {

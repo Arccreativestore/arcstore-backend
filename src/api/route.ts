@@ -8,8 +8,21 @@ import CompleteUpload, { CustomRequest } from '../helpers/completeUpload';
 
 const router = express.Router();
 
+
+
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+/**
+ * 
+ * @description authenticate with google
+ * @param {Request} req
+ * @param {Response} res 
+ * 
+ * @response 200 {             
+ *   accessToken: string,      // access token
+ * }
+ * 
+ */
 router.get('/auth/google/callback',  
     passport.authenticate('google', { failureRedirect: '/', session: false }),
     new apiControllers().googleCallback
@@ -18,7 +31,17 @@ router.get('/auth/google/callback',
 router.get('/auth/facebook',
     passport.authenticate('facebook', { scope: ['public_profile'] })
 );
-
+/**
+ * 
+ * @description authenticate with facebook
+ * @param {Request} req
+ * @param {Response} res 
+ * 
+ * @response 200 {             
+ *   accessToken: string,  // access token
+ * }
+ * 
+ */
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/', session: false }),
     new apiControllers().facebookCallback
@@ -26,6 +49,7 @@ router.get('/auth/facebook/callback',
 
 
 /**
+ * 
  * @description Creates a presigned URL for accessing an asset
  * @param {Request} req - The request object
  * @param {Response} res - The response object

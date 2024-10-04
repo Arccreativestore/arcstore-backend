@@ -16,6 +16,10 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
   },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
+  },
   "ts-node": {
       "esm": true
   },

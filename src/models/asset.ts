@@ -13,7 +13,6 @@ export interface IRating{
     total: number;
 }
 export enum IStatus {
-    Review='review',
     Pending='pending',
     Approved='approved',
     Declined='declined'
@@ -23,7 +22,7 @@ export interface IAsset extends Document {
     slug: string;
     description: string;
     price: number;
-    author: ObjectId;
+    authorId: ObjectId;
     categoryId: ObjectId;
     tags: string[];
     views: number;
@@ -50,7 +49,6 @@ const AssetSchema = new Schema<IAsset>({
     slug: {
         type: String,
         unique: true,
-        required: true,
         lowercase: true,
     },
     description: {
@@ -62,7 +60,7 @@ const AssetSchema = new Schema<IAsset>({
         type: Number,
         required: true,
     },
-    author: {
+    authorId: {
         type: Schema.Types.ObjectId,
         ref:"users",
         required: true,

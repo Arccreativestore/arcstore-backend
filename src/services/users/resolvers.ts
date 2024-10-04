@@ -12,13 +12,12 @@ import { downloadType, purchaseHistoryType, savedAssetType, validateMongoId } fr
 
 const downloadsQuery = {
 
-    async getDownloads(_: any, args: any, context: {user: User}){
+    async getDownloads(__: any, args: any, context: {user: User}){
         
        try {
 
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
-        validateMongoId(userId)
         return await new datasource().getDownloads(userId)
        } catch (error) {
         throw error
@@ -29,12 +28,11 @@ const downloadsQuery = {
 
 const savedAssetsQuery = {
 
-    async getsavedAssets( savedAssets_: any, args: any, context: {user: User}){
+    async getsavedAssets(__: any, args: any, context: {user: User}){
         
       try {
         const userId = context.user?._id;
         if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
-        validateMongoId(userId)
         return await new datasource().getsavedAssets(userId)
       } catch (error) {
         throw error
@@ -44,7 +42,7 @@ const savedAssetsQuery = {
 
 
 const purchaseHistoryQuery = {
-    async getPurchaseHistory(_:any, args: any, context: {user: User}){
+    async getPurchaseHistory(__:any, args: any, context: {user: User}){
 
        try {
 

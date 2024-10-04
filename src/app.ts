@@ -24,7 +24,12 @@ import Base from "./base";
 import { expressHandler } from "./helpers/expressError";
 import { ObjectId } from "mongoose";
 import faqModel from "./models/Faq";
-import { data } from "./faqs";
+import agenda from "./config/agenda";
+import AssetModel from "./models/asset";
+import  fileModel  from "./models/files";
+import CategoryModel from "./models/assetCategory";
+import savedAssetsModel from "./models/savedAssets";
+import downloadsModel from "./models/downloads";
 
 export const cookieSettings = {
     httpOnly: true,
@@ -91,8 +96,13 @@ const corsOptions = {
     origin,
     credentials: true, // <-- REQUIRED backend setting
 };
+agenda.start()
+.then(()=>{
+    console.log('Agenda running and ready to process jobs')
+})
+.catch((e)=> console.log(e))
+
 await server.start();
-//await faqModel().insertMany(data)
 //await userModel().deleteMany({}) // for dev purposes
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
@@ -135,7 +145,7 @@ app.use("/graphql",
 
 
 await new Promise<void>((resolve) =>
-    httpServer.listen({port: PORT}, resolve)
+    httpServer.listen({port: PORT,host: '0.0.0.0',}, resolve)
 );
 
 app.use(expressHandler) 
@@ -147,3 +157,10 @@ process.on('uncaughtException', (error) => {
     logger.error(`Uncaught Exception: ${JSON.stringify(error, null, 2)}`);
     process.exit(1); 
   });
+
+process.on('SIGTERM', async () => {
+    console.log('Shutting down Agenda...');
+    await agenda.stop();
+    process.exit(0);
+});
+  

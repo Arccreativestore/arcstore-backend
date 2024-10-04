@@ -2,17 +2,18 @@ import { isValidObjectId } from "mongoose";
 import { User } from "../../app";
 import { ErrorHandlers } from "../../helpers/errorHandler";
 import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
-import { faqCreateInputType,  faqUpdateInputType, vailidateSearchQuery, validateCreateFaq, validateUpdateFaq } from "./types";
+import { faqCreateInputType,  faqUpdateInputType, vailidateAllFaqInput, vailidateSearchQuery, validateCreateFaq, validateUpdateFaq } from "./types";
 import { datasource } from "./datasource";
 import Joi from "joi";
 
 
 
 const faqQuery = {
-    async getAllFaqs(_: any, {data}:{ data:{limit?: number, page?: number}}, context: {user: User}){
+    async getAllFaqs(__: any, {data}:{ data:{limit?: number, page?: number}}){
     try {
+      vailidateAllFaqInput(data)
       const {limit, page} = data
-      return await new datasource().getAllFaqs(limit, page)
+      return await new datasource().getAllFaqs(page, limit)
     } catch (error) {
        throw error 
     }
@@ -22,7 +23,7 @@ const faqQuery = {
        try {
          const { faqId } = data
          if(!isValidObjectId(faqId)) throw new ErrorHandlers().ValidationError("faqId is not a valid id")
-          return await new datasource().getOneFaq(faqId) 
+         return await new datasource().getOneFaq(faqId) 
        } catch (error) {
         throw error
        }
@@ -30,8 +31,8 @@ const faqQuery = {
     },
 
     async searchFaq(__: any, {data}: {data: {searchKey: string, limit?: number, page?: number}}){
-      const { searchKey, limit, page } = data
       vailidateSearchQuery(data)
+      const { searchKey, limit, page } = data
       return await new datasource().searchFaqs(searchKey, page, limit)
     }
 }
@@ -43,9 +44,9 @@ const faqMutation = {
       try {
 
       const userId = context?.user?._id
+      validateCreateFaq(data)
       if(!userId || !context.user) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
       const { firstName } = context?.user
-      validateCreateFaq(data)
       const faqData = {author: userId, name: firstName, ...data }
       isUserAuthorized(context.user, this.createFaq.name)
       return await new datasource().createFaq(faqData)

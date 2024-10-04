@@ -3,24 +3,22 @@ import { GraphQLJSON } from 'graphql-type-json'
 const UserTypeDefs = gql`
 scalar JSON
 type Query{
-    getDownloads: downloadsResponse
-    getsavedAssets:savedAssetsResponse
+    getDownloads:AssetsResponse
+    getsavedAssets:AssetsResponse
     getPurchaseHistory:purchaseHistoryResponse
     getSubcriptionHistory: subHistoryResponse
 }
 
-type downloadsResponse{
-_id: ID
-userId: ID
-assetId: ID
-createdAt: String
+type AssetsResponse {
+data: [IResponse]
+pageInfo: PageInfo
 }
 
-type savedAssetsResponse{
-_id: ID
-userId: ID
-assetId: ID
-createdAt: String
+type IResponse{
+asset: subAssets
+category: subCategory
+files: [subFile]
+createdAt: Date
 }
 
 type subHistoryResponse {
@@ -42,6 +40,39 @@ amountPayed: Int
 paymentMethod: JSON
 currency: String
 status: Boolean
-}`
+}
+
+type subAssets{
+title: String
+description: String
+price: Int
+author: ID
+ratings: String
+licenseType: String          
+}
+
+type subFile{
+    thumbnailUrl: String,
+    type: String,
+    key: String
+}
+
+type subCategory{
+    title:String
+    description:String
+    disable: Boolean
+    deleted: Boolean          
+}
+
+type PageInfo {
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  totalPages: Int
+  nextPage: Int
+  prevPage: Int
+  totalDocs: Int
+}
+`
+
 
 export default UserTypeDefs
