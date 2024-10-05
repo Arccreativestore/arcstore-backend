@@ -2,7 +2,8 @@ import { defineArguments } from "graphql/type/definition";
 import creatorsModel from "../../models/creator";
 import { UserDatasource } from "../auth/datasource";
 import { userModel } from "../../models/user";
-import mongoose, { ObjectId, Schema, Types } from "mongoose";
+import mongoose, { Schema, Types, ObjectId } from "mongoose";
+import { ErrorHandlers } from "../../helpers/errorHandler";
 
 
 
@@ -25,15 +26,25 @@ class CreatorDatasource {
     }
 
     async findCreatorByUserId(_id: ObjectId){
+        try {
+            
         const find = await creatorsModel().findOne({userId: _id})
         if(find) return find.toObject()
         return null
+
+        } catch (error) {
+            throw error
+        }
     }
 
     async checkFollowing(userId: ObjectId, _id: string){
+       try {
         const find = await creatorsModel().findById(_id)
         if(find?.followers?.includes(userId)) return true
         return false
+       } catch (error) {
+        throw error
+       }
     }
 
     async followCreator(userId: ObjectId, _id: string){
@@ -53,32 +64,17 @@ class CreatorDatasource {
     }
 
 
-    async checkFollowerRequest(userId: string , creator: any){
-    
-        if (!creator) return false;
-        const followersRequestStrings = creator.followersRequest.map((id: ObjectId) => id.toString());
-        console.log(followersRequestStrings)
-        if (followersRequestStrings.includes(userId)) return true;
-        return false;
+    async checkFollowerRequest(userId: string , _id: Types.ObjectId){
+        const findCreator = await creatorsModel().findOne({_id, followersRequest: { $in: new Types.ObjectId(userId)}})
+        return findCreator ? true : false
     }
 
-
-    async acceptFollower(userId: string, creator: any){
+    async acceptFollower(userId: string, _id: Types.ObjectId){
         
       try {
-        const requestArray = creator.followersRequest.map((id: ObjectId)=> id.toString())
-        const requestIndex = requestArray.indexOf(userId);
-        console.log(requestIndex)
-        if (requestIndex !== -1) {
-            creator.followersRequest.splice(requestIndex, 1);
-            creator.followers.push(userId);
-            //const await creatorsModel().find
-            await creator.save();
+            let id =  new Types.ObjectId(userId)
+            await creatorsModel().updateOne({_id}, {$addToSet: {followers: id}, $pull: {followersRequest: id}})
             return { status: "success", message: "follower request accepted" };
-        } else {
-            throw new Error('Follower request not found');
-        }
-
       } catch (error) {
         throw error
       }
@@ -100,10 +96,27 @@ class CreatorDatasource {
        }
     }
 
-    async privateCreator(_id: string){
+    async toPrivateCreator(_id: string){
+       try {
+        
         const find = await creatorsModel().updateOne({_id}, {$set:{isPrivate: true}})
         return find.matchedCount > 0 ? true : false
+
+       } catch (error) {
+          throw error
+       }
         
+    }
+
+    async toPublicCreator(_id: string){
+        try {
+            
+        const find = await creatorsModel().updateOne({_id}, {$set:{isPrivate: false}})
+        return find.matchedCount > 0 ? true : false
+        
+        } catch (error) {
+            throw error
+        }
     }
 }
 

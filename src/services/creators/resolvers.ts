@@ -5,6 +5,7 @@ import { UserDatasource } from "../auth/datasource";
 import { validateMongoId } from "../users/types";
 import CreatorDatasource from "./datasource";
 import { Icreator, validateCreator } from "./types";
+import { use } from "passport";
 
 
 export const creatorMutation = {
@@ -68,10 +69,10 @@ export const creatorMutation = {
         const creatorExist = await new CreatorDatasource().findCreatorByUserId(creatorUserId);
         if (!creatorExist) throw new ErrorHandlers().NotFound('Creator does not exist');
        
-        const followerRequestExist = await new CreatorDatasource().checkFollowerRequest(userId, creatorExist);
+        const followerRequestExist = await new CreatorDatasource().checkFollowerRequest(userId, creatorExist._id);
         if (!followerRequestExist) throw new ErrorHandlers().NotFound('Follower request does not exist');
 
-        await new CreatorDatasource().acceptFollower(userId, creatorExist);
+        await new CreatorDatasource().acceptFollower(userId, creatorExist._id);
         return { "status": "success", message: 'Successfully accepted the follower request' };
     
         
@@ -104,23 +105,44 @@ export const creatorMutation = {
         }
     },
 
- async privateCreator(__: any, args: any, context: {user: User}){
+ async toPrivateCreator(__: any, args: any, context: {user: User}){
     try {
         
     const userId = context?.user?._id
     if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
     
     const creatorExist = await new CreatorDatasource().findCreatorByUserId(userId)
-    if(!creatorExist) throw new ErrorHandlers().NotFound('Creator does not exist')
-    const update =  await new CreatorDatasource().privateCreator(creatorExist._id.toString())
-    if(update) return { status: "success", message: "you are now a private creator"}
-    
+    if(!creatorExist) throw new ErrorHandlers().ForbiddenError('You are not a creator')
+    const update =  await new CreatorDatasource().toPrivateCreator(creatorExist._id.toString())
+    if(update) return { status: "success", message: "you are now a public creator"}
+    throw new Error('server error, cannot update privacy setting')
 
     } catch (error) {
         throw error
     }
     
+ },
+
+ async toPublicCreator(__: any, args: any, context: {user: User}){
+    
+    try {
+
+    const userId = context?.user?._id
+    if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
+    
+    const creatorExist = await new CreatorDatasource().findCreatorByUserId(userId)
+    if(!creatorExist) throw new ErrorHandlers().ForbiddenError('You are not a creator')
+    const update =  await new CreatorDatasource().toPublicCreator(creatorExist._id.toString())
+    if(update) return { status: "success", message: "you are now a private creator"}
+    throw new Error('server error, cannot update privacy setting')
+    
+        
+    } catch (error) {
+        throw error
+    }
  }
+
+
     
 }
 

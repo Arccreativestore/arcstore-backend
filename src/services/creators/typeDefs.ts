@@ -6,7 +6,8 @@ signUpCreator(data: Icreator): Creator!
 followCreator(data: Ifollow): General!
 acceptFollower(data: IacceptFollow): General!
 unfollowCreator(data: Ifollow): General!
-privateCreator: General!
+toPrivateCreator: General!
+toPublicCreator: General!
 }
 input Icreator {
 country: String
