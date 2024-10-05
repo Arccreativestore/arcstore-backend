@@ -67,7 +67,7 @@ class CreatorDatasource {
         
       try {
         const requestArray = creator.followersRequest.map((id: ObjectId)=> id.toString())
-        const requestIndex = requestArray.i ndexOf(userId);
+        const requestIndex = requestArray.indexOf(userId);
         console.log(requestIndex)
         if (requestIndex !== -1) {
             creator.followersRequest.splice(requestIndex, 1);
