@@ -7,6 +7,7 @@ import {
   PermissionMutation,
   PermissionQuery,
 } from "./services/permission/resolver";
+import { creatorMutation } from "./services/creators/resolvers";
 
 const Mutation = {
   ...authMutations,
@@ -23,6 +24,7 @@ const Query = {
   ...tokenQuery,
   ...faqQueries,
   ...AssetQuery,
+  ...creatorMutation
 };
 
 export { Mutation, Query };

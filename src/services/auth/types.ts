@@ -35,9 +35,9 @@ export interface IReg {
   email: string;
   firstName: string;
   lastName?: string;
-  password?: string | null;
+  password?: string 
+  profilePicture?: string | null
   role: "USER" 
-  profilePicture?: string | null;
   emailVerified?: boolean;
   verifiedDate?: Date;
 }
@@ -71,7 +71,6 @@ export interface IupdateProfile {
   email?: string;
   firstName?: string;
   lastName?: string;
-  password?: string;
   phoneNumber?: number;
 }
 // Common reusable rules
@@ -105,6 +104,7 @@ const regValidationSchema = Joi.object({
   email: emailRule,
   password: passwordRule,
   firstName: usernameRule,
+  lastName: usernameRule,
   role: roleRule,
 });
 
@@ -144,6 +144,11 @@ const updateProfileSchema = Joi.object({
     'number.max': 'Phone Number should not exceed 15 digits'})
 })
 
+const validatePasswordSchema = Joi.object({
+  password: passwordRule
+})
+
+
 // Validate Email
 export const isEmail = (data: { email: string }) => {
   const { error, value } = EmailValidationSchema.validate(data, {abortEarly: false});
@@ -154,7 +159,7 @@ export const isEmail = (data: { email: string }) => {
 };
 
 // Validate Registration
-export const validateRegistrationInput = (data: IReg) => {
+export const validateRegistrationInput = (data: any) => {
   const { error, value } = regValidationSchema.validate(data,{ abortEarly: false });
   if (error) {
     throw new ErrorHandlers().ValidationError(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
@@ -186,4 +191,13 @@ export const validateUpdateProfileInput= (data: IupdateProfile)=> {
     throw new ErrorHandlers().ValidationError(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
   }
   return value
+}
+
+export const validatePassword = (password: string)=>{
+  const { error, value } =  validatePasswordSchema.validate({password}, {abortEarly: false})
+  if (error) {
+    throw new ErrorHandlers().ValidationError(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
+  }
+  return value
+
 }

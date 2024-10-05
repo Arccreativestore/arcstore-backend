@@ -6,6 +6,7 @@ import {
   isEmail,
   IupdateProfile,
   registerResponse,
+  validatePassword,
   validateresetInput,
   validateUpdateProfileInput,
 } from "./types";
@@ -33,6 +34,7 @@ import { verifyEmail } from "../../utils/mails/verifyMail";
 import { resolve } from "path";
 import { isValidObjectId, ObjectId } from "mongoose";
 import { verifyEmailPayload } from "./helper";
+import Joi from "joi";
 
 
 //REGISTER MUTATION
@@ -42,15 +44,7 @@ export const registerMutation = {
   
     try {
      
-      if(lastName)
-      {
-        if(typeof lastName !== "string")
-        {
-          throw new ErrorHandlers().UserInputError("Please Enter a valid Last name")
-        }
-      }
-
-      validateRegistrationInput({email, password, firstName, role});
+      validateRegistrationInput({email, password, firstName, lastName, role});
       const findEmail = await new UserDatasource().findByEmail(email);
       if (findEmail) throw new ErrorHandlers().ConflicError("User already exists");
       const createUser = await new UserDatasource().userRegistration(data);
@@ -273,17 +267,58 @@ async function handleProfileUpdate(_id: ObjectId , data: any, email?: string){
   return { status: "success", message: "Profile updated" };
 }
 
+const setPasswordAfter3rdPartyAuth = {
 
-const dummyQuery= {
-  me(){
-    return 'Hello world'
+    async setPasswordAfter3rdPartyAuth(__: any, {data}:{data: {password: string}}, context: {user: User}){
+
+          try {
+            
+          const userId = context?.user?._id
+          if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
+          const password = data?.password
+          validatePassword(password)
+          return await new UserDatasource().setPassword(userId, password)
+
+          } catch (error) {
+            throw error
+          }
+    }
+}
+
+const updatePassword = {
+
+  async updatePassword(__: any, {data}: {data:{oldPassword: string, newPassword: string}}, context: {user: User}){
+    try {
+            
+      const userId = context?.user?._id
+      if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
+      const { oldPassword, newPassword } = data;
+      validatePassword(oldPassword);
+      validatePassword(newPassword);
+
+      const user = await new UserDatasource().findById(userId);
+      if (!user) throw new ErrorHandlers().NotFound("User not found");
+
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) throw new ErrorHandlers().AuthenticationError("Old password is incorrect");
+
+      if (oldPassword === newPassword) throw new ErrorHandlers().UserInputError("New password cannot be the same as the old password");
+
+      const hashedNewPassword = await bcrypt.hash(newPassword, 12);
+      return await new UserDatasource().setPassword(userId, hashedNewPassword);
+      
+
+      } catch (error) {
+        throw error
+      }
   }
 }
 
 export const authQuery = {
- ...dummyQuery,
  ...verifyUserQuery,
- ...requestEmailVerification
+ ...requestEmailVerification,
+ ...updatePassword,
+ ...setPasswordAfter3rdPartyAuth
 };
 
 export const authMutations = 
