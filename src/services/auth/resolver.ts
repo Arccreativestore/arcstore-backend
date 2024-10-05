@@ -35,6 +35,7 @@ import { resolve } from "path";
 import { isValidObjectId, ObjectId } from "mongoose";
 import { verifyEmailPayload } from "./helper";
 import Joi from "joi";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 
 //REGISTER MUTATION
@@ -235,15 +236,19 @@ const updateProfile = {
         if(!user) throw new ErrorHandlers().AuthenticationError("Please Login to Proceed")
         const { _id } = user
         validateUpdateProfileInput(data)
+        let phoneNumber
+        if(data.phoneNumber) phoneNumber = parsePhoneNumberFromString(data.phoneNumber)
+        delete data.phoneNumber 
+        console.log(data)
         const  email  = data?.email
         if(email) {
           const userExist = await new UserDatasource().findByEmail(email)
           if(userExist) throw new ErrorHandlers().ConflicError('This Email is Already In Use')
-          const newData = { emailVerified: false, verifiedDate: '', ...data}
+          const newData = { emailVerified: false, verifiedDate: '', phoneNumber, ...data}
           return handleProfileUpdate(_id, newData, email)
         }
-
-        return handleProfileUpdate(_id, data)
+        const newData = {phoneNumber, ...data}
+        return handleProfileUpdate(_id, newData)
 
       } catch (error) {
         throw error

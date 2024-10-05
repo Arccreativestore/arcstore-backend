@@ -71,7 +71,7 @@ export interface IupdateProfile {
   email?: string;
   firstName?: string;
   lastName?: string;
-  phoneNumber?: number;
+  phoneNumber?: string;
 }
 // Common reusable rules
 
@@ -138,10 +138,10 @@ const updateProfileSchema = Joi.object({
   .messages({
     'string.min': 'Please enter a valid username (minimum 3 characters)',
   }),
-  PhoneNumber: Joi.number().min(4).max(15)
+  PhoneNumber: Joi.string().min(4).max(15)
   .messages({
-    'number.min': 'phone Number cannot be less than 3 digits', 
-    'number.max': 'Phone Number should not exceed 15 digits'})
+    'string.min': 'phone Number cannot be less than 3 digits', 
+    'string.max': 'Phone Number should not exceed 15 digits'})
 })
 
 const validatePasswordSchema = Joi.object({

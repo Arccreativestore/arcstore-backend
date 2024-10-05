@@ -67,3 +67,8 @@
   "syscall": "querySrv",
   "hostname": "_mongodb._tcp.cluster0.wfrdpqg.mongodb.net"
 }
+2024-10-05T17:12:27.483Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
