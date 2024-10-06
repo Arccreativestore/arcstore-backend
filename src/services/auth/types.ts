@@ -68,10 +68,11 @@ export interface IVerifyUserMutation {
 }
 
 export interface IupdateProfile {
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  phoneNumber?: number;
 }
 // Common reusable rules
 

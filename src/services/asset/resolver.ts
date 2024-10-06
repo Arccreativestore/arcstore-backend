@@ -92,7 +92,30 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     return await new AssetDatasource().getLikeCount(assetId)
   },
 
+  async assetComment(__: unknown, {data}: {data: {assetId: string, comment: string}}, context: context){
 
+    const user = context?.user
+    if(!user || !user._id) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
+    const assetId = data?.assetId
+    const comment = data?.comment
+    const userId = user?._id
+    validateMongoId(assetId)
+
+    return await new AssetDatasource().assetComment(userId, assetId, comment)
+  },
+
+  async deleteComment(__: unknown, { data }: { data: {assetId: string, commentId: string}}, context: context){
+
+    const user = context?.user
+    if(!user || !user._id) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
+    const assetId = data?.assetId
+    const _id = data?.commentId
+    const userId = user?._id
+    validateMongoId(assetId)
+    validateMongoId(_id)
+
+    return await new AssetDatasource().deleteComment(_id, assetId, userId)
+  },
   //CREATOR's PAYMENT METHOD
   async updateCreatorsPaymentMethod(_:unknown, {id, input}:{id:string, input: PaymentMethodInput}, context: context ){
     return await new AssetDatasource().updatePaymentMethod(id, input, context.user._id.toString()
@@ -108,8 +131,12 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     return await new AssetDatasource().deletePaymentMethod(id)
   },
 
+};
 
-}
+
+
+
+
 export const AssetQuery = {
   
   async getAllCategory(){

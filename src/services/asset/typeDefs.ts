@@ -18,6 +18,8 @@ const AssetType = gql`
     addCreatorsPaymentMethod(input: PaymentMethodInput!): PaymentMethod!
     updateCreatorsPaymentMethod(id: ID!, input: PaymentMethodInput!): PaymentMethod!
     deleteCreatorsPaymentMethod(id: ID!): Boolean!
+    assetComment(data: Icomment!): Comment!
+    deleteComment(data: IdeleteComment!): General!
   }
 
 
@@ -108,6 +110,15 @@ input IAddAssetInput{
   declined
   }
 
+  input Icomment {
+    assetId: String, 
+    comment: String
+  }
+
+  input IdeleteComment {
+    assetId: String, 
+    commentId: String
+  }
   input IUpdateCategoryInput{
     categoryId:ID!
     title:String
@@ -127,7 +138,14 @@ input IAddAssetInput{
   count: Int
   total: Int
 }
+type Comment {
+  assetId: ID
+  userId: ID
+  comment: String
+  createdAt:DateTime
+  updatedAt:DateTime
 
+}
 type IFile {
   _id: ID!
   key: String

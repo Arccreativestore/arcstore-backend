@@ -13,6 +13,7 @@ import { logger } from '../../config/logger';
 import AssetModel from '../../models/asset';
 import { relativeTimeRounding } from 'moment';
 import __PaymentMethod, { IPaymentMethod, PaymentMethodEnum } from '../../models/paymentMethod'
+import commentsModel from '../../models/assetsComment';
 
 
 
@@ -330,6 +331,22 @@ class AssetDatasource extends Base {
     return findAll
   }
 
+
+  async assetComment(userId: ObjectId, assetId: string, comment: string){
+    const create = await commentsModel().create({
+      assetId,
+      userId,
+      comment
+    })
+
+    return create ? create.toObject() : null
+  }
+
+  async deleteComment(_id: string, assetId: string, userId: ObjectId){
+    const remove = await commentsModel().findOneAndDelete({_id,assetId,userId})
+    if(remove) return {message: 'Coment deleted successfully', status: "success"} 
+    else { throw new ErrorHandlers().NotFound('comment not found') }
+  }
 
   async getExternalAsset(platform:PlatformEnum, params:QueryParams){
     return await new AssetFetcher(platform).fetchAssets(params)
