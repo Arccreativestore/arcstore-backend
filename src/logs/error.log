@@ -63,17 +63,52 @@
 2024-09-30T22:11:01.577Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
 2024-09-30T22:58:31.960Z [31merror[39m: Reused Token Detected, Please Login to Continue
 2024-10-01T00:35:06.467Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
+<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
+=======
+2024-10-04T05:38:15.214Z [31merror[39m: Error Adding Default Permission Attempted to check out a connection from closed connection pool
+2024-10-04T05:40:08.165Z [31merror[39m: Error Adding Default Permission Operation `permissions.countDocuments()` buffering timed out after 10000ms
+2024-10-04T07:14:52.951Z [31merror[39m: Uncaught Exception: {
+>>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
+<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
+=======
+2024-10-04T07:14:52.963Z [31merror[39m: Uncaught Exception: {
+>>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
+<<<<<<< HEAD
 2024-10-06T21:16:26.503Z [31merror[39m: Uncaught Exception: {
+=======
+2024-10-04T07:14:52.956Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-04T19:04:30.743Z [31merror[39m: Error Adding Default Permission Operation `permissions.countDocuments()` buffering timed out after 10000ms
+2024-10-04T22:58:00.906Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-04T22:58:00.919Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-05T01:05:39.400Z [31merror[39m: Uncaught Exception: {
+  "code": "ETIMEOUT",
+  "syscall": "querySrv",
+  "hostname": "_mongodb._tcp.cluster0.wfrdpqg.mongodb.net"
+}
+2024-10-05T17:12:27.483Z [31merror[39m: Uncaught Exception: {
+>>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"

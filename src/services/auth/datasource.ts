@@ -118,4 +118,16 @@ export class UserDatasource extends Base {
         throw error
       }
   }
+
+  async setPassword(_id: ObjectId, password: string){
+    try {
+      
+    const find = await userModel().updateOne({_id}, {$set: {password}})
+    if(find) return {status: "success", message: "password updated successfully"}
+    throw new Error('server error')
+
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }

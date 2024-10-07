@@ -13,63 +13,75 @@ const UserType = gql`
   type Query {
     me: String
     verifyAccount(data: IToken): General!
+    updatePassword(data: IupdatePassword!): General!
+    setPasswordAfter3rdPartyAuth(data: IsetPassword!): General!
     requestEmailVerification(data: IEmail!): General!
   }
 
-  enum IuserType {
-    USER
-  }
+enum IuserType {
+   USER
+}
 
-  input iRegister {
-    email: String!
-    firstName: String!
-    lastName: String
-    password: String!
-    role: IuserType!
-  }
+input iRegister {
+  email: String!
+  firstName: String!
+  lastName: String
+  password: String!
+  role: IuserType!
+}
 
-  input ILogin {
-    email: String!
-    password: String!
-  }
+input IupdatePassword {
+  oldPassword: String
+  newPassword: String
+}
+
+input IsetPassword {
+  password: String
+}
+
+input ILogin {
+  email: String!
+  password: String!
+}
   
-  input IEmail{
+input IEmail{
   email:String!
-  }
+}
 
- input IToken {
+input IToken {
   token: String 
 }
-  input IresetPassword{
-    email: String!
-    newPassword: String!
-    token:String!
-  }
 
-  input IupdateProfile {
+input IresetPassword{
+  email: String!
+  newPassword: String!
+  token:String!
+}
+
+input IupdateProfile {
   email: String
   firstName: String
   lastName: String
   phoneNumber: Int
-  }
+}
 
-  type User {
-    status: String!
-    _id: ID!
-    email: String!
-    firstName: String!
-    lastName: String
-    role: String!
-  }
+type User {
+  status: String!
+  _id: ID!
+  email: String!
+  firstName: String!
+  lastName: String
+  role: String!
+}
 
-  type General {
-    status: String!
-    message: String!
-  }
+type General {
+  status: String!
+  message: String!
+}
 
-  type AuthToken {
-    accessToken: String!
-  }
+type AuthToken {
+  accessToken: String!
+}
 `;
 
 export default UserType;

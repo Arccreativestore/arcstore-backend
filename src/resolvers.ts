@@ -8,6 +8,7 @@ import {
 } from "./services/permission/resolver";
 import { AssetMutation, AssetQuery } from "./services/asset/resolver";
 import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription/resolver";
+import { creatorMutation } from "./services/creators/resolvers";
 
 const Mutation = {
   ...authMutations,
@@ -27,6 +28,7 @@ const Query = {
   ...faqQueries,
   ...AssetQuery,
   ...SubscriptionQuery,
+  ...creatorMutation
 };
 
 export { Mutation, Query };

@@ -9,6 +9,7 @@ type Query{
     getSubcriptionHistory: subHistoryResponse
     disableUserAccount: General
     deleteUserAccount: General
+    getUserProfile: getUserProfile!
 }
 
 type AssetsResponse {
@@ -48,6 +49,18 @@ type General {
     status: String
     message: String
 }
+
+type getUserProfile {
+_id: ID
+firstName: String
+lastName: String
+emailVerified: Boolean
+email: String
+verifiedDate: Date
+role: String
+phoneNumber: String
+}
+
 type subAssets{
 title: String
 description: String

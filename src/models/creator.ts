@@ -6,9 +6,13 @@ export interface Icreator extends Document {
     userId: ObjectId
     firstName: string
     lastName: string
+    country: string
+    city: string
     address: string
-    phoneNumber: number
+    postalCode: string
+    phoneNumber: string
     disabled: boolean
+    isPrivate: boolean
     followers?: ObjectId[]
     followersRequest?: ObjectId[]
 }
@@ -19,6 +23,7 @@ interface IcreatorModel extends Model<Icreator>{
 const schema = new Schema<Icreator>({
     userId: {
         type: Schema.Types.ObjectId,
+        unique: true,
         ref: 'users'
     },
 
@@ -32,6 +37,24 @@ const schema = new Schema<Icreator>({
         trim: true
     },
 
+    country: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    city: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    postalCode:{
+        type: String,
+        required: true,
+        trim: true
+    },
+
     address: {
         type: String,
         required: true,
@@ -39,12 +62,18 @@ const schema = new Schema<Icreator>({
     },
 
     phoneNumber: {
-        type: Number,
+        type: String,
         required: true
     },
-
+    
+    isPrivate: {
+        type: Boolean,
+        default: false
+    },
+    
     followers: [{type: Schema.Types.ObjectId, ref: 'users'}],
     followersRequest: [{type: Schema.Types.ObjectId, ref: 'users'}],
+
     disabled: {
         type: Boolean,
         default: false
