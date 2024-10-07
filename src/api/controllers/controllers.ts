@@ -8,9 +8,10 @@ class apiControllers {
 
     async googleCallback(req: Request, res: Response, next: NextFunction) {
       const {accessToken } = req.user as { accessToken: string }
+        console.log("hello")
         if(accessToken)
         {
-          return res.status(200).json({accessToken})          
+          res.redirect(`https://arcstore-frontend.fly.dev/explore?accessToken=${accessToken}`)         
         }
         throw new Error('Error signing up at this time')
       }

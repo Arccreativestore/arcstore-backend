@@ -11,6 +11,14 @@ import { Icreator } from "../../models/creator";
 import { UserDatasource } from "../auth/datasource";
 
 
+const getUserProfile = {
+    async getUserProfile(__:any, args: any, context: {user: User}){
+      const userId = context?.user?._id
+      if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
+      return await new UserDatasource().findById(userId)
+    }
+}
+
 
 const downloadsQuery = {
 
@@ -113,7 +121,8 @@ const UserQueries =  {
   ...purchaseHistoryQuery,
   ...subscriptionQuery,
   ...disableUserAccount,
-  ...deleteUserAccount
+  ...deleteUserAccount,
+  ...getUserProfile
 }
 
 export default UserQueries

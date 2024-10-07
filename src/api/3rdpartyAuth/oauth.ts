@@ -71,7 +71,6 @@ class PassportGoogleAuth extends UserDatasource {
           
             const payload = { id: user._id };
             const jwtAccessToken = jwt.sign(payload, ACCESS_SECRETKEY as string, { expiresIn: '1h' });
-
             const tokenId = crypto.randomBytes(16).toString('hex');
             const jwtRefreshToken = jwt.sign({ ...payload, tokenId }, REFRESH_SECRETKEY as string, { expiresIn: '7d' });
             const expiresAt = Date.now()+ 7 * 24 * 60 * 60 * 1000
@@ -85,9 +84,7 @@ class PassportGoogleAuth extends UserDatasource {
               secure: process.env.NODE_ENV === "production",
               expires: new Date(expiresAt), // 7 days
             });
-          
-
-           console.log('hello')
+            //console.log('hello')
             return done(null, { accessToken: jwtAccessToken });
           } catch (err: any) {
             logger.error(`OAuth Error: ${err.message}`);

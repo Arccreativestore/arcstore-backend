@@ -63,3 +63,18 @@
 2024-09-30T22:11:01.577Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
 2024-09-30T22:58:31.960Z [31merror[39m: Reused Token Detected, Please Login to Continue
 2024-10-01T00:35:06.467Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
+2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-06T21:16:26.503Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
