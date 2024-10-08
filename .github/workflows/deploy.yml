@@ -1,0 +1,99 @@
+name: Deploy Node.js App to EC2
+
+on:
+  push:
+    branches:
+      - main  # Deploy when changes are pushed to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install SSH Key
+      run: |
+        echo "${{ secrets.EC2_KEY }}" | base64 --decode > ec2_key.pem
+        chmod 400 ec2_key.pem
+
+    - name: SSH into EC2 and Deploy Node.js Server
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          
+          # Navigate to the Node.js app directory or clone the repo
+          if [ ! -d "/var/www/node-app" ]; then
+            git clone git@github.com:Arccreativestore/arcstore-backend.git /var/www/node-app
+          fi
+          cd /var/www/node-app
+
+          # Ensure correct branch
+          git checkout main
+          
+          # Pull the latest changes
+          git pull origin main
+
+          # Install Yarn if not installed
+          if ! command -v yarn &> /dev/null; then
+            npm install -g yarn
+          fi
+
+          # Install dependencies using Yarn
+          yarn install --frozen-lockfile
+
+          # Export environment variables from GitHub Secrets
+          cat << 'ENV' > .env
+          PORT=${{ secrets.PORT }}
+          MONGO_URI=${{ secrets.MONGO_URI }}
+          ACCESS_SECRETKEY=${{ secrets.ACCESS_SECRETKEY }}
+          REFRESH_SECRETKEY=${{ secrets.REFRESH_SECRETKEY }}
+          VERIFY_SECRETKEY=${{ secrets.VERIFY_SECRETKEY }}
+          G_HOST=${{ secrets.G_HOST }}
+          G_USER=${{ secrets.G_USER }}
+          G_PORT=${{ secrets.G_PORT }}
+          G_PASSWORD=${{ secrets.G_PASSWORD }}
+          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_HOSTNAME_URL=${{ secrets.AWS_HOSTNAME_URL }}
+          AWS_REGION=${{ secrets.AWS_REGION }}
+          VERIFYEMAIL_SECRETKEY=${{ secrets.VERIFYEMAIL_SECRETKEY }}
+          FACEBOOK_APP_ID=${{ secrets.FACEBOOK_APP_ID }}
+          FACEBOOK_APP_SECRET=${{ secrets.FACEBOOK_APP_SECRET }}
+          GOOGLE_CALLBACK_URL=${{ secrets.GOOGLE_CALLBACK_URL }}
+          FACEBOOK_CALLBACK_URL=${{ secrets.FACEBOOK_CALLBACK_URL }}
+          MJ_SECRETKEY=${{ secrets.MJ_SECRETKEY }}
+          MJ_APIKEY=${{ secrets.MJ_APIKEY }}
+          PAYSTACK_BASE_URL=${{ secrets.PAYSTACK_BASE_URL }}
+          PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }}
+          PAYSTACK_PUBLIC_KEY=${{ secrets.PAYSTACK_PUBLIC_KEY }}
+          ADOBE_BASE_URL=${{ secrets.ADOBE_BASE_URL }}
+          ADOBE_API_KEY=${{ secrets.ADOBE_API_KEY }}
+          PINTEREST_BASE_URL=${{ secrets.PINTEREST_BASE_URL }}
+          PINTEREST_API_KEY=${{ secrets.PINTEREST_API_KEY }}
+          BEHANCE_BASE_URL=${{ secrets.BEHANCE_BASE_URL }}
+          BEHANCE_API_KEY=${{ secrets.BEHANCE_API_KEY }}
+          DRIBBLE_BASE_URL=${{ secrets.DRIBBLE_BASE_URL }}
+          DRIBBLE_API_KEY=${{ secrets.DRIBBLE_API_KEY }}
+          FREEPIK_BASE_URL=${{ secrets.FREEPIK_BASE_URL }}
+          FREEPIK_API_KEY=${{ secrets.FREEPIK_API_KEY }}
+          INSTAGRAM_BASE_URL=${{ secrets.INSTAGRAM_BASE_URL }}
+          INSTAGRAM_API_KEY=${{ secrets.INSTAGRAM_API_KEY }}
+          TIKTOK_BASE_URL=${{ secrets.TIKTOK_BASE_URL }}
+          TIKTOK_API_KEY=${{ secrets.TIKTOK_API_KEY }}
+          MOBBIN_BASE_URL=${{ secrets.MOBBIN_BASE_URL }}
+          MOBBIN_API_KEY=${{ secrets.MOBBIN_API_KEY }}
+          ENVATO_BASE_URL=${{ secrets.ENVATO_BASE_URL }}
+          ENVATO_API_KEY=${{ secrets.ENVATO_API_KEY }}
+          YANDEX_BASE_URL=${{ secrets.YANDEX_BASE_URL }}
+          YANDEX_API_KEY=${{ secrets.YANDEX_API_KEY }}
+          Dribble_Client_ID=${{ secrets.Dribble_Client_ID }}
+          Client_Secret=${{ secrets.Client_Secret }}
+          ENV
+
+          # Start or restart the Node.js app using PM2
+          pm2 restart all || pm2 start yarn --name "node-app" -- run start
+        EOF
