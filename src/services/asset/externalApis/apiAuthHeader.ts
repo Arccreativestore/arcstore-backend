@@ -63,6 +63,7 @@ export const apiAuthHeader = {
   },
 };
 
+
 export enum PlatformEnum {
   AdobeStock = "adobeStock",
   Pinterest = "pinterest",
