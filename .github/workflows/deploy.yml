@@ -94,6 +94,7 @@ jobs:
           Client_Secret=${{ secrets.Client_Secret }}
           ENV
 
+
           # Start or restart the Node.js app using PM2
           pm2 restart all || pm2 start yarn --name "node-app" -- run start
         EOF
