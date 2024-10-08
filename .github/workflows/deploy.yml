@@ -25,7 +25,7 @@ jobs:
 
     - name: SSH into EC2 and Deploy Node.js Server
       run: |
-        ssh -o StrictHostKeyChecking=no -i arc-access.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i arc-access.pem ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
           
           # Navigate to the Node.js app directory or clone the repo
           if [ ! -d "/var/www/node-app" ]; then
@@ -39,16 +39,16 @@ jobs:
           # Pull the latest changes
           git pull origin main
 
-          # Install specific version of Node.js using nvm
-          nvm install 18.12.0  # Install Node.js version 18.12.0 on the server
+          # Install specific version of Node.js using nvm with sudo
+          sudo NVM_DIR="$HOME/.nvm" bash -c "source $NVM_DIR/nvm.sh; nvm install 18.12.0"
 
-          # Install Yarn if not installed
+          # Install Yarn globally with sudo
           if ! command -v yarn &> /dev/null; then
-            npm install -g yarn
+            sudo npm install -g yarn
           fi
 
-          # Install dependencies using Yarn
-          yarn install --frozen-lockfile
+          # Install dependencies using Yarn with sudo
+          sudo yarn install --frozen-lockfile
 
           # Export environment variables from GitHub Secrets
           cat << 'ENV' > .env
@@ -80,6 +80,11 @@ jobs:
           MJ_APIKEY=${{ secrets.MJ_APIKEY }}
           MJ_SECRETKEY=${{ secrets.MJ_SECRETKEY }}
           ENV
+
+          # Install PM2 globally with sudo
+          if ! command -v pm2 &> /dev/null; then
+            sudo npm install -g pm2
+          fi
 
           # Start or restart the Node.js app using PM2
           pm2 restart all || pm2 start yarn --name "node-app" -- run start
