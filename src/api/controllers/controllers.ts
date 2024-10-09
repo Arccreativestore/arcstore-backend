@@ -6,6 +6,7 @@ import { BadreqError } from "../errorClass";
 
 class apiControllers {
 
+  
     async googleCallback(req: Request, res: Response, next: NextFunction) {
       const {accessToken } = req.user as { accessToken: string }
         console.log("hello")
