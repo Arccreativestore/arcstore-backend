@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 const UserType = gql`
   type Mutation {
     userRegistration(data: iRegister!): User!
-    Login(data: ILogin!): AuthToken!
+    Login(data: ILogin!): AuthToken
     forgotPassword(data: IEmail!): General!
     resetPassword(data: IresetPassword!): General!
     updateUserProfile(data: IupdateProfile): General!
@@ -81,7 +81,9 @@ type General {
 }
 
 type AuthToken {
-  accessToken: String!
+  accessToken: String
+  status: String
+  message: String
 }
 `;
 

@@ -134,7 +134,6 @@ export const loginUserMutation = {
       if(userExist._2fa) { 
         let otp = generateOTP() 
           // store otp in database 
-        console.log(otp)
         const saveOtp = await new _2faDatasource().saveOtp(otp, userExist._id)
         if(!saveOtp) throw new Error('could not send otp at this time')
           // send otp in email to client
