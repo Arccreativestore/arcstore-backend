@@ -99,6 +99,7 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     const assetId = data?.assetId
     const comment = data?.comment
     const userId = user?._id
+    notifyCreator(userId, assetId, "commented")
     validateMongoId(assetId)
 
     return await new AssetDatasource().assetComment(userId, assetId, comment)

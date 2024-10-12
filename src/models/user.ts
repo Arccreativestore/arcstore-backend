@@ -12,6 +12,7 @@ export interface IAccount extends Document {
   profilePicture: string;
   firstName: string;
   lastName: string;
+  _2fa: boolean
   phoneNumber: number;
   permissionGroup?: ObjectId[];
   permissions?: string[];
@@ -66,6 +67,11 @@ const UserSchema: Schema = new Schema<IAccount>(
       trim: true,
     },
 
+    _2fa: {
+      type: Boolean,
+      default: false
+    },
+    
     permissionGroup: {
       type: [Schema.Types.ObjectId],
     },

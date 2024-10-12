@@ -15,6 +15,8 @@ export interface dbResponse {
   profilePicture: string;
   firstName: string;
   lastName: string;
+  _2fa: boolean
+  disabled: boolean
   permissionGroup?: ObjectId[];
 }
 export interface registerResponse {

@@ -113,3 +113,16 @@
   "code": "EIO",
   "syscall": "write"
 }
+2024-10-09T15:35:16.674Z [31merror[39m: Error Adding Default Permission Operation `permissions.countDocuments()` buffering timed out after 10000ms
+2024-10-10T01:11:07.732Z [32minfo[39m: Default Permission Added
+2024-10-10T01:12:34.299Z [31merror[39m: Error sending email:
+2024-10-10T08:05:38.476Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-10T08:05:38.494Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}

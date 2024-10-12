@@ -9,6 +9,7 @@ import {
 import { AssetMutation, AssetQuery } from "./services/asset/resolver";
 import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription/resolver";
 import { creatorMutation } from "./services/creators/resolvers";
+import { _2faMutation, _2faQuery } from "./services/_2fa/resolvers";
 
 const Mutation = {
   ...authMutations,
@@ -17,7 +18,8 @@ const Mutation = {
   ...faqMutations,
   ...AssetMutation,
   ...SubscriptionMutation,
-  ...AssetMutation
+  ...AssetMutation,
+  ..._2faMutation
 };
 
 const Query = {
@@ -28,7 +30,8 @@ const Query = {
   ...faqQueries,
   ...AssetQuery,
   ...SubscriptionQuery,
-  ...creatorMutation
+  ...creatorMutation,
+  ..._2faQuery
 };
 
 export { Mutation, Query };
