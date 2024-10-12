@@ -140,10 +140,14 @@ export const creatorMutation = {
     } catch (error) {
         throw error
     }
- }
+ },
 
+    async getCreatorProfile(__: any, args: any, context: {user: User}){
 
+        const userId = context?.user?._id
+        if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
+        return await new CreatorDatasource().findCreatorByUserId(userId)  
+    }
     
 }
-
 

@@ -6,6 +6,7 @@ export interface Icreator extends Document {
     userId: ObjectId
     firstName: string
     lastName: string
+    bio: string
     country: string
     city: string
     address: string
@@ -53,6 +54,12 @@ const schema = new Schema<Icreator>({
         type: String,
         required: true,
         trim: true
+    },
+    
+    bio: {
+        type: String,
+        trim: true,
+        required: true
     },
 
     address: {

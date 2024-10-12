@@ -8,6 +8,7 @@ const UserType = gql`
     forgotPassword(data: IEmail!): General!
     resetPassword(data: IresetPassword!): General!
     updateUserProfile(data: IupdateProfile): General!
+   
   }
 
   type Query {
