@@ -27,7 +27,7 @@ export class UserDatasource extends Base {
 
   async findById(_id: ObjectId){
     try {
-      const find = await userModel().findById(_id)
+      const find = await userModel().findById(_id).select('-password')
       return find ? find.toObject() : null
     } catch (error) {
       logger.error(error)
@@ -130,4 +130,5 @@ export class UserDatasource extends Base {
       logger.error(error)
     }
   }
+
 }
