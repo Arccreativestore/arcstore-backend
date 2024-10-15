@@ -1,23 +1,23 @@
-
+# Use a Node.js base image
 FROM node:18.12.0
 
-# Create and change to the app directory
+# Set the working directory
 WORKDIR /usr/src/app
 
 # Copy package.json and yarn.lock
-COPY package.json .
+COPY package.json yarn.lock ./
 
 # Install dependencies using Yarn
-RUN npm install
+RUN yarn install --production
 
 # Copy the rest of the application code
 COPY . .
 
-# Build the TypeScript files
-RUN npm run build
+# Build the project (if you're using TypeScript, ensure the build script is correctly set up in package.json)
+RUN yarn build
 
-# Expose the port specified in the environment variable
+# Expose the port
 EXPOSE 3000
 
-# Command to run the app
-CMD ["npm", "start"]
+# Start the app
+CMD ["yarn", "start"]
