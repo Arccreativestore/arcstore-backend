@@ -108,6 +108,7 @@ export class AssetDetailsFetcher {
   }
 
   private async getFreepikAssetDetails(endpoint: string, category: string) {
+  
     const customHeaders = {
       'x-freepik-api-key': FREEPIK_API_KEY as string,
     };

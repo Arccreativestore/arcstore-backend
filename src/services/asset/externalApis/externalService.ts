@@ -3,6 +3,7 @@ import { apiAuthHeader, PlatformEnum } from './apiAuthHeader';
 import { logger } from '../../../config/logger';
 import { FREEPIK_API_KEY, FREEPIK_BASE_URL } from '../../../config/config';
 import { errorMonitor } from 'node-cache';
+import { ErrorHandlers } from '../../../helpers/errorHandler';
 
 export interface QueryParams {
   query: string;  // Search term
@@ -32,11 +33,12 @@ export class AssetFetcher {
     customHeaders?: CustomHeaders 
   ): Promise<AxiosResponse | undefined> {
     try {
+    
       const api = this.apis[platform];
-
-      if (!api) {
-        throw new Error(`API for platform ${platform} is not configured`);
-      }
+      console.log(this.apis, )
+      // if (!api) {
+      //   throw new ErrorHandlers().NotFound(`API for platform ${platform} is not configured`);
+      // }
       let headers 
       if(customHeaders){
         headers = customHeaders
@@ -58,8 +60,12 @@ export class AssetFetcher {
 
       const response = await axios(config);
       return response.data
-    } catch (error) {
+    } catch (error:any) {
+      if(error?.message){
+        throw new ErrorHandlers().ValidationError(error.message)    
+        }
       console.log(JSON.stringify({error}, null, 2))
+
       logger.error(`Error fetching from ${platform}: ${error}`);
       return undefined;
     }
@@ -69,7 +75,6 @@ export class AssetFetcher {
   public async fetchAssets(
     params: QueryParams
   ) {
-
     switch (this.platform) {
       case PlatformEnum.AdobeStock:
         return this.getAdobeStockAssets(params);
@@ -114,11 +119,13 @@ export class AssetFetcher {
   }
 
   private async getFreepikAssets(params: QueryParams) {
+    
     const {category, ...rest} = params
 
     const customHeaders = {
       'x-freepik-api-key': FREEPIK_API_KEY as string,
     }
+    console.log(PlatformEnum.Freepik)
     return await this.makeRequest(PlatformEnum.Freepik, category as string, rest, customHeaders);
   }
 
@@ -141,5 +148,7 @@ export class AssetFetcher {
   private async getYandexAssets(params: QueryParams ) {
     return await this.makeRequest(PlatformEnum.Yandex, 'search', params);
   }
+
+
 }
 
