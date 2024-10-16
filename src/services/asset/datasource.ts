@@ -14,6 +14,7 @@ import AssetModel from '../../models/asset';
 import { relativeTimeRounding } from 'moment';
 import __PaymentMethod, { IPaymentMethod, PaymentMethodEnum } from '../../models/paymentMethod'
 import commentsModel from '../../models/assetsComment';
+import { DownloadService } from './externalApis/download';
 
 
 
@@ -455,6 +456,10 @@ async  getAssetAnalytics(authorId: string) {
      return false
   }
 
+
+  async downloadAsset(platform: PlatformEnum, relativePath:string, itemId:string, itemFormat?:string){
+    return await new DownloadService().downloadFreePikAsset(platform, relativePath, itemId, itemFormat)
+  }
 
 
 }

@@ -34,11 +34,29 @@ const AssetType = gql`
     getFreePikAssetDetails(platform:PlatformEnum! params:IDetailsParams):JSON
     getUploadStatusStatistics:[IUploadStatusStatistics]
     getAssetAnalytics:[AssetAnalytics]
+    getDownloadLink(platform:PlatformEnum! assetType:IFreePickCategory! itemId:String! itemFormat:String):DownloadResponse
 
      #CREATORS
     getCreatorsPaymentMethods(userId: ID!): [PaymentMethod!]!
   }
 
+  type DownloadResponse{
+  filename:String
+  url:String}
+
+  enum ItemEnum{
+  psd
+  ai
+  eps
+  atn
+  fonts
+  resources
+  png
+  jpg
+  render
+  svg
+  mockup 
+  }
 
   type AssetAnalytics {
     _id: ID!         
