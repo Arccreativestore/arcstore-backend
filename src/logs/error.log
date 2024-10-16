@@ -125,3 +125,13 @@
   "code": "EIO",
   "syscall": "write"
 }
+2024-10-15T13:43:08.947Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:43:10.384Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:43:21.417Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:43:30.958Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:43:39.426Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:45:33.153Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:46:56.656Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:47:37.821Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:48:23.617Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
+2024-10-15T13:49:05.298Z [31merror[39m: Error fetching from freepik: API for platform freepik is not configured
