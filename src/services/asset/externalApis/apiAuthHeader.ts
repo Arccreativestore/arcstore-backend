@@ -6,8 +6,8 @@ import {
   // DRIBBLE_BASE_URL,
   // ENVATO_API_KEY,
   // ENVATO_BASE_URL,
-  // FREEPIK_API_KEY,
-  // FREEPIK_BASE_URL,
+  FREEPIK_API_KEY,
+  FREEPIK_BASE_URL,
   // INSTAGRAM_API_KEY,
   // INSTAGRAM_BASE_URL,
   // MOBBIN_API_KEY,
@@ -37,10 +37,10 @@ export const apiAuthHeader = {
   //   baseUrl: DRIBBLE_BASE_URL || "",
   //   authHeader: `Bearer ${DRIBBLE_API_KEY || ""}`,
   // },
-  // freepik: {
-  //   baseUrl: FREEPIK_BASE_URL || "",
-  //   authHeader: `Bearer ${FREEPIK_API_KEY || ""}`,
-  // },
+  freepik: {
+    baseUrl: FREEPIK_BASE_URL || "",
+    authHeader: `Bearer ${FREEPIK_API_KEY || ""}`,
+  },
   // instagram: {
   //   baseUrl: INSTAGRAM_BASE_URL || "",
   //   authHeader: `Bearer ${INSTAGRAM_API_KEY || ""}`,
