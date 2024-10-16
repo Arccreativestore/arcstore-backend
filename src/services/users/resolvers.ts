@@ -38,6 +38,7 @@ const downloadsQuery = {
 
 const savedAssetsQuery = {
 
+
     async getsavedAssets(__: any, args: any, context: {user: User}){
         
       try {
@@ -47,6 +48,39 @@ const savedAssetsQuery = {
       } catch (error) {
         throw error
       }
+    },
+
+    async saveAsset(__: any, {data}: {data: {assetId: string}}, context: { user: User}){
+     try {
+      const assetId = data.assetId
+      validateMongoId(assetId)
+      const userId = context.user?._id;
+      if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
+      const assetAlreadySaved = await new datasource().assetAlreadySaved(userId, assetId)
+      if(assetAlreadySaved) throw new ErrorHandlers().ConflicError('Asset already saved')
+      const save = await new datasource().saveAsset(userId, assetId)
+      if(!save) throw new Error('could not save assets at this time')
+      return { status: "success", message: "asset saved"}
+    
+     } catch (error) {
+      throw error
+     }},
+
+    async unsaveAsset(__: any, {data}: {data: {assetId: string}}, context: { user: User}){
+     try {
+      const assetId = data.assetId
+      validateMongoId(assetId)
+      const userId = context.user?._id;
+      if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
+      const assetAlreadySaved = await new datasource().assetAlreadySaved(userId, assetId)
+      if(!assetAlreadySaved) throw new ErrorHandlers().ConflicError('Asset is not saved')
+      const unsave = await new datasource().unsaveAsset(userId, assetId)
+      if(!unsave) throw new Error('could not unsave asset at this time')
+        return { status: "success", message: "asset unsaved"}
+     } catch (error) {
+      throw error
+     }
+
     }
 }
 

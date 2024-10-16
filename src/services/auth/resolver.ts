@@ -126,7 +126,7 @@ export const loginUserMutation = {
       if (!userExist) throw new ErrorHandlers().NotFound("User with that email not found");
       if(userExist.disabled) throw new ErrorHandlers().AuthenticationError('your account is disabled')
       
-      if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login")
+     // if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login")
       if(!userExist.password) throw new ErrorHandlers().AuthenticationError('Please signin with the method you used to signup')
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {

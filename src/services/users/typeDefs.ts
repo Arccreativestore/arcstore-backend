@@ -10,6 +10,8 @@ type Query{
     disableUserAccount: General
     deleteUserAccount: General
     getUserProfile: getUserProfile!
+    saveAsset(data: IsaveAsset): General!
+    unsaveAsset(data: IsaveAsset): General!
 }
 
 type AssetsResponse {
@@ -22,6 +24,10 @@ asset: subAssets
 category: subCategory
 files: [subFile]
 createdAt: Date
+}
+
+input IsaveAsset {
+assetId: String
 }
 
 type subHistoryResponse {
