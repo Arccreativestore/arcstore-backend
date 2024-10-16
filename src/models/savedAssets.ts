@@ -16,7 +16,8 @@ const savedAssetsSchema  = new Schema<Isaved>({
 
     assetId: {
         type: Schema.Types.ObjectId,
-        ref: 'assets'
+        ref: 'assets',
+        unique: true
     },
     userId: {
         type: Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-import { ObjectId, PipelineStage, Schema } from "mongoose";
+import { ObjectId, PipelineStage, Schema, Types } from "mongoose";
 import Base from "../../base";
 import savedAssetsModel from "../../models/savedAssets";
 import downloadsModel from "../../models/downloads";
@@ -28,6 +28,31 @@ export class datasource extends Base {
         throw error
        }
     }
+
+    async saveAsset(userId: ObjectId, assetId: string){
+       try {
+        const save = await savedAssetsModel().create({userId, assetId: new Types.ObjectId(assetId), savedAt: new Date()})
+        return save ? true : false
+       } catch (error) {
+        logger.error(error)
+       }
+    }
+
+    async unsaveAsset(userId: ObjectId, assetId: string){
+        try {
+            const unsave = await savedAssetsModel().findOneAndDelete({userId, assetId})
+            return unsave ? unsave : null
+        } catch (error) {
+           logger.error(error) 
+        }
+    }
+
+
+    async assetAlreadySaved(userId: ObjectId, assetId: string){
+        const check = await savedAssetsModel().findOne({assetId, userId})
+        return check ? true : false
+    }
+
     // adjust to pipeline when payment methods db has been implemented
     async getPurchaseHistory(userId: ObjectId){
         try {

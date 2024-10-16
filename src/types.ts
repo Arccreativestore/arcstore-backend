@@ -8,6 +8,7 @@ import supportTypeDefs from "./services/Faq/typeDefs.js";
 import AssetType from "./services/asset/typeDefs.js";
 import SubscriptionType from "./services/subscription/typeDefs.js";
 import creatorTypeDefs from './services/creators/typeDefs.js'
+import _2fatypeDefs from "./services/_2fa/typeDefs.js";
 
 
 
@@ -35,6 +36,7 @@ const data = [
   AssetType,
   SubscriptionType,
   creatorTypeDefs,
+  _2fatypeDefs,
   ...scalarTypeDefs,
 ]
 

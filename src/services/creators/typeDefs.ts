@@ -8,6 +8,7 @@ acceptFollower(data: IacceptFollow): General!
 unfollowCreator(data: Ifollow): General!
 toPrivateCreator: General!
 toPublicCreator: General!
+getCreatorProfile: Creator!
 }
 input Icreator {
 country: String
@@ -35,6 +36,7 @@ message: String
 type Creator {
     country: String
     firstName: String
+    bio: String
     lastName: String
     userId: ID
     _id: ID

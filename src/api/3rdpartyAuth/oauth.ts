@@ -11,6 +11,7 @@ import {
   REFRESH_SECRETKEY,
   ACCESS_SECRETKEY,
 } from '../../config/config';
+import bcrypt from 'bcrypt'
 import { UserDatasource } from '../../services/auth/datasource';
 import { BadreqError } from '../errorClass';
 import crypto from 'crypto';

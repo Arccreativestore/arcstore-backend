@@ -36,6 +36,7 @@ import { isValidObjectId, ObjectId } from "mongoose";
 import { verifyEmailPayload } from "./helper";
 import Joi from "joi";
 import parsePhoneNumberFromString from "libphonenumber-js";
+import _2faDatasource from "../_2fa/datasource";
 
 
 //REGISTER MUTATION
@@ -113,7 +114,7 @@ export const requestEmailVerification = {
 };
 // LOGIN MUTATION
 export const loginUserMutation = {
-  async Login(_: any,{ data }: { data: { email: string; password: string } },context: { req: Request, res: Response }): Promise<{ accessToken: string }> {
+  async Login(_: any,{ data }: { data: { email: string; password: string } },context: { req: Request, res: Response }): Promise<{ accessToken?: string, status?: string, message?: string}> {
     const { email, password } = data;
     const { res }= context
     try {
@@ -123,11 +124,23 @@ export const loginUserMutation = {
 
       const userExist = await new UserDatasource().findByEmail(email);
       if (!userExist) throw new ErrorHandlers().NotFound("User with that email not found");
+      if(userExist.disabled) throw new ErrorHandlers().AuthenticationError('your account is disabled')
       
-     
-      if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login")
+     // if (userExist.emailVerified == false) throw new ErrorHandlers().ForbiddenError("Please Verify Your Email Before Login")
+      if(!userExist.password) throw new ErrorHandlers().AuthenticationError('Please signin with the method you used to signup')
       const comparePassword: boolean = await bcrypt.compare(password, userExist.password);
       if (comparePassword) {
+
+      if(userExist._2fa) { 
+        let otp = generateOTP() 
+          // store otp in database 
+        const saveOtp = await new _2faDatasource().saveOtp(otp, userExist._id)
+        if(!saveOtp) throw new Error('could not send otp at this time')
+          // send otp in email to client
+        return { status: "success", message: "otp has been sent to users email"}
+        }
+
+
       const tokenId = crypto.randomBytes(12).toString('hex')
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
 
@@ -272,6 +285,9 @@ async function handleProfileUpdate(_id: ObjectId , data: any, email?: string){
   return { status: "success", message: "Profile updated" };
 }
 
+function generateOTP(): number {
+  return Math.floor(1000 + Math.random() * 9000);
+}
 const setPasswordAfter3rdPartyAuth = {
 
     async setPasswordAfter3rdPartyAuth(__: any, {data}:{data: {password: string}}, context: {user: User}){
@@ -280,8 +296,9 @@ const setPasswordAfter3rdPartyAuth = {
             
           const userId = context?.user?._id
           if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
-          const password = data?.password
+          let password = data?.password
           validatePassword(password)
+          password = await bcrypt.hash(password, 12)
           return await new UserDatasource().setPassword(userId, password)
 
           } catch (error) {
@@ -319,6 +336,7 @@ const updatePassword = {
   }
 }
 
+
 export const authQuery = {
  ...verifyUserQuery,
  ...requestEmailVerification,
@@ -332,5 +350,5 @@ export const authMutations =
   ...loginUserMutation,
   ...forgotPasswordMutation,
   ...resetPasswordMutation,
-  ...updateProfile
+  ...updateProfile,
 }
