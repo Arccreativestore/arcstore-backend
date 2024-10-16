@@ -1,24 +1,27 @@
-# Use a Node.js base image (LTS version 18.12.0)
+# Use the official Node.js image
 FROM node:18.12.0
 
-# Set the working directory inside the container
+# Create and change to the app directory
 WORKDIR /usr/src/app
 
-# Copy only the package files first to take advantage of Docker layer caching
-COPY package.json yarn.lock ./
 
-# Install production dependencies using Yarn (ignores devDependencies)
-RUN yarn install --production
+# Copy package.json and yarn.lock
+COPY package.json  ./
 
-# Copy the rest of the application code into the container
+# Install dependencies using Yarn
+RUN yarn install
+
+# Copy the rest of the application code
 COPY . .
 
-# Build the project (if using TypeScript or other pre-build steps)
-# Make sure `yarn build` is defined in your package.json
+# Install TypeScript globally (if needed)
+# RUN yarn global add typescript
+
+# Compile TypeScript to JavaScript
 RUN yarn build
 
-# Expose the port that the application will run on
+# Expose the ports the app runs on
 EXPOSE 3000
 
-# Set the command to start the app
-CMD ["yarn", "start"]
+# Command to run the app
+CMD ["node", "dist/src/app.js"]
