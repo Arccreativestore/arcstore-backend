@@ -24,4 +24,4 @@ RUN yarn build
 EXPOSE 3000
 
 # Command to run the app
-CMD ["node", "dist/src/app.js"]
+CMD ["node", "dist/app.js"]

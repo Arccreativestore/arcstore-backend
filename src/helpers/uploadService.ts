@@ -22,7 +22,8 @@ class FileUploader {
                 accessKeyId: AWS_ACCESS_KEY_ID as string,
                 secretAccessKey: AWS_SECRET_ACCESS_KEY as string,
             },
-
+            endpoint: AWS_HOSTNAME_URL,
+            forcePathStyle: true,
         };
 
 
