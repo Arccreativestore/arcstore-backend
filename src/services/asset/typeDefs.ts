@@ -12,7 +12,7 @@ const AssetType = gql`
     deleteAsset(assetId:ID!):String!
     likeAsset(data:assetId!): General!
     unlikeAsset(data:assetId!): General!
-    getLikeCount(data:assetId!): Int!
+   
 
     #CREATORS
     addCreatorsPaymentMethod(input: PaymentMethodInput!): PaymentMethod!
@@ -35,7 +35,8 @@ const AssetType = gql`
     getUploadStatusStatistics:[IUploadStatusStatistics]
     getAssetAnalytics:[AssetAnalytics]
     getDownloadLink(platform:PlatformEnum! assetType:IFreePickCategory! itemId:String! itemFormat:String):DownloadResponse
-
+    getLikeCount(data:assetId!): Int!
+    getAssetComment(assetId:ID!):[Comment]
      #CREATORS
     getCreatorsPaymentMethods(userId: ID!): [PaymentMethod!]!
   }
@@ -66,6 +67,12 @@ const AssetType = gql`
     ratingsCount: Int! 
     averageRating: Float!
     earnings: Float! 
+}
+
+type Icomment {
+  assetId: String,
+  comment: String
+  userId: JSON
 }
 
   type IUploadStatusStatistics{

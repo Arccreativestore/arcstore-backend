@@ -36,7 +36,11 @@ class AssetDatasource extends Base {
     if(created) return "Asset created successfully"
     throw new ErrorHandlers().ValidationError("Unable to create asset, please try again")
   }
+  async getAssetComment(assetId:string){
+    const get =  await commentsModel().find({assetId}).populate('userId')
+    return get.length > 0 ? get : null
 
+  }
 
   async getAllAssets(page:number=1, limit:number=20, searchKey:string) {
     let options = {
@@ -334,13 +338,18 @@ class AssetDatasource extends Base {
 
 
   async assetComment(userId: ObjectId, assetId: string, comment: string){
-    const create = await commentsModel().create({
-      assetId,
-      userId,
-      comment
-    })
-
-    return create ? create.toObject() : null
+    try {
+      const create = await commentsModel().create({
+        assetId,
+        userId,
+        comment
+      })
+  
+      if(create) return create.toObject()
+      throw new ErrorHandlers().UserInputError('Unable to create comment, try again')
+    } catch (error) {
+      throw error
+    }
   }
 
   async deleteComment(_id: string, assetId: string, userId: ObjectId){

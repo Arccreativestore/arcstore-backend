@@ -85,16 +85,11 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
 
   },
 
-  async getLikeCount(__: any, {data}: {data: {assetId: string}}){
-
-    const assetId = data?.assetId
-    validateMongoId(assetId)
-    return await new AssetDatasource().getLikeCount(assetId)
-  },
 
   async assetComment(__: unknown, {data}: {data: {assetId: string, comment: string}}, context: context){
 
-    const user = context?.user
+    try {
+      const user = context?.user
     if(!user || !user._id) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
     const assetId = data?.assetId
     const comment = data?.comment
@@ -103,11 +98,15 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     validateMongoId(assetId)
 
     return await new AssetDatasource().assetComment(userId, assetId, comment)
+    } catch (error) {
+      throw error
+    }
   },
 
   async deleteComment(__: unknown, { data }: { data: {assetId: string, commentId: string}}, context: context){
 
-    const user = context?.user
+    try {
+      const user = context?.user
     if(!user || !user._id) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed')
     const assetId = data?.assetId
     const _id = data?.commentId
@@ -116,6 +115,9 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     validateMongoId(_id)
 
     return await new AssetDatasource().deleteComment(_id, assetId, userId)
+    } catch (error) {
+      throw error
+    }
   },
   //CREATOR's PAYMENT METHOD
   async updateCreatorsPaymentMethod(_:unknown, {id, input}:{id:string, input: PaymentMethodInput}, context: context ){
@@ -151,6 +153,12 @@ export const AssetQuery = {
     return await new AssetDatasource().getAssetById(assetId)
   },
 
+  async getLikeCount(__: any, {data}: {data: {assetId: string}}){
+    const assetId = data?.assetId
+    validateMongoId(assetId)
+    return await new AssetDatasource().getLikeCount(assetId)
+  },
+
   async getAllAssets(__:unknown, {page, limit, search}:{page:number, limit:number, search:string},context:context){
     return await new AssetDatasource().getAllAssets(page, limit, search)
   },
@@ -178,6 +186,17 @@ export const AssetQuery = {
   },
 
 
+  async getAssetComment(__: any, {data}: {data: {assetId: string}}){
+   try {
+    const assetId = data?.assetId
+    validateMongoId(assetId)
+    const get =  await new AssetDatasource().getAssetComment(assetId)
+    if(!get) return []
+    return get
+   } catch (error) {
+    throw error
+   }
+  },
   
   async getAssetAnalytics(__:unknown, _:unknown, context:context){
     isUserAuthorized(context.user, this.getAssetAnalytics.name) 
