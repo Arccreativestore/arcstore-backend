@@ -1,10 +1,11 @@
 import Base from "../base";
-import __File, { IUploadFor } from "../models/files";
+import __File, { IFile, IUploadFor } from "../models/files";
 import __Asset from '../models/asset'
 import { CreateAssetValidation, IAssetValidation } from "../services/asset/validation";
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";  
 import { IAccount } from "../models/user";
+import { createPresignedUrl } from "./uploadService";
 
 
 export interface FileRes{
@@ -19,39 +20,46 @@ class CompleteUpload {
 
     async processFileUpload(req: CustomRequest, res: Response) {
         try {
-            const { user, uploads } = req;
-            const body:IAssetValidation = req.body
+            
+            const { user } = req;
+
+          
+            const uploads:any = req?.file
+            const body:IAssetValidation = req?.body
 
             // Validate the request body
-            
-            await CreateAssetValidation({...body, authorId:user._id.toString()});
+        
+            await CreateAssetValidation({...body,authorId:user._id.toString()});
 
     
-            
+    
             // Normalize uploads to an array (in case it's a single file)
             const uploadArray = Array.isArray(uploads) ? uploads : [uploads];
-
+        
             // Format the uploaded files
-            const formattedUploadedFile = uploadArray.map((upload: { url: string; type: string }) => {
+            const formattedUploadedFile = uploadArray.map((upload: { key: string; mimetype: string }) => {
+            
                 return {
                     userId: user._id,
-                    type: upload.type,
-                    key: upload.url,
+                    type: upload.mimetype,
+                    key: upload.key,
                     uploaded: true,
                     uploadFor:IUploadFor.AssetUpload
                 };
             });
 
+            console.log({formattedUploadedFile})
+
             // Save uploaded files as assets in the database
-            const uploadedAssets: any[] = await __File().create(formattedUploadedFile);
+            const uploadedAssets: any[] = await __File().insertMany(formattedUploadedFile);
             const uploadedIds: ObjectId[] = uploadedAssets.map((asset) => asset._id);
 
             // Create a Asset using the uploaded asset IDs
-            const created: any = await __Asset().create({
+            const created: any = await __Asset().insertMany({
                 ...body, 
                 uploads: uploadedIds,
                 files:uploadedIds,
-                author: user?._id   
+                authorId: user?._id   
             });
 
             // Response to indicate success
@@ -65,12 +73,10 @@ class CompleteUpload {
 
 
     //Get presigned url
-    async createPresignedUrl(req: Request, res: Response){
-        const key = req.params.id
-        const exp:any = req.query.exp
-        const url:string = ""
-        // await createPresignedUrl(key, exp )
-
+    async getPresignedUrl(req: Request, res: Response){
+        const key= req.params.key
+       const url = await createPresignedUrl(key as string )
+  
         res.redirect(url)
     }
 

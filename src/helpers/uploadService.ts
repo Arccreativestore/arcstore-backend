@@ -37,6 +37,7 @@ class FileUploader {
                     cb(null, {fieldName: file.fieldname});
                 },
                 key: function (req: Request, file: Express.Multer.File, cb): void {
+ 
                     const ext = file.mimetype.split('/').pop()
                     const generatedKey: string = new Base().generateUniqueId()
 
@@ -49,14 +50,14 @@ class FileUploader {
     }
 
     // Get File Presigned URL , default to 6 days => aws max 7 days.
-    public async getFileUrl(key: string, fileExpiryDate: number = 6 * 60 * 60): Promise<string> {
+    public async getFileUrl(key: string, fileExpiryDate: number = 6 * 24 * 60 * 60): Promise<string> {
         const command: GetObjectCommand = new GetObjectCommand({
             Bucket: this.bucketName,
             Key: key
         });
 
-        // const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
-        return "";
+        const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
+        return url
     }
 
     //Uploade multiple files 

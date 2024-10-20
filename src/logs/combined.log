@@ -138,3 +138,8 @@
 2024-10-15T13:49:05.298Z [31merror[39m: Error fetching from freepik: API for platform freepik is not configured
 2024-10-18T10:25:10.878Z [31merror[39m: Unexpected field
 2024-10-18T10:28:47.297Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
+2024-10-20T13:37:27.018Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
+2024-10-20T13:39:48.738Z [31merror[39m: The authorization header is malformed; the region 'us-west-2' is wrong; expecting 'eu-west-2'
+2024-10-20T14:37:54.395Z [31merror[39m: Unexpected field
+2024-10-20T15:02:52.442Z [31merror[39m: Uncaught Exception: {}
+2024-10-20T15:04:47.220Z [31merror[39m: Uncaught Exception: {}

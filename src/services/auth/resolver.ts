@@ -37,6 +37,7 @@ import { verifyEmailPayload } from "./helper";
 import Joi from "joi";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import _2faDatasource from "../_2fa/datasource";
+import { log } from "console";
 
 
 //REGISTER MUTATION
@@ -118,7 +119,8 @@ export const loginUserMutation = {
     const { email, password } = data;
     const { res }= context
     try {
-      validateLoginInput(data);
+      log(password)
+      // validateLoginInput(data);
       if (!email || !password) throw new ErrorHandlers().UserInputError("Please provide all required fields");
       
 

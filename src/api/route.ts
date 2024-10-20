@@ -54,7 +54,7 @@ router.get('/auth/facebook/callback',
  * @param {Request} req - The request object
  * @param {Response} res - The response object
  * 
- * @param {string} req.params.id - The ID of the asset for which to generate the presigned URL (required)
+ * @param {string} req.params.key - The ID of the asset for which to generate the presigned URL (required)
  * @param {number} req.query.exp - The expiration time for the presigned URL in seconds (optional)
  * 
  * @response 302 {
@@ -77,8 +77,8 @@ router.get('/auth/facebook/callback',
  *   error: boolean        // Indicates there was an error (true)
  * }
  */
-router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:NextFunction)=>{
-    await new CompleteUpload().createPresignedUrl(req, res)
+router.get('/asset/:key', authMiddleware, async(req:Request, res:Response, next:NextFunction)=>{
+    await new CompleteUpload().getPresignedUrl(req, res)
 })
 
 /**
