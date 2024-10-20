@@ -1,11 +1,12 @@
  import GeneralController from "./helpers/generalController";
-import jwt from 'jsonwebtoken'
+ import jwt from "jsonwebtoken";
 import {userModel} from './models/user'
 import mongoose from "mongoose";
 import { ACCESS_SECRETKEY, REFRESH_SECRETKEY, VERIFYEMAIL_SECRETKEY } from "./config/config";
 import {v4 as uuid} from 'uuid'
 import { IUnitType } from "./models/plan";
 import moment from "moment";
+import { log } from "winston";
 
  export default class Base extends GeneralController {
 
@@ -13,20 +14,26 @@ import moment from "moment";
         return jwt.verify(token, REFRESH_SECRETKEY as string)
      }
      decodeToken(token: string) {
-       return  jwt.verify(token, ACCESS_SECRETKEY as string)
+     try{
+     return jwt.verify(token, ACCESS_SECRETKEY as string)
+ 
+     }catch(err){
+        console.log({err}, "auth error")
+        return null
+
+     }
     }
 
     isTokenExpired(decoded: any) {
-        
         const currentTimeInSeconds = Math.floor(Date.now() / 1000);
-        return decoded.exp < currentTimeInSeconds;
+        return decoded?.exp < currentTimeInSeconds;
     }
 
     async extractUserDetails(token: string) {
+
         const payload: any = this.decodeToken(token)
 
         const tokenExpired = this.isTokenExpired(payload)
-
         if (!tokenExpired) {
             const pipeline:any[]=[
                 {

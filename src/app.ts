@@ -129,15 +129,12 @@ app.use("/graphql",
     bodyParser.json({ limit: "5mb" }),
     expressMiddleware(server, {
       context: async ({ req, res }) => {
-
-        const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
-
+        const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req?.headers?.authorization.substring(7) : req?.headers?.authorization);
         let user = null
         if (token) {
-            
           user = await new Base().extractUserDetails(token)
         }
-      
+        
         return {
           req,
           res,
