@@ -91,6 +91,7 @@ router.get('/asset/:key', authMiddleware, async(req:Request, res:Response, next:
  *   description: string,  // Description of the asset (required)
  *   price: number,       // Price of the asset (required)
  *   categoryId: ObjectId, // ID of the category for the asset (required)
+ *   tags: string[],  // Tags of the asset (required)
  *  @response 201 {
  *   message: string,      // Success message
  *   error: boolean,       // Indicates if there was an error (false for success)
@@ -116,6 +117,7 @@ router.post('/asset/upload/single', authMiddleware, upload.single('file'), async
  *   description: string,  // Description of the asset (required)
  *   price: number,       // Price of the asset (required)
  *   categoryId: ObjectId, // ID of the category for the asset (required)
+ *   tags: string[],  // Tags of the asset (required)
  * @response 201 {
  *   message: string,      // Success message
  *   error: boolean,       // Indicates if there was an error (false for success)

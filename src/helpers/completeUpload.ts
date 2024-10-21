@@ -48,8 +48,6 @@ class CompleteUpload {
                 };
             });
 
-            console.log({formattedUploadedFile})
-
             // Save uploaded files as assets in the database
             const uploadedAssets: any[] = await __File().insertMany(formattedUploadedFile);
             const uploadedIds: ObjectId[] = uploadedAssets.map((asset) => asset._id);
@@ -60,6 +58,7 @@ class CompleteUpload {
                 uploads: uploadedIds,
                 files:uploadedIds,
                 authorId: user?._id   
+                
             });
 
             // Response to indicate success

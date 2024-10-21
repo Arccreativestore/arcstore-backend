@@ -83,6 +83,7 @@ export interface IAssetValidation {
     price: number;
     authorId: string
     categoryId: string
+    tags:string[]
 }
 
 export interface IUpdateAssetValidation {
@@ -117,6 +118,16 @@ const assetSchema = Joi.object({
     categoryId: objectId.required().messages({
         'any.invalid': 'Invalid Category ID',
         'any.required': 'Category ID is required',
+    }),
+    tags: Joi.array()
+    .items(Joi.string().required().messages({
+        'string.base': 'Each tag must be a string',
+        'any.required': 'Tag is required',
+    }))
+    .required()
+    .messages({
+        'array.base': 'Tags must be an array',
+        'any.required': 'Tags are required',
     }),
 });
 
