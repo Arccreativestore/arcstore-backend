@@ -24,21 +24,24 @@ class CompleteUpload {
             const { user } = req;
 
           
-            const uploads:any = req?.file
-            const body:IAssetValidation = req?.body
+            const uploads:any = req?.file || req?.uploads
+            let body:any = req?.body
+
+            body.tags = JSON.parse(body.tags)
 
             // Validate the request body
-        
+
             await CreateAssetValidation({...body,authorId:user._id.toString()});
 
     
     
+
             // Normalize uploads to an array (in case it's a single file)
             const uploadArray = Array.isArray(uploads) ? uploads : [uploads];
         
             // Format the uploaded files
             const formattedUploadedFile = uploadArray.map((upload: { key: string; mimetype: string }) => {
-            
+                
                 return {
                     userId: user._id,
                     type: upload.mimetype,

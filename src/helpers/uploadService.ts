@@ -76,7 +76,7 @@ class FileUploader {
             try {
         
                 req.uploads = await Promise.all(files.map(async (file) => {
-                    return {url: file.key, type: file.mimetype};
+                    return {key: file.key, mimetype: file.mimetype};
                 }));
                 return next()
             } catch (error) {
