@@ -34,7 +34,7 @@ import { log } from "winston";
         const payload: any = this.decodeToken(token)
 
         const tokenExpired = this.isTokenExpired(payload)
-        if (!tokenExpired) {
+        if (!tokenExpired && payload?._id) {
             const pipeline:any[]=[
                 {
                     $match: { _id: new mongoose.Types.ObjectId(payload._id )},

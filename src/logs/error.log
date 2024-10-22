@@ -142,3 +142,6 @@
 2024-10-20T14:37:54.395Z [31merror[39m: Unexpected field
 2024-10-20T15:02:52.442Z [31merror[39m: Uncaught Exception: {}
 2024-10-20T15:04:47.220Z [31merror[39m: Uncaught Exception: {}
+2024-10-22T08:46:05.654Z [31merror[39m: Uncaught Exception: {
+  "code": "ERR_HTTP_HEADERS_SENT"
+}
