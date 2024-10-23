@@ -146,8 +146,8 @@ export const loginUserMutation = {
       const tokenId = crypto.randomBytes(12).toString('hex')
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
 
-      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
-      const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "30d" }); //Updated this to 30 days for development against 1hr
+      const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "30d" }); //Make this to be 30 days for development against 7d
         
       await new tokenDataSource().newToken(tokenId, userExist._id, expiresAt)
         res.cookie('refreshToken', refreshToken, {
