@@ -4,8 +4,8 @@
     "description": "arc creative",
     "main": "app.js",
     "engines": {
-  "node": "18.12.0" 
-},
+        "node": "18.12.0"
+    },
     "scripts": {
         "dev": "nodemon",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -38,7 +38,7 @@
         "ejs": "^3.1.9",
         "express": "^4.18.2",
         "express-handlebars": "^7.1.2",
-        "faker": "^5.5.3",
+        "faker": "^6.6.6",
         "firebase-admin": "^12.5.0",
         "graphql": "^16.6.0",
         "graphql-constraint-directive": "^5.4.3",
@@ -76,7 +76,6 @@
         "@types/cors": "^2.8.13",
         "@types/ejs": "^3.1.2",
         "@types/express": "^4.17.17",
-        "@types/faker": "^6.6.8",
         "@types/jsonwebtoken": "^9.0.1",
         "@types/mongoose": "^5.11.97",
         "@types/mongoose-aggregate-paginate-v2": "^1.0.12",
