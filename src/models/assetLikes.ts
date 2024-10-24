@@ -1,4 +1,3 @@
-import { number } from "joi";
 import { model, Model, ObjectId, PipelineStage, Schema } from "mongoose";
 
 
@@ -16,12 +15,13 @@ const likesSchema = new Schema<Ilikes>({
     assetId: {
         type: Schema.Types.ObjectId,
         required: true,
+        index:true,
         ref: 'assets'
     },
     userId: {
         type: Schema.Types.ObjectId,
         required: true,
-        unique: true,
+        index:true,
         ref: 'users'
     },
 },
@@ -29,10 +29,10 @@ const likesSchema = new Schema<Ilikes>({
     versionKey: false,
     timestamps: true
 })
-
+likesSchema.index({userId:1, assetId:1}, {unique:true})
 const likesModel = (isTest: boolean = false)=>{
     if(isTest == undefined|| isTest == null) throw new Error('Invalid environment');
-    let collectionName = isTest ? 'test_assetLikes' : 'assetLikes'
+    let collectionName = isTest ? 'test_asset_likes' : 'asset_likes'
     return model<Ilikes, IlikesModel>(collectionName, likesSchema, collectionName)
 }
 

@@ -200,6 +200,7 @@ type AssetResponse {
   ratings: Rating
   licenseType: String
   files: [IFile]
+  likeCounts:Int
   category: ICategoryResponse
 }
 

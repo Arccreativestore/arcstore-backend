@@ -136,6 +136,9 @@ router.post('/asset/upload/multiple', authMiddleware, handleMultipleFileUpload, 
 })
 
 
+router.post('/image/upload', authMiddleware, upload.single('file'), async(req:Request, res:Response, next:NextFunction)=>{
+    await new CompleteUpload().processOtherImages(req as CustomRequest, res)
+})
 
 
 export default router;

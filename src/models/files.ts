@@ -3,7 +3,9 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 
 export enum IUploadFor {
     UploadPix= 'profile_pix',
-    AssetUpload='asset_uploads' 
+    AssetUpload='asset_uploads',
+    CoverPix="cover_pix", 
+    Others="others"
 }
 
 

@@ -3,7 +3,7 @@ import { CreateAssetValidation, IAssetValidation, ICategoryValidation, IUpdateCa
 import __Category from '../../models/assetCategory'
 import { ErrorHandlers } from '../../helpers/errorHandler';
 import mongoose, { PipelineStage, Schema, Types } from 'mongoose';
-import __Asset from '../../models/asset'
+import __Asset, { IAsset } from '../../models/asset'
 import { AssetFetcher, QueryParams } from './externalApis/externalService';
 import { PlatformEnum } from './externalApis/apiAuthHeader';
 import { AssetDetailsFetcher, DetailsQueryParams } from './externalApis/externalAssetDetails';
@@ -15,7 +15,7 @@ import { relativeTimeRounding } from 'moment';
 import __PaymentMethod, { IPaymentMethod, PaymentMethodEnum } from '../../models/paymentMethod'
 import commentsModel from '../../models/assetsComment';
 import { DownloadService } from './externalApis/download';
-
+import __AssetLikes from '../../models/assetLikes'
 
 
 export interface PaymentMethodInput {
@@ -41,111 +41,122 @@ class AssetDatasource extends Base {
     return get.length > 0 ? get : null
 
   }
-
-  async getAllAssets(page:number=1, limit:number=20, searchKey:string) {
+  async getAllAssets(page: number = 1, limit: number = 20, searchKey: string) {
     let options = {
-      page,
-      limit: limit > 100 ? 100:limit,
-      $sort:{ createdAt:-1 },
-    }
+        page,
+        limit: limit > 100 ? 100 : limit,
+        sort: { createdAt: -1 },
+    };
 
     const pipeline: PipelineStage[] = [
-      {
-        $match: {
-          deleted: false,
-          published: false,
-          ...(searchKey && {
-            $or: [
-              { name: { $regex: searchKey, $options: 'i' } },
-              { description: { $regex: searchKey, $options: 'i' } },
-            ],
-          }),
-        },
-      },
-      {
-        $lookup: {
-          from: 'files',
-          localField: 'files',
-          foreignField: '_id',
-          as: 'files',
-        },
-      },
-      {
-        $lookup: {
-          from: 'categories',
-          localField: 'categoryId',
-          foreignField: '_id',
-          as: 'category',
-        },
-      },
-      {
-        $unwind: {
-          path: '$category',
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-      ...(searchKey
-        ? [
-            {
-              $match: {
-                $or: [
-                  { 'category.title': { $regex: searchKey, $options: 'i' } },
-                  { 'category.description': { $regex: searchKey, $options: 'i' } },
-                ],
-              },
+        {
+            $match: {
+                deleted: false,
+                published: false,
+                ...(searchKey && {
+                    $or: [
+                        { name: { $regex: searchKey, $options: 'i' } },
+                        { description: { $regex: searchKey, $options: 'i' } },
+                    ],
+                }),
             },
-          ]
-        : []),
-      {
-        $group: {
-          _id: '$_id', 
-          title: { $first: '$title' },
-          description: { $first: '$description' },
-          createdAt: { $first: '$createdAt' },
-          price: { $first: '$price' },
-          author: { $first: '$author' },
-          tags: { $first: '$tags' },
-          views: { $first: '$views' },
-          downloads: { $first: '$downloads' },
-          ratings: { $first: '$ratings' },
-          licenseType: { $first: '$licenseType' },
-          files: { $first: '$files' },
-          category: { $first: '$category' }, 
         },
-      },
-      {
-        $project: {
-          title: 1,
-          description: 1,
-          createdAt: 1,
-          price: 1,
-          author: 1,
-          tags: 1,
-          views: 1,
-          downloads: 1,
-          ratings: 1,
-          licenseType: 1,
-          files: 1,
-          category: 1,
+        {
+            $lookup: {
+                from: 'files',
+                localField: 'files',
+                foreignField: '_id',
+                as: 'files',
+            },
         },
-      },
+        {
+            $lookup: {
+                from: 'categories',
+                localField: 'categoryId',
+                foreignField: '_id',
+                as: 'category',
+            },
+        },
+        {
+            $unwind: {
+                path: '$category',
+                preserveNullAndEmptyArrays: true,
+            },
+        },
+        ...(searchKey
+            ? [
+                {
+                    $match: {
+                        $or: [
+                            { 'category.title': { $regex: searchKey, $options: 'i' } },
+                            { 'category.description': { $regex: searchKey, $options: 'i' } },
+                        ],
+                    },
+                },
+            ]
+            : []),
+        {
+            $group: {
+                _id: '$_id',
+                title: { $first: '$title' },
+                description: { $first: '$description' },
+                createdAt: { $first: '$createdAt' },
+                price: { $first: '$price' },
+                author: { $first: '$author' },
+                tags: { $first: '$tags' },
+                views: { $first: '$views' },
+                downloads: { $first: '$downloads' },
+                ratings: { $first: '$ratings' },
+                licenseType: { $first: '$licenseType' },
+                files: { $first: '$files' },
+                category: { $first: '$category' },
+            },
+        },
+        {
+            $project: {
+                _id: 1,
+                title: 1,
+                description: 1,
+                createdAt: 1,
+                price: 1,
+                author: 1,
+                tags: 1,
+                views: 1,
+                downloads: 1,
+                ratings: 1,
+                licenseType: 1,
+                files: 1,
+                category: 1,
+            },
+        },
     ];
 
     const assetModel = __Asset();
     const aggregate = assetModel.aggregate(pipeline);
     const result = await assetModel.aggregatePaginate(aggregate as any, options);
-    return     {
-      data: result.docs,
-      pageInfo: {
-        hasNextPage: result.hasNextPage,
-        hasPrevPage: result.hasPrevPage,
-        totalPages: result.totalPages,
-        nextPage: result.nextPage,
-        prevPage: result.prevPage,
-        totalDocs: result.totalDocs,
-    },
-};
-  }
+
+    const assetsWithLikesCount = await Promise.all(
+        result.docs.map(async (item: any) => {
+            const likeCounts = await this.getLikeCount(item.id)
+            return { ...item, likeCounts };
+        })
+    );
+
+    return {
+        data: assetsWithLikesCount,
+        pageInfo: {
+            hasNextPage: result.hasNextPage,
+            hasPrevPage: result.hasPrevPage,
+            totalPages: result.totalPages,
+            nextPage: result.nextPage,
+            prevPage: result.prevPage,
+            totalDocs: result.totalDocs,
+        },
+    };
+}
+
+
+
   async getAllMyAssets(page:number=1, limit:number=20, userId:ObjectId, searchKey:string) {
     let options = {
       page,
@@ -228,6 +239,7 @@ class AssetDatasource extends Base {
     const assetModel = __Asset();
     const aggregate = assetModel.aggregate(pipeline);
     const result = await assetModel.aggregatePaginate(aggregate as any, options);
+    console.log(JSON.stringify(result, null, 2))
     return     {
       data: result.docs,
       pageInfo: {
