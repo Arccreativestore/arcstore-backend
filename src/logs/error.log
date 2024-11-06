@@ -146,3 +146,6 @@
   "code": "ERR_HTTP_HEADERS_SENT"
 }
 2024-10-23T13:15:33.428Z [31merror[39m: E11000 duplicate key error collection: arc-store.assetLikes index: userId_1_assetId_1 dup key: { userId: ObjectId('671505f7befc839a65c1a8c7'), assetId: ObjectId('6716297bf472f00b3d7725cb') }
+2024-11-06T22:25:17.257Z [31merror[39m: Uncaught Exception: {
+  "code": "ERR_UNHANDLED_REJECTION"
+}

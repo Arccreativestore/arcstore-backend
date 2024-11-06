@@ -12,6 +12,9 @@ import { IAccount } from "../../models/user";
 import { resetPasswordModel } from "../../models/resetpassword";
 import { tokenModel } from "../../models/token";
 import { ObjectId } from "mongoose";
+import { User } from "../../app";
+import __WorkSchema from '../../models/work'
+import { ErrorHandlers } from "../../helpers/errorHandler";
 
 export class UserDatasource extends Base {
   async userRegistration(data: IReg): Promise<dbResponse | null> {
@@ -129,6 +132,25 @@ export class UserDatasource extends Base {
     } catch (error) {
       logger.error(error)
     }
+  }
+
+
+  async createOrUpdateWork(data:any, user:User){
+    const userWork = await __WorkSchema().findOne({userId:user._id})
+
+    if(!userWork){
+        this.handleMongoError(__WorkSchema().create({...data, userId:user._id}))
+        return "Work created successfully"
+    }
+
+    const updated = await __WorkSchema().updateOne({userId:user._id}, {$set:{...data}})
+    if(updated.matchedCount > 0) return "Work updated successfully"
+    throw new ErrorHandlers().ValidationError("Unable to update work, please try again.")
+
+  }
+
+  async getUserWorkSetting(user:User){
+      return await __WorkSchema().findOne({userId:user._id.toString()})
   }
 
 }

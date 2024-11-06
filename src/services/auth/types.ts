@@ -129,22 +129,32 @@ const resetPasswordValidateSchema = Joi.object({
 
 const updateProfileSchema = Joi.object({
   email: Joi.string().email()
-  .messages({
-    'string.email': 'Please enter a valid Email Address',
-  }),
+    .messages({
+      'string.email': 'Please enter a valid Email Address',
+    }),
   firstName: Joi.string().min(3)
-  .messages({
-    'string.min': 'Please enter a valid username (minimum 3 characters)',
-  }),
+    .messages({
+      'string.min': 'Please enter a valid username (minimum 3 characters)',
+    }),
   lastName: Joi.string().min(3)
-  .messages({
-    'string.min': 'Please enter a valid username (minimum 3 characters)',
-  }),
+    .messages({
+      'string.min': 'Please enter a valid username (minimum 3 characters)',
+    }),
+  banner: Joi.string().min(5).optional()
+    .messages({
+      'string.min': 'Must be valid image key',
+    }),
+  profilePicture: Joi.string().min(5).optional()
+    .messages({
+      'string.min': 'Must be valid image key',
+    }),
   PhoneNumber: Joi.string().min(4).max(15)
-  .messages({
-    'string.min': 'phone Number cannot be less than 3 digits', 
-    'string.max': 'Phone Number should not exceed 15 digits'})
-})
+    .messages({
+      'string.min': 'Phone Number cannot be less than 4 digits',
+      'string.max': 'Phone Number should not exceed 15 digits'
+    })
+});
+
 
 const validatePasswordSchema = Joi.object({
   password: passwordRule

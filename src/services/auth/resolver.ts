@@ -38,6 +38,8 @@ import Joi from "joi";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import _2faDatasource from "../_2fa/datasource";
 import { log } from "console";
+import { IAccount } from "../../models/user";
+import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 
 
 //REGISTER MUTATION
@@ -339,11 +341,29 @@ const updatePassword = {
 }
 
 
+
+//WORK ADD & UPDATE
+export const workMutation = {
+  async createOrUpdateWork(__: unknown,{ data }: { data: any }, context:{req:Request, res:Response, user:User}): Promise<string> {
+    isUserAuthorized(context.user, this.createOrUpdateWork.name, true)
+    return await new UserDatasource().createOrUpdateWork(data, context.user)
+  }
+};
+
+
+//WORK ADD & UPDATE
+export const workQuery = {
+  async getUserWorkSetting(__: unknown,_:unknown, context:{req:Request, res:Response, user:User}) {
+    isUserAuthorized(context.user, this.getUserWorkSetting.name, true)
+    return await new UserDatasource().getUserWorkSetting(context.user)
+  }
+};
 export const authQuery = {
  ...verifyUserQuery,
  ...requestEmailVerification,
  ...updatePassword,
- ...setPasswordAfter3rdPartyAuth
+ ...setPasswordAfter3rdPartyAuth,
+ ...workQuery
 };
 
 export const authMutations = 
@@ -353,4 +373,5 @@ export const authMutations =
   ...forgotPasswordMutation,
   ...resetPasswordMutation,
   ...updateProfile,
+  ...workMutation
 }

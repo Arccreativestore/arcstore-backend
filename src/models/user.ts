@@ -18,6 +18,7 @@ export interface IAccount extends Document {
   permissions?: string[];
   disabled: boolean;
   preferences: Array<ObjectId>
+  banner:string
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
@@ -65,6 +66,10 @@ const UserSchema: Schema = new Schema<IAccount>(
     profilePicture: {
       type: String,
       trim: true,
+    },
+    banner:{
+      type: String,
+      trim: true
     },
 
     _2fa: {

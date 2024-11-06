@@ -177,7 +177,7 @@ async function execPipeline(userId: ObjectId, limit?: number, page?: number){
   const savedAssetsModelInstance = savedAssetsModel();
   const aggregate = savedAssetsModelInstance.aggregate(pipeline);
   const result = await savedAssetsModelInstance.aggregatePaginate(aggregate as any, options);
-  console.log(result.docs[0].files)
+
   return {
       data: result.docs,
       pageInfo: {

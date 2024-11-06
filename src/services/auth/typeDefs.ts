@@ -8,6 +8,7 @@ const UserType = gql`
     forgotPassword(data: IEmail!): General!
     resetPassword(data: IresetPassword!): General!
     updateUserProfile(data: IupdateProfile): General!
+    createOrUpdateWork(data:WorkInput):String
    
   }
 
@@ -17,6 +18,7 @@ const UserType = gql`
     updatePassword(data: IupdatePassword!): General!
     setPasswordAfter3rdPartyAuth(data: IsetPassword!): General!
     requestEmailVerification(data: IEmail!): General!
+    getUserWorkSetting:Work
   }
 
 enum IuserType {
@@ -64,6 +66,8 @@ input IupdateProfile {
   firstName: String
   lastName: String
   phoneNumber: Int
+  profilePicture:String
+  banner:String
 }
 
 type User {
@@ -84,6 +88,57 @@ type AuthToken {
   accessToken: String
   status: String
   message: String
+}
+
+# Enums for Job Types and Work Preferences
+enum AvailableForHireEnum {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  FREELANCE
+  REMOTE
+}
+
+# Input type for Location, used in mutations
+input LocationInput {
+  country: String!
+  state: String
+  city: String
+}
+
+# Main type for Work data
+type Work {
+  id: ID!
+  userId: ID!
+  companyName: String
+  position: String
+  externalUrl: String
+  phoneNumber: String!
+  location: Location!
+  about: String
+  skills: [String!]!
+  roleType: AvailableForHireEnum!
+  createdAt: String!
+  updatedAt: String!
+}
+
+# Location type, used within Work type
+type Location {
+  country: String!
+  state: String
+  city: String
+}
+
+# Input type for adding or updating Work details
+input WorkInput {
+  companyName: String
+  position: String
+  externalUrl: String
+  phoneNumber: String!
+  location: LocationInput!
+  about: String
+  skills: [String!]!
+  roleType: AvailableForHireEnum!
 }
 `;
 
