@@ -65,6 +65,8 @@ email: String
 verifiedDate: Date
 role: String
 phoneNumber: String
+banner:String
+profilePicture:String
 }
 
 type subAssets{

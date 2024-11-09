@@ -139,6 +139,7 @@ export class UserDatasource extends Base {
     const userWork = await __WorkSchema().findOne({userId:user._id})
 
     if(!userWork){
+      
         this.handleMongoError(__WorkSchema().create({...data, userId:user._id}))
         return "Work created successfully"
     }

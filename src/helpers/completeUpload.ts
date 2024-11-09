@@ -7,6 +7,7 @@ import { ObjectId } from "mongodb";
 import { IAccount } from "../models/user";
 import { createPresignedUrl } from "./uploadService";
 import { ErrorHandlers } from "./errorHandler";
+import { AWS_BUCKET_NAME, AWS_REGION } from "../config/config";
 
 
 export interface FileRes{
@@ -112,9 +113,9 @@ class CompleteUpload {
     //Get presigned url
     async getPresignedUrl(req: Request, res: Response){
         const key= req.params.key
-       const url = await createPresignedUrl(key as string )
-  
-        res.redirect(url)
+    //    const url = await createPresignedUrl(key as string )
+  const url = `https://arc-store.s3.${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${key}`
+        res.status(200).send(url)
     }
 
     // Utility to truncate text to a maximum length
