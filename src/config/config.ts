@@ -33,6 +33,7 @@ const requiredEnvs = [
   // "PINTEREST_API_KEY",
   "FREEPIK_BASE_URL",
   "FREEPIK_API_KEY",
+  "PEXEL_API_KEY"
 ] as const;
 
 interface Envs {
@@ -85,5 +86,6 @@ export const {
 
   FREEPIK_BASE_URL,
   FREEPIK_API_KEY,
+  PEXEL_API_KEY
 
 } = process.env;

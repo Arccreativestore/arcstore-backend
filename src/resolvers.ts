@@ -10,6 +10,7 @@ import { AssetMutation, AssetQuery } from "./services/asset/resolver";
 import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription/resolver";
 import { creatorMutation } from "./services/creators/resolvers";
 import { _2faMutation, _2faQuery } from "./services/_2fa/resolvers";
+import { PexelsQuery, PexelsMutation } from "./services/asset/pexel/resolver";
 
 const Mutation = {
   ...authMutations,
@@ -19,6 +20,7 @@ const Mutation = {
   ...AssetMutation,
   ...SubscriptionMutation,
   ...AssetMutation,
+  ...PexelsMutation,
   ..._2faMutation
 };
 
@@ -31,7 +33,8 @@ const Query = {
   ...AssetQuery,
   ...SubscriptionQuery,
   ...creatorMutation,
-  ..._2faQuery
+  ..._2faQuery,
+  ...PexelsQuery
 };
 
 export { Mutation, Query };
