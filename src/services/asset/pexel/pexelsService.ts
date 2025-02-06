@@ -25,11 +25,9 @@ export class PexelServices {
   getPexelsVideos =async (data:ISearchParams): Promise<VideoResponse> => {
     try {
       const response = await this.client.videos.search(data)
-      if (response && response.data) {
-        return response.data
-      } else {
-        throw new Error('No photos found');
-      }
+     
+        return response
+  
     } catch (error) {
       console.error('Error fetching photos from Pexels:', error.message);
       throw new ErrorHandlers().ValidationError('Failed to fetch videos');

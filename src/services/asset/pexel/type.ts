@@ -1,11 +1,20 @@
 // types.ts
 
 export interface PhotosResponse{
-    total_results:number
+total_results:number
 per_page:number
 page:number
 photos:Photo[]
+next_page:string
 }
+
+export interface VideoResponse{
+    total_results:number
+    per_page:number
+    page:number
+    videos:Videos[]
+    next_page:string
+    }
  interface Photo {
     id: number;
     width: number;
@@ -56,7 +65,7 @@ export interface User {
     nr: number;
   }
   
-  export interface VideoResponse {
+  export interface Videos {
     id: number;
     width: number;
     height: number;
