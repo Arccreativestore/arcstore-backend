@@ -9,6 +9,7 @@ const PexelType = gql`
   type Query {
   getPexelsPhotos(data:QueryInput):PhotoResponse
   getPexelsVideos(data:QueryInput):VideoResponse
+  getDribbleShots(data:QueryInput):JSON
 }
 
 input QueryInput{

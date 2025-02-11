@@ -12,6 +12,11 @@ async getPexelPhotos(data:ISearchParams):Promise<PhotosResponse>{
 async getPexelVideos(data:ISearchParams):Promise<VideoResponse>{
     return await new PexelServices(PEXEL_API_KEY as string).getPexelsVideos(data)
 }
+
+async getDribbleShots(data:ISearchParams):Promise<any>{
+    return await new PexelServices(PEXEL_API_KEY as string).getDribbbleShots(data)
+}
+
 }
 export default PexelsDatasource
 

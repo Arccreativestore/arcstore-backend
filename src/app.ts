@@ -116,14 +116,13 @@ new passportGoogleAuth().init()
 new FacebookAuth().init()
 
 app.get("/", async (req:Request, res:Response) => {
+    console.log(req.body, "body") 
+
     res.json({name: packageJson.name, version: packageJson.version, });
 });
 
 
 app.use('/api/v1', apiRoute);
-
-
-
 
 app.use("/graphql",
     bodyParser.json({ limit: "5mb" }),

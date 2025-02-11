@@ -140,5 +140,12 @@ router.post('/image/upload', authMiddleware, upload.single('file'), async(req:Re
     await new CompleteUpload().processOtherImages(req as CustomRequest, res)
 })
 
+router.get('/callback', (req, res, next)=>{
+    console.log(req.params, "param" )
+    console.log(req.query, "query")
+    console.log(req.body, "body")
+
+})
+
 
 export default router;
