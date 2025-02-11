@@ -1,6 +1,6 @@
 import Base from '../../../base'
 import { PEXEL_API_KEY } from '../../../config/config'
-import { PexelServices } from './PexelsService'
+import { PexelServices } from './pexelsService'
 import { ISearchParams, PhotosResponse,  VideoResponse } from './type'
 
 
