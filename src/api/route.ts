@@ -103,7 +103,7 @@ router.get('/asset/:key', authMiddleware, async(req:Request, res:Response, next:
  *   error: boolean        // Indicates there was an error (true)
  * }
  */
-router.post('/asset/upload/single', authMiddleware, upload.single('file'), async(req:Request, res:Response, next:NextFunction)=>{
+router.post('/asset/upload/single', authMiddleware, upload.single('file') as any, async(req:Request, res:Response, next:NextFunction)=>{
     await new CompleteUpload().processFileUpload(req as CustomRequest, res)
 })
 
@@ -136,16 +136,16 @@ router.post('/asset/upload/multiple', authMiddleware, handleMultipleFileUpload, 
 })
 
 
-router.post('/image/upload', authMiddleware, upload.single('file'), async(req:Request, res:Response, next:NextFunction)=>{
+router.post('/image/upload', authMiddleware, upload.single('file') as any, async(req:Request, res:Response, next:NextFunction)=>{
     await new CompleteUpload().processOtherImages(req as CustomRequest, res)
 })
 
-router.get('/callback', (req, res, next)=>{
-    console.log(req.params, "param" )
-    console.log(req.query, "query")
-    console.log(req.body, "body")
+// router.get('/callback', (req, res, next)=>{
+//     console.log(req.params, "param" )
+//     console.log(req.query, "query")
+//     console.log(req.body, "body")
 
-})
+// })
 
 
 export default router;

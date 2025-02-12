@@ -111,7 +111,8 @@ await server.start();
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(cookieParser())
-app.use(passport.initialize())
+app.use(passport.initialize() as any);
+
 new passportGoogleAuth().init()
 new FacebookAuth().init()
 
@@ -127,7 +128,7 @@ app.use('/api/v1', apiRoute);
 app.use("/graphql",
     bodyParser.json({ limit: "5mb" }),
     expressMiddleware(server, {
-      context: async ({ req, res }) => {
+      context: async ({ req, res }:{req:Request, res:Response}) => {
         const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req?.headers?.authorization.substring(7) : req?.headers?.authorization);
         let user = null
         if (token) {

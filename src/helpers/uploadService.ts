@@ -8,6 +8,7 @@ import { NextFunction, Response,Request} from 'express'
 import Base from "../base";
 
 
+
 class FileUploader {
     private bucketName = AWS_BUCKET_NAME as string
     private s3Config: S3ClientConfig;
@@ -62,7 +63,7 @@ class FileUploader {
     }
 
     //Uploade multiple files 
-    public async handleMultipleUpload(req: any, res: Response, next: NextFunction): Promise<void> {
+    public async handleMultipleUpload(req: any, res: any, next: NextFunction): Promise<void> {
         
         const uploadMultiple = this.upload.array('files', 6); 
 
