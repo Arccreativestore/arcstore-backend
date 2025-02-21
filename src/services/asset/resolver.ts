@@ -9,6 +9,7 @@ import { ErrorHandlers } from "../../helpers/errorHandler";
 import { validateMongoId } from "../users/types";
 import { notifyCreator } from "./helper";
 import { Types } from "mongoose";
+import { IPaymentMethods } from "./type";
 
 interface context{
   req:Request, 
@@ -134,6 +135,10 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     return await new AssetDatasource().deletePaymentMethod(id)
   },
 
+  async processPayment(_:unknown, {planId, methods}:{ planId: string, methods:IPaymentMethods}, context: context ){
+    isUserAuthorized(context.user, this.processPayment.name) 
+    return await new AssetDatasource().processPayment(planId, methods, context.user)
+  },
 };
 
 

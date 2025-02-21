@@ -10,6 +10,7 @@ export interface ISubscriptions extends Document{
     expiresAt: Date
     paymentId:ObjectId
     paymentMethod: IPaymentMethodEnum
+    teamMembers:ObjectId[]
 }
 
 
@@ -43,6 +44,8 @@ const subSchema = new Schema<ISubscriptions>({
         type: String,
         enum:Object.values(IPaymentMethodEnum)
     },
+
+    teamMembers:[Schema.Types.ObjectId]
 },
 {
     timestamps: true

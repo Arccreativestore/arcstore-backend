@@ -16,7 +16,6 @@ export const PexelsMutation = {
 }
 
 
-
 export const PexelsQuery = {
   
     async getPexelsPhotos(_:unknown, {data}:{data:ISearchParams}, context:context ):Promise<PhotosResponse>{
@@ -31,6 +30,10 @@ export const PexelsQuery = {
 
       async getDribbleShots(_:unknown, {data}:{data:ISearchParams}, context:context){
         return await new PexelsDatasource().getDribbleShots(data)
+      },
+ 
+      async getBehanceCategoryProjects(_:unknown, {data}:{data:ISearchParams}, context:context){
+        return await new PexelsDatasource().getBehanceCategoryProjects(data)
       }
 }
   

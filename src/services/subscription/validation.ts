@@ -10,8 +10,8 @@ export enum IUnitType {
 }
 
 export enum subPlans {
-    freemium = 'freemium',
-    premium = 'premium',
+    freemium = 'individual',
+    premium = 'team',
 }
 
 // Plan Interfaces

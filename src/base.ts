@@ -105,7 +105,7 @@ import { log } from "winston";
     }
 
 
-    calculateSubscription(unit: IUnitType, amount: string, discount: number, duration: number): {
+    calculateSubscription(unit: IUnitType, amount: string, duration: number): {
 		expiresAt: Date,
 		totalAmount: number
 	} {
@@ -118,11 +118,8 @@ import { log } from "winston";
 		
 		const endDate = now.clone().add(duration, newUnit[unit]);
 		
-		if (discount > 0) {
-			totalAmount = this.bankersRound(Number(amount) * duration * (1 - discount))
-		} else {
 			totalAmount = this.bankersRound(Number(amount) * duration)
-		}
+
 		return { expiresAt: endDate.toDate(), totalAmount: Number(totalAmount) };
 	}
 	

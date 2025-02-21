@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 import {PAYSTACK_BASE_URL, PAYSTACK_SECRET_KEY} from "../config/config.js";
 import __Subscription from "../models/subscription.js";
-import __Payment, { IPurchase, transactionStatus} from "../models/purchaseHistory";
+import __Payment, { IPurchase, transactionStatus} from "../models/purchaseHistory.js";
 import { ErrorHandlers } from './errorHandler.js';
 import Base from '../base.js';
 

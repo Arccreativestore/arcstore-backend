@@ -20,9 +20,14 @@ const AssetType = gql`
     deleteCreatorsPaymentMethod(id: ID!): Boolean!
     assetComment(data: Icomment!): Comment!
     deleteComment(data: IdeleteComment!): General!
+
+
+    #payment for assets 
+    processPayment(planId:ID! paymentMethod:IPaymentMethodEnum):JSON
   }
 
 
+  
   type Query {
     getAllCategory:[ICategoryResponse]
     getAssetCategoryById(categoryId:ID!):ICategoryResponse
@@ -45,6 +50,10 @@ const AssetType = gql`
   filename:String
   url:String}
 
+  enum IPaymentMethodEnum{
+  Paystack
+  GooglePay
+  }
   enum ItemEnum{
   psd
   ai

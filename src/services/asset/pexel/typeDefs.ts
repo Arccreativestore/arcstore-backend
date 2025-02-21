@@ -10,21 +10,53 @@ const PexelType = gql`
   getPexelsPhotos(data:QueryInput):PhotoResponse
   getPexelsVideos(data:QueryInput):VideoResponse
   getDribbleShots(data:QueryInput):JSON
+  getBehanceCategoryProjects(data:QueryInput):JSON
+  getBehanceVideo(data:QueryInput):JSON
 }
 
 input QueryInput{
-query:String
-per_page:Int
-page:Int
+    query:String
+    per_page:Int
+    page:Int
+    category:BehanceCategory
 }
 
+enum BehanceCategory {
+    ADVERTISING
+    ANIMATION
+    ARCHITECTURE
+    ART_DIRECTION
+    BRANDING
+    CALLIGRAPHY
+    CREATIVE_DIRECTION
+    DIGITAL_ART
+    EDITORIAL_DESIGN
+    FASHION
+    FILM
+    FINE_ARTS
+    GAME_DESIGN
+    GRAPHIC_DESIGN
+    ILLUSTRATION
+    INDUSTRIAL_DESIGN
+    INTERACTION_DESIGN
+    INTERIOR_DESIGN
+    MOTION_GRAPHICS
+    MUSIC
+    PACKAGING
+    PHOTOGRAPHY
+    PRODUCT_DESIGN
+    PROGRAMMING
+    TYPOGRAPHY
+    UI_UX
+    WEB_DESIGN
+  }
 
 type PhotoResponse{
-total_results: Int
-  page: Int
-  per_page: Int
+    total_results: Int
+    page: Int
+    per_page: Int
     next_page:String
-  photos:[Photo]
+    photos:[Photo]
 }
 type Photo {
     id: Int

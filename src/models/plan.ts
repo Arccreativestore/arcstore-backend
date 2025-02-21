@@ -6,17 +6,18 @@ export enum  IUnitType {
 }
 
 export enum subPlans {
-    freemium = "freemium",
-    premium = "premium",
+    Individual = "individual",
+    Team = "team",
 }
 
 export interface IPlan extends Document {
     type: subPlans
     amount: Decimal128
-    discount: number
     disable: boolean
     unit: IUnitType
     duration: number,
+    minUsers:number
+    baseCurrency:'usd',
     updatedAt?:Date
     createdAt?:Date
     features:[ObjectId]
@@ -31,18 +32,12 @@ const IPlanSchema: Schema = new Schema<IPlan>({
         type: {
             type: String,
             enum: Object.values(subPlans),
-            default: subPlans.premium
+            default: subPlans.Individual
         },
 
         amount: {
             type: Decimal128,
             default:0
-        },
-
-        discount: {
-            type: Number,
-            max: 1,
-            min: 0,
         },
 
         duration: {
@@ -53,10 +48,19 @@ const IPlanSchema: Schema = new Schema<IPlan>({
             type: String,
             enum:IUnitType
         },
+        minUsers: {
+            type: Number,
+            default:null
+        },
 
         disable: {
             type: Boolean,
             default: false
+        },
+
+        baseCurrency:{
+            type:String,
+            default:"usd"
         },
         
         features:{

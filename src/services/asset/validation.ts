@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import { Types } from 'mongoose';
 import { ErrorHandlers } from '../../helpers/errorHandler';
+import { BehanceCategory, ISearchParams } from './pexel/type';
 
 // Category Interfaces
 export interface ICategoryValidation {
@@ -12,6 +13,15 @@ export interface IUpdateCategoryValidation {
     categoryId: string;
     title?: string;
     description?: string;
+}
+
+
+
+export interface IQueryParamsValidation {
+    category?: string;
+    page?: number;
+    per_page?: number;
+    query:string
 }
 
 
@@ -35,6 +45,7 @@ const categorySchema = Joi.object({
         'string.base': 'Description must be a string',
     }),
 });
+
 
 // Create Category Validation
 export function CreateCategoryValidation(data: ICategoryValidation): Promise<ICategoryValidation> {
@@ -179,4 +190,24 @@ export function UpdateAssetValidation(data: IUpdateCategoryValidation): Promise<
             resolve(value);
         }
     });
+}
+
+
+const searchParamsSchema = Joi.object({
+    page:Joi.number(),
+    per_page:Joi.number(),
+    query:Joi.string(),
+    category:Joi.string()
+
+})
+export function ValidateQueryParams(data:ISearchParams):Promise<ISearchParams>{
+    return new Promise((resolve, reject) => {
+        const { error, value } = searchParamsSchema.validate(data, { abortEarly: false });
+        if (error) {
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+        } else {
+            resolve(value);
+        }
+    });
+
 }

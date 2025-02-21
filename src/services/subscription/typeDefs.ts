@@ -33,7 +33,6 @@ const SubscriptionType = gql`
     input IUpdatePlanInput{
         planId:ID!
         amount:Float
-        discount: Float
         unit: UnitEnum
         duration: Int
     }

@@ -7,6 +7,7 @@ import purchaseHistoryModel from "../../models/purchaseHistory";
 import subscriptionsModel from "../../models/subscription";
 import { userModel } from "../../models/user";
 import { ErrorHandlers } from "../../helpers/errorHandler";
+import { LocationService } from "../../helpers/locationAndCurrency";
 
 
 export class datasource extends Base {
@@ -94,6 +95,19 @@ export class datasource extends Base {
         throw error
        }
     }
+
+  
+    
+      async getUserCurrentLocation() {
+        return new LocationService().getLocationByIP()
+  
+      }
+
+      async amountUSDToLocalCurrency(amountInUSD:number) {
+        const getLocationByIP =  new LocationService()
+        const {data:{convertedAmount, conversionRate}} = await getLocationByIP.getUserLocationWithCurrency(amountInUSD)
+         return {convertedAmount, conversionRate}
+       }
 }
 
 async function execPipeline(userId: ObjectId, limit?: number, page?: number){

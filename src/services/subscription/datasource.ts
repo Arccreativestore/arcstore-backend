@@ -1,7 +1,7 @@
 import Base from '../../base.js';
 import __Subscription, { ISubscriptions } from "../../models/subscription.js";
 import __Payment, {IPaymentMethodEnum, IPurchase, transactionStatus} from "../../models/purchaseHistory";
-import PaystackService from "../../helpers/paymentService";
+import PaystackService from "../../helpers/paystackService.js";
 import { ErrorHandlers } from '../../helpers/errorHandler.js';
 import { User } from '../../app.js';
 import __Plan, {IPlan} from '../../models/plan'
@@ -23,8 +23,8 @@ class SubscriptionDatasource extends Base {
         const plan: IPlan | null = await __Plan().findOne({_id: planId});
   
         if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
-        const {unit, amount, discount, duration } = plan
-        const {totalAmount} = this.calculateSubscription(unit, amount.toString(), discount, duration)
+        const {unit, amount, duration } = plan
+        const {totalAmount} = this.calculateSubscription(unit, amount.toString(), duration)
    
         const created = await this.handleMongoError(__Payment().create({
             userId: user?._id,
@@ -50,10 +50,10 @@ class SubscriptionDatasource extends Base {
       
 
         let updateStatus: transactionStatus;
-      const { amount, unit, discount, duration} = plan
+      const { amount, unit, duration} = plan
       const amtPaid = Number(amount.toString()) * 100
 
-        const {expiresAt, totalAmount}  =   this.calculateSubscription(unit, amtPaid.toString(), discount, duration)
+        const {expiresAt, totalAmount}  =   this.calculateSubscription(unit, amtPaid.toString(), duration)
         if (incomingPayStackData.status === transactionStatus.success && amount === incomingPayStackData.amount) {
             await this.updatePaymentStatus(paymentRef, transactionStatus.success);
       
@@ -145,7 +145,6 @@ class SubscriptionDatasource extends Base {
             delete data?.amount
             return {
                 type: data.type,
-                discount: data.discount,
                 unit: data.unit,
                 duration: data.duration,
                 disable: data.disable,

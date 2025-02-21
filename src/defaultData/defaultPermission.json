@@ -48,6 +48,29 @@
       "updatedAt": "2024-09-10T12:35:14.789Z",
       "display": true,
       "group": "permissions"
+    },
+
+    {
+      "_id": "67b837538788203adeea16f1",
+      "title": "Get User Current Location",
+      "description": "Allows fetching user current location.",
+      "method": "getUserCurrentLocation",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "location"
+    },
+    {
+      "_id": "67b8ad7d8788203adeea16f2",
+      "title": "Amount USD To Local Currency",
+      "description": "Amount in USD to be converted to local currency",
+      "method": "amountUSDToLocalCurrency",
+      "createdAt": "2024-09-10T12:35:14.789Z",
+      "updatedAt": "2024-09-10T12:35:14.789Z",
+      "display": true,
+      "group": "currency"
     }
+
+
   ]
   

@@ -6,7 +6,7 @@ import {Decimal128} from 'mongodb';
 
 export enum IPaymentMethodEnum {
     PayStack='paystack',
-    GooglePay='googlepay'
+    GooglePay='GooglePay'
 }
 export enum transactionStatus {
     pending = "pending",
@@ -51,7 +51,6 @@ const purchaseHistorySchema = new Schema<IPurchase>({
 
     currency: {
         type: String,
-        default:"NGN"
     },
 
     paymentMethod: {

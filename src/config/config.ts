@@ -36,7 +36,11 @@ const requiredEnvs = [
   "PEXEL_API_KEY",
   "DRIBBLE_API_URL",
 "DRIBBLE_ACCESS_TOKEN",
-] as const;
+"BEHANCE_BASE_URL",
+"STRIPE_MERCHANT_ID",
+"STRIPE_SECRET_KEY",
+"EXCHANGE_RATE_API_KEY",
+"BEHANCE_API_KEY"] as const;
 
 interface Envs {
   [key: string]: string;
@@ -91,5 +95,10 @@ export const {
   PEXEL_API_KEY,
   DRIBBLE_API_URL,
 DRIBBLE_ACCESS_TOKEN,
+BEHANCE_API_KEY,
+BEHANCE_BASE_URL,
+STRIPE_MERCHANT_ID,
+STRIPE_SECRET_KEY,
+EXCHANGE_RATE_API_KEY
 
 } = process.env;
