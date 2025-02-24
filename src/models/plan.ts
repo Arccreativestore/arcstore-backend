@@ -1,8 +1,8 @@
 import {Schema, Document, model, PaginateModel, Model, ObjectId} from 'mongoose';
 import { Decimal128 } from 'mongodb';
 export enum  IUnitType {
-    month= 'month',
-    year= 'year'
+    month= 'monthly',
+    year= 'yearly'
 }
 
 export enum subPlans {
@@ -18,6 +18,8 @@ export interface IPlan extends Document {
     duration: number,
     minUsers:number
     baseCurrency:'usd',
+    annualCommitment:boolean
+    userPerYear:Decimal128
     updatedAt?:Date
     createdAt?:Date
     features:[ObjectId]
@@ -36,6 +38,11 @@ const IPlanSchema: Schema = new Schema<IPlan>({
         },
 
         amount: {
+            type: Decimal128,
+            default:0
+        },
+
+        userPerYear:{
             type: Decimal128,
             default:0
         },
@@ -62,6 +69,10 @@ const IPlanSchema: Schema = new Schema<IPlan>({
             type:String,
             default:"usd"
         },
+        annualCommitment:{
+            type:Boolean,
+            default:false
+        },
         
         features:{
             type:[Schema.Types.ObjectId]
@@ -77,6 +88,8 @@ const IPlanSchema: Schema = new Schema<IPlan>({
     }
 );
 
+
+IPlanSchema.index({unit:1, type:1}, {unique:true})
 export default function (isTest: boolean = false) {
     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
     const collectionName = isTest ? 'test_plans' : "plans";

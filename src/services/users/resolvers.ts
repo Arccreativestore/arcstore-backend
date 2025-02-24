@@ -5,7 +5,7 @@ import { ErrorHandlers } from "../../helpers/errorHandler";
 import { datasource } from "./datasource";
 import Joi from "joi";
 import { Types } from "mongoose";
-import purchaseHistoryModel from "../../models/purchaseHistory";
+import purchaseHistoryModel from "../../models/payments";
 import { downloadType, purchaseHistoryType, savedAssetType, validateMongoId } from "./types";
 import { Icreator } from "../../models/creator";
 import { UserDatasource } from "../auth/datasource";

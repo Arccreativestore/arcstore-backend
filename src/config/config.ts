@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
 
+
 dotenv.config({ path: [".env", ".env.keys"] });
 export const isDev = process.env.NODE_ENV !== "production";
+export const GOOGLE_APPLICATION_CREDENTIALS="../server/src/defaultData/serviceAccountKey.json"
+
 
 const requiredEnvs = [
   "PORT",

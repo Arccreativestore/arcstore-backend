@@ -3,7 +3,7 @@ import Base from "../../base";
 import savedAssetsModel from "../../models/savedAssets";
 import downloadsModel from "../../models/downloads";
 import { logger } from "../../config/logger";
-import purchaseHistoryModel from "../../models/purchaseHistory";
+import purchaseHistoryModel from "../../models/payments";
 import subscriptionsModel from "../../models/subscription";
 import { userModel } from "../../models/user";
 import { ErrorHandlers } from "../../helpers/errorHandler";
@@ -104,9 +104,8 @@ export class datasource extends Base {
       }
 
       async amountUSDToLocalCurrency(amountInUSD:number) {
-        const getLocationByIP =  new LocationService()
-        const {data:{convertedAmount, conversionRate}} = await getLocationByIP.getUserLocationWithCurrency(amountInUSD)
-         return {convertedAmount, conversionRate}
+        const {data:{convertedAmount, conversionRate, currency, symbol}} = await new LocationService().getUserLocationWithCurrency(amountInUSD)
+         return {convertedAmount, conversionRate,currency, symbol }
        }
 }
 

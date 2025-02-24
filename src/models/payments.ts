@@ -23,6 +23,9 @@ export interface IPurchase extends Document {
     amountPaid: Decimal128
     paymentMethod: IPaymentMethodEnum
     currency: string
+    stripeCustomerId:string
+    expiresAt:Date,
+    teamMembers:ObjectId[]
     status: transactionStatus
 }
 
@@ -39,9 +42,17 @@ const purchaseHistorySchema = new Schema<IPurchase>({
         index:true,
     },
 
+    stripeCustomerId:{
+        type:String
+
+    },
     purchaseDate: {
         type: Date,
         default: Date.now()
+    },
+
+    expiresAt: {
+        type: Date
     },
 
     amountPaid: {
@@ -63,7 +74,10 @@ const purchaseHistorySchema = new Schema<IPurchase>({
         type: String,
         enum:Object.values(transactionStatus),
         default:transactionStatus.pending
-    }
+    },
+
+    teamMembers:[Schema.Types.ObjectId]
+    
 },
 {
     timestamps: true,
@@ -73,7 +87,7 @@ const purchaseHistorySchema = new Schema<IPurchase>({
 const purchaseHistoryModel = (isTest: boolean = false)=>{
     if(isTest == undefined || isTest == null) throw new GraphQLError("Environment is invalid")
     
-    let collectionName = isTest ? "test_purchaseHistory" : "purchaseHistory"
+    let collectionName = isTest ? "test_payments" : "payments"
     return model<IPurchase>(collectionName, purchaseHistorySchema, collectionName)
     }
     

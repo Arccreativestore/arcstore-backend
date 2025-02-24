@@ -19,11 +19,11 @@ import __AssetLikes from '../../models/assetLikes'
 import { IPaymentMethods } from './type';
 import { GooglePayService } from '../../helpers/googlePayService';
 import __Plan from '../../models/plan'
-import Stripe from 'stripe'; 
-import PaystackService from '../../helpers/paystackService';
-import { STRIPE_SECRET_KEY } from '../../config/config';
 
-const stripe = new Stripe(STRIPE_SECRET_KEY);
+
+
+
+
 export interface PaymentMethodInput {
   method: PaymentMethodEnum
   details: Record<string, any>
@@ -488,41 +488,7 @@ async  getAssetAnalytics(authorId: string) {
     return await new DownloadService().downloadFreePikAsset(platform, relativePath, itemId, itemFormat)
   }
 
-  async processPayment(planId:string, paymentMethod:IPaymentMethods, user:any){
- 
-    try {
-  
-      const {amount, baseCurrency} =  await __Plan().findById(planId)
-     //TODO: convert baseCurrency to the user currency
-      const currency = baseCurrency
 
-      if (paymentMethod === IPaymentMethods.GPAY) {
-        const googlePayService = new GooglePayService()
-        const paymentData =  googlePayService.createPaymentData(amount.toString(), currency); 
-        const token = await googlePayService.processPayment(paymentData);
-
-        const charge = await stripe.charges.create({
-          amount: parseInt(amount.toString()) * 100, 
-          currency:currency,
-          source: token, 
-          receipt_email: user.email,
-          metadata: { planId },
-        });
-
-        return charge; 
-
-      } else if (paymentMethod === IPaymentMethods.PAYSTACK) {
-        const paystackProcessing = new PaystackService().processData({reference:planId})
-    return paystackProcessing
-
-      } else {
-        throw new ErrorHandlers().UserInputError('Invalid payment method.');
-      }
-    } catch (error) {
-      console.error("Payment Error:", error);
-      throw error; // Re-throw the error to be handled by the caller
-    }
-  }
 
 
 }

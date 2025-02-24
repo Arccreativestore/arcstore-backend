@@ -21,9 +21,6 @@ const AssetType = gql`
     assetComment(data: Icomment!): Comment!
     deleteComment(data: IdeleteComment!): General!
 
-
-    #payment for assets 
-    processPayment(planId:ID! paymentMethod:IPaymentMethodEnum):JSON
   }
 
 

@@ -2,7 +2,7 @@ import SubscriptionDatasource from './datasource.js';
 import { Request, Response } from 'express'
 import { isUserAuthorized } from '../../helpers/utils/permissionChecks.js';
 import { User } from '../../app.js';
-import { IPaymentMethodEnum } from '../../models/purchaseHistory.js';
+import { IPaymentMethodEnum } from '../../models/payments.js';
 import { ISubscriptions } from '../../models/subscription.js';
 import { IPlanValidation, IUpdatePlanValidation } from './validation.js';
 
@@ -14,9 +14,9 @@ export const SubscriptionMutation = {
         return await new SubscriptionDatasource().addSubscription(data)
     },
 
-    async InitializePayment(__: unknown, {planId, paymentMethod}: { planId:string, paymentMethod:IPaymentMethodEnum }, context:{req:Request, res:Response, user:User}): Promise<{ ref:string, publicKey:string }> {
-        isUserAuthorized(context.user, this.InitializePayment.name, true)
-        return await new SubscriptionDatasource().InitializePayment(planId, paymentMethod, context.user)
+    async initializePaystackPayment(__: unknown, {planId, teamMembers}: { planId:string, teamMembers:string[]}, context:{req:Request, res:Response, user:User}): Promise<{ ref:string, publicKey:string, data:Record<string, any> }> {
+        isUserAuthorized(context.user, this.initializePaystackPayment.name, true)
+        return await new SubscriptionDatasource().InitializePayment(planId, teamMembers, context.user)
     },
 
     async addPlan(__: unknown, {data}: { data: IPlanValidation }, context: {
@@ -24,7 +24,7 @@ export const SubscriptionMutation = {
         res: Response,
         user: User
     }): Promise<string> {
-        isUserAuthorized(context.user, this.addPlan.name)
+        // isUserAuthorized(context.user, this.addPlan.name)
         return await new SubscriptionDatasource().addPlan(data);
     },
     async updatePlan(__: unknown, {data}: { data: IUpdatePlanValidation }, context: {
@@ -36,6 +36,14 @@ export const SubscriptionMutation = {
         return await new SubscriptionDatasource().updatePlan(data);
     },
 
+    async processGooglePayment(_:unknown, {planId, googlePayToken, teamMembers}:{ planId: string, googlePayToken:string, teamMembers:string[] }, context: {
+        req: Request,
+        res: Response,
+        user: User
+    } ){
+        // isUserAuthorized(context.user, this.processGooglePayment.name) 
+        return await new SubscriptionDatasource().processGooglePayment(planId, teamMembers, googlePayToken, context.user)
+      },
 
 };
 
@@ -69,7 +77,7 @@ export const SubscriptionQuery = {
         res: Response,
         user: User
     }): Promise<any> {
-        isUserAuthorized(context.user, this.getPlanById.name, true)
+        // isUserAuthorized(context.user, this.getPlanById.name, true)
         return await new SubscriptionDatasource().getPlanById(planId);
     },
 
@@ -78,7 +86,7 @@ export const SubscriptionQuery = {
         res: Response,
         user: User
     }): Promise<any[]> {
-        isUserAuthorized(context.user, this.getAllPlan.name, true)
+        // isUserAuthorized(context.user, this.getAllPlan.name, true)
         return await new SubscriptionDatasource().getAllPlan();
     },
 };

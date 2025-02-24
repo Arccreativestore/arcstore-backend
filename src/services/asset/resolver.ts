@@ -135,10 +135,6 @@ async addAsset(_:unknown, {data}:{data:IAssetValidation}, context:context ){
     return await new AssetDatasource().deletePaymentMethod(id)
   },
 
-  async processPayment(_:unknown, {planId, methods}:{ planId: string, methods:IPaymentMethods}, context: context ){
-    isUserAuthorized(context.user, this.processPayment.name) 
-    return await new AssetDatasource().processPayment(planId, methods, context.user)
-  },
 };
 
 

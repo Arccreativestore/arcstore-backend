@@ -4,6 +4,12 @@ import apiControllers from './controllers/controllers';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { handleMultipleFileUpload, upload } from '../helpers/uploadService';
 import CompleteUpload, { CustomRequest } from '../helpers/completeUpload';
+import Stripe from 'stripe'
+import { STRIPE_SECRET_KEY } from '../config/config';
+import StripeService from '../helpers/stripeService';
+import PaystackService from '../helpers/paystackService';
+
+const stripe = new Stripe(STRIPE_SECRET_KEY)
 
 
 const router = express.Router();
@@ -147,5 +153,31 @@ router.post('/image/upload', authMiddleware, upload.single('file') as any, async
 
 // })
 
+
+
+
+//STRIPE WEBHOOK ROUTE: Handling webhook related request
+router.post("/stripe-webhook", async (req:Request, res:Response, next: NextFunction) => {
+    const sig = req.headers["stripe-signature"];
+    const endpointSecret = "YOUR_STRIPE_WEBHOOK_SECRET";
+
+    let event;
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+        console.error("Webhook Error:", err);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    await new StripeService(STRIPE_SECRET_KEY).processWebhook({event:event.type, data:event.data.object})
+   
+});
+
+
+//PAYSTACK WEBHOOK ROUTE: Handling webhook related request
+router.post("/paystack-webhook", async (req:Request, res:Response, next: NextFunction) => {
+    await new PaystackService().processWebhook(req.body)
+   
+});
 
 export default router;

@@ -1,6 +1,6 @@
 import { model, ObjectId, Schema } from "mongoose";
 import { Decimal128 } from 'mongodb'
-import { IPaymentMethodEnum } from "./purchaseHistory";
+import { IPaymentMethodEnum, transactionStatus } from "./payments";
 
 export interface ISubscriptions extends Document{
     _id?:ObjectId
@@ -11,6 +11,7 @@ export interface ISubscriptions extends Document{
     paymentId:ObjectId
     paymentMethod: IPaymentMethodEnum
     teamMembers:ObjectId[]
+
 }
 
 

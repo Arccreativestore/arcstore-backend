@@ -105,22 +105,22 @@ import { log } from "winston";
     }
 
 
-    calculateSubscription(unit: IUnitType, amount: string, duration: number): {
+    calculateSubscription(unit: IUnitType, amount: string): {
 		expiresAt: Date,
-		totalAmount: number
+		totalAmount: string
 	} {
 		const now = moment();
-		let totalAmount: string;
+
 		const newUnit = {
 			[IUnitType.month]: 'month',
 			[IUnitType.year]: 'year',
 		} as const
 		
-		const endDate = now.clone().add(duration, newUnit[unit]);
+		const endDate = now.clone().add(1, newUnit[unit]);
 		
-			totalAmount = this.bankersRound(Number(amount) * duration)
+			// totalAmount = this.bankersRound(Number(amount) )
 
-		return { expiresAt: endDate.toDate(), totalAmount: Number(totalAmount) };
+		return { expiresAt: endDate.toDate(), totalAmount: amount };
 	}
 	
 	bankersRound(number: number): string {

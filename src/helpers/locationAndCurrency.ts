@@ -1,5 +1,6 @@
 import axios from "axios";
 import { EXCHANGE_RATE_API_KEY } from "../config/config";
+import { ErrorHandlers } from "./errorHandler";
 
 export class LocationService {
    async getLocationByIP() {
@@ -53,7 +54,7 @@ export class LocationService {
       );
 
       if (!data.conversion_rates[toCurrency]) {
-        throw new Error(`Conversion rate not found for ${toCurrency}`);
+        throw new ErrorHandlers().ValidationError(`Conversion rate not found for ${toCurrency}`);
       }
 
       const conversionRate = data.conversion_rates[toCurrency];
@@ -63,14 +64,19 @@ export class LocationService {
       const currencySymbol = await this.getCurrencySymbol(toCurrency);
 
       return {
-        convertedAmount: this.formatCurrency(convertedAmount, currencySymbol),
+        convertedAmount: this.bankersRound(convertedAmount),
         rate: conversionRate,
+        currency:toCurrency,
+        symbol:currencySymbol
+
       };
     } catch (error) {
       console.error("Error converting currency:", error);
       return {
-        convertedAmount: `$${amount.toFixed(2)}`, // Default fallback
+        convertedAmount: `${amount.toFixed(2)}`, // Default fallback
         rate: 1,
+        symbol:"$",
+        currency:'usd'
       };
     }
   }
@@ -91,12 +97,33 @@ export class LocationService {
     }
   }
 
-  private formatCurrency(amount: number, symbol: string): string {
-    return `${symbol}${amount.toLocaleString(undefined, {
+  private formatCurrency(amount: number): string {
+    return amount.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    })}`;
+    });
   }
+
+  	bankersRound(number: number): string {
+		// Function to check if a number is exactly halfway between two integers
+		const isHalfway = (num: number) => Math.abs(num - Math.round(num)) === 0.5;
+		
+		let rounded: number;
+		if (isHalfway(number)) {
+			// If the number is halfway, determine if the integer part is even
+			if (Math.floor(number) % 2 === 0) {
+				rounded = Math.floor(number);
+			} else {
+				rounded = Math.ceil(number);
+			}
+		} else {
+			// For non-halfway numbers, use standard rounding and apply two decimal rounding here
+			rounded = Math.round(number * 100) / 100;
+		}
+		
+		// Format the rounded number to always have two decimal places
+		return rounded.toFixed(2);
+	}
 
   public async getUserLocationWithCurrency(amountInUSD: number) {
     const locationData:any = await this.getLocationByIP();
@@ -108,6 +135,8 @@ export class LocationService {
       );
       locationData.data.convertedAmount = conversion.convertedAmount;
       locationData.data.conversionRate = conversion.rate;
+      locationData.data.convertedCurrency = conversion.currency
+      locationData.data.symbol = conversion.symbol
     }
 
     return locationData;

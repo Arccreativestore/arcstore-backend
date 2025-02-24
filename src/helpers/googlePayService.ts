@@ -1,6 +1,8 @@
 import { google } from 'googleapis';
 import { ErrorHandlers } from './errorHandler';
-import { STRIPE_MERCHANT_ID, STRIPE_SECRET_KEY } from '../config/config';
+import { GOOGLE_APPLICATION_CREDENTIALS, STRIPE_MERCHANT_ID, STRIPE_SECRET_KEY } from '../config/config';
+
+
 
 enum IEnvironment {
   PRODUCTION="PRODUCTION",
@@ -29,12 +31,12 @@ export interface PaymentData {
   };
   [key: string]: any; 
 }
-
+console.log({GOOGLE_APPLICATION_CREDENTIALS})
 export class GooglePayService {
   private auth: any
   private merchantId: string = STRIPE_MERCHANT_ID;
   private environment:IEnvironment = STRIPE_SECRET_KEY.startsWith('sk_test_') ? IEnvironment.TEST : IEnvironment.PRODUCTION;
-  private  serviceAccountKeyFile: string = "serviceAccountKeyFile"
+  private  serviceAccountKeyFile: string = GOOGLE_APPLICATION_CREDENTIALS
 
   constructor() {
     this.auth = new google.auth.GoogleAuth({
@@ -46,8 +48,10 @@ export class GooglePayService {
   }
 
 
+
   async processPayment(paymentData: PaymentData): Promise<string> {
     try {
+   
       const client = await this.auth.getClient();
 
       const response = await client.request({
