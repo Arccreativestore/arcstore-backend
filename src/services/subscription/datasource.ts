@@ -1,19 +1,21 @@
 import Base from '../../base.js';
-import __Subscription, { ISubscriptions } from "../../models/subscription.js";
+import __Subscription, { IStatusEnum, ISubscriptions } from "../../models/subscription.js";
 import __Payment, {IPaymentMethodEnum, IPurchase, transactionStatus} from "../../models/payments.js";
 import PaystackService from "../../helpers/paystackService.js";
 import { ErrorHandlers } from '../../helpers/errorHandler.js';
 import { User } from '../../app.js';
 import __Plan, {IPlan, subPlans} from '../../models/plan'
-import __Asset, { IAsset } from '../../models/asset.js';
-import {PAYSTACK_PUBLIC_KEY, STRIPE_SECRET_KEY} from '../../config/config'
+import __Asset from '../../models/asset.js';
+import { STRIPE_SECRET_KEY} from '../../config/config'
 import { ObjectId } from 'mongoose';
 import { CreatePlanValidation, IPlanValidation, IUnitType, IUpdatePlanValidation, UpdatePlanValidation } from './validation.js';
 import { LocationService } from '../../helpers/locationAndCurrency.js';
 import { Decimal128 } from 'mongodb';
-import { GooglePayService } from '../../helpers/googlePayService.js';
+
 import Stripe from 'stripe';
 import TeamSubscriptionService from '../../helpers/stripeService.js';
+import PaystackSubscriptionService from '../../helpers/paystackV2.js';
+import moment from 'moment';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -24,16 +26,64 @@ class SubscriptionDatasource extends Base {
         return 'Added successfully'
     }
 
-    async InitializePayment(planId: string, teamMembers: string[], user: User): Promise<{ ref:string, publicKey:string, data:Record<string,any>}> {
+    // async InitializePayment(planId: string, teamMembers: string[], user: User): Promise<{ ref:string, publicKey:string, data:Record<string,any>}> {
      
+    //     const plan: IPlan | null = await __Plan().findOne({_id: planId});
+  
+    //     if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
+    //     const {unit, amount, minUsers, annualCommitment } = plan
+
+    //     let amountToBePaid
+
+    //     teamMembers && teamMembers.length && teamMembers.push(user._id.toString())
+
+    //     // Ensure its individual/team(yearly) subscription 
+    //     if(unit === IUnitType.year && teamMembers && teamMembers.length < minUsers){ 
+    //         throw new ErrorHandlers().UserInputError("This plan requires minimum of 2 team members")
+    //     }
+
+    //     const {data} = await new LocationService().getUserLocationWithCurrency(Number(amount.toString()))
+
+    //     const {convertedAmount,currency, symbol}=data
+    //      if(teamMembers && teamMembers?.length >= minUsers && annualCommitment ){
+    //      amountToBePaid = Number(convertedAmount) * teamMembers.length
+
+    //      }else{
+    //         amountToBePaid = convertedAmount
+    //      }
+
+    //     const {totalAmount, expiresAt} = this.calculateSubscription(unit, amountToBePaid.toString())
+    //     const created:any = await this.handleMongoError(__Payment().create({
+    //         userId: user?._id,
+    //         amountPaid:totalAmount,
+    //         paymentMethod:IPaymentMethodEnum.PayStack,
+    //         planId,
+    //         currency,
+    //         teamMembers,
+    //         expiresAt,
+    //     }));
+
+    //     if (!created?._id) throw new ErrorHandlers().ValidationError('Unable to initialize payment, try again.');
+    //     return { ref: created?._id, publicKey: PAYSTACK_PUBLIC_KEY as string,
+    //         data:{
+    //             totalAmount:created.totalAmount,
+    //             paymentMethod:IPaymentMethodEnum.PayStack,
+    //             currency:created.currency,
+    //             symbol:created.symbol
+    //         }}
+    // }
+
+
+    async InitializePayment(planId: string, teamMembers: string[], user: User): Promise<{ ref:string, authorization_url:string}> {
+      
         const plan: IPlan | null = await __Plan().findOne({_id: planId});
   
         if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
         const {unit, amount, minUsers, annualCommitment } = plan
 
-        let amountToBePaid
+        let amountToBePaid:number
 
-        teamMembers && teamMembers.length && teamMembers.push(user._id.toString())
+        teamMembers && teamMembers.length && teamMembers.push(user?._id.toString())
 
         // Ensure its individual/team(yearly) subscription 
         if(unit === IUnitType.year && teamMembers && teamMembers.length < minUsers){ 
@@ -42,7 +92,7 @@ class SubscriptionDatasource extends Base {
 
         const {data} = await new LocationService().getUserLocationWithCurrency(Number(amount.toString()))
 
-        const {convertedAmount,currency, symbol}=data
+        const {convertedAmount,currency}=data
          if(teamMembers && teamMembers?.length >= minUsers && annualCommitment ){
          amountToBePaid = Number(convertedAmount) * teamMembers.length
 
@@ -50,54 +100,85 @@ class SubscriptionDatasource extends Base {
             amountToBePaid = convertedAmount
          }
 
-        const {totalAmount, expiresAt} = this.calculateSubscription(unit, amountToBePaid.toString())
+        const now = moment();
+        const endDate = now.clone().add(1, 'month');
+        
+        let currentPlan: any 
+
+        if(teamMembers && teamMembers.length > 1){
+
+            const newPlan = await new PaystackSubscriptionService().createPlan({
+                name:'customized team plan', 
+                interval:'monthly', 
+                amount:Math.round(Number(amountToBePaid)), description:`${user.email} customized plan` 
+            })
+
+            currentPlan=newPlan.plan_code
+        }else{
+            currentPlan= plan.paystackPlanCode
+        }
+
+
+         const processPlan = await new PaystackSubscriptionService().createSubscription({
+            email:user.email,
+            amount:Math.round(Number(amountToBePaid)),
+            currency,
+            plan:currentPlan,
+            metadata:{
+                planId,
+                userId:user._id.toString()
+            }
+
+        })
+
         const created:any = await this.handleMongoError(__Payment().create({
             userId: user?._id,
-            amountPaid:totalAmount,
+            amountPaid:Math.round(Number(amountToBePaid)),
             paymentMethod:IPaymentMethodEnum.PayStack,
             planId,
             currency,
             teamMembers,
-            expiresAt,
+            subscriptionCode:processPlan.subscription_code,
+            paystackRef:processPlan.reference,
+            expiresAt:endDate,
         }));
 
+
+
+
         if (!created?._id) throw new ErrorHandlers().ValidationError('Unable to initialize payment, try again.');
-        return { ref: created?._id, publicKey: PAYSTACK_PUBLIC_KEY as string,
-            data:{
-                totalAmount:created.totalAmount,
-                paymentMethod:IPaymentMethodEnum.PayStack,
-                currency:created.currency,
-                symbol:created.symbol
-            }}
+        return { ref:processPlan.reference, authorization_url:processPlan.authorization_url
+        }
     }
 
 
     async verifyTransaction(paymentRef: string, user: User): Promise<string> {
 
-        const isTransaction: IPurchase | null = await __Payment().findOne({_id: paymentRef});
+        const isTransaction: IPurchase | null = await __Payment().findOne({paystackRef: paymentRef});
         if (!isTransaction) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
 
-        const plan = await __Plan().findOne({_id:isTransaction.planId})
-        if (!plan) throw new ErrorHandlers().ValidationError('Unable to perform this operation');
+    
         if (isTransaction.status === transactionStatus.success) return "Payment completed successfully.";
         const incomingPayStackData = await new PaystackService().verifyTransaction(paymentRef)
       
 
         let updateStatus: transactionStatus;
-      const { amount, unit, duration} = plan
-      const amtPaid = Number(amount.toString()) * 100
+    
+          const now = moment();
+            const endDate = now.clone().add(1, 'month');
 
-        const {expiresAt, totalAmount}  =   this.calculateSubscription(unit, amtPaid.toString())
-        if (incomingPayStackData.status === transactionStatus.success && amount === incomingPayStackData.amount) {
+        if (incomingPayStackData.status === transactionStatus.success) {
             await this.updatePaymentStatus(paymentRef, transactionStatus.success);
       
             const formattedPay = {
                 userId:isTransaction.userId, 
                 planId : isTransaction.planId,
-                amountPaid: totalAmount,
-                expiresAt,
+                amountPaid: incomingPayStackData.amount / 100,
+                expiresAt:endDate,
+                subscriptionCode:isTransaction.subscriptionCode,
                 paymentId:isTransaction._id as ObjectId,
                 paymentMethod: isTransaction.paymentMethod,
+                status:IStatusEnum.ACTIVE,
             }
 
             await this.handleMongoError(__Subscription().create(formattedPay))
@@ -113,24 +194,38 @@ class SubscriptionDatasource extends Base {
                         transactionStatus.pending;
 
 
-        await this.updatePaymentStatus(paymentRef, updateStatus);
+        await this.updatePaymentStatus(isTransaction._id.toString(), updateStatus);
         return `${updateStatus === transactionStatus.fraud ? fraudMessage : "Transaction processing"}`
     }
 
 
+    async cancelSubscription(subscriptionId:string):Promise<{status:boolean, message:string}>{
+        const subDetails = await __Subscription().findById(subscriptionId)
+        
+        if(subDetails.paymentMethod === IPaymentMethodEnum.PayStack){
+            const { subscriptionCode }   = subDetails
+            return new PaystackSubscriptionService().cancelSubscription(subscriptionCode)
+        }else{
 
-    async cancelSubscription(subscriptionId:string){}
-
-    async updatePaymentStatus(paymentId: string,  status: transactionStatus) {
-        return __Payment().updateOne({_id: paymentId}, {$set: {status}});
+            // TODO:Handle google/stripe subscription cancellation 
+            return {status:false, message:"Stripe cancellation not implemented"}
+        }
     }
 
-    async getAllMySubscriptions(userId:ObjectId){}
+    async updatePaymentStatus(paymentId: string,  status: transactionStatus) {
+        return __Payment().updateOne({paystackRef: paymentId}, {$set: {status}});
+    }
 
-    async getAllSubscriptions(){}
+    async getAllMySubscriptions(userId:ObjectId){
+        return __Subscription().find({userId})
+    }
+
+    async getAllSubscriptions(){
+        return __Subscription().find({})
+    }
 
     async getSubscriptionById(subId:string):Promise<ISubscriptions | null>{
-        return null
+        return __Subscription().findById(subId)
     }
 
         //Pricing
@@ -270,8 +365,6 @@ class SubscriptionDatasource extends Base {
       
         //     }
 
-
-
         async processGooglePayment(planId:string, teamMembers:string[], paymentMethod:string, user:any){  
             const plan=  await __Plan().findById(planId)
             const {unit, amount, minUsers, annualCommitment , baseCurrency, userPerYear} = plan
@@ -282,7 +375,7 @@ class SubscriptionDatasource extends Base {
       
               const {convertedAmount,currency, symbol}=data
 
-        const stripeData = await new TeamSubscriptionService(STRIPE_SECRET_KEY).createSubscriptionOrOneTimePayment(user._id.toString(), paymentMethod, planId, convertedAmount, currency, teamSize, teamSize ? false:true )
+        const stripeData = await new TeamSubscriptionService(STRIPE_SECRET_KEY).createSubscriptionOrOneTimePayment(user.email, paymentMethod, planId, Math.round(convertedAmount), currency, teamSize, teamSize ? false:true )
       
               let amountToBePaid
       
@@ -306,7 +399,7 @@ class SubscriptionDatasource extends Base {
               await this.handleMongoError(__Payment().create({
                   userId: user?._id,
                   amountPaid:totalAmount,
-                  paymentMethod:IPaymentMethodEnum.PayStack,
+                  paymentMethod:IPaymentMethodEnum.GooglePay,
                   planId,
                   currency,
                   teamMembers,

@@ -16,15 +16,21 @@ const SubscriptionType = gql`
     addPlan(data: IPlanInput!): String!
     updatePlan(data:IUpdatePlanInput):String!
     processGooglePayment(planId:ID  googlePayToken:String teamMembers:[ID]):JSON
+    cancelSubscription(subscriptionId:ID):NormalResponse!
   }
 
 
 
   enum IPlanEnum{
-  individual
-  team
+    individual
+    team
   }
 
+
+  type NormalResponse{
+    status:Boolean 
+    message:String
+  }
       input IPlanInput{
       type:IPlanEnum
         amount:Float!
@@ -70,8 +76,7 @@ const SubscriptionType = gql`
 
   type IPaymentResponse {
     ref: String
-    publicKey: String
-    data:JSON
+    authorization_url:String
   }
 
   enum ISubTypeEnum {

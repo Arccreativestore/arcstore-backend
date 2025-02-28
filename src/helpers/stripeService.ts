@@ -42,13 +42,34 @@ class TeamSubscriptionService {
     }
 
     /** ✅ Create Subscription (Dynamic Team Size) */
-    async createSubscriptionOrOneTimePayment(userId: string, paymentMethodId: string, planId:string,  pricePerMember:number, currency:string, teamSize: number=1,isOneTime:boolean=true) {
+    async createSubscriptionOrOneTimePayment(email: string, paymentMethodId: string, planId:string,  pricePerMember:number, currency:string, teamSize: number=1,isOneTime:boolean=true) {
         try {
-            const customer = await this.stripe.customers.create({
-                payment_method: paymentMethodId,
-                invoice_settings: { default_payment_method: paymentMethodId },
-                metadata: { userId , planId}
-            });
+
+
+            console.log({
+                email,
+                limit: 1,
+              })
+      
+              let customer:any =  await this.stripe.customers.list({
+                email,
+                limit: 1,
+              });
+      
+              console.log({customer})
+              if (customer.data.length === 0) {
+                customer = await this.stripe.customers.create({
+                    payment_method: paymentMethodId,
+                    invoice_settings: { default_payment_method: paymentMethodId },
+                    metadata: { email , planId}
+                });
+    
+              } else {
+                customer = customer.data[0];
+              }
+      
+    
+            console.log({customer})
 
             if (isOneTime) {
                 const paymentIntent = await this.stripe.paymentIntents.create({
@@ -57,7 +78,7 @@ class TeamSubscriptionService {
                     currency,
                     payment_method: paymentMethodId,
                     confirm: true, 
-                    metadata: { userId, planId }
+                    metadata: { email, planId }
                 });
     
                 return paymentIntent;
@@ -74,7 +95,7 @@ class TeamSubscriptionService {
                     quantity: teamSize
                 }],
                 expand: ["latest_invoice.payment_intent"],
-                metadata: { userId, planId }
+                metadata: { email, planId }
             });
 
             return subscription;

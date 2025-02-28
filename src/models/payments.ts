@@ -25,6 +25,8 @@ export interface IPurchase extends Document {
     currency: string
     stripeCustomerId:string
     expiresAt:Date,
+    subscriptionCode:string,
+    paystackRef:string
     teamMembers:ObjectId[]
     status: transactionStatus
 }
@@ -46,6 +48,10 @@ const purchaseHistorySchema = new Schema<IPurchase>({
         type:String
 
     },
+
+    paystackRef:{
+        type:String
+    },
     purchaseDate: {
         type: Date,
         default: Date.now()
@@ -58,6 +64,9 @@ const purchaseHistorySchema = new Schema<IPurchase>({
     amountPaid: {
         type: Decimal128,
         required: true
+    },
+    subscriptionCode: {
+        type: String,
     },
 
     currency: {

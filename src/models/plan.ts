@@ -23,6 +23,7 @@ export interface IPlan extends Document {
     updatedAt?:Date
     createdAt?:Date
     features:[ObjectId]
+    paystackPlanCode:string
 }
 
 
@@ -46,7 +47,9 @@ const IPlanSchema: Schema = new Schema<IPlan>({
             type: Decimal128,
             default:0
         },
-
+        paystackPlanCode:{
+            type:String,
+        },
         duration: {
             type: Number,
         },

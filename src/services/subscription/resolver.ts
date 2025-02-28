@@ -14,9 +14,9 @@ export const SubscriptionMutation = {
         return await new SubscriptionDatasource().addSubscription(data)
     },
 
-    async initializePaystackPayment(__: unknown, {planId, teamMembers}: { planId:string, teamMembers:string[]}, context:{req:Request, res:Response, user:User}): Promise<{ ref:string, publicKey:string, data:Record<string, any> }> {
-        isUserAuthorized(context.user, this.initializePaystackPayment.name, true)
-        return await new SubscriptionDatasource().InitializePayment(planId, teamMembers, context.user)
+    async initializePaystackPayment(__: unknown, {planId, teamMembers}: { planId:string, teamMembers:string[]}, context:{req:Request, res:Response, user:User}): Promise<{ref:string, authorization_url:string }> {
+        // isUserAuthorized(context.user, this.initializePaystackPayment.name, true)
+        return await new SubscriptionDatasource().InitializePayment(planId, teamMembers, context?.user)
     },
 
     async addPlan(__: unknown, {data}: { data: IPlanValidation }, context: {
@@ -45,6 +45,14 @@ export const SubscriptionMutation = {
         return await new SubscriptionDatasource().processGooglePayment(planId, teamMembers, googlePayToken, context.user)
       },
 
+      async cancelSubscription(_:unknown, {subId}:{ subId:string }, context: {
+        req: Request,
+        res: Response,
+        user: User
+    } ):Promise<{status:boolean, message:string}>{
+        // isUserAuthorized(context.user, this.processGooglePayment.name) 
+        return await new SubscriptionDatasource().cancelSubscription(subId)
+      },
 };
 
 export const SubscriptionQuery = {
