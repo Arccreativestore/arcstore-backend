@@ -1,7 +1,8 @@
 import pkg from 'node-mailjet'
 const { Client } = pkg
 import {  SendEmailV3_1, LibraryResponse } from 'node-mailjet';
-import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
+const  MJ_APIKEY = "kknknk"
+const MJ_SECRETKEY = "ghvhvh"
 
 
 export async function forgotPasswordMail(name: string, link: string, userEmail: string) {

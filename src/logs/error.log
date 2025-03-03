@@ -135,3 +135,9 @@
 2024-10-15T13:47:37.821Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
 2024-10-15T13:48:23.617Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
 2024-10-15T13:49:05.298Z [31merror[39m: Error fetching from freepik: API for platform freepik is not configured
+2024-10-19T11:27:41.879Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-19T19:21:06.166Z [31merror[39m: Error sending email:

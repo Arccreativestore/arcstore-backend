@@ -12,7 +12,7 @@ export const eventEmitter = new EventEmitter();
 eventEmitter.on("newUser", (data: any) => {
   try {
     const { username, verificationLink, email } = data;
-    verifyEmail(email, username, verificationLink);
+    verifyEmail(email, username);
   } catch (err) {
     logger.error(`error sending verify mail ${err}`);
     throw new Error("error sending email");
