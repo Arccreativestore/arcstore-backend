@@ -56,8 +56,9 @@ export const registerMutation = {
       const { _id, email, firstName, lastName, role } = createUser
       const token = jwt.sign({ email, _id: createUser._id }, VERIFYEMAIL_SECRETKEY as string, {expiresIn: "1hr"});
 
-      const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
-      eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
+      // const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
+      // eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
+      
       return { status: "success", _id, email, firstName, lastName, role };
 
       }
