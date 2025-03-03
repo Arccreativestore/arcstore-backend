@@ -147,3 +147,9 @@
 2025-03-03T16:31:22.859Z [32minfo[39m: Email sent response: 
 2025-03-03T17:38:53.875Z [32minfo[39m: Email sent response: 
 2025-03-03T17:40:25.502Z [32minfo[39m: Email sent response: 
+2025-03-03T17:48:15.772Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2025-03-03T18:13:15.821Z [32minfo[39m: Email sent response: 

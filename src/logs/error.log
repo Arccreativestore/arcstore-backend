@@ -141,3 +141,8 @@
   "syscall": "write"
 }
 2024-10-19T19:21:06.166Z [31merror[39m: Error sending email:
+2025-03-03T17:48:15.772Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
