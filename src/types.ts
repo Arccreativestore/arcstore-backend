@@ -9,6 +9,7 @@ import AssetType from "./services/asset/typeDefs.js";
 import SubscriptionType from "./services/subscription/typeDefs.js";
 import creatorTypeDefs from './services/creators/typeDefs.js'
 import _2fatypeDefs from "./services/_2fa/typeDefs.js";
+import advanceSearchType from "./services/advancedSearch/typeDefs.js";
 
 
 
@@ -37,6 +38,7 @@ const data = [
   SubscriptionType,
   creatorTypeDefs,
   _2fatypeDefs,
+  advanceSearchType,
   ...scalarTypeDefs,
 ]
 

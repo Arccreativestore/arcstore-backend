@@ -53,7 +53,7 @@ const savedAssetsQuery = {
     async saveAsset(__: any, {data}: {data: {assetId: string}}, context: { user: User}){
      try {
       const assetId = data.assetId
-      validateMongoId(assetId)
+     // validateMongoId(assetId)
       const userId = context.user?._id;
       if (!userId) throw new ErrorHandlers().AuthenticationError('Please Login to Proceed');
       const assetAlreadySaved = await new datasource().assetAlreadySaved(userId, assetId)

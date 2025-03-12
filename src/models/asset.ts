@@ -35,6 +35,9 @@ export interface IAsset extends Document {
     status:IStatus
     reviewedBy:ObjectId
     reviewedAt:Date
+    color: string
+    size: string
+    fileFormat: string
 }
 interface IAssetModel extends Model<IAsset> {
     aggregatePaginate(pipeline: PipelineStage[], options: any): Promise<any>;
@@ -123,6 +126,18 @@ const AssetSchema = new Schema<IAsset>({
     
     reviewedAt:{
         type:Date
+    },
+    color: {
+        type: String,
+        required: false
+    },
+    size: {
+        type: String,
+        required: false
+    },
+    fileFormat: {
+        type: String,
+        required: true  // 
     }
 }, {
     timestamps: true,

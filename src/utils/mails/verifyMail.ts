@@ -14,10 +14,10 @@ export async function verifyEmail(userEmail: string, name: string) {
    // console.log("Your token:", token);
 
     const emailData = {
-      subject: "🎉 Welcome to Wooky – Your Design Journey Starts Now!",
+      subject: "🎉 Welcome to Wooky – Your Creative Journey Starts Now!",
       from: {
         name: "Wooky",
-        email: "eniola@arccreatives.store",
+        email: "info@arccreatives.store",
       },
       to: [
         {
