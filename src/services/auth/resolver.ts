@@ -61,6 +61,7 @@ export const registerMutation = {
 
       const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
       eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
+      
       return { status: "success", _id, email, firstName, lastName, role };
 
       }

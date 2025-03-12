@@ -63,29 +63,21 @@
 2024-09-30T22:11:01.577Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
 2024-09-30T22:58:31.960Z [31merror[39m: Reused Token Detected, Please Login to Continue
 2024-10-01T00:35:06.467Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
-<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T05:38:15.214Z [31merror[39m: Error Adding Default Permission Attempted to check out a connection from closed connection pool
 2024-10-04T05:40:08.165Z [31merror[39m: Error Adding Default Permission Operation `permissions.countDocuments()` buffering timed out after 10000ms
 2024-10-04T07:14:52.951Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
-<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T07:14:52.963Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
-<<<<<<< HEAD
 2024-10-06T21:16:26.503Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T07:14:52.956Z [31merror[39m: Uncaught Exception: {
   "errno": -5,
   "code": "EIO",
@@ -108,7 +100,6 @@
   "hostname": "_mongodb._tcp.cluster0.wfrdpqg.mongodb.net"
 }
 2024-10-05T17:12:27.483Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
@@ -136,6 +127,27 @@
 2024-10-15T13:47:37.821Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
 2024-10-15T13:48:23.617Z [31merror[39m: Error fetching from freepik: Error: API for platform freepik is not configured
 2024-10-15T13:49:05.298Z [31merror[39m: Error fetching from freepik: API for platform freepik is not configured
+2024-10-19T11:27:41.879Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2024-10-19T19:21:06.166Z [31merror[39m: Error sending email:
+2025-03-03T16:28:48.540Z [32minfo[39m: Email sent response: 
+2025-03-03T16:30:40.157Z [32minfo[39m: Email sent response: 
+2025-03-03T16:31:22.859Z [32minfo[39m: Email sent response: 
+2025-03-03T17:38:53.875Z [32minfo[39m: Email sent response: 
+2025-03-03T17:40:25.502Z [32minfo[39m: Email sent response: 
+2025-03-03T17:48:15.772Z [31merror[39m: Uncaught Exception: {
+  "errno": -5,
+  "code": "EIO",
+  "syscall": "write"
+}
+2025-03-03T18:13:15.821Z [32minfo[39m: Email sent response: 
+2025-03-03T18:44:43.564Z [32minfo[39m: Email sent response: 
+2025-03-03T19:50:04.643Z [32minfo[39m: Email sent response: 
+2025-03-03T19:56:04.800Z [32minfo[39m: Email sent response: 
+2025-03-04T14:49:43.910Z [32minfo[39m: Email sent response: 
 2024-10-18T10:25:10.878Z [31merror[39m: Unexpected field
 2024-10-18T10:28:47.297Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
 2024-10-20T13:37:27.018Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
