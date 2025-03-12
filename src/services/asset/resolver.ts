@@ -9,6 +9,7 @@ import { ErrorHandlers } from "../../helpers/errorHandler";
 import { validateMongoId } from "../users/types";
 import { notifyCreator } from "./helper";
 import { Types } from "mongoose";
+import { IPaymentMethods } from "./type";
 
 interface context{
   req:Request, 

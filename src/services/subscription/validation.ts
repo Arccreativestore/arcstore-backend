@@ -5,13 +5,13 @@ import { ErrorHandlers } from '../../helpers/errorHandler';
 
 // Plan Enums
 export enum IUnitType {
-    month = 'month',
-    year = 'year'
+    month = 'monthly',
+    year = 'yearly'
 }
 
 export enum subPlans {
-    freemium = 'freemium',
-    premium = 'premium',
+    Individual = 'individual',
+    Team = 'team',
 }
 
 // Plan Interfaces
@@ -27,6 +27,7 @@ export interface IPlanValidation {
 
 export interface IUpdatePlanValidation {
     planId: Types.ObjectId;
+    userPerYear?:Decimal128
     type?: subPlans;
     amount?: Decimal128;
     discount?: number;
@@ -47,18 +48,12 @@ export const objectId = Joi.string().custom((value, helpers) => {
 // Plan Validation Schema
 const planSchema = Joi.object({
     type: Joi.string().valid(...Object.values(subPlans)).messages({
-        'any.only': 'Plan type must be either "freemium" or "premium"',
+        'any.only': 'Plan type must be either "individual" or "team"',
         'any.required': 'Plan type is required',
     }),
     amount: Joi.number().required().messages({
         'number.base': 'Amount must be a number',
         'any.required': 'Amount is required',
-    }),
-    discount: Joi.number().min(0).max(1).required().messages({
-        'number.base': 'Discount must be a number',
-        'number.min': 'Discount must be between 0 and 1',
-        'number.max': 'Discount must be between 0 and 1',
-        'any.required': 'Discount is required',
     }),
 
     unit: Joi.string().valid(...Object.values(IUnitType)).required().messages({
@@ -69,6 +64,7 @@ const planSchema = Joi.object({
         'number.base': 'Duration must be a number',
         'any.required': 'Duration is required',
     }),
+    annualCommitment:Joi.boolean(),
     features: Joi.array().items(objectId).messages({
         'array.base': 'Features must be an array of ObjectIds',
         'any.required': 'Features are required',

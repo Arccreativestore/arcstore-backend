@@ -10,7 +10,7 @@ export enum IUploadFor {
 
 
 export interface IFile extends Document {
-  type: string
+  type: FileFormats
   userId: ObjectId
   uploaded: boolean
   uploadFor:  IUploadFor
@@ -19,7 +19,63 @@ export interface IFile extends Document {
   thumbnailUrl?: string
 }
 
+export enum FileFormats {
+    JPG = "image/jpeg",
+    JPEG = "image/jpeg",
+    PNG = "image/png",
+    GIF = "image/gif",
+    SVG = "image/svg+xml",
+    WEBP = "image/webp",
+    TIFF = "image/tiff",
+    TIF = "image/tiff",
+    BMP = "image/bmp",
+    HEIC = "image/heic",
+    HEIF = "image/heif",
 
+    MP4 = "video/mp4",
+    MOV = "video/quicktime",
+    AVI = "video/x-msvideo",
+    WMV = "video/x-ms-wmv",
+    MKV = "video/x-matroska",
+    FLV = "video/x-flv",
+    WEBM = "video/webm",
+
+    MP3 = "audio/mpeg",
+    WAV = "audio/wav",
+    AAC = "audio/aac",
+    FLAC = "audio/flac",
+    OGG = "audio/ogg",
+    WMA = "audio/x-ms-wma",
+
+    PDF = "application/pdf",
+    DOC = "application/msword",
+    DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    XLS = "application/vnd.ms-excel",
+    XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    PPT = "application/vnd.ms-powerpoint",
+    PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    TXT = "text/plain",
+    CSV = "text/csv",
+    RTF = "application/rtf",
+
+    OBJ = "model/obj",
+    STL = "model/stl",
+    FBX = "model/fbx",
+    GLTF = "model/gltf+json",
+    GLB = "model/gltf-binary",
+
+    PSD = "image/vnd.adobe.photoshop",
+    AI = "application/postscript",
+    EPS = "application/postscript",
+    CDR = "application/x-coreldraw",
+    SKETCH = "application/x-sketch",
+    FIG = "application/x-figma",
+
+    ZIP = "application/zip",
+    RAR = "application/x-rar-compressed",
+    SEVEN_Z = "application/x-7z-compressed",
+    TAR = "application/x-tar"
+}
 interface IFileDoc<T extends Document> extends Model<T>, PaginateModel<T> {
 }
 
@@ -45,8 +101,8 @@ const fileSchema = new Schema<IFile>({
 
     type: {
       type: String,
-      trim: true,
-      required: true
+      enum:Object.values(FileFormats),
+      required: true,
     },
 
     thumbnailUrl: {

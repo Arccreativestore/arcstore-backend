@@ -16,6 +16,12 @@ import __PaymentMethod, { IPaymentMethod, PaymentMethodEnum } from '../../models
 import commentsModel from '../../models/assetsComment';
 import { DownloadService } from './externalApis/download';
 import __AssetLikes from '../../models/assetLikes'
+import { IPaymentMethods } from './type';
+import { GooglePayService } from '../../helpers/googlePayService';
+import __Plan from '../../models/plan'
+
+
+
 
 
 export interface PaymentMethodInput {
@@ -481,6 +487,8 @@ async  getAssetAnalytics(authorId: string) {
   async downloadAsset(platform: PlatformEnum, relativePath:string, itemId:string, itemFormat?:string){
     return await new DownloadService().downloadFreePikAsset(platform, relativePath, itemId, itemFormat)
   }
+
+
 
 
 }

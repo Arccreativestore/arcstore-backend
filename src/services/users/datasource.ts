@@ -3,10 +3,11 @@ import Base from "../../base";
 import savedAssetsModel from "../../models/savedAssets";
 import downloadsModel from "../../models/downloads";
 import { logger } from "../../config/logger";
-import purchaseHistoryModel from "../../models/purchaseHistory";
+import purchaseHistoryModel from "../../models/payments";
 import subscriptionsModel from "../../models/subscription";
 import { userModel } from "../../models/user";
 import { ErrorHandlers } from "../../helpers/errorHandler";
+import { LocationService } from "../../helpers/locationAndCurrency";
 
 
 export class datasource extends Base {
@@ -94,6 +95,18 @@ export class datasource extends Base {
         throw error
        }
     }
+
+  
+    
+      async getUserCurrentLocation() {
+        return new LocationService().getLocationByIP()
+  
+      }
+
+      async amountUSDToLocalCurrency(amountInUSD:number) {
+        const {data:{convertedAmount, conversionRate, currency, symbol}} = await new LocationService().getUserLocationWithCurrency(amountInUSD)
+         return {convertedAmount, conversionRate,currency, symbol }
+       }
 }
 
 async function execPipeline(userId: ObjectId, limit?: number, page?: number){

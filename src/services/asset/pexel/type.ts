@@ -38,8 +38,39 @@ export interface VideoResponse{
     alt: string;
   }
 
+  export enum BehanceCategory {
+    ADVERTISING = "advertising",
+    ANIMATION = "animation",
+    ARCHITECTURE = "architecture",
+    ART_DIRECTION = "art-direction",
+    BRANDING = "branding",
+    CALLIGRAPHY = "calligraphy",
+    CREATIVE_DIRECTION = "creative-direction",
+    DIGITAL_ART = "digital-art",
+    EDITORIAL_DESIGN = "editorial-design",
+    FASHION = "fashion",
+    FILM = "film",
+    FINE_ARTS = "fine-arts",
+    GAME_DESIGN = "game-design",
+    GRAPHIC_DESIGN = "graphic-design",
+    ILLUSTRATION = "illustration",
+    INDUSTRIAL_DESIGN = "industrial-design",
+    INTERACTION_DESIGN = "interaction-design",
+    INTERIOR_DESIGN = "interior-design",
+    MOTION_GRAPHICS = "motion-graphics",
+    MUSIC = "music",
+    PACKAGING = "packaging",
+    PHOTOGRAPHY = "photography",
+    PRODUCT_DESIGN = "product-design",
+    PROGRAMMING = "programming",
+    TYPOGRAPHY = "typography",
+    UI_UX = "ui-ux",
+    WEB_DESIGN = "web-design",
+  }
+  
   export interface ISearchParams{
     query?:string
+    category?:BehanceCategory
     per_page:number   
     page:number
 }

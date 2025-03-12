@@ -6,7 +6,7 @@ import {Decimal128} from 'mongodb';
 
 export enum IPaymentMethodEnum {
     PayStack='paystack',
-    GooglePay='googlepay'
+    GooglePay='GooglePay'
 }
 export enum transactionStatus {
     pending = "pending",
@@ -23,6 +23,11 @@ export interface IPurchase extends Document {
     amountPaid: Decimal128
     paymentMethod: IPaymentMethodEnum
     currency: string
+    stripeCustomerId:string
+    expiresAt:Date,
+    subscriptionCode:string,
+    paystackRef:string
+    teamMembers:ObjectId[]
     status: transactionStatus
 }
 
@@ -39,19 +44,33 @@ const purchaseHistorySchema = new Schema<IPurchase>({
         index:true,
     },
 
+    stripeCustomerId:{
+        type:String
+
+    },
+
+    paystackRef:{
+        type:String
+    },
     purchaseDate: {
         type: Date,
         default: Date.now()
+    },
+
+    expiresAt: {
+        type: Date
     },
 
     amountPaid: {
         type: Decimal128,
         required: true
     },
+    subscriptionCode: {
+        type: String,
+    },
 
     currency: {
         type: String,
-        default:"NGN"
     },
 
     paymentMethod: {
@@ -64,7 +83,10 @@ const purchaseHistorySchema = new Schema<IPurchase>({
         type: String,
         enum:Object.values(transactionStatus),
         default:transactionStatus.pending
-    }
+    },
+
+    teamMembers:[Schema.Types.ObjectId]
+    
 },
 {
     timestamps: true,
@@ -74,7 +96,7 @@ const purchaseHistorySchema = new Schema<IPurchase>({
 const purchaseHistoryModel = (isTest: boolean = false)=>{
     if(isTest == undefined || isTest == null) throw new GraphQLError("Environment is invalid")
     
-    let collectionName = isTest ? "test_purchaseHistory" : "purchaseHistory"
+    let collectionName = isTest ? "test_payments" : "payments"
     return model<IPurchase>(collectionName, purchaseHistorySchema, collectionName)
     }
     

@@ -1,25 +1,29 @@
 import {Schema, Document, model, PaginateModel, Model, ObjectId} from 'mongoose';
 import { Decimal128 } from 'mongodb';
 export enum  IUnitType {
-    month= 'month',
-    year= 'year'
+    month= 'monthly',
+    year= 'yearly'
 }
 
 export enum subPlans {
-    freemium = "freemium",
-    premium = "premium",
+    Individual = "individual",
+    Team = "team",
 }
 
 export interface IPlan extends Document {
     type: subPlans
     amount: Decimal128
-    discount: number
     disable: boolean
     unit: IUnitType
     duration: number,
+    minUsers:number
+    baseCurrency:'usd',
+    annualCommitment:boolean
+    userPerYear:Decimal128
     updatedAt?:Date
     createdAt?:Date
     features:[ObjectId]
+    paystackPlanCode:string
 }
 
 
@@ -31,7 +35,7 @@ const IPlanSchema: Schema = new Schema<IPlan>({
         type: {
             type: String,
             enum: Object.values(subPlans),
-            default: subPlans.premium
+            default: subPlans.Individual
         },
 
         amount: {
@@ -39,12 +43,13 @@ const IPlanSchema: Schema = new Schema<IPlan>({
             default:0
         },
 
-        discount: {
-            type: Number,
-            max: 1,
-            min: 0,
+        userPerYear:{
+            type: Decimal128,
+            default:0
         },
-
+        paystackPlanCode:{
+            type:String,
+        },
         duration: {
             type: Number,
         },
@@ -53,10 +58,23 @@ const IPlanSchema: Schema = new Schema<IPlan>({
             type: String,
             enum:IUnitType
         },
+        minUsers: {
+            type: Number,
+            default:null
+        },
 
         disable: {
             type: Boolean,
             default: false
+        },
+
+        baseCurrency:{
+            type:String,
+            default:"usd"
+        },
+        annualCommitment:{
+            type:Boolean,
+            default:false
         },
         
         features:{
@@ -73,6 +91,8 @@ const IPlanSchema: Schema = new Schema<IPlan>({
     }
 );
 
+
+IPlanSchema.index({unit:1, type:1}, {unique:true})
 export default function (isTest: boolean = false) {
     if (isTest === undefined || isTest === null) throw new Error('Invalid environment');
     const collectionName = isTest ? 'test_plans' : "plans";

@@ -1,6 +1,13 @@
 import { model, ObjectId, Schema } from "mongoose";
 import { Decimal128 } from 'mongodb'
-import { IPaymentMethodEnum } from "./purchaseHistory";
+import { IPaymentMethodEnum, transactionStatus } from "./payments";
+
+
+
+export enum IStatusEnum{
+    ACTIVE='active',
+    INACTIVE='inactive'
+}
 
 export interface ISubscriptions extends Document{
     _id?:ObjectId
@@ -9,7 +16,11 @@ export interface ISubscriptions extends Document{
     amountPaid: Decimal128
     expiresAt: Date
     paymentId:ObjectId
+    status:IStatusEnum
     paymentMethod: IPaymentMethodEnum
+    teamMembers:ObjectId[]
+    subscriptionCode:string
+
 }
 
 
@@ -19,6 +30,12 @@ const subSchema = new Schema<ISubscriptions>({
         type: Schema.Types.ObjectId,
         ref: 'users',
         index: true
+    },
+
+    status:{
+        type:String,
+        enum:Object.values(IStatusEnum),
+        default:IStatusEnum.ACTIVE
     },
     
     paymentId:{
@@ -38,11 +55,16 @@ const subSchema = new Schema<ISubscriptions>({
     amountPaid:{
         type: Decimal128
     },
+subscriptionCode:{
+type:String,
 
+},
     paymentMethod:{
         type: String,
         enum:Object.values(IPaymentMethodEnum)
     },
+
+    teamMembers:[Schema.Types.ObjectId]
 },
 {
     timestamps: true

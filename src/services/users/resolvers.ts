@@ -5,7 +5,7 @@ import { ErrorHandlers } from "../../helpers/errorHandler";
 import { datasource } from "./datasource";
 import Joi from "joi";
 import { Types } from "mongoose";
-import purchaseHistoryModel from "../../models/purchaseHistory";
+import purchaseHistoryModel from "../../models/payments";
 import { downloadType, purchaseHistoryType, savedAssetType, validateMongoId } from "./types";
 import { Icreator } from "../../models/creator";
 import { UserDatasource } from "../auth/datasource";
@@ -16,7 +16,15 @@ const getUserProfile = {
       const userId = context?.user?._id
       if(!userId) throw new ErrorHandlers().AuthenticationError('Please login to proceed')
       return await new UserDatasource().findById(userId)
-    }
+    },
+
+    async getUserCurrentLocation(__:any, args: any, context: {user: User, req:Request}){
+      return await new datasource().getUserCurrentLocation()
+    },
+
+    async amountUSDToLocalCurrency(__:unknown, {amountInUSD}: {amountInUSD:number}, context: {user: User, req:Request}){
+      return await new datasource().amountUSDToLocalCurrency(amountInUSD)
+    },
 }
 
 

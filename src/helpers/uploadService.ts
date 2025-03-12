@@ -88,6 +88,41 @@ class FileUploader {
         });
     }
 
+
+    public async handleFileWithThumbnailUpload(req: any, res: any, next: NextFunction): Promise<void> {
+        // Expect one file and one thumbnail
+        const uploadMultiple = this.upload.fields([
+            { name: 'file', maxCount: 1 }, 
+            { name: 'thumbnail', maxCount: 1 }
+        ]);
+    
+        uploadMultiple(req, res, async (err) => {
+            if (err) return res.status(400).json({ error: err.message });
+    
+            // Extract file and thumbnail from req.files
+            const file = req.files?.['file'] ? req.files['file'][0] : null;
+            const thumbnail = req.files?.['thumbnail'] ? req.files['thumbnail'][0] : null;
+    
+            // Ensure at least the file is present
+            if (!file) return res.status(400).json({ message: 'No file uploaded.' });
+    
+            try {
+                req.uploads = {
+                    file: { key: file.key, mimetype: file.mimetype, size:file.size },
+                    thumbnail: thumbnail 
+                        ? { key: thumbnail.key, mimetype: thumbnail.mimetype }
+                        : null, // Handle missing thumbnail gracefully
+                };
+    
+                return next();
+            } catch (error) {
+                console.error('Error processing file and thumbnail:', error);
+                next(error);
+            }
+        });
+    }
+    
+
     //Unlink or delete file from from aws
     public async deleteFile(key: string): Promise<void> {
         try {
@@ -110,5 +145,7 @@ const fileUploader = new FileUploader();
 export const upload = fileUploader.upload;
 export const createPresignedUrl = fileUploader.getFileUrl.bind(fileUploader);
 export const handleMultipleFileUpload = fileUploader.handleMultipleUpload.bind(fileUploader)
+export const handleFileWithThumbnailUpload = fileUploader.handleFileWithThumbnailUpload.bind(fileUploader)
+
 export const deleteFileFromS3 = fileUploader.deleteFile.bind(fileUploader);
 

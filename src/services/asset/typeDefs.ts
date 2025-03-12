@@ -20,9 +20,11 @@ const AssetType = gql`
     deleteCreatorsPaymentMethod(id: ID!): Boolean!
     assetComment(data: Icomment!): Comment!
     deleteComment(data: IdeleteComment!): General!
+
   }
 
 
+  
   type Query {
     getAllCategory:[ICategoryResponse]
     getAssetCategoryById(categoryId:ID!):ICategoryResponse
@@ -45,6 +47,10 @@ const AssetType = gql`
   filename:String
   url:String}
 
+  enum IPaymentMethodEnum{
+  Paystack
+  GooglePay
+  }
   enum ItemEnum{
   psd
   ai
@@ -244,6 +250,74 @@ input PaymentMethodInput {
     details: JSON!
     isActive: Boolean
 }
+
+
+enum Colors {
+  TERRA_COTTA
+  INDIAN_YELLOW
+  ROSE_QUARTZ
+  MAIZE_CRAYON
+  MEDIUM_AQUAMARINE
+  CORNFLOWER_BLUE
+  BRIGHT_ROYAL_BLUE
+  PERIWINKLE
+  GUNMETAL
+  PURE_WHITE
+  PURE_BLACK
+}
+
+enum FileFormats {
+  JPG
+  JPEG
+  PNG
+  GIF
+  SVG
+  WEBP
+  TIFF
+  TIF
+  BMP
+  HEIC
+  HEIF
+  MP4
+  MOV
+  AVI
+  WMV
+  MKV
+  FLV
+  WEBM
+  MP3
+  WAV
+  AAC
+  FLAC
+  OGG
+  WMA
+  PDF
+  DOC
+  DOCX
+  XLS
+  XLSX
+  PPT
+  PPTX
+  TXT
+  CSV
+  RTF
+  OBJ
+  STL
+  FBX
+  GLTF
+  GLB
+  PSD
+  AI
+  EPS
+  CDR
+  SKETCH
+  FIG
+  ZIP
+  RAR
+  SEVEN_Z
+  TAR
+}
+
 `
 
 export default AssetType

@@ -87,7 +87,7 @@ const origin = [
     "https://arcstore-frontend.fly.dev",
     "https://arc-creatives.fly.dev",
     "http://localhost:3000",
-   'http://localhost:3001' ,
+   'https://localhost:3000' ,
     "https://frontend.arcdesign.duckdns.org",
 ];
 

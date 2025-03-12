@@ -3,15 +3,17 @@ import { createClient } from 'pexels';
 import {  ISearchParams, PhotosResponse, VideoResponse } from './type';
 import { ErrorHandlers } from '../../../helpers/errorHandler';
 import axios from 'axios'
-import { DRIBBLE_API_URL, DRIBBLE_ACCESS_TOKEN } from '../../../config/config';
+import { DRIBBLE_API_URL, DRIBBLE_ACCESS_TOKEN, BEHANCE_BASE_URL } from '../../../config/config';
 
 export class PexelServices {
   private apiKey: string;
   private client: any;
+  private behanceAPIKey:string
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, behanceAPIKey?:string) {
     this.apiKey = apiKey;
     this.client = createClient(this.apiKey);
+    this.behanceAPIKey = behanceAPIKey
   }
 
   getPexelsPhotos = async (data:ISearchParams): Promise<PhotosResponse> => {
@@ -27,7 +29,6 @@ export class PexelServices {
   getPexelsVideos =async (data:ISearchParams): Promise<VideoResponse> => {
     try {
       const response = await this.client.videos.search(data)
-     
         return response
   
     } catch (error) {
@@ -44,8 +45,8 @@ getDribbbleShots= async(data:ISearchParams) =>{
           Authorization: `Bearer ${DRIBBLE_ACCESS_TOKEN}`,
         },
         params: {
-        page:data.page | 1,
-          per_page:data.per_page | 10,
+        page:data.page || 1,
+          per_page:data.per_page || 10,
         },
       });
   
@@ -57,5 +58,27 @@ getDribbbleShots= async(data:ISearchParams) =>{
       throw new ErrorHandlers().ValidationError("Error fetching Dribbble assets:", error.response?.data || error.message);
     }
   }
+
+
+getBehanceCategoryProjects = async (queryParams:ISearchParams) => {
+  try {
+    const response = await axios.get(BEHANCE_BASE_URL, {
+      params: {
+        q: queryParams.query || "logo",           // Search query (e.g., "logo", "UI design")
+        field: queryParams.category,      // Filter by category (e.g., "graphic-design")
+        page: queryParams.page || 1,         // Pagination: Page number
+        per_page: queryParams.per_page || 10,  // Number of results per page
+        api_key: this.behanceAPIKey,
+      },
+    });
+
+    console.log(response.data.projects); // Logs the projects
+    return response.data.projects;
+  } catch (error) {
+    console.error("Error fetching Behance projects:", error);
+    return [];
+  }
+
+};
 
 }

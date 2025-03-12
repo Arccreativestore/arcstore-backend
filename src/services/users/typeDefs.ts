@@ -12,7 +12,11 @@ type Query{
     getUserProfile: getUserProfile!
     saveAsset(data: IsaveAsset): General!
     unsaveAsset(data: IsaveAsset): General!
+    getUserCurrentLocation:JSON
+    amountUSDToLocalCurrency(amountInUSD:Float):JSON
 }
+
+
 
 type AssetsResponse {
 data: [IResponse]

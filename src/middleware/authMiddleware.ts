@@ -6,6 +6,7 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
 
         const authorization:string | null = (request?.headers?.authorization?.startsWith('Bearer ') ? request.headers.authorization.substring(7) : null);
 
+        console.log(authorization)
         const STATUS_CODE = 403
         const ERROR_MESSAGE = {
             "error": "Forbidden",
@@ -20,6 +21,7 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
     }else{
         try {
             const userFound:IAccount | null = await new Base().extractUserDetails(authorization as string)
+            console.log(userFound)
          
             if (!userFound) return res.status(STATUS_CODE).json(ERROR_MESSAGE)
          

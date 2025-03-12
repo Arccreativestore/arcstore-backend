@@ -12,28 +12,42 @@ const SubscriptionType = gql`
 
   extend type Mutation {
     addSubscription(data: JSON!): String!
-    InitializePayment(planId:ID! paymentMethod: PaymentMethodEnum!): IPaymentResponse
+    initializePaystackPayment(planId:ID! teamMembers: [String]): IPaymentResponse
     addPlan(data: IPlanInput!): String!
     updatePlan(data:IUpdatePlanInput):String!
+    processGooglePayment(planId:ID  googlePayToken:String teamMembers:[ID]):JSON
+    cancelSubscription(subscriptionId:ID):NormalResponse!
   }
 
 
 
+  enum IPlanEnum{
+    individual
+    team
+  }
+
+
+  type NormalResponse{
+    status:Boolean 
+    message:String
+  }
       input IPlanInput{
+      type:IPlanEnum
         amount:Float!
-        discount: Float!
+        annualCommitment:Boolean
         unit: UnitEnum!
         duration: Int!
+
     }
 
        enum UnitEnum {
-        month
-        year
+        monthly
+        yearly
     }
+
     input IUpdatePlanInput{
         planId:ID!
         amount:Float
-        discount: Float
         unit: UnitEnum
         duration: Int
     }
@@ -41,9 +55,9 @@ const SubscriptionType = gql`
 
     type IPlanResponse{
         _id:ID!
-        amount: Float
-        discount: Float
+        amount: String
         unit: UnitEnum
+        userPerYear:String
         duration: Int
         disable:Boolean
         createdAt:DateTime
@@ -62,7 +76,7 @@ const SubscriptionType = gql`
 
   type IPaymentResponse {
     ref: String
-    publicKey: String
+    authorization_url:String
   }
 
   enum ISubTypeEnum {
