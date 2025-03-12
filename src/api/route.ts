@@ -2,7 +2,7 @@ import express,{Response, Request, NextFunction} from 'express';
 import passport from 'passport';
 import apiControllers from './controllers/controllers';
 import { authMiddleware } from '../middleware/authMiddleware';
-import { handleMultipleFileUpload, upload } from '../helpers/uploadService';
+import { handleFileWithThumbnailUpload, handleMultipleFileUpload, upload } from '../helpers/uploadService';
 import CompleteUpload, { CustomRequest } from '../helpers/completeUpload';
 import Stripe from 'stripe'
 import { STRIPE_SECRET_KEY } from '../config/config';
@@ -140,6 +140,14 @@ router.post('/asset/upload/single', authMiddleware, upload.single('file') as any
 router.post('/asset/upload/multiple', authMiddleware, handleMultipleFileUpload, async(req:Request, res:Response, next:NextFunction)=>{
     await new CompleteUpload().processFileUpload(req as CustomRequest, res)
 })
+
+
+
+router.post('/asset/upload/with/thumbnail', authMiddleware, handleFileWithThumbnailUpload, async(req:Request, res:Response, next:NextFunction)=>{
+    await new CompleteUpload().processFileUploadWithThumbnail(req as CustomRequest, res)
+})
+
+
 
 
 router.post('/image/upload', authMiddleware, upload.single('file') as any, async(req:Request, res:Response, next:NextFunction)=>{

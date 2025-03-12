@@ -1,7 +1,9 @@
 import Joi from 'joi';
-import { Types } from 'mongoose';
+import { ObjectId, Types } from 'mongoose';
 import { ErrorHandlers } from '../../helpers/errorHandler';
 import { BehanceCategory, ISearchParams } from './pexel/type';
+import { Colors, LicenseType } from '../../models/asset';
+import { FileFormats, IFile, IUploadFor } from '../../models/files';
 
 // Category Interfaces
 export interface ICategoryValidation {
@@ -91,10 +93,14 @@ export function UpdateCategoryValidation(data: IUpdateCategoryValidation): Promi
 export interface IAssetValidation {
     title: string;
     description: string;
+    thumbnailUrl:string;
+    colors:string[]
+    format:string[]
     price: number;
     authorId: string
     categoryId: string
     tags:string[]
+
 }
 
 export interface IUpdateAssetValidation {
@@ -104,9 +110,20 @@ export interface IUpdateAssetValidation {
     price?: number;
     categoryId?: string;
     tags?: string[];
-    licenseType?: 'regular' | 'extended';
+    licenseType?: LicenseType
 }
 
+
+ export interface IFileValidation{
+  type: FileFormats
+  userId: ObjectId
+  uploaded: boolean
+  uploadFor:  IUploadFor
+  key: string
+  url?: string,
+  thumbnailUrl?: string
+}
+  
 
 // Asset Validation Schema
 const assetSchema = Joi.object({
@@ -117,6 +134,11 @@ const assetSchema = Joi.object({
     description: Joi.string().required().trim().messages({
         'string.empty': 'Description is required',
         'string.base': 'Description must be a string',
+    }),
+    link: Joi.string().uri().required().messages({
+        'string.empty': 'Link is required',
+        'string.base': 'Link must be a string',
+        'string.uri': 'Link must be a valid URL',
     }),
     price: Joi.number().required().messages({
         'number.base': 'Price must be a number',
@@ -140,6 +162,18 @@ const assetSchema = Joi.object({
         'array.base': 'Tags must be an array',
         'any.required': 'Tags are required',
     }),
+    colors: Joi.string()
+    .valid(...Object.values(Colors)) // Ensuring colors match enum values
+    .messages({
+        'any.only': 'Invalid color selection',
+    }),
+    licenseType: Joi.string().valid(...Object.values(LicenseType)).messages({
+        'any.only': 'License type must be either "free" or "premium"',
+    }),
+    format: Joi.string().valid(...Object.values(LicenseType)).messages({
+        'any.only': 'License type must be either "free" or "premium"',
+    }),
+    
 });
 
 // Create Asset Validation
@@ -175,8 +209,8 @@ const updateAssetSchema = Joi.object({
     tags: Joi.array().items(Joi.string()).optional().messages({
         'array.base': 'Tags should be an array of strings',
     }),
-    licenseType: Joi.string().valid('regular', 'extended').optional().messages({
-        'any.only': 'License type must be either "regular" or "extended"',
+    licenseType: Joi.string().valid(...Object.values(LicenseType)).messages({
+        'any.only': 'License type must be either "free" or "premium"',
     }),
 });
 
@@ -210,4 +244,43 @@ export function ValidateQueryParams(data:ISearchParams):Promise<ISearchParams>{
         }
     });
 
+}
+
+
+// File Validation Schema
+const fileSchema = Joi.object({
+    key: Joi.string().trim().required().messages({
+        'string.empty': 'Key is required',
+        'string.base': 'Key must be a string',
+    }),
+    uploadFor: Joi.string().valid(...Object.values(IUploadFor)).required().messages({
+        'any.only': `uploadFor must be one of ${Object.values(IUploadFor).join(', ')}`,
+        'any.required': 'uploadFor is required',
+    }),
+    userId: objectId.required().messages({
+        'any.invalid': 'Invalid User ID',
+        'any.required': 'User ID is required',
+    }),
+    type: Joi.string().valid(...Object.values(FileFormats)).required().messages({
+        'any.only': `Type must be one of ${Object.values(FileFormats).join(', ')}`,
+        'any.required': 'Type is required',
+    }),
+    thumbnailUrl: Joi.string().uri().optional().messages({
+        'string.uri': 'thumbnailUrl must be a valid URL',
+    }),
+    uploaded: Joi.boolean().default(false).messages({
+        'boolean.base': 'Uploaded must be a boolean',
+    }),
+});
+
+// Create File Validation
+export function CreateFileValidation(data:IFileValidation) {
+    return new Promise((resolve, reject) => {
+        const { error, value } = fileSchema.validate(data, { abortEarly: false });
+        if (error) {
+            reject(new ErrorHandlers().ValidationError(`Validation failed: ${error.details.map(x => x.message).join(', ')}`));
+        } else {
+            resolve(value);
+        }
+    });
 }

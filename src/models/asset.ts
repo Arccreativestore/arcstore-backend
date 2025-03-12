@@ -4,9 +4,23 @@ import slugify from 'slugify';
 
 
 export enum LicenseType {
-    Regular='regular',
-    Extended="extended"
+    Free='free',
+    Premium="premium"
 }
+export enum Colors {
+    TERRA_COTTA = "#E75F59",
+    INDIAN_YELLOW = "#EFA543",
+    ROSE_QUARTZ = "#F5C3CC",
+    MAIZE_CRAYON = "#F7DC8B",
+    MEDIUM_AQUAMARINE = "#75CF9A",
+    CORNFLOWER_BLUE = "#9FCCF6",
+    BRIGHT_ROYAL_BLUE = "#3672E3",
+    PERIWINKLE = "#8080EA",
+    GUNMETAL = "#1F262C",
+    PURE_WHITE = "#FFFFFF",
+    PURE_BLACK = "#000000",
+}
+
 
 export interface IRating{
     count: number;
@@ -30,11 +44,14 @@ export interface IAsset extends Document {
     ratings:IRating
     licenseType: LicenseType
     files:ObjectId[]
+    link:string
     deleted:boolean
+    color:Colors
     published:boolean
     status:IStatus
     reviewedBy:ObjectId
     reviewedAt:Date
+    
 }
 interface IAssetModel extends Model<IAsset> {
     aggregatePaginate(pipeline: PipelineStage[], options: any): Promise<any>;
@@ -85,6 +102,9 @@ const AssetSchema = new Schema<IAsset>({
         default: 0,
     },
 
+    link:{
+        type:String,
+    },
     files:{
         ref:"files",
         type:[Schema.Types.ObjectId]
@@ -97,7 +117,7 @@ const AssetSchema = new Schema<IAsset>({
     licenseType: {
         type: String,
         enum: Object.values(LicenseType),
-        default:LicenseType.Regular,
+        default:LicenseType.Free,
         required: true,
     },
     deleted: {
@@ -116,10 +136,16 @@ const AssetSchema = new Schema<IAsset>({
         enum:Object.values(IStatus),
         default:IStatus.Pending,
     },
+
+    color:{
+        type:String,
+        enum:Object.values(Colors),
+    },
     reviewedBy:{
         type: Schema.Types.ObjectId,
         ref:"users"
     },
+
     
     reviewedAt:{
         type:Date

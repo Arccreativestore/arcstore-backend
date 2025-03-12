@@ -1,7 +1,7 @@
 import Base from "../base";
 import __File, { IFile, IUploadFor } from "../models/files";
 import __Asset from '../models/asset'
-import { CreateAssetValidation, IAssetValidation } from "../services/asset/validation";
+import { CreateAssetValidation, CreateFileValidation, IAssetValidation } from "../services/asset/validation";
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";  
 import { IAccount } from "../models/user";
@@ -83,7 +83,7 @@ class CompleteUpload {
                     type: upload.mimetype,
                     key: upload.key,
                     uploaded: true,
-                    uploadFor:IUploadFor.AssetUpload
+                    uploadFor:IUploadFor.AssetUpload,
                 };
             });
 
@@ -108,6 +108,60 @@ class CompleteUpload {
             res.status(400).json({ message: error.message || "Unable to create asset", error: true });
         }
     }
+
+
+    async processFileUploadWithThumbnail(req: any, res: Response) {
+        try {
+            const { user } = req;
+    
+            // Extract uploaded file and thumbnail (single objects)
+            const { file, thumbnail } = req.uploads || {};
+    
+            let body: any = req?.body;
+            body.tags = JSON.parse(body.tags);
+    
+            // Validate the request body
+            await CreateAssetValidation({ ...body, authorId: user._id.toString() });
+    
+            // Ensure at least a file is present
+            if (!file) {
+                return res.status(400).json({ message: "File is required", error: true });
+            }
+    
+            // Format the uploaded file with its thumbnail
+            const formattedUploadedFile = {
+                userId: user._id.toString(),
+                type: file.mimetype,
+                key: file.key,
+                uploaded: true,
+                uploadFor: IUploadFor.AssetUpload,
+                thumbnailUrl: thumbnail ? `https://arc-store.s3.${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${thumbnail.key }`: null, // Link thumbnail if available
+            };
+
+            console.log({formattedUploadedFile})
+
+           await CreateFileValidation(formattedUploadedFile)
+    
+            // Save uploaded file as an asset in the database
+            const uploadedAsset = await __File().create(formattedUploadedFile);
+    
+            // Create an asset using the uploaded asset ID
+            const created: any = await __Asset().create({
+                ...body,
+                uploads: uploadedAsset._id,
+                files: uploadedAsset._id,
+                authorId: user?._id,
+            });
+    
+            // Response to indicate success
+            res.status(201).json({ message: "File and thumbnail added successfully", error: false, data: created });
+        } catch (error: any) {
+            // Handle errors and send response
+            res.status(400).json({ message: error.message || "Unable to create asset", error: true });
+        }
+    }
+    
+
 
 
     //Get presigned url
