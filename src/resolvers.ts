@@ -11,6 +11,7 @@ import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription
 import { creatorMutation } from "./services/creators/resolvers";
 import { _2faMutation, _2faQuery } from "./services/_2fa/resolvers";
 import advanceSearchResolver from "./services/advancedSearch/resolvers";
+import { PexelsQuery, PexelsMutation } from "./services/asset/pexel/resolver";
 
 const Mutation = {
   ...authMutations,
@@ -21,7 +22,9 @@ const Mutation = {
   ...SubscriptionMutation,
   ...AssetMutation,
   ..._2faMutation,
-  ...advanceSearchResolver
+  ...advanceSearchResolver,
+  ...PexelsMutation,
+  ..._2faMutation
 };
 
 const Query = {
@@ -33,7 +36,8 @@ const Query = {
   ...AssetQuery,
   ...SubscriptionQuery,
   ...creatorMutation,
-  ..._2faQuery
+  ..._2faQuery,
+  ...PexelsQuery
 };
 
 export { Mutation, Query };

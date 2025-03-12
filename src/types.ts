@@ -10,6 +10,7 @@ import SubscriptionType from "./services/subscription/typeDefs.js";
 import creatorTypeDefs from './services/creators/typeDefs.js'
 import _2fatypeDefs from "./services/_2fa/typeDefs.js";
 import advanceSearchType from "./services/advancedSearch/typeDefs.js";
+import PexelType from "./services/asset/pexel/typeDefs.js";
 
 
 
@@ -39,6 +40,7 @@ const data = [
   creatorTypeDefs,
   _2fatypeDefs,
   advanceSearchType,
+  PexelType,
   ...scalarTypeDefs,
 ]
 

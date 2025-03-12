@@ -63,29 +63,21 @@
 2024-09-30T22:11:01.577Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
 2024-09-30T22:58:31.960Z [31merror[39m: Reused Token Detected, Please Login to Continue
 2024-10-01T00:35:06.467Z [31merror[39m: E11000 duplicate key error collection: arc-studios.assetLikes index: userId_1 dup key: { userId: ObjectId('66eb5a1b7b22f33c8a4ba84a') }
-<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T05:38:15.214Z [31merror[39m: Error Adding Default Permission Attempted to check out a connection from closed connection pool
 2024-10-04T05:40:08.165Z [31merror[39m: Error Adding Default Permission Operation `permissions.countDocuments()` buffering timed out after 10000ms
 2024-10-04T07:14:52.951Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
-<<<<<<< HEAD
 2024-10-06T21:16:26.402Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T07:14:52.963Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
 }
-<<<<<<< HEAD
 2024-10-06T21:16:26.503Z [31merror[39m: Uncaught Exception: {
-=======
 2024-10-04T07:14:52.956Z [31merror[39m: Uncaught Exception: {
   "errno": -5,
   "code": "EIO",
@@ -108,7 +100,6 @@
   "hostname": "_mongodb._tcp.cluster0.wfrdpqg.mongodb.net"
 }
 2024-10-05T17:12:27.483Z [31merror[39m: Uncaught Exception: {
->>>>>>> origin/creators
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
@@ -145,4 +136,17 @@
   "errno": -5,
   "code": "EIO",
   "syscall": "write"
+2024-10-18T10:25:10.878Z [31merror[39m: Unexpected field
+2024-10-18T10:28:47.297Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
+2024-10-20T13:37:27.018Z [31merror[39m: The bucket you are attempting to access must be addressed using the specified endpoint. Please send all future requests to this endpoint.
+2024-10-20T13:39:48.738Z [31merror[39m: The authorization header is malformed; the region 'us-west-2' is wrong; expecting 'eu-west-2'
+2024-10-20T14:37:54.395Z [31merror[39m: Unexpected field
+2024-10-20T15:02:52.442Z [31merror[39m: Uncaught Exception: {}
+2024-10-20T15:04:47.220Z [31merror[39m: Uncaught Exception: {}
+2024-10-22T08:46:05.654Z [31merror[39m: Uncaught Exception: {
+  "code": "ERR_HTTP_HEADERS_SENT"
+}
+2024-10-23T13:15:33.428Z [31merror[39m: E11000 duplicate key error collection: arc-store.assetLikes index: userId_1_assetId_1 dup key: { userId: ObjectId('671505f7befc839a65c1a8c7'), assetId: ObjectId('6716297bf472f00b3d7725cb') }
+2024-11-06T22:25:17.257Z [31merror[39m: Uncaught Exception: {
+  "code": "ERR_UNHANDLED_REJECTION"
 }

@@ -36,7 +36,7 @@ class PassportGoogleAuth extends UserDatasource {
           passReqToCallback: true, 
         },
         async (
-          req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any) => void
+          req: any, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any) => void
         ) => {
           try {
            

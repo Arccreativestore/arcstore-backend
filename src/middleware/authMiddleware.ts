@@ -12,7 +12,12 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
             "message": "invalid authorization",
             "statusCode": STATUS_CODE
         }
-
+        if(!authorization)  {res.status(STATUS_CODE).json( {
+            "error": "Forbidden",
+            "message": "Authorization token missing",
+            "statusCode": 401
+        })
+    }else{
         try {
             const userFound:IAccount | null = await new Base().extractUserDetails(authorization as string)
          
@@ -23,6 +28,7 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
             return next();
         } catch
             (e: any) {
+        
             if (e.name === 'TokenExpiredError') {
                 return res.status(STATUS_CODE).json({
                     "error": "Forbidden",
@@ -32,6 +38,7 @@ export const authMiddleware = async (request: Request, res: Response, next: Next
             }
             return res.status(STATUS_CODE).json(ERROR_MESSAGE)
         }
+    }
     }
 ;
 

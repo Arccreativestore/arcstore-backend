@@ -86,11 +86,13 @@ const server = new ApolloServer<MyContext>({
 const origin = [
     "https://arcstore-frontend.fly.dev",
     "https://arc-creatives.fly.dev",
-    "http://localhost:3000"
+    "http://localhost:3000",
+   'http://localhost:3001' ,
+    "https://frontend.arcdesign.duckdns.org",
 ];
 
 if (isDev) {
-    origin.push("http://localhost:3000", "http://localhost:3001", "");
+    // origin.push("http://localhost:3000", "http://localhost:3001", "");
 }
 
 
@@ -109,33 +111,30 @@ await server.start();
 app.use(cookieParser());
 app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(cookieParser())
-app.use(passport.initialize())
+app.use(passport.initialize() as any);
+
 new passportGoogleAuth().init()
 new FacebookAuth().init()
 
 app.get("/", async (req:Request, res:Response) => {
+    console.log(req.body, "body") 
+
     res.json({name: packageJson.name, version: packageJson.version, });
 });
 
 
 app.use('/api/v1', apiRoute);
 
-
-
-
 app.use("/graphql",
     bodyParser.json({ limit: "5mb" }),
     expressMiddleware(server, {
-      context: async ({ req, res }) => {
-
-        const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req.headers.authorization.substring(7) : null);
-
+      context: async ({ req, res }:{req:Request, res:Response}) => {
+        const token = (req?.headers?.authorization?.startsWith('Bearer ') ? req?.headers?.authorization.substring(7) : req?.headers?.authorization);
         let user = null
         if (token) {
-            
           user = await new Base().extractUserDetails(token)
         }
-      
+        
         return {
           req,
           res,

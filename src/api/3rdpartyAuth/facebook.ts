@@ -14,7 +14,7 @@ import { BadreqError } from '../errorClass';
 import jwt from 'jsonwebtoken';
 import { logger } from '../../config/logger';
 import crypto from 'crypto';
-import { Request, Response } from 'express';
+import { Request as ExpressRequest, Response } from 'express';
 import { tokenDataSource } from '../../services/tokens/dataSource';
 
 class FacebookAuth extends UserDatasource {
@@ -29,7 +29,7 @@ class FacebookAuth extends UserDatasource {
           scope: ['email'],
           passReqToCallback: true,
         },
-        async (req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any) => void
+        async (req: any, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: any) => void
         ) => {
           try {
             const email: string | undefined = profile.emails?.[0].value;

@@ -54,7 +54,7 @@ router.get('/auth/facebook/callback',
  * @param {Request} req - The request object
  * @param {Response} res - The response object
  * 
- * @param {string} req.params.id - The ID of the asset for which to generate the presigned URL (required)
+ * @param {string} req.params.key - The ID of the asset for which to generate the presigned URL (required)
  * @param {number} req.query.exp - The expiration time for the presigned URL in seconds (optional)
  * 
  * @response 302 {
@@ -77,8 +77,8 @@ router.get('/auth/facebook/callback',
  *   error: boolean        // Indicates there was an error (true)
  * }
  */
-router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:NextFunction)=>{
-    await new CompleteUpload().createPresignedUrl(req, res)
+router.get('/asset/:key', authMiddleware, async(req:Request, res:Response, next:NextFunction)=>{
+    await new CompleteUpload().getPresignedUrl(req, res)
 })
 
 /**
@@ -91,6 +91,7 @@ router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:N
  *   description: string,  // Description of the asset (required)
  *   price: number,       // Price of the asset (required)
  *   categoryId: ObjectId, // ID of the category for the asset (required)
+ *   tags: string[],  // Tags of the asset (required)
  *  @response 201 {
  *   message: string,      // Success message
  *   error: boolean,       // Indicates if there was an error (false for success)
@@ -102,7 +103,7 @@ router.get('/asset/:id', authMiddleware, async(req:Request, res:Response, next:N
  *   error: boolean        // Indicates there was an error (true)
  * }
  */
-router.post('/asset/upload/single', authMiddleware, upload.single('file'), async(req:Request, res:Response, next:NextFunction)=>{
+router.post('/asset/upload/single', authMiddleware, upload.single('file') as any, async(req:Request, res:Response, next:NextFunction)=>{
     await new CompleteUpload().processFileUpload(req as CustomRequest, res)
 })
 
@@ -116,6 +117,7 @@ router.post('/asset/upload/single', authMiddleware, upload.single('file'), async
  *   description: string,  // Description of the asset (required)
  *   price: number,       // Price of the asset (required)
  *   categoryId: ObjectId, // ID of the category for the asset (required)
+ *   tags: string[],  // Tags of the asset (required)
  * @response 201 {
  *   message: string,      // Success message
  *   error: boolean,       // Indicates if there was an error (false for success)
@@ -134,6 +136,16 @@ router.post('/asset/upload/multiple', authMiddleware, handleMultipleFileUpload, 
 })
 
 
+router.post('/image/upload', authMiddleware, upload.single('file') as any, async(req:Request, res:Response, next:NextFunction)=>{
+    await new CompleteUpload().processOtherImages(req as CustomRequest, res)
+})
+
+// router.get('/callback', (req, res, next)=>{
+//     console.log(req.params, "param" )
+//     console.log(req.query, "query")
+//     console.log(req.body, "body")
+
+// })
 
 
 export default router;

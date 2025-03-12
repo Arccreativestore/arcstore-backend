@@ -37,6 +37,9 @@ import { verifyEmailPayload } from "./helper";
 import Joi from "joi";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import _2faDatasource from "../_2fa/datasource";
+import { log } from "console";
+import { IAccount } from "../../models/user";
+import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 
 
 //REGISTER MUTATION
@@ -119,7 +122,8 @@ export const loginUserMutation = {
     const { email, password } = data;
     const { res }= context
     try {
-      validateLoginInput(data);
+      log(password)
+      // validateLoginInput(data);
       if (!email || !password) throw new ErrorHandlers().UserInputError("Please provide all required fields");
       
 
@@ -145,8 +149,8 @@ export const loginUserMutation = {
       const tokenId = crypto.randomBytes(12).toString('hex')
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
 
-      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "1hr" });
-      const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "7d" });
+      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "30d" }); //Updated this to 30 days for development against 1hr
+      const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "30d" }); //Make this to be 30 days for development against 7d
         
       await new tokenDataSource().newToken(tokenId, userExist._id, expiresAt)
         res.cookie('refreshToken', refreshToken, {
@@ -338,11 +342,29 @@ const updatePassword = {
 }
 
 
+
+//WORK ADD & UPDATE
+export const workMutation = {
+  async createOrUpdateWork(__: unknown,{ data }: { data: any }, context:{req:Request, res:Response, user:User}): Promise<string> {
+    isUserAuthorized(context.user, this.createOrUpdateWork.name, true)
+    return await new UserDatasource().createOrUpdateWork(data, context.user)
+  }
+};
+
+
+//WORK ADD & UPDATE
+export const workQuery = {
+  async getUserWorkSetting(__: unknown,_:unknown, context:{req:Request, res:Response, user:User}) {
+    isUserAuthorized(context.user, this.getUserWorkSetting.name, true)
+    return await new UserDatasource().getUserWorkSetting(context.user)
+  }
+};
 export const authQuery = {
  ...verifyUserQuery,
  ...requestEmailVerification,
  ...updatePassword,
- ...setPasswordAfter3rdPartyAuth
+ ...setPasswordAfter3rdPartyAuth,
+ ...workQuery
 };
 
 export const authMutations = 
@@ -352,4 +374,5 @@ export const authMutations =
   ...forgotPasswordMutation,
   ...resetPasswordMutation,
   ...updateProfile,
+  ...workMutation
 }

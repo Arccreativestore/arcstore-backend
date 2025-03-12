@@ -8,6 +8,7 @@ import { NextFunction, Response,Request} from 'express'
 import Base from "../base";
 
 
+
 class FileUploader {
     private bucketName = AWS_BUCKET_NAME as string
     private s3Config: S3ClientConfig;
@@ -22,7 +23,8 @@ class FileUploader {
                 accessKeyId: AWS_ACCESS_KEY_ID as string,
                 secretAccessKey: AWS_SECRET_ACCESS_KEY as string,
             },
-
+            endpoint: AWS_HOSTNAME_URL,
+            forcePathStyle: true,
         };
 
 
@@ -36,6 +38,7 @@ class FileUploader {
                     cb(null, {fieldName: file.fieldname});
                 },
                 key: function (req: Request, file: Express.Multer.File, cb): void {
+ 
                     const ext = file.mimetype.split('/').pop()
                     const generatedKey: string = new Base().generateUniqueId()
 
@@ -48,18 +51,19 @@ class FileUploader {
     }
 
     // Get File Presigned URL , default to 6 days => aws max 7 days.
-    public async getFileUrl(key: string, fileExpiryDate: number = 6 * 60 * 60): Promise<string> {
+    public async getFileUrl(key: string, fileExpiryDate: number = 6 * 24 * 60 * 60): Promise<string> {
         const command: GetObjectCommand = new GetObjectCommand({
             Bucket: this.bucketName,
             Key: key
         });
 
-        // const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
-        return "";
+        const url: string = await getSignedUrl(this.s3, command, { expiresIn: fileExpiryDate });
+        
+        return url
     }
 
     //Uploade multiple files 
-    public async handleMultipleUpload(req: any, res: Response, next: NextFunction): Promise<void> {
+    public async handleMultipleUpload(req: any, res: any, next: NextFunction): Promise<void> {
         
         const uploadMultiple = this.upload.array('files', 6); 
 
@@ -74,7 +78,7 @@ class FileUploader {
             try {
         
                 req.uploads = await Promise.all(files.map(async (file) => {
-                    return {url: file.key, type: file.mimetype};
+                    return {key: file.key, mimetype: file.mimetype};
                 }));
                 return next()
             } catch (error) {
