@@ -4819,6 +4819,11 @@ send@0.19.0:
     range-parser "~1.2.1"
     statuses "2.0.1"
 
+sendpulse-api@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/sendpulse-api/-/sendpulse-api-1.1.7.tgz#392d3d7414b9d8ac4d130d72bf6a0311837f9178"
+  integrity sha512-Jb/9mcMN1Cs/5iHDQ+EURXfUzhJAz3W9yeAfPnVoHhTsj2Cx9n9oqqxvwZay1kTSbweVNIrLCt12ku31IufQfw==
+
 serve-static@1.16.2:
   version "1.16.2"
   resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.16.2.tgz#b6a5343da47f6bdd2673848bf45754941e803296"

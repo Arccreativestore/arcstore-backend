@@ -1,56 +1,42 @@
-import pkg from 'node-mailjet'
-const { Client } = pkg
-import {  SendEmailV3_1, LibraryResponse } from 'node-mailjet';
-import {  MJ_APIKEY, MJ_SECRETKEY} from '../../config/config'
-import { logger } from '../../config/logger';
+import sendpulse from "sendpulse-api";
+import { SENDPULSE_ID, SENDPULSE_SECRETKEY } from "../../config/config";
+import { logger } from "../../config/logger";
 
+const TOKEN_STORAGE = "/tmp/";
 
-export async function verifyEmail(userEmail: string, username: string, verificationLink: string): Promise<boolean> {
-  try {
-  
-   
-const mailjet = new Client({
-  apiKey: MJ_APIKEY,
-  apiSecret: MJ_SECRETKEY
-});
-  const data: SendEmailV3_1.Body = {
-    Messages: [
-      {
-        From: {
-          Email: 'contact@arccreatives.store',
-          Name: 'Arc Creatives',
-        },
-        To: [
-          {
-            Email: userEmail
-          },
-        ],
-        Variables:
-        {
-          firstname: username,
-          verification_link: verificationLink,
-        },
-       TemplateID: 6291738,
-       TemplateLanguage: true,
-       Subject: 'VERIFY YOUR EMAIL',
-       
+export async function verifyEmail(userEmail: string, name: string) {
+  sendpulse.init(SENDPULSE_ID, SENDPULSE_SECRETKEY, TOKEN_STORAGE, function (token: any) {
+    if (token && token.is_error) {
+      logger.error("SendPulse Token Error:", token);
+      return;
+    }
+
+   // console.log("Your token:", token);
+
+    const emailData = {
+      subject: "🎉 Welcome to Wooky – Your Creative Journey Starts Now!",
+      from: {
+        name: "Wooky",
+        email: "info@arccreatives.store",
       },
-    ],
-  };
+      to: [
+        {
+          email: userEmail,
+          name: name,
+        },
+      ],
+      template: {
+        id: 208909, 
+        variables: {
+          name: name,
+          code: "123456",
+        },
+      },
+    };
 
-  const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
-          .post('send', { version: 'v3.1' })
-          .request(data);
-
-  const { Status } = result.body.Messages[0];
-  return Status ? true : false
-
-
-
-  } catch (error) {
-    logger.error('Error sending email:', error.statusCode, error.message);
-    throw error
-  }
+    sendpulse.smtpSendMail((response: any) => {
+      console.log("SendPulse Response:", response);
+      logger.info("Email sent response: ", response);
+    }, emailData);
+  });
 }
-
-

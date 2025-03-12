@@ -108,7 +108,7 @@ class FileUploader {
     
             try {
                 req.uploads = {
-                    file: { key: file.key, mimetype: file.mimetype },
+                    file: { key: file.key, mimetype: file.mimetype, size:file.size },
                     thumbnail: thumbnail 
                         ? { key: thumbnail.key, mimetype: thumbnail.mimetype }
                         : null, // Handle missing thumbnail gracefully

@@ -10,6 +10,7 @@ import { AssetMutation, AssetQuery } from "./services/asset/resolver";
 import { SubscriptionMutation, SubscriptionQuery } from "./services/subscription/resolver";
 import { creatorMutation } from "./services/creators/resolvers";
 import { _2faMutation, _2faQuery } from "./services/_2fa/resolvers";
+import advanceSearchResolver from "./services/advancedSearch/resolvers";
 import { PexelsQuery, PexelsMutation } from "./services/asset/pexel/resolver";
 
 const Mutation = {
@@ -20,6 +21,8 @@ const Mutation = {
   ...AssetMutation,
   ...SubscriptionMutation,
   ...AssetMutation,
+  ..._2faMutation,
+  ...advanceSearchResolver,
   ...PexelsMutation,
   ..._2faMutation
 };

@@ -138,7 +138,7 @@ class CompleteUpload {
                 thumbnailUrl: thumbnail ? `https://arc-store.s3.${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${thumbnail.key }`: null, // Link thumbnail if available
             };
 
-            console.log({formattedUploadedFile})
+    
 
            await CreateFileValidation(formattedUploadedFile)
     
@@ -151,6 +151,8 @@ class CompleteUpload {
                 uploads: uploadedAsset._id,
                 files: uploadedAsset._id,
                 authorId: user?._id,
+                fileFormat:file.mimetype,
+                size:file?.size
             });
     
             // Response to indicate success
