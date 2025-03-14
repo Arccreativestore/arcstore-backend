@@ -65,7 +65,10 @@ class FileUploader {
     //Uploade multiple files 
     public async handleMultipleUpload(req: any, res: any, next: NextFunction): Promise<void> {
         
-        const uploadMultiple = this.upload.array('files', 6); 
+        const uploadMultiple = this.upload.fields([
+            { name: 'files', maxCount: 6 }, 
+            { name: 'thumbnail', maxCount: 1 }
+        ]);
 
         uploadMultiple(req, res, async (err) => {
             if (err) return res.status(400).send(err);
@@ -78,7 +81,7 @@ class FileUploader {
             try {
         
                 req.uploads = await Promise.all(files.map(async (file) => {
-                    return {key: file.key, mimetype: file.mimetype};
+                    return {key: file.key, mimetype: file.mimetype, size:file.size};
                 }));
                 return next()
             } catch (error) {

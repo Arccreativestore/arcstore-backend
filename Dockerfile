@@ -13,8 +13,8 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application
 COPY . .
 
-# Build the application
-RUN yarn build
+# Build the application with increased memory
+RUN NODE_OPTIONS="--max-old-space-size=4096" yarn build
 
 # Use a lightweight Node.js image for the final container
 FROM node:20.17.0 AS production

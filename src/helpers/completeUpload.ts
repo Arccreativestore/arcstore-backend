@@ -54,13 +54,22 @@ class CompleteUpload {
         }
     }
 
-    async processFileUpload(req: CustomRequest, res: Response) {
+    async processFileUpload(req: any, res: Response) {
         try {
             
             const { user } = req;
+            let uploads:any 
+            let thumbnailPayload:any
+    
 
-          
-            const uploads:any = req?.file || req?.uploads
+            if(req?.file){
+                 uploads = req?.file
+            }else{
+                const { files, thumbnail } = req.uploads ;
+                uploads = files
+                thumbnailPayload= thumbnail
+            }
+        
             let body:any = req?.body
 
             body.tags = JSON.parse(body.tags)
@@ -69,14 +78,12 @@ class CompleteUpload {
 
             await CreateAssetValidation({...body,authorId:user._id.toString()});
 
-    
-    
 
             // Normalize uploads to an array (in case it's a single file)
             const uploadArray = Array.isArray(uploads) ? uploads : [uploads];
         
             // Format the uploaded files
-            const formattedUploadedFile = uploadArray.map((upload: { key: string; mimetype: string }) => {
+            const formattedUploadedFile = uploadArray.map((upload: { key: string; mimetype: string, size:number }) => {
                 
                 return {
                     userId: user._id,
@@ -92,16 +99,17 @@ class CompleteUpload {
             const uploadedIds: ObjectId[] = uploadedAssets.map((asset) => asset._id);
 
             // Create a Asset using the uploaded asset IDs
-            const created: any = await __Asset().insertMany({
+            const created: any = await __Asset().create({
                 ...body, 
-                uploads: uploadedIds,
                 files:uploadedIds,
-                authorId: user?._id   
+                authorId: user?._id,
+                uploadFor: IUploadFor.AssetUpload,
+                thumbnailUrl: thumbnailPayload ? `https://arc-store.s3.${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${thumbnailPayload.key }`: null, // Link thumbnail if available   
                 
             });
 
             // Response to indicate success
-            const response = { message: "File(s) added successfully", error: false, data: created };
+            const response = { message: "Asset uploaded successfully", error: false, data: created };
             res.status(201).json(response);
         } catch (error: any) {
             // Handle errors and send response
