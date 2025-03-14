@@ -181,6 +181,8 @@ export const forgotPasswordMutation = {
       const userExist = await new UserDatasource().findByEmail(email);
       if (userExist) {
         const user_id = userExist._id;
+
+        const otp = GenerateOTP()
         const token = crypto.randomBytes(32).toString("hex");
         const sha256Hash = crypto
         .createHash("sha256")
@@ -191,14 +193,14 @@ export const forgotPasswordMutation = {
         const newPasswordRequest = await new UserDatasource().passwordRequest({
           user_id,
           email,
-          sha256Hash,
+          otp,
           expiresAt,
         });
 
 
-        let link = `https://arcstore-frontend.fly.dev/accounts/resetpassword?email=${email}&token=${token}`; // for dev 
+        //let link = `https://arcstore-frontend.fly.dev/accounts/resetpassword?email=${email}&token=${token}`; // for dev 
         let username = userExist.firstName;
-        eventEmitter.emit("forgotPassword", { username, link, email });
+        eventEmitter.emit("forgotPassword", { username, otp, email });
         return { status: "success",message: "Please Check your email for further instructions",};
       }
 
@@ -212,12 +214,12 @@ export const forgotPasswordMutation = {
 export const resetPasswordMutation = {
   async resetPassword(
     _: any,
-    { data }: { data: { email: string; newPassword: string; token: string } }
+    { data }: { data: { email: string; newPassword: string; otp: string } }
   ): Promise<Generalres> 
   {
-    let { email, newPassword, token } = data;
+    let { email, newPassword, otp } = data;
    try {
-    if (!email || !newPassword || !token) throw new ErrorHandlers().UserInputError("Please provide all required fields");
+    if (!email || !newPassword || !otp) throw new ErrorHandlers().UserInputError("Please provide all required fields");
     
     validateresetInput(data)
     const userExist = await new UserDatasource().findByEmail(email);
@@ -226,18 +228,18 @@ export const resetPasswordMutation = {
     if(samePassword) throw new ErrorHandlers().UserInputError('New Password Matches Old Password')
  
     
-    const sha256Hash = crypto.createHash("sha256").update(token).digest("hex");
-    const findToken = await new UserDatasource().findByEmailAndToken({email,sha256Hash});
+   // const sha256Hash = crypto.createHash("sha256").update(token).digest("hex");
+    const findToken = await new UserDatasource().findByEmailAndToken({email,otp});
     if (!findToken) throw new ErrorHandlers().NotFound("Invalid token");
   
 
     const expiresAt = findToken.expiresAt;
-    if (Date.now() > expiresAt) throw new ErrorHandlers().UserInputError("The provided Link has expired");
+    if (Date.now() > expiresAt) throw new ErrorHandlers().UserInputError("The provided otp has expired");
     newPassword = await bcrypt.hash(newPassword, 12)
   
-    const setPassword = await new UserDatasource().updatePassword(email, newPassword, sha256Hash);
+    const setPassword = await new UserDatasource().updatePassword(email, newPassword, otp);
     if (!setPassword) throw new Error("Error updating password at this time");
-    eventEmitter.emit("resetPassword", {email, firstname: userExist.firstName});
+    //eventEmitter.emit("resetPassword", {email, firstname: userExist.firstName});
     return { status: "success", message: "password has been updated" };
   
    } catch (error) {
@@ -359,6 +361,10 @@ export const workQuery = {
     return await new UserDatasource().getUserWorkSetting(context.user)
   }
 };
+function GenerateOTP(): string {
+  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join('');
+}
+
 export const authQuery = {
  ...verifyUserQuery,
  ...requestEmailVerification,

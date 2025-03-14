@@ -47,7 +47,7 @@ export interface IReg {
 export interface IresetPassword {
   user_id: ObjectId;
   email: string;
-  sha256Hash: string;
+  otp: string;
   expiresAt: number;
 }
 export interface Imail {
@@ -122,8 +122,8 @@ const EmailValidationSchema = Joi.object({
 const resetPasswordValidateSchema = Joi.object({
   email: emailRule,
   newPassword: passwordRule,
-  token: Joi.string().required().messages({
-    'any.required': 'Token is required',
+  otp: Joi.string().required().messages({
+    'any.required': 'otp is required',
   }),
 });
 
@@ -189,7 +189,7 @@ export const validateLoginInput = (data: {email: string; password: string;}) => 
 };
 
 // Validate Reset Password Route
-export const validateresetInput = (data: {email: string; newPassword: string;token: string;}) => {
+export const validateresetInput = (data: {email: string; newPassword: string;otp: string;}) => {
   const { error, value } = resetPasswordValidateSchema.validate(data,{ abortEarly: false });
   if (error) {
     throw new ErrorHandlers().ValidationError(`Validation error: ${error.details.map(x => x.message).join(', ')}`);

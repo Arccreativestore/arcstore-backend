@@ -65,8 +65,8 @@ export class UserDatasource extends Base {
 
   async passwordRequest(data: IresetPassword): Promise<IresetPassword | null> {
     try {
-      const { user_id, email, sha256Hash, expiresAt } = data;
-      const newRequest = await resetPasswordModel().create({user_id, email, token:sha256Hash, expiresAt});
+      const { user_id, email, otp, expiresAt } = data;
+      const newRequest = await resetPasswordModel().create({user_id, email, otp, expiresAt});
       return newRequest ? newRequest.toObject() : null;
     } catch (error) {
       logger.error(error);
@@ -76,13 +76,13 @@ export class UserDatasource extends Base {
 
   async findByEmailAndToken(data: {
     email: string;
-    sha256Hash: string;
+    otp: string;
   }): Promise<IresetPassword | null> {
     try {
-      const { email, sha256Hash } = data;
+      const { email, otp } = data;
       const findToken = await resetPasswordModel().findOne({
         email,
-        token: sha256Hash,
+        otp
       });
 
       return findToken ? findToken.toObject() : null;
@@ -92,14 +92,14 @@ export class UserDatasource extends Base {
     }
   }
 
-  async updatePassword(email: string, password: string, sha256: string): Promise<boolean> {
+  async updatePassword(email: string, password: string, otp: string): Promise<boolean> {
     try {
       
       const newPassword = await userModel().updateOne({ email}, {$set:{ password}});
 
       if(newPassword.matchedCount > 0)
       {
-       await resetPasswordModel().updateOne({email, token: sha256}, {$set:{passwordChanged: true, expiresAt: Date.now()}})
+       await resetPasswordModel().updateOne({email, token: otp}, {$set:{passwordChanged: true, expiresAt: Date.now()}})
        return true
       }
       return false;

@@ -5,7 +5,7 @@ interface IRpassword extends Document
 {
     user_id: ObjectId
     email: string
-    token: string
+    otp: string
     expiresAt: Date,
     passwordChanged: boolean
 }
@@ -23,7 +23,7 @@ const resetPasswordSchema = new Schema<IRpassword>({
         required: true,
         index: true
     },
-    token:
+    otp:
     {
         type: String,
         required: true,

@@ -1,6 +1,6 @@
 import { logger } from "../../config/logger";
 import {
-  forgotPasswordMail,
+  ForgotPasswordMail,
   resetPasswordMail,
 } from "../../utils/mails/forgotPasswordMail";
 import { verifyEmail } from "../../utils/mails/verifyMail";
@@ -22,8 +22,8 @@ eventEmitter.on("newUser", (data: any) => {
 //forgot password mail event
 eventEmitter.on("forgotPassword", (data: any) => {
   try {
-    const { username, link, email } = data;
-    forgotPasswordMail(username, link, email);
+    const { username, otp, email } = data;
+    ForgotPasswordMail(username, otp, email);
   } catch (err) {
     logger.error(`error sending forgot password mail ${err}`);
     throw new Error("error sending email");

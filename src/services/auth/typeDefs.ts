@@ -58,7 +58,7 @@ input IToken {
 input IresetPassword{
   email: String!
   newPassword: String!
-  token:String!
+  otp:String!
 }
 
 input IupdateProfile {
