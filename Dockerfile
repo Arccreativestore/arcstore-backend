@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base
-FROM node:20.17.0 AS build
+FROM node:18.12.0 AS build
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -14,10 +14,10 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application with increased memory
-RUN NODE_OPTIONS="--max-old-space-size=4096" yarn build
+RUN yarn build
 
 # Use a lightweight Node.js image for the final container
-FROM node:20.17.0 AS production
+FROM node:18.12.0 AS production
 
 WORKDIR /usr/src/app
 
