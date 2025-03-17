@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base
-FROM node:18.12.0 AS build
+# Use a slim Node.js image
+FROM node:18.12.0-slim AS build
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -13,11 +13,12 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application
 COPY . .
 
-# Build the application with increased memory (8GB Heap)
-RUN NODE_OPTIONS="--max-old-space-size=8192" yarn build
+# Build the application with reduced memory usage
+# (Consider removing tsc-alias here if possible)
+RUN yarn build
 
 # Use a lightweight Node.js image for the final container
-FROM node:18.12.0 AS production
+FROM node:18.12.0-slim AS production
 
 WORKDIR /usr/src/app
 
@@ -28,9 +29,6 @@ COPY package.json ./
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV NODE_OPTIONS=--max-old-space-size=4096 
-
-# Set production heap size too, if needed.
 
 # Expose the application port
 EXPOSE 3000
