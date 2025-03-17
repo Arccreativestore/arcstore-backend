@@ -201,7 +201,7 @@ export const forgotPasswordMutation = {
         //let link = `https://arcstore-frontend.fly.dev/accounts/resetpassword?email=${email}&token=${token}`; // for dev 
         let username = userExist.firstName;
         eventEmitter.emit("forgotPassword", { username, otp, email });
-        return { status: "success",message: "Please Check your email for further instructions",};
+        return { status: "success",message: "Please Check your Email for further instructions",};
       }
 
       throw new ErrorHandlers().NotFound("No user with that email was found");
