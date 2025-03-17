@@ -13,8 +13,8 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application
 COPY . .
 
-# Build the application with increased memory
-RUN yarn build
+# Build the application with increased memory (8GB Heap)
+RUN NODE_OPTIONS="--max-old-space-size=8192" yarn build
 
 # Use a lightweight Node.js image for the final container
 FROM node:18.12.0 AS production
@@ -28,7 +28,9 @@ COPY package.json ./
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV NODE_OPTIONS=--max-old-space-size=4096
+ENV NODE_OPTIONS=--max-old-space-size=4096 
+
+# Set production heap size too, if needed.
 
 # Expose the application port
 EXPOSE 3000
