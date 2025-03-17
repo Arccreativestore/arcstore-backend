@@ -1,23 +1,25 @@
-# Use a slim Node.js image
+# Use the official Node.js 18.12.0 slim image as the base
 FROM node:18.12.0-slim AS build
 
 # Set the working directory
 WORKDIR /usr/src/app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package*.json yarn.lock ./
 
-# Install dependencies
-RUN yarn install --frozen-lockfile
+# Clear Yarn cache before installing dependencies
+RUN yarn cache clean
+
+# Install dependencies with a fresh cache
+RUN yarn install --frozen-lockfile --force
 
 # Copy the rest of the application
 COPY . .
 
-# Build the application with reduced memory usage
-# (Consider removing tsc-alias here if possible)
-RUN yarn build
+# Build the application with increased memory (8GB Heap)
+RUN NODE_OPTIONS="--max-old-space-size=8192" yarn build
 
-# Use a lightweight Node.js image for the final container
+# Use a lightweight Node.js 18.12.0 slim image for the final container
 FROM node:18.12.0-slim AS production
 
 WORKDIR /usr/src/app
