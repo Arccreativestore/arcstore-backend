@@ -89,7 +89,8 @@ const origin = [
     "http://localhost:3000",
    'https://localhost:3000' ,
     "https://frontend.arcdesign.duckdns.org",
-    "https://wooky.fly.dev"
+    "https://wooky.fly.dev",
+   "https://wooky1.vercel.app"
 ];
 
 if (isDev) {
