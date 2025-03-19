@@ -2,8 +2,9 @@
 import { createClient } from 'pexels';
 import {  ISearchParams, PhotosResponse, VideoResponse } from './type';
 import { ErrorHandlers } from '../../../helpers/errorHandler';
-import axios from 'axios'
-import { DRIBBLE_API_URL, DRIBBLE_ACCESS_TOKEN, BEHANCE_BASE_URL } from '../../../config/config';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { DRIBBLE_API_URL, DRIBBLE_ACCESS_TOKEN, BEHANCE_BASE_URL, FREEPIK_API_KEY, FREEPIK_BASE_URL } from '../../../config/config';
+import {  } from '../../../config/config';
 
 export class PexelServices {
   private apiKey: string;
@@ -79,6 +80,34 @@ getBehanceCategoryProjects = async (queryParams:ISearchParams) => {
     return [];
   }
 
+};
+
+getFreePickAssets = async (queryParams: ISearchParams, endpoint: string) => {
+  try {
+    const headers = { 
+      "x-freepik-api-key": FREEPIK_API_KEY as string,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+
+    const config: AxiosRequestConfig = {
+      url: `${FREEPIK_BASE_URL}${endpoint}`,
+      method: "GET",
+      headers,
+      params: {  
+        query: queryParams.query,
+        page: queryParams.page || 1,
+        per_page: queryParams.per_page || 10,
+      },
+    };
+
+    const response: AxiosResponse<any> = await axios(config);
+  
+    return response.data || {}; 
+  } catch (error) {
+    console.error("Error fetching Freepik assets:", error);
+    return {}; 
+  }
 };
 
 }

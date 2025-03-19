@@ -34,6 +34,9 @@ export const PexelsQuery = {
  
       async getBehanceCategoryProjects(_:unknown, {data}:{data:ISearchParams}, context:context){
         return await new PexelsDatasource().getBehanceCategoryProjects(data)
+      },
+      async aggregatedExternalAssets(_:unknown, {data}:{data:ISearchParams}){
+        return await new PexelsDatasource().aggregatedExternalAssets(data)
       }
 }
   

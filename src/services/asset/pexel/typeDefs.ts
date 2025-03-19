@@ -12,6 +12,7 @@ const PexelType = gql`
   getDribbleShots(data:QueryInput):JSON
   getBehanceCategoryProjects(data:QueryInput):JSON
   getBehanceVideo(data:QueryInput):JSON
+  aggregatedExternalAssets(data:QueryInput):MediaResponse
 }
 
 input QueryInput{
@@ -84,12 +85,6 @@ type Photo {
     }
 
 
-type PexelUser {
-  id: Int
-  name: String
-  url: String
-}
-
 type VideoFile {
   id: Int
   quality: String
@@ -123,9 +118,102 @@ type Video {
   full_res: String   
   tags: [String]  
   duration: Int
-  user: PexelUser
+  user: Author
   video_files: [VideoFile]
   video_pictures: [VideoPicture]
+}
+
+
+type MediaResponse {
+  photos: [Photo]
+  videos: [Video]
+  icons: [Icon]
+  pagination: Pagination
+}
+
+type Photo {
+  id: Int
+  source: String
+  url: String
+  author: Author
+  dimensions: Dimensions
+  avg_color: String
+  src: SRC
+  liked: Boolean
+  alt: String
+}
+
+type Video {
+  id: Int
+  source: String
+  url: String
+  user: Author
+  dimensions: Dimensions
+  duration: Int
+  video_files: [VideoFile]
+  thumbnail: String
+}
+
+type Icon {
+  id: Int
+  source: String
+  author: Author
+  family: IconFamily
+  free_svg: Boolean
+  tags: [Tag]
+  style: IconStyle
+  thumbnails: [Thumbnail]
+}
+
+type Author {
+  name: String
+  url: String
+}
+
+type Dimensions {
+  width: Int
+  height: Int
+}
+
+
+type IconFamily {
+  id: Int
+  name: String
+  total: Int
+}
+
+type Tag {
+  slug: String
+  name: String
+}
+
+type IconStyle {
+  id: Int
+  name: String
+}
+
+type Thumbnail {
+  width: Int
+  height: Int
+  url: String
+}
+
+type Pagination {
+  pexels: PageInfoTwo
+  freepick: PageInfoTwo
+  total_results: TotalResults
+}
+
+type PageInfoTwo {
+  page: Int
+  per_page: Int
+  total: Int
+}
+
+type TotalResults {
+  photos: Int
+  videos: Int
+  icons: Int
 }
 
 `

@@ -245,7 +245,7 @@ class AssetDatasource extends Base {
     const assetModel = __Asset();
     const aggregate = assetModel.aggregate(pipeline);
     const result = await assetModel.aggregatePaginate(aggregate as any, options);
-    console.log(JSON.stringify(result, null, 2))
+   
     return     {
       data: result.docs,
       pageInfo: {
