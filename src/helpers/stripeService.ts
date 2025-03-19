@@ -10,7 +10,7 @@ class TeamSubscriptionService {
 
     constructor(stripeKey: string) {
         this.stripeKey = stripeKey;
-        this.stripe = new Stripe(this.stripeKey, { apiVersion: "2025-01-27.acacia" });
+        this.stripe = new Stripe(this.stripeKey, { apiVersion: "2025-02-24.acacia" });
     }
 
     /** ✅ Process Stripe Webhook */

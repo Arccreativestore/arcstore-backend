@@ -5,11 +5,8 @@ import DefaultScripts from "../defaultScript";
 dotenv.config();
 
 const options = {
-    keepAlive: true,
     serverSelectionTimeoutMS: 30000, 
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-};
+}
 
 class db {
     private readonly log: any;

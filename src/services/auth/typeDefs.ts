@@ -31,6 +31,7 @@ input iRegister {
   lastName: String
   password: String!
   role: IuserType!
+  subscribedToEmailTips: Boolean!
 }
 
 input IupdatePassword {
@@ -58,7 +59,7 @@ input IToken {
 input IresetPassword{
   email: String!
   newPassword: String!
-  token:String!
+  otp:String!
 }
 
 input IupdateProfile {

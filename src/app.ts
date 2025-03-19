@@ -16,8 +16,8 @@ import apiRoute from "./api/route";
 import db from "./config/database";
 import { logger } from "./config/logger";
 import passport from "passport";
-import passportGoogleAuth from "./api/3rdpartyAuth/oauth";
-import FacebookAuth from "./api/3rdpartyAuth/facebook";
+//import passportGoogleAuth from "./api/3rdpartyAuth/oauth";
+//import FacebookAuth from "./api/3rdpartyAuth/facebook";
 import { userModel } from "./models/user";
 import formatError from "./helpers/formatError";
 import Base from "./base";
@@ -89,6 +89,7 @@ const origin = [
     "http://localhost:3000",
    'https://localhost:3000' ,
     "https://frontend.arcdesign.duckdns.org",
+    "https://wooky.fly.dev"
 ];
 
 if (isDev) {
@@ -113,8 +114,8 @@ app.use(cors<cors.CorsRequest>(corsOptions));
 app.use(cookieParser())
 app.use(passport.initialize() as any);
 
-new passportGoogleAuth().init()
-new FacebookAuth().init()
+//new passportGoogleAuth().init()
+//yanew FacebookAuth().init()
 
 app.get("/", async (req:Request, res:Response) => {
     console.log(req.body, "body") 

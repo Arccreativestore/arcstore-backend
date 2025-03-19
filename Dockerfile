@@ -1,5 +1,7 @@
-# Use the official Node.js 18.12.0 slim image as the base
-FROM node:18.12.0-slim AS build
+
+# Use the official Node.js image
+FROM node:20.17.0
+
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -20,7 +22,7 @@ COPY . .
 RUN NODE_OPTIONS="--max-old-space-size=8192" yarn build
 
 # Use a lightweight Node.js 18.12.0 slim image for the final container
-FROM node:18.12.0-slim AS production
+FROM node:20.17.0 AS production
 
 WORKDIR /usr/src/app
 
