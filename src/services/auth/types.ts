@@ -42,6 +42,7 @@ export interface IReg {
   role: "USER" 
   emailVerified?: boolean;
   verifiedDate?: Date;
+  subscribedToEmailTips: boolean
 }
 
 export interface IresetPassword {

@@ -35,8 +35,8 @@ export async function verifyEmail(userEmail: string, name: string) {
     };
 
     sendpulse.smtpSendMail((response: any) => {
-      console.log("SendPulse Response:", response);
-      logger.info("Email sent response: ", response);
+     // console.log("SendPulse Response:", response);
+     // logger.info("Email sent response: ", response);
     }, emailData);
   });
 }

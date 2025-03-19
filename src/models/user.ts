@@ -19,6 +19,7 @@ export interface IAccount extends Document {
   disabled: boolean;
   preferences: Array<ObjectId>
   banner:string
+  subscribedToEmailTips: boolean
 }
 
 const UserSchema: Schema = new Schema<IAccount>(
@@ -90,6 +91,11 @@ const UserSchema: Schema = new Schema<IAccount>(
       default: false
     },
 
+    subscribedToEmailTips: {
+      type: Boolean,
+      default: false
+    },
+    
     preferences : [{type: Schema.Types.ObjectId, ref: 'categories'}]
   },{
   timestamps: true,

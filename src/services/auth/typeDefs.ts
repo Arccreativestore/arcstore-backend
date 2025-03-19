@@ -31,6 +31,7 @@ input iRegister {
   lastName: String
   password: String!
   role: IuserType!
+  subscribedToEmailTips: Boolean!
 }
 
 input IupdatePassword {

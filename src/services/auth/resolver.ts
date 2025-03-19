@@ -45,7 +45,7 @@ import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 //REGISTER MUTATION
 export const registerMutation = {
   async userRegistration(__: unknown,{ data }: { data: IReg }): Promise<registerResponse> {
-    const { email, firstName, lastName, password, role} = data;
+    const { email, firstName, lastName, password, role, subscribedToEmailTips }  = data;
   
     try {
      
