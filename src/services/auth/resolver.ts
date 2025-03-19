@@ -51,7 +51,7 @@ export const registerMutation = {
      
       validateRegistrationInput({email, password, firstName, lastName, role});
       const findEmail = await new UserDatasource().findByEmail(email);
-      if (findEmail) throw new ErrorHandlers().ConflicError("User already exists");
+      if (findEmail) throw new ErrorHandlers().ConflicError("User already exist");
       const createUser = await new UserDatasource().userRegistration(data);
 
       if (createUser) {
