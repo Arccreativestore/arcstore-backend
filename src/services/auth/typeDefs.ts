@@ -46,6 +46,7 @@ input IsetPassword {
 input ILogin {
   email: String!
   password: String!
+  rememberMe: Boolean!
 }
   
 input IEmail{

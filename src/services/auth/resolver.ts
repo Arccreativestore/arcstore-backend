@@ -44,9 +44,9 @@ import { isUserAuthorized } from "../../helpers/utils/permissionChecks";
 
 //REGISTER MUTATION
 export const registerMutation = {
-  async userRegistration(__: unknown,{ data }: { data: IReg }): Promise<registerResponse> {
+  async userRegistration(__: unknown,{ data }: { data: IReg },context: { req: Request, res: Response }): Promise<registerResponse> {
     const { email, firstName, lastName, password, role, subscribedToEmailTips }  = data;
-  
+    const { res }= context
     try {
      
       validateRegistrationInput({email, password, firstName, lastName, role});
@@ -61,8 +61,20 @@ export const registerMutation = {
 
       const verificationLink = `https://arcstore-frontend.fly.dev/accounts/verify/${token}`
       eventEmitter.emit('newUser', {email, username: firstName, verificationLink})
-      
-      return { status: "success", _id, email, firstName, lastName, role };
+      const tokenId = crypto.randomBytes(12).toString('hex')
+      const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
+
+      const accessToken = jwt.sign( { _id}, ACCESS_SECRETKEY as string, { expiresIn: "30d" }); //Updated this to 30 days for development against 1hr
+      const refreshToken = jwt.sign( { _id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "30d" }); //Make this to be 30 days for development against 7d
+        
+      await new tokenDataSource().newToken(tokenId, _id, expiresAt)
+        res.cookie('refreshToken', refreshToken, {
+          httpOnly: true,
+          secure: false, // for http
+          expires: new Date(expiresAt),
+        })
+        
+      return { status: "success", _id, email, firstName, lastName, role, accessToken };
 
       }
       throw new Error("Error registering, please try again later");
@@ -118,11 +130,11 @@ export const requestEmailVerification = {
 };
 // LOGIN MUTATION
 export const loginUserMutation = {
-  async Login(_: any,{ data }: { data: { email: string; password: string } },context: { req: Request, res: Response }): Promise<{ accessToken?: string, status?: string, message?: string}> {
-    const { email, password } = data;
+  async Login(_: any,{ data }: { data: { email: string; password: string, rememberMe: boolean } },context: { req: Request, res: Response }): Promise<{ accessToken?: string, status?: string, message?: string}> {
+    const { email, password, rememberMe} = data;
     const { res }= context
     try {
-      log(password)
+     // log(password)
       // validateLoginInput(data);
       if (!email || !password) throw new ErrorHandlers().UserInputError("Please provide all required fields");
       
@@ -144,21 +156,28 @@ export const loginUserMutation = {
           // send otp in email to client
         return { status: "success", message: "otp has been sent to users email"}
         }
+      
+      let accessToken: string;
 
-
+      
       const tokenId = crypto.randomBytes(12).toString('hex')
       const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000
-
-      const accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "30d" }); //Updated this to 30 days for development against 1hr
+      
+      accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "30d" });//Updated this to 30 days for development against 1hr
+    
       const refreshToken = jwt.sign( { _id: userExist._id, tokenId}, REFRESH_SECRETKEY as string, { expiresIn: "30d" }); //Make this to be 30 days for development against 7d
         
-      await new tokenDataSource().newToken(tokenId, userExist._id, expiresAt)
+         await new tokenDataSource().newToken(tokenId, userExist._id, expiresAt)
         res.cookie('refreshToken', refreshToken, {
           httpOnly: true,
           secure: false, // for http
           expires: new Date(expiresAt),
         })
-        
+
+        if(rememberMe) {
+          accessToken = jwt.sign( { _id: userExist._id }, ACCESS_SECRETKEY as string, { expiresIn: "7d" }); 
+          return { accessToken };
+        }
         return { accessToken };
       }
       throw new ErrorHandlers().AuthenticationError("Password is incorrect");
