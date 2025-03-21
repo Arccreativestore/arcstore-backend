@@ -79,6 +79,7 @@ type User {
   firstName: String!
   lastName: String
   role: String!
+  accessToken: String!
 }
 
 type General {
