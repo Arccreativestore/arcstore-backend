@@ -119,7 +119,6 @@ app.use(passport.initialize() as any);
 //yanew FacebookAuth().init()
 
 app.get("/", async (req:Request, res:Response) => {
-    console.log(req.body, "body") 
 
     res.json({name: packageJson.name, version: packageJson.version, });
 });

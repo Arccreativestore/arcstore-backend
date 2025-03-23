@@ -48,6 +48,8 @@ async aggregatedExternalAssets(data: ISearchParams) {
                 id: photo.id,
                 source: "pexels",
                 url: photo.url,
+                width: photo.width,
+                height: photo.height,
                 author: {
                     name: photo.photographer,
                     url: photo.photographer_url,
@@ -62,6 +64,8 @@ async aggregatedExternalAssets(data: ISearchParams) {
                 alt: photo.alt,
             })),
             ...freePickPhotos.data.map((photo: any) => ({
+                width: photo.preview.width,
+                height: photo.preview.height,
                 id: photo.id,
                 source: "freepick",
                 url: photo.url,
@@ -75,7 +79,7 @@ async aggregatedExternalAssets(data: ISearchParams) {
                     height: photo.preview.height,
                 },
                 available_formats: photo.available_formats,
-                src: photo.preview,
+                src: {original: photo.preview.url},
             })),
         ];
 
@@ -84,6 +88,10 @@ async aggregatedExternalAssets(data: ISearchParams) {
             id: video.id,
             source: "pexels",
             url: video.url,
+            image:video.image,
+            duration:video.duration,
+            width: video.width,
+            height: video.height,
             user: {
                 name: video.user.name,
                 url: video.user.url,
@@ -92,7 +100,6 @@ async aggregatedExternalAssets(data: ISearchParams) {
                 width: video.width,
                 height: video.height,
             },
-            duration: video.duration,
             video_files: video.video_files.map((file: any) => ({
                 id: file.id,
                 quality: file.quality,

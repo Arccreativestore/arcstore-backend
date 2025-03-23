@@ -36,7 +36,7 @@ const AssetType = gql`
     getFreePikAssetDetails(platform:PlatformEnum! params:IDetailsParams):JSON
     getUploadStatusStatistics:[IUploadStatusStatistics]
     getAssetAnalytics:[AssetAnalytics]
-    getDownloadLink(platform:PlatformEnum! assetType:IFreePickCategory! itemId:String! itemFormat:String):DownloadResponse
+    getDownloadLink(platform:PlatformEnum! assetType:IFreePickCategory! itemId:String! itemFormat:ItemEnum):DownloadResponse
     getLikeCount(data:assetId!): Int!
     getAssetComment(assetId:ID!):[Comment]
      #CREATORS
@@ -51,6 +51,9 @@ const AssetType = gql`
   Paystack
   GooglePay
   }
+
+
+ 
   enum ItemEnum{
   psd
   ai
@@ -60,9 +63,9 @@ const AssetType = gql`
   resources
   png
   jpg
-  render
   svg
   mockup 
+  render
   }
 
   type AssetAnalytics {
@@ -76,7 +79,7 @@ const AssetType = gql`
 }
 
 type Icomment {
-  assetId: String,
+  assetId: String
   comment: String
   userId: JSON
 }
@@ -129,6 +132,7 @@ input IAddAssetInput{
     envato
     yandex
   }
+
   input IAddCategoryInput{
     title:String
     description:String
@@ -142,7 +146,7 @@ input IAddAssetInput{
   }
 
   input Icomment {
-    assetId: String, 
+    assetId: String 
     comment: String
   }
 

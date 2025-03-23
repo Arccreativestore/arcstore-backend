@@ -211,11 +211,8 @@ async getCreatorsPaymentMethods(_:unknown, __:unknown, context:context )  {
 },
 
 async getDownloadLink(_:unknown, {platform, assetType, itemId, itemFormat}:{platform: PlatformEnum, assetType:string, itemId:string, itemFormat?:string}, context:context){
-  if(itemFormat ==="render"){
-    itemFormat="3d-render"
-  }
+  if(itemFormat ==="render")itemFormat="3d-render"
 
-  
   return await new AssetDatasource().downloadAsset(platform, assetType, itemId, itemFormat)
 }
 
