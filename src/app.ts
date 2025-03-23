@@ -82,7 +82,7 @@ const server = new ApolloServer<MyContext>({
     
 
 });
-
+//app
 const origin = [
     "https://arcstore-frontend.fly.dev",
     "https://arc-creatives.fly.dev",
@@ -90,7 +90,7 @@ const origin = [
    'https://localhost:3000' ,
     "https://frontend.arcdesign.duckdns.org",
     "https://wooky.fly.dev",
-    "https://wooky1.vercel.app"
+   "https://wooky1.vercel.app"
 ];
 
 if (isDev) {

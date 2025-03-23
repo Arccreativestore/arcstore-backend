@@ -1,6 +1,6 @@
 
 # Use the official Node.js image
-FROM node:20.17.0
+FROM node:20.17.0 AS build
 
 
 # Set the working directory

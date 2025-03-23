@@ -150,3 +150,4 @@
 2024-11-06T22:25:17.257Z [31merror[39m: Uncaught Exception: {
   "code": "ERR_UNHANDLED_REJECTION"
 }
+2025-03-19T13:12:19.664Z [31merror[39m: Error Adding Default Permission Cannot use a session that has ended

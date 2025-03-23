@@ -25,6 +25,7 @@ export interface registerResponse {
   email: string;
   firstName: string;
   lastName: string;
+  accessToken: string
   role: "USER" | "STAFF" | "CREATOR" | "SUPERADMIN";
 }
 

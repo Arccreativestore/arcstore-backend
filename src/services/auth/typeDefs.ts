@@ -46,6 +46,7 @@ input IsetPassword {
 input ILogin {
   email: String!
   password: String!
+  rememberMe: Boolean!
 }
   
 input IEmail{
@@ -78,6 +79,7 @@ type User {
   firstName: String!
   lastName: String
   role: String!
+  accessToken: String!
 }
 
 type General {
